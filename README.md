@@ -179,7 +179,7 @@ URL: /accounts
 Retrieve the list of accounts referenced. 
 This service also provides the balance of `wallet` type accounts.
 
-As a response to this query, you will receive an Array containing the [balance Object](#balance_object).
+As a response to this query, you will receive an Array containing the `account_id` and the [Balance Object](#balance_object).
 
 #### <a id="get-account-details"></a> Retrieve account details ####
 
@@ -199,7 +199,7 @@ URL: /account/{account_id}
 ```
 Update information on an account or modify beneficiary bank or correspondent bank related to this one. 
 
-*Parameter:*
+*Parameters:*
 
 | Field | Type | Description |
 |-------|------|-------------|
@@ -268,16 +268,16 @@ As an example, a response for `GET /payment/{:id}` object looks like this:
 {
     "payment": {
         "id": "xxx",
-        "status": "Awaiting confirmation",
-        "created_date": "2014-01-12T00:00:00+00:00",
-        "created_by": "Api",
-        "initial_operation_date"= "2014-01-12T00:00:00+00:00",
+        "status": "Awaiting Confirmation",
         "type": "Standard",
+        "tag": "Invoice xxx",
+        "created_date": "2014-01-12T00:00:00+00:00",
+        "initial_execution_date": "2014-01-12T00:00:00+00:00",
         "amount": {
             "value": "125000.00",
             "currency": "USD"
         "account": {
-            "id": "xxx"
+            "account_id": "xxx"
             "status": "active",
             "type": "wallet",
             "created_date": "2014-01-12T00:00:00+00:00",
@@ -514,44 +514,6 @@ When an account is specified as part of a JSON body, it is encoded as an object 
 }
 ```
 
-#### <a id="accounts_object"></a> Accounts Object ####
-
-When an accounts is specified as part of a JSON body, it is encoded as an object with the following fields:
-
-*Object resources:*
-
-| Field | Type | Description |
-|-------|------|-------------|
-| account_id |  String | The id of the account. `xxx` |
-| currency | String | Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the account currency. `USD` |
-| tag |  String | Custom data. `reference` |
-| status |  String | Status of the account `active` |
-| type |  String | type of account `wallet` |
-| number | String | Iban or account number. `xxx384` |
-
-*Example Accounts Object:*
-
-```js
-{
-    "accounts": [{
-        "account_id": "xxx"
-        "status": "active",
-        "type": "wallet",
-        "tag": "My wallet account EUR",
-        "number": "xxx4548",
-        "currency": "EUR",
-    },
-    {
-        "account_id": "xxx"
-        "status": "active",
-        "type": "wallet",
-        "tag": "My wallet account EUR",
-        "number": "xxx4548",
-        "currency": "EUR",
-    }]
-}
-```
-
 #### <a id="address_object"></a> Address Object ####
 
 When an address is specified as part of a JSON body, it is encoded as an object with four fields:
@@ -604,21 +566,24 @@ When an amount of currency is specified as part of a JSON body, it is encoded as
 
 #### <a id="balance_object"></a> Balance Object ####
 
-When the balance of a `wallet` account is specified as part of a JSON body, it is encoded as an object with the following fields:
+When the balance is specified as part of a JSON body, it is encoded as an object with the following fields:
 
 *Object resources:*
 
 | Field | Type | Description |
 |-------|------|-------------|
-| amount  | [Amount Object](#amount_object) | **Required.** The value on the account. `10,000.00 GBP`
+| closing_date | Date | The losing date of the balance details given. `2014-01-12` |
+| booking_amount | [Amount Object](#amount_object) | The closing balance of the account. `10,000.00 GBP`|
+| value_amount | [Amount Object](#amount_object) | The closing value of the account. `10,000.00 GBP`|
 
 *Example balance Object:*
 
 ```js
 {
-    "amount": {
-      "value": "10000.00",
-      "currency": "GBP"
+    "balance": {
+        "date": "2014-01-12",
+        "booking_amount": {amount},
+        "value_amount": {amount}
     }
 }
 ```
@@ -635,7 +600,7 @@ When a beneficiary bank is specified as part of a JSON body, it is encoded as an
 | clearing_type | String | **Required if local format.** Two-digit code specifying the local clearing network. `FW` |
 | clearing_number | String | **Required if local format.** The branch number on the local clearing network `021000021` |
 | name | String | **Required if local format.** The beneficiary bank name. `JPMORGAN CHASE BANK, N.A.` |
-| address | [Address Object](#address_object) | **Required if local format.** The beneficiary bank name. |
+| address | [Address Object](#address_object) | **Required if local format.** The beneficiary bank address. |
 
 *Example Beneficiary Bank Object:*
 
@@ -701,40 +666,32 @@ When a `payment` is specified as part of a JSON body, it is encoded as an object
 
 | Field | Type | Description |
 |-------|------|-------------|
-| payment_id | String | **Required.** id of the beneficiary account. `xxx` |
+| payment_id | String | **Required.** id of the payment. `xxx` |
+| status | String | Payment status. `Awaiting Confirmation` |
+| created_date | Date Time | Creation date of the payment. `2014-01-12T00:00:00+00:00` |
+| updated_date | Date Time | Last update on the payment. `2014-01-12T00:00:00+00:00` |
+| initial_execution_date | Date | The initial date of execution when the payment is created. `YYYY-MM-DD` |
+| confirmation_date | Date | We consider the payment confirmed when the status turns scheduled. `YYYY-MM-DD` |
+| execution_date | Date | We consider the payment executed when the status turns finalized. `YYYY-MM-DD` |
 | amount | [Amount Object](#amount_object) | **Required.** The nominal amount to be transfered. `10,000.00 GBP` |
-| execution_date | Date | `YYYY-MM-DD` |
+| type | String | Defines the type of payment affected. `Standard` |
+| tag | String | Custom reference on the payment. `Invoice xxx` |
+| account_id | [Account Object](#account_object) | **Required.** Details of the destination account. |
 
 *Example Payment Object:*
 
 ```js
-"correspondant_bank":{
-    "bic": "AGRIFRPP",
-    "name": "CREDIT AGRICOLE SA",
-    "address": {address}
-},
+    "payment":{
+        "payment_id": "xxx",
+        "status": "Awaiting Confirmation",
+        "type": "Standard",
+        "tag": "Invoice xxx",
+        "created_date": "2014-01-12T00:00:00+00:00",
+        "initial_execution_date": "2014-01-12T00:00:00+00:00",
+        "amount": {amount},
+        "account_id": {amount},
+    },
 ```
-
-#### <a id="payments_object"></a> Payments Object ####
-
-When a `payments` is specified as part of a JSON body, it is encoded as an object with the following fields:
-
-*Object resources:*
-
-| Field | Type | Description |
-|-------|------|-------------|
-| payments_id | String | **Required.** id of each payment `xxx` |
-| amount | [Amount Object](#amount_object) | **Required.** The nominal amount of the payment. `10,000.00 GBP` |
-| execution_date | Date | `YYYY-MM-DD` |
-| created_date | Date | `YYYY-MM-DD` |
-| confirmed_date | Date | `YYYY-MM-DD` |
-
-*Example Payments Object:*
-
-```js
-},
-```
-
 #### <a id="trade_object"></a> Trade Object ####
 
 When a `trade` is specified as part of a JSON body, it is encoded as an object with the following fields:
