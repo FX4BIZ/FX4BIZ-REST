@@ -16,7 +16,7 @@ Our API is divided into sections based on different concepts in our system. Each
 #### Accounts ####
 
 * [Submit New Account - `POST /account`](#post-account-create)
-* [Retrieve Account list - `GET /accounts`](#get-accounts-list)
+* [Retrieve Accounts list - `GET /accounts`](#get-accounts-list)
 * [Retrieve Account Balance - `GET /account/{account_id}/balance`](#get-account-balance)
 * [Retrieve Account Details - `GET /account/{account_id}`](#get-account-details)
 * [Update Account Details - `PUT /account/{account_id}`](#put-account-details)
@@ -88,7 +88,7 @@ All API request must be made over [HTTPS](http://en.wikipedia.org/wiki/HTTPS). C
 #### <a id="get-end-session"></a> End session ####
 -> TBD
 
-### <a id="account_services"></a> Account Services ### 
+### <a id="account_services"></a> Account Services 
 
 There are two kinds of accounts with FX4BIZ. What we call `wallet` account, which is an account hold in the FX4BIZ books and `external bank` account, which can be either your own account in another bank or a third party recipient account.
 
@@ -146,7 +146,7 @@ There are two kinds of accounts with FX4BIZ. What we call `wallet` account, whic
 
 ```
 Method: POST 
-URL: /accounts
+URL: /account
 ```
 This service permits to reference a new account. This service include verifications on the format of the account created.
 The API has been made in order to accept local specification of cross-boarder payments.
@@ -179,7 +179,7 @@ Retrieve the list of accounts already referenced.
 If you only want to retrieve the list of your wallets accounts, you have to sort the list by `wallet` types.
 
 *Parameters:*
-
+https://github.com/FX4BIZ/FX4BIZ-REST/blob/master/README.md
 | Field | Type | Description |
 |-------|------|-------------|
 | type | String | Sort the list by type of account. `wallet` |
