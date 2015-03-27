@@ -17,7 +17,6 @@ Our API is divided into sections based on different concepts in our system. Each
 
 * [Submit New Account - `POST /account`](#post-account-create)
 * [Retrieve Accounts list - `GET /accounts`](#get-accounts-list)
-* [Retrieve Account Balance - `GET /account/{account_id}/balance`](#get-account-balance)
 * [Retrieve Account Details - `GET /account/{account_id}`](#get-account-details)
 * [Update Account Details - `PUT /account/{account_id}`](#put-account-details)
 * [Retrieve Transfer History - `GET /transfers`](#get-transfers-list)
@@ -169,38 +168,18 @@ The Api accepts the following formats of `external bank` accounts :
 | currency | String | **Required.** Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the account currency. `EUR` |
 | tag | String | Custom Data. `John Doe bank account EUR` |
 
+As a response to this query, you will receive a json response containing details of the [Account Object](#account_object) created.
+
 #### <a id="get-accounts-list"></a> Retrieve accounts list ####
 
 ```
 Method: GET 
-URL: /accounts/
+URL: /accounts
 ```
-Retrieve the list of accounts already referenced.
-If you only want to retrieve the list of your wallets accounts, you have to sort the list by `wallet` types.
+Retrieve the list of accounts referenced. 
+This service also provides the balance of `wallet` type accounts.
 
-*Parameters:*
-https://github.com/FX4BIZ/FX4BIZ-REST/blob/master/README.md
-| Field | Type | Description |
-|-------|------|-------------|
-| type | String | Sort the list by type of account. `wallet` |
-
-#### <a id="get-account-balances"></a> Get account balances ####
-
-```
-Method: GET 
-URL: /account/{account_id}/balance
-```
-Retrieve the [balance](#balance_object) of a wallet account hold in the FX4BIZ books.
-It is not possible to retrieve the balance of an external account. If the `account_id` given in the url parameters do not match with one of your wallet account, the json response will be an error.
-It is possible to retrieve the closing balance of a wallet account on a specific past date, you have to specify the closing date in the parameters. 
-
-As a response to this query, you will receive a json response containing details of the [Balance Object](#balance_object).
-
-*Parameters:*
-
-| Field | Type | Description |
-|-------|------|-------------|
-| closing_date | Date | The closing balance date. `YYYY-MM-DD` |
+As a response to this query, you will receive an Array containing the [balance Object](#balance_object).
 
 #### <a id="get-account-details"></a> Retrieve account details ####
 
@@ -208,7 +187,9 @@ As a response to this query, you will receive a json response containing details
 Method: GET 
 URL: /account/{account_id}
 ```
-Retrieve bank details on an account. As a response to this query, you will receive the details of the [Accounts Object](#accounts_object).
+Retrieve bank details on an account. 
+
+As a response to this query, you will receive the details of the [Account Object](#account_object).
 
 #### <a id="put-account-details"></a> Update account details ####
 
@@ -229,14 +210,15 @@ Update information on an account or modify beneficiary bank or correspondent ban
 | currency | String | **Required.** Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the account currency. `EUR` |
 | tag | String | Custom Data. `External bank account EUR` |
 
-#### <a id="get-transfers-list"></a> Get transfer history ####
+As a response to this query, you will receive the details of the [Account Object](#account_object) with updated information.
+
+#### <a id="get-transfers-list"></a> Get transfers history ####
 
 ```
 Method: GET 
 URL: /transfers
 ```
 Request the list of transfers that has been received or sent on a specific period of time.
-As a response to this query, you will receive the [Transfers Object](#transfers_object).
 
 *Parameters:*
 
@@ -244,6 +226,8 @@ As a response to this query, you will receive the [Transfers Object](#transfers_
 |-------|------|-------------|
 | from_date | Date | List all transfers that has been credited or debited on your wallets account since this date. `YYYY-MM-DD` |
 | to_date | Date | List all transfers that has been credited or debited on your wallets account until this date. `YYYY-MM-DD` | 
+
+As a response to this query, you will receive the [Transfers Object](#transfers_object).
 
 #### <a id="get-transfer-details"></a> Retrieve transfer details ####
 
