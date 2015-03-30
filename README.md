@@ -147,7 +147,7 @@ There are two kinds of accounts with FX4BIZ. What we call `wallet` account, whic
 Method: POST 
 URL: /account
 ```
-This service permits to reference a `external bank` new account. All `wallet` are created automatically when subscribing with FX4BIZ.
+This service permits to reference a new `external bank` account. All `wallet` are created automatically when subscribing with FX4BIZ.
 This service include verifications on the format of the account created.
 The API has been made in order to accept local specification of cross-boarder payments.
 
