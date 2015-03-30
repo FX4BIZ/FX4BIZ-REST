@@ -91,7 +91,7 @@ All API request must be made over [HTTPS](http://en.wikipedia.org/wiki/HTTPS). C
 
 There are two kinds of accounts with FX4BIZ. What we call `wallet` account, which is an account hold in the FX4BIZ books and `external bank` account, which can be either your own account in another bank or a third party recipient account.
 
-**As an example, a response for `GET /account/{account_id}/details` object looks like this:**
+**As an example, a response for `GET /account/{account_id}/details` looks like this:**
 ```js
 {
     "account": {
@@ -147,7 +147,8 @@ There are two kinds of accounts with FX4BIZ. What we call `wallet` account, whic
 Method: POST 
 URL: /account
 ```
-This service permits to reference a new account. This service include verifications on the format of the account created.
+This service permits to reference a `external bank` new account. All `wallet` are created automatically when subscribing with FX4BIZ.
+This service include verifications on the format of the account created.
 The API has been made in order to accept local specification of cross-boarder payments.
 
 The Api accepts the following formats of `external bank` accounts :
@@ -168,7 +169,7 @@ The Api accepts the following formats of `external bank` accounts :
 | currency | String | **Required.** Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the account currency. `EUR` |
 | tag | String | Custom Data. `John Doe bank account EUR` |
 
-As a response to this query, you will receive a json response containing details of the [Account Object](#account_object) created.
+**As a response to this query, you will receive a json response containing details of the [Account](#account_object) created.**
 
 #### <a id="get-accounts-list"></a> Retrieve accounts list ####
 
@@ -179,7 +180,7 @@ URL: /accounts
 Retrieve the list of accounts referenced. 
 This service also provides the balance of `wallet` type accounts.
 
-**As a response to this query, you will receive an Array containing the `account_id` and the [Balance Object](#balance_object).**
+**As a response to this query, you will receive an Array containing the `account_id` and the [Balance](#balance_object) for each `wallet` account.**
 
 #### <a id="get-account-details"></a> Retrieve account details ####
 
@@ -189,7 +190,7 @@ URL: /account/{account_id}
 ```
 Retrieve bank details on a specific account. 
 
-**As a response to this query, you will receive the details of the [Account Object](#account_object).**
+**As a response to this query, you will receive the details of the [Account](#account_object).**
 
 #### <a id="put-account-details"></a> Update account details ####
 
@@ -210,7 +211,7 @@ Update information on an account or modify beneficiary bank or correspondent ban
 | currency | String | **Required.** Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the account currency. `EUR` |
 | tag | String | Custom Data. `External bank account EUR` |
 
-**As a response to this query, you will receive the details of the [Account Object](#account_object) with updated information.**
+**As a response to this query, you will receive the details of the [Account](#account_object) with updated information.**
 
 #### <a id="get-transfers-list"></a> Get transfers history ####
 
@@ -227,7 +228,7 @@ Request the list of transfers that has been received or sent on a specific perio
 | from_date | Date | List all transfers that has been credited or debited on your wallets account since this `operation_date`. `YYYY-MM-DD` |
 | to_date | Date | List all transfers that has been credited or debited on your wallets account until this `operation_date`. `YYYY-MM-DD` | 
 
-**As a response to this query, you will receive an Array containing the `transfer_id`, `operation_date`, `value_date` and the [Amount Object](#amount_object) for all transfers that has been credited or debited on `operation date`.**
+**As a response to this query, you will receive an Array containing the `transfer_id`, `operation_date`, `value_date` and the [Amount](#amount_object) for all transfers that has been credited or debited on `operation date`.**
 
 #### <a id="get-transfer-details"></a> Retrieve transfer details ####
 
@@ -237,7 +238,7 @@ URL: /transfer/{transfer_id}
 ```
 Request information on a particular transfer that has been credited or debited to a wallet. 
 
-**As a response to this query, you will receive the details of the [Transfer Object](#transfer_object).**
+**As a response to this query, you will receive the details of the [Transfer](#transfer_object).**
 
 #### <a id="delete-account"></a> Delete account ####
 
