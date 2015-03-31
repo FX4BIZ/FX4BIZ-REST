@@ -5,7 +5,7 @@
 Please contact our institutional team in order to open an API account.
 * Maxime Champoux @ mch@fx4biz.com
 
-** Caution: We need to get all your required legal docs in order to create your new account.**
+**Caution: We need to get all your required legal docs in order to create your new account.**
 
 #### 2. GET YOUR TEST ENVIRONNEMENT ####
 
