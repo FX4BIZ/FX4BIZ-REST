@@ -169,7 +169,7 @@ The Api accepts the following formats of `external bank` accounts :
 | currency | String | **Required.** Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the account currency. `EUR` |
 | tag | String | Custom Data. `John Doe bank account EUR` |
 
-**As a response to this query, you will receive a json response containing details of the [Account](#account_object) created.**
+*As a response to this query, you will receive a json response containing details of the [Account](#account_object) created.*
 
 #### <a id="get-accounts-list"></a> Retrieve accounts list ####
 
@@ -190,7 +190,7 @@ URL: /account/{account_id}
 ```
 Retrieve bank details on a specific account. 
 
-**As a response to this query, you will receive the details of the [Account](#account_object).**
+*As a response to this query, you will receive the details of the [Account](#account_object).*
 
 #### <a id="put-account-details"></a> Update account details ####
 
@@ -211,7 +211,7 @@ Update information on an account or modify beneficiary bank or correspondent ban
 | currency | String | **Required.** Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the account currency. `EUR` |
 | tag | String | Custom Data. `External bank account EUR` |
 
-**As a response to this query, you will receive the details of the [Account](#account_object) with updated information.**
+*As a response to this query, you will receive the details of the [Account](#account_object) with updated information.*
 
 #### <a id="get-transfers-list"></a> Get transfers history ####
 
@@ -228,7 +228,7 @@ Request the list of transfers that has been received or sent on a specific perio
 | from_date | Date | List all transfers that has been credited or debited on your wallets account since this `operation_date`. `YYYY-MM-DD` |
 | to_date | Date | List all transfers that has been credited or debited on your wallets account until this `operation_date`. `YYYY-MM-DD` | 
 
-**As a response to this query, you will receive an Array containing the `transfer_id`, `operation_date`, `value_date` and the [Amount](#amount_object) for all transfers that has been credited or debited on `operation date`.**
+*As a response to this query, you will receive an Array containing the `transfer_id`, `operation_date`, `value_date` and the [Amount](#amount_object) for all transfers that has been credited or debited on `operation date`.*
 
 #### <a id="get-transfer-details"></a> Retrieve transfer details ####
 
@@ -238,7 +238,7 @@ URL: /transfer/{transfer_id}
 ```
 Request information on a particular transfer that has been credited or debited to a wallet. 
 
-**As a response to this query, you will receive the details of the [Transfer](#transfer_object).**
+*As a response to this query, you will receive the details of the [Transfer](#transfer_object).*
 
 #### <a id="delete-account"></a> Delete account ####
 
@@ -248,7 +248,7 @@ URL: /account/{account_id}
 ```
 Delete an account.
 
-**As a response to this query, you will receive a JSON confirmation that the account has been deleted properly.**
+*As a response to this query, you will receive a JSON confirmation that the account has been deleted properly.*
 
 *Caution:* A `wallet` account cannot be deleted.
 
@@ -334,7 +334,7 @@ URL: /payments
 ```
 Use this path in order to schedule a new payment. 
 
-**As a response to this query, you will receive the details of the [Payment](#payment_object) created.**
+*As a response to this query, you will receive the details of the [Payment](#payment_object) created.*
 
 *Parameters:*
 
@@ -353,7 +353,7 @@ URL: /payment/{payment_id}/confirm
 Payments that has been scheduled must be confirmed in order to be release. 
 If the payment is not confirmed on scheduled date of operation, it will be postponed to the next operation date available.
 
-**As a response to this query, you will receive the updated details of the [Payment](#payment_object) confirmed.**
+*As a response to this query, you will receive the updated details of the [Payment](#payment_object) confirmed.*
 
 #### <a id="get-payments-history"></a> Retrieve payments history ####
 
