@@ -48,7 +48,6 @@ The FX4BIZ API is organized around [REST](http://en.wikipedia.org/wiki/Represent
 #### Objects List ####
 
 * [Account Object](#account_object)
-* [Accounts Object](#accounts_object)
 * [Address Object](#address_object)
 * [Balance Object](#balance_object)
 * [Beneficiary Bank Object](#beneficiary_bank_object)
@@ -56,11 +55,9 @@ The FX4BIZ API is organized around [REST](http://en.wikipedia.org/wiki/Represent
 * [Correspondent Bank Object](#correspondent_bank_object)
 * [Payment Object](#payment_object)
 * [Payments Object](#payments_object)
-* [Rates Object](#rates_object)
+* [Rate Object](#rate_object)
 * [Trade Object](#trade_object)
-* [Trades Object](#trades_object)
 * [Transfer Object](#transfer_object)
-* [Transfers Object](#transfers_object)
 * [Quote Object](#trade_object)
 
 #### Formatting Conventions ####
