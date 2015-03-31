@@ -889,6 +889,7 @@ Our API libraries can raise exceptions for many reasons, such as failed trade, i
 All top-level FX4BIZ API resources have support for bulk fetches - "list" API methods. For instance you can [list accounts`](#get-account-list), [list transfers`](#get-transfers-list), etc... These list API methods share a common structure.
 
 *Parameters:*
+
 | Field | Type | Description |
 |-------|------|-------------|
 | page | String | index of the page (start to 1) Default value: `1` |
