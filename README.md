@@ -428,9 +428,11 @@ The FX4BIZ-REST API provides a FX Data Feed. You can use the [Rates service](#ra
 
 | Field | Type | Description |
 |-------|------|-------------|
-| instruments | Array | **Required.** List of crosses.`EURGBP;EURUSD` |
+| currency_pair | Array | **Required.** List of crosses.`EURGBP;EURUSD` |
 | type | String | **Required.** List the crosses for all the rates wished. `real-time` |
 | date | Date | For historical rates. `YYYY-MM-DD` |
+
+As a response to this query, you will receive an Array containing the `type`, the `date` and the [Rate](#rate_object) for all rates asked.
 
 #### <a id="submit-quote"></a> Retrieve Quote ####
 
@@ -797,22 +799,6 @@ Example Rate Object:
 }
 ```
 
-#### <a id="rates_object"></a> Rates Object ####
-
-When a rates is specified as part of a JSON body, it is encoded as an array of rates objects with he following fields:
-
-| Field | Type | Description |
-|-------|------|-------------|
-| rate | [Rate Object](#rate_object) | |
-| instruments | Array | **Required.** List of crosses.`EURGBP;EURUSD` |
-| type | String | **Required.** List the crosses for all the rates wished. `real-time` |
-| date | Date | For historical rates. `YYYY-MM-DD` |
-
-Example Rates Object:
-
-```js
-    "rates":[{rate_object}]
-```
 #### <a id="quote_object"></a> Quote Object ####
 
 When a `quote` is specified as part of a JSON body, it is encoded as an object with four fields:
