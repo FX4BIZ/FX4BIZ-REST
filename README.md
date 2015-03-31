@@ -322,15 +322,13 @@ When you confirm a payment for processing, make sure you have sufficient funds i
 }
 ```
 
-#### <a id="submit-payment"></a> Submitting a payment ####
+#### <a id="submit-payment"></a> Submit a payment ####
 
 ```
 Method: POST 
-URL: /payments
+URL: /payment
 ```
 Use this path in order to schedule a new payment. 
-
-As a response to this query, you will receive the details of the [Payment](#payment_object) created.
 
 *Parameters:*
 
@@ -339,6 +337,8 @@ As a response to this query, you will receive the details of the [Payment](#paym
 | account_id | String | **Required.** Id of the destination account. `xxx` |
 | amount | [Amount Object](#amount_object) | **Required.** Amount to be sent. `10000.00+GBP` *Caution.* The currency of the amount sent must be equal to the currency of the beneficiary account. |
 | execution_date | Date | Initial execution date of you payment. `YYYY-MM-DD` |
+
+As a response to this query, you will receive the details of the [Payment](#payment_object) created.
 
 #### <a id="confirm-payment"></a> Confirm a payment ####
 
@@ -365,6 +365,8 @@ Request the list of payments that has been created on a specific period of time.
 |-------|------|-------------|
 | from_date | Date | `YYYY-MM-DD` |
 | to_date | Date | `YYYY-MM-DD` | 
+
+As a response to this query, you will receive an Array with the `payment_id`, `creation_date`, `execution_date` and `amount`  of the [Payment] of all payment created.
 
 #### <a id="get-payment-details"></a> Retrieve Payment Details ####
 
