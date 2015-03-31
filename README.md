@@ -749,7 +749,6 @@ When a transfer is specified as part of a JSON body, it is encoded as an object 
 
 | Field | Type | Description |
 |-------|------|-------------|
-| payment_id | String | **Required.** id of the beneficiary account. `xxx` |
 | amount | [Amount Object](#amount_object) | **Required.** The nominal amount to be transfered. `10,000.00 GBP` |
 | account_source | [Account Object](#account_object) | Details of the initiating account. |
 | account_target | [Account Object](#account_object) | Details of the destination account. |
@@ -795,6 +794,7 @@ When a `quote` is specified as part of a JSON body, it is encoded as an object w
 Example Quote Object:
 
 ```js
+--> TBD
 ```
 
 ### Formatting Conventions ###
