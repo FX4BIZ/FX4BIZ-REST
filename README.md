@@ -225,10 +225,10 @@ Request the list of transfers that has been received or sent on a specific perio
 
 | Field | Type | Description |
 |-------|------|-------------|
-| from_date | Date | List all transfers that has been credited or debited on your wallets account since this `operation_date`. `YYYY-MM-DD` |
-| to_date | Date | List all transfers that has been credited or debited on your wallets account until this `operation_date`. `YYYY-MM-DD` | 
+| from_date | Date | List all transfers that has been credited or debited on your wallets account since this `booking_date`. `YYYY-MM-DD` |
+| to_date | Date | List all transfers that has been credited or debited on your wallets account until this `booking_date`. `YYYY-MM-DD` | 
 
-As a response to this query, you will receive an Array containing the `transfer_id`, `operation_date`, `value_date` and the [Amount](#amount_object) for all transfers that has been credited or debited on `operation date`.
+As a response to this query, you will receive an Array containing the `transfer_id`, `booking_date`, `value_date` and the [Amount](#amount_object) for all transfers that has been credited or debited on `booking date`.
 
 #### <a id="get-transfer-details"></a> Retrieve transfer details ####
 
@@ -361,6 +361,14 @@ As a response to this query, you will receive the updated details of the [Paymen
 Method: GET
 URL: /payments
 ```
+Request the list of payments that has been created on a specific period of time.
+
+*Parameters:*
+
+| Field | Type | Description |
+|-------|------|-------------|
+| from_date | Date | `YYYY-MM-DD` |
+| to_date | Date | `YYYY-MM-DD` | 
 
 #### <a id="get-payment-details"></a> Retrieve Payment Details ####
 
@@ -745,7 +753,11 @@ When a transfer is specified as part of a JSON body, it is encoded as an object 
 |-------|------|-------------|
 | payment_id | String | **Required.** id of the beneficiary account. `xxx` |
 | amount | [Amount Object](#amount_object) | **Required.** The nominal amount to be transfered. `10,000.00 GBP` |
-| date | Date | `YYYY-MM-DD` |
+| account_source | [Account Object](#account_object) | Details of the initiating account. |
+| account_target | [Account Object](#account_object) | Details of the destination account. |
+| booking_date | Date | `YYYY-MM-DD` |
+| value_date | Date | `YYYY-MM-DD` |
+| communication | String | Communication in the free format field of the transfer. `Invoice XXX` |
 
 #### <a id="transfers_object"></a> Transfers Object ####
 
