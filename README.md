@@ -374,6 +374,9 @@ As a response to this query, you will receive an Array with the `payment_id`, `c
 Method: GET
 URL: /payment
 ```
+Retrieve the details of a specific payment.
+
+As a response to this query, you will receive the details of the [Payment](#payment_object).
 
 #### <a id="put-payment"></a> Update Payment Details####
 
@@ -381,6 +384,9 @@ URL: /payment
 Method: PUT
 URL: /payment/{payment_id}
 ```
+Update information on a specific payment.
+
+As a response to this query, you will receive the updated details of the [Payment](#payment_object).
 
 #### <a id="delete-payment"></a> Cancel Payment ####
 
@@ -388,6 +394,8 @@ URL: /payment/{payment_id}
 Method: DELETE
 URL: /payment/{payment_id}
 ```
+
+As a response to this query, you will receive a confirmation that the [Payment](#payment_object) is deleted properly.
 
 ### Trade Services ###
 
@@ -415,7 +423,6 @@ As an example, a response for `GET /trade/{:id}` object looks like this:
     }
 }
 ```
-
 
 #### <a id="submit-rates"></a> Retrieve Rates ####
 
@@ -453,6 +460,8 @@ The Retrieve Quote service is a read-only service permitting to ask for the real
 | amount | [Amount Object](#amount_object) | **Required.** Amount to be sent. `10000.00+GBP` *Caution.* The currency of the amount sent must be equal to the currency of the beneficiary account. |
 | execution_date | Date | Initial execution date of you payment. `YYYY-MM-DD` |
 
+As a response to this query, you will receive the [Quote](#quote_object) required.
+
 #### <a id="submit-trade"></a> Execute Trade ####
 
 ```
@@ -460,7 +469,6 @@ Method: POST
 URL: /trade
 ```
 This services permits to execute trade.
-As a response, you will receive the details of the [Trade](#trade_object) executed.
 
 *Parameters:*
 
@@ -471,12 +479,17 @@ As a response, you will receive the details of the [Trade](#trade_object) execut
 | amount | [Amount Object](#amount_object) | **Required.** Amount to be sent. `10000.00+GBP` *Caution.* The currency of the amount sent must be equal to the currency of the beneficiary account. |
 | execution_date | Date | Initial execution date of you payment. `YYYY-MM-DD` |
 
+As a response, you will receive the details of the [Trade](#trade_object) executed.
+
 #### <a id="get-trade"></a> Retrieve Trade ####
 
 ```
 Method: GET
 URL: /trade/{trade_id}
 ```
+Retrieve the trade details.
+
+As a response, you will receive the details of the [Trade](#trade_object).
 
 #### <a id="get-trades"></a> Retrieve Trades Book ####
 
@@ -484,6 +497,9 @@ URL: /trade/{trade_id}
 Method: GET
 URL: /trades
 ```
+Retrieve the list of trades executed. We sort trades by validation date.
+
+As a response, you will receive an array containing the `trade_id`, the `validation_date` and the `amount` for all trades validated.
 
 ### API objects ###
 
