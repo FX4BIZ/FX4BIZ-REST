@@ -888,15 +888,11 @@ Our API libraries can raise exceptions for many reasons, such as failed trade, i
 
 All top-level FX4BIZ API resources have support for bulk fetches - "list" API methods. For instance you can [list accounts`](#get-account-list), [list transfers`](#get-transfers-list), etc... These list API methods share a common structure.
 
-FX4BIZ utilizes cursor-based pagination, using the parameter `starting_after`. Pass `starting_after` to dictate where in the list you would like to begin (see below).
-
-*Arguments:*
-
+*Parameters:*
 | Field | Type | Description |
 |-------|------|-------------|
-| limit | String | A limit on the number of objects to be returned. limit can range between 1 and 100 items. |
-| starting_after | String | A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. for instance, if you make a list request and receive 100 objects, ending with `object_foo`, your subsequent call can include `starting_after=object_foo` in order to fetch the next page of the list. |
-| ending_before | String | A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list. |
+| page | String | index of the page (start to 1) Default value: `1` |
+| per_page | String | number of items returned. Default value: `10` Max: `100` |
 
 #### <a id="quoted_numbers"></a> Quoted Numbers ####
 
