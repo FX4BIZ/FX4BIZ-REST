@@ -54,7 +54,6 @@ The FX4BIZ API is organized around [REST](http://en.wikipedia.org/wiki/Represent
 * [Beneficiary Object](#beneficiary_object)
 * [Correspondent Bank Object](#correspondent_bank_object)
 * [Payment Object](#payment_object)
-* [Payments Object](#payments_object)
 * [Rate Object](#rate_object)
 * [Trade Object](#trade_object)
 * [Transfer Object](#transfer_object)
@@ -704,6 +703,7 @@ When a `payment` is specified as part of a JSON body, it is encoded as an object
         "account_id": {amount},
     },
 ```
+
 #### <a id="trade_object"></a> Trade Object ####
 
 When a `trade` is specified as part of a JSON body, it is encoded as an object with the following fields:
@@ -720,26 +720,7 @@ When a `trade` is specified as part of a JSON body, it is encoded as an object w
 *Example Trade Object:*
 
 ```js
-},
-```
-
-#### <a id="trades_object"></a> Trades Object ####
-
-When a `trades` is specified as part of a JSON body, it is encoded as an object with the following fields:
-
-*Object resources:*
-
-| Field | Type | Description |
-|-------|------|-------------|
-| trade_id | String | **Required.** id of trade `xxx` |
-| amount | [Amount Object](#amount_object) | **Required.** The nominal amount of the trade. `10,000.00 GBP` |
-| execution_date | Date | `YYYY-MM-DD` |
-| created_date | Date | `YYYY-MM-DD` |
-
-*Example Trades Object:*
-
-```js
-},
+-> TBD
 ```
 
 #### <a id="transfer_object"></a> Transfer Object ####
@@ -758,23 +739,10 @@ When a transfer is specified as part of a JSON body, it is encoded as an object 
 | value_date | Date | `YYYY-MM-DD` |
 | communication | String | Communication in the free format field of the transfer. `Invoice XXX` |
 
-#### <a id="transfers_object"></a> Transfers Object ####
-
-When a `transfers` is specified as part of a JSON body, it is encoded as an object with the following fields:
-
-*Object resources:*
-
-| Field | Type | Description |
-|-------|------|-------------|
-| transfers_id | String | **Required.** id of transfers `xxx` |
-| amount | [Amount Object](#amount_object) | **Required.** The nominal amount of the trade. `10,000.00 GBP` |
-| execution_date | Date | `YYYY-MM-DD` |
-| created_date | Date | `YYYY-MM-DD` |
-
-*Example Transfers Object:*
+*Example Transfer Object:*
 
 ```js
-},
+-> TBD
 ```
 
 #### <a id="rate_object"></a> Rate Object ####
@@ -791,12 +759,12 @@ When a rate is specified as part of a JSON body, it is encoded as an object with
 Example Rate Object:
 
 ```js
-"rate":{
-  "mid_market": "1.1005",
-  "core": "1.1004",
-  "applied": "1.1002",
-  "currency_pair": "EURUSD",
-}
+    "rate":{
+      "mid_market": "1.1005",
+      "core": "1.1004",
+      "applied": "1.1002",
+      "currency_pair": "EURUSD",
+    }
 ```
 
 #### <a id="quote_object"></a> Quote Object ####
@@ -809,8 +777,6 @@ When a `quote` is specified as part of a JSON body, it is encoded as an object w
 Example Quote Object:
 
 ```js
-{
-}
 ```
 
 ### Formatting Conventions ###
