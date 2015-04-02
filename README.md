@@ -439,7 +439,7 @@ The FX4BIZ-REST API provides a FX Data Feed. You can use the [Rates service](#ra
 
 As a response to this query, you will receive an Array containing the `type`, the `date` and the [Rate](#rate_object) for all rates asked.
 
-#### <a id="submit-quote"></a> Retrieve Quote ####
+#### <a id="get-quote"></a> Retrieve Quote ####
 
 ```
 Method: GET
