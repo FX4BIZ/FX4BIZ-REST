@@ -421,7 +421,7 @@ As an example, a response for `GET /trade/{:id}` object looks like this:
 }
 ```
 
-#### <a id="submit-rates"></a> Retrieve Rates ####
+#### <a id="get-rates"></a> Retrieve Rates ####
 
 ```
 Method: GET
