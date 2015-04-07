@@ -82,7 +82,7 @@ All API request must be made over [HTTPS](http://en.wikipedia.org/wiki/HTTPS). C
 
 ### <a id="account_services"></a> Account Services 
 
-There are two kinds of accounts with FX4BIZ. What we call `wallet` account, which is an account hold in the FX4BIZ books and `external bank` account, which can be either your own account in another bank or a third party recipient account.
+There are two kinds of accounts with FX4BIZ. What we call `wallet` account, which is your own or a third party account hold in the FX4BIZ books and `external bank` account, which can be either your own account in another bank or a third party recipient account.
 
 **As an example, a response for `GET /account/{account_id}/details` looks like this:**
 ```js
@@ -140,7 +140,19 @@ There are two kinds of accounts with FX4BIZ. What we call `wallet` account, whic
 Method: POST 
 URL: /account
 ```
-This service permits to reference a new `external bank` account. All `wallet` accounts are created automatically when subscribing with FX4BIZ.
+By submitting a new account, you reference a new beneficiary for your future payments.
+The beneficiary account can be a `wallet` account if your beneficiary has already an account with FX4BIZ. In that case, the API only need tho parameters to reference the account.
+
+*Parameters:*
+
+| Field | Type | Description |
+|-------|------|-------------|
+| number | String | **Required.** The recipient account number or Iban. `xxx4548` |
+| type | String | **Required.** The category of account. `external bank` |
+
+*Caution.* All your own `wallet` accounts are created automatically when subscribing with FX4BIZ.
+
+This service also permits to reference `external bank` accounts which are your own accounts or a third party account hold in another bank.
 This service include verifications on the format of the account created.
 The API has been made in order to accept local specification of cross-boarder payments.
 
@@ -161,6 +173,7 @@ The Api accepts the following formats of `external bank` accounts :
 | number | String | **Required.** The recipient account number or Iban. `xxx4548` |
 | currency | String | **Required.** Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the account currency. `EUR` |
 | tag | String | Custom Data. `John Doe bank account EUR` |
+| type | String | **Required.** The category of account. `external bank` |
 
 As a response to this query, you will receive a json response containing details of the [Account](#account_object) created.
 
