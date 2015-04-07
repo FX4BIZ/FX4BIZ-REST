@@ -8,8 +8,6 @@ We recommend FX4BIZ-REST for financial institutions just getting started with FX
 
 Our API is divided into sections based on different concepts in our system. Each section is made up of a series of calls.
 
-#### Authenticate ####
-
 #### Accounts ####
 
 * [Submit New Account - `POST /account`](#post-account-create)
@@ -73,12 +71,6 @@ You authenticate to the FX4BIZ API by providing one of your API keys in the requ
 Authentication to the API occurs via [HTTP Auth.](http://en.wikipedia.org/wiki/Representational_state_transfer) Provide your API key as the basic auth username. You do not need to provide a password.
 
 All API request must be made over [HTTPS](http://en.wikipedia.org/wiki/HTTPS). Calls made over plain HTTP will fail. You must authenticate for all requests.
-
-#### <a id="get-login-user"></a> Login ####
--> TBD
-
-#### <a id="get-end-session"></a> End session ####
--> TBD
 
 ### <a id="account_services"></a> Account Services 
 
