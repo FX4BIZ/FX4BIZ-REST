@@ -141,7 +141,8 @@ Method: POST
 URL: /account
 ```
 By submitting a new account, you reference a new beneficiary for your future payments.
-The beneficiary account can be a `wallet` account if your beneficiary has already an account with FX4BIZ. In that case, the API only need tho parameters to reference the account.
+The beneficiary account can be a `wallet` account if your beneficiary has already an account with FX4BIZ. In that case, the API only need two parameters to reference the account.
+The big asset of payments between two `wallet` accounts is the access to a free of charge instant transfer.
 
 *Parameters:*
 
