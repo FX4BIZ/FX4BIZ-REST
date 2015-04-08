@@ -433,7 +433,7 @@ As an example, a response for `GET /trade/{:id}` object looks like this:
 Method: GET
 URL: /rates
 ```
-The FX4BIZ-REST API provides a FX Data Feed. You can use the [Rates service](#rates_object) in order to ask for daily, hourly, minute, or real-time currency rates tables. Real-time rates are specified at mid-market.
+The FX4BIZ-REST API provides a FX Data Feed. You can use the [Rates service](#rate_object) in order to ask for currency rates tables. Spreads showed in this service are minimal spreads, the tradable spread can be higher depending on the volatility of the market.
 
 *Parameters:*
 
@@ -452,7 +452,7 @@ Method: GET
 URL: /quote
 ```
 The Retrieve Quote service is a read-only service permitting to ask for the real-time rate before to execute a trade. 
-*Caution:* It is not possible to trade with the Retrieve Quote service, you have to utilize the [Trade Service](#submit-trade) in order to placing new trades.
+*Caution:* It is not possible to trade with the Retrieve Quote service, you have to utilize the [Trade Service](#submit-trade) in order to placing new trades. 
 
 *Parameters:*
 
