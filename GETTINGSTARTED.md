@@ -15,3 +15,4 @@ Please contact our IT Team in order to have access to our Test environnement.
 #### 3. GO LIVE ####
 
 Once the setup has been validated from both sides, you will get your production environnement credentials.
+
