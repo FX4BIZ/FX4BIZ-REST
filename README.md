@@ -133,19 +133,12 @@ Method: POST
 URL: /account
 ```
 By submitting a new account, you reference a new beneficiary for your future payments.
-The beneficiary account can be a `wallet` account if your beneficiary has already an account with FX4BIZ. In that case, the API only need two parameters to reference the account.
-The big asset of payments between two `wallet` accounts is the access to a free of charge instant transfer.
-
-*Parameters:*
-
-| Field | Type | Description |
-|-------|------|-------------|
-| number | String | **Required.** The recipient account number or Iban. `xxx4548` |
-| type | String | **Required.** The category of account. `external bank` |
+The beneficiary account can be a `wallet` account if your beneficiary has already an account with FX4BIZ. 
+The big asset of submitting payments between two `wallet` accounts is the access to a free of charge and instant transfer.
 
 *Caution.* All your own `wallet` accounts are created automatically when subscribing with FX4BIZ.
 
-This service also permits to reference `external bank` accounts which are your own accounts or a third party account hold in another bank.
+The Submit account service also permits to reference `external bank` accounts which are your own accounts or a third party account hold in another bank.
 This service include verifications on the format of the account created.
 The API has been made in order to accept local specification of cross-boarder payments.
 
@@ -177,7 +170,7 @@ Method: GET
 URL: /accounts
 ```
 Retrieve the list of accounts referenced. 
-This service also provides the balance of `wallet` type accounts.
+This service also provides the balance for `wallet` type accounts.
 
 As a response to this query, you will receive an Array containing the `account_id` and the [Balance](#balance_object) for each `wallet` account.
 
@@ -604,7 +597,7 @@ When the balance is specified as part of a JSON body, it is encoded as an object
 
 | Field | Type | Description |
 |-------|------|-------------|
-| closing_date | Date | The losing date of the balance details given. `2014-01-12` |
+| closing_date | Date | The closing date of the balance details given. `2014-01-12` |
 | booking_amount | [Amount Object](#amount_object) | The closing balance of the account. `10,000.00 GBP`|
 | value_amount | [Amount Object](#amount_object) | The closing value of the account. `10,000.00 GBP`|
 
@@ -721,7 +714,7 @@ When a `payment` is specified as part of a JSON body, it is encoded as an object
         "created_date": "2014-01-12T00:00:00+00:00",
         "initial_execution_date": "2014-01-12T00:00:00+00:00",
         "amount": {amount},
-        "account_id": {amount},
+        "account_id": {account},
     },
 ```
 
@@ -734,14 +727,28 @@ When a `trade` is specified as part of a JSON body, it is encoded as an object w
 | Field | Type | Description |
 |-------|------|-------------|
 | trade_id | String | **Required.** id of trade `xxx` |
-| amount | [Amount Object](#amount_object) | **Required.** The nominal amount of the trade. `10,000.00 GBP` |
-| execution_date | Date | `YYYY-MM-DD` |
+| nominal_amount | [Amount Object](#amount_object) | **Required.** The nominal amount of the trade. `10,000.00 GBP` |
+| settlement_amount | [Amount Object](#amount_object) | **Required.** The amount that will be debited on the related source `wallet` account at delivery date. `10,000.00 GBP` |
+| delivered_amount | [Amount Object](#amount_object) | **Required.** The amount that will be credited on the related target `wallet` account at delivery date. `10,000.00 GBP` |
+| rate_applied | String | **Required.** The nominal amount of the trade. `1.10000` |
+| currency_pair | String | **Required.** The instrument related to the rate applied. `EURUSD` |
+| rate | [Rate Object](#rate_object) | **Required.** The Core and mid-market real time rates related to this trade. |
+| delivery_date | Date | `YYYY-MM-DD` |
 | created_date | Date | `YYYY-MM-DD` |
 
 *Example Trade Object:*
 
 ```js
--> TBD
+    "trade": {
+        "created_date": "2014-01-12T00:00:00+00:00",
+        "delivery_date": "2014-01-12T00:00:00+00:00",
+        "nominal_amount": {amount},
+        "rate_applied": "1.1002",
+        "currency_pair": "EURUSD",
+        "rate": {rate}
+        "settlement_amount": {amount},
+        "delivered_amount": {amount},
+    }
 ```
 
 #### <a id="transfer_object"></a> Transfer Object ####
@@ -753,8 +760,8 @@ When a transfer is specified as part of a JSON body, it is encoded as an object 
 | Field | Type | Description |
 |-------|------|-------------|
 | amount | [Amount Object](#amount_object) | **Required.** The nominal amount to be transfered. `10,000.00 GBP` |
-| account_source | [Account Object](#account_object) | Details of the initiating account. |
-| account_target | [Account Object](#account_object) | Details of the destination account. |
+| account_source | [Account Object](#account_object) | Details of the settlement account. |
+| account_target | [Account Object](#account_object) | Details of the delivery account. |
 | booking_date | Date | `YYYY-MM-DD` |
 | value_date | Date | `YYYY-MM-DD` |
 | communication | String | Communication in the free format field of the transfer. `Invoice XXX` |
@@ -781,8 +788,8 @@ Example Rate Object:
 ```js
     "rate":{
       "mid_market": "1.1005",
-      "core": "1.1004",
-      "applied": "1.1002",
+      "core_bid": "1.1004",
+      "core_offer": "1.1006",
       "currency_pair": "EURUSD",
     }
 ```
