@@ -132,7 +132,7 @@ There are two kinds of accounts with FX4BIZ. What we call `wallet` account, whic
 Method: POST 
 URL: /account
 ```
-By submitting a new account, you reference a new beneficiary for your future payments.
+By submitting a new account, supply the relevant details in order to pay a beneficiary.
 The beneficiary account can be a `wallet` account if your beneficiary has already an account with FX4BIZ. 
 The big asset of submitting payments between two `wallet` accounts is the access to a free of charge and instant transfer.
 
@@ -161,7 +161,7 @@ The Api accepts the following formats of `external bank` accounts :
 | tag | String | Custom Data. `John Doe bank account EUR` |
 | type | String | **Required.** The category of account. `external bank` |
 
-As a response to this query, you will receive a json response containing details of the [Account](#account_object) created.
+As a response to this query, you will receive a json response containing details of the [Account](#account_object) created. The unique account_id must be stored and used in your future payments.
 
 #### <a id="get-accounts-list"></a> Retrieve accounts list ####
 
@@ -169,7 +169,7 @@ As a response to this query, you will receive a json response containing details
 Method: GET 
 URL: /accounts
 ```
-Retrieve the list of accounts referenced. 
+If you list an account
 This service also provides the balance for `wallet` type accounts.
 
 As a response to this query, you will receive an Array containing the `account_id` and the [Balance](#balance_object) for each `wallet` account.
@@ -180,7 +180,7 @@ As a response to this query, you will receive an Array containing the `account_i
 Method: GET 
 URL: /account/{account_id}
 ```
-Retrieve bank details on a specific account. 
+If you want to see the details related to an account, to confirm display the beneficiary information in your application for example
 
 As a response to this query, you will receive the details of the [Account](#account_object).
 
@@ -641,23 +641,27 @@ When a beneficiary bank is specified as part of a JSON body, it is encoded as an
 
 #### <a id="beneficiary_object"></a> Beneficiary Object ####
 
-When the beneficiary of an account is specified as part of a JSON body, it is encoded as an object with the following fields:
+Definition: Beneficiary - The Individual or Organisation to receive payment.
+May also be referred to as: Supplier/Vendor/Payee/Recipient
+The Beneficiary object must store the following fields:
 
 *Object resources:*
 
 | Field | Type | Description |
 |-------|------|-------------|
 | name | String | **Required.** The name of the account owner. `John Doe`|
-| type | String | **Required.** The type of account owner. `individual` |
+| type | String | **Required.** The type of account owner. `Individual` |
 | address | [Address Object](#address_object) | The account owner address. |
 
 *Example Beneficiary Object:*
 
 ```js
 {
-  "name": "John Doe",
-  "type": "individual",
-  "address": {address}
+    "beneficiary": {
+        "name": "John Doe",
+        "type": "Individual",
+        "address": {address},
+    }
 }
 ```
 
