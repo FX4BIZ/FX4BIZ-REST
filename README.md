@@ -66,11 +66,77 @@ The FX4BIZ API is organized around [REST](http://en.wikipedia.org/wiki/Represent
 
 ### Authentication Services ###
 
-You authenticate to the FX4BIZ API by providing one of your API keys in the request. You can have multiple API keys active at one time. Your API keys carry many privileges, so be sure to keep them secret!
+Every call to the FX4BIZ API must be authenticated, which must be done by adding a custom HTTP header (X-WSSE) with your username and secret.  
+This section contains detailed instructions on how to create valid headers for the Suite REST API.
 
-Authentication to the API occurs via [HTTP Auth.](http://en.wikipedia.org/wiki/Representational_state_transfer) Provide your API key as the basic auth username. You do not need to provide a password.
+**All API request must be made over [HTTPS](http://en.wikipedia.org/wiki/HTTPS). Calls made over plain [HTTP](http://en.wikipedia.org/wiki/HTTP) will fail.  
+You must authenticate for all requests.**
 
-All API request must be made over [HTTPS](http://en.wikipedia.org/wiki/HTTPS). Calls made over plain HTTP will fail. You must authenticate for all requests.
+#### X-WSSE Format ####
+
+The header has the following format, usually a single [HTTP](http://en.wikipedia.org/wiki/HTTP) header line which we broke down into multiple lines for easier readability:
+
+```js
+X-WSSE: UsernameToken
+Username="customer001",
+PasswordDigest="ZmI2ZmQ0MDIxYmQwNjcxNDkxY2RjNDNiMWExNjFkZA==",
+Nonce="d36e3162829ed4c89851497a717f",
+Created="2014-03-20T12:51:45Z"
+```
+
+The following sections describe each component in detail:
+
+**X-WSSE :** This is the name of the [HTTP](http://en.wikipedia.org/wiki/HTTP) header we use for authenticating the request.  
+**UsernameToken :** This is the authentication method. The X-WSSE header must contain a UsernameToken as we only support token-based authentication.  
+**Username :** This field contains the username you were provided during onboarding.  
+**PasswordDigest :** This field contains the hashed token which will prove the authenticity of your request. It is essential that you recompute this hash for every request as a hash is only valid for a certain period of time, and then it expires.  
+**Nonce :** This is a random value used to make your request unique so it cannot be replicated by any other unknown party.  
+**Created :** This field contains the current UTC, GMT, ZULU timestamp (YYYY-MM-DDTHH:MM:SS) according to the [ISO8601](http://fr.wikipedia.org/wiki/ISO_8601) format, *e.g. 2014-03-20T12:51:45+01:00*.
+
+####Computing the Password Digest####
+
+Computing the password digest involves 5 simple steps:
+
+1. Get a randomly generated 16 byte Nonce formatted as 32 hexadecimal characters.
+2. Get the current Created timestamp in [ISO-8601](http://fr.wikipedia.org/wiki/ISO_8601) format.
+3. Concatenate the following three values in this order: nonce, timestamp, secret.
+4. Calculate the [SHA-1](http://fr.wikipedia.org/wiki/SHA-1) hash value of the concatenated string, and make sure this value is in hexadecimal format! Some languages, like PHP, output hexadecimal hash by default. You may need to use special methods to obtain hexadecimal hashes in different languages or even convert byte to hex values by hand (see the sample codes below for more information).
+5. Apply a [Base64](http://fr.wikipedia.org/wiki/Base64) encoding to the resulted hash to get the final PasswordDigest value.
+
+####Exemple of creating the X-WSSE header with PHP####
+Here is a sample code that you can use to make your X-WSSE header, or just in a way of understanding the process.
+
+```php
+<?php
+
+// Login informations
+$username = "YourUserName" ;			// The username used to authenticate
+$password = "secret" ;					// The password used to authenticate
+$nonce = "" ;							// The nonce
+$nonce64 = "" ;							// The nonce with a Base64 encoding
+$date = "" ;							// The date of the request, in  ISO 8601 format
+$digest = "" ;							// The password digest needed to authenticate you
+$header = "" ; 							// The final header to put in your request
+
+// Making the nonce and the encoded nonce
+$chars = "0123456789abcdef";
+for ($i = 0; $i < 32; $i++) {
+    $nonce .= $chars[rand(0, 15)];
+}
+$nonce64 = base64_encode($nonce) ;
+
+// Getting the date at the right format (e.g. YYYY-MM-DDTHH:MM:SSZ)
+$date = gmdate('c');
+$date = substr($ts,0,19)."Z" ;
+
+// Getting the password digest
+$digest = base64_encode(sha1($nonce.$ts.$password, true));
+
+// Getting the X-WSSE header to put in your request
+$header = sprintf('X-WSSE: UsernameToken Username="%s", PasswordDigest="%s", Nonce="%s", Created="%s"',$username, $digest, $nonce64, $ts);
+
+```
+
 
 ### <a id="account_services"></a> Account Services 
 
@@ -423,8 +489,8 @@ As an example, a response for `GET /trade/{:id}` object looks like this:
 #### <a id="get-rates"></a> Retrieve Rates ####
 
 ```
-Method: GET
-URL: /rates
+Method: 	GET
+URL: 		/rates
 ```
 The FX4BIZ-REST API provides a FX Data Feed. You can use the [Rates service](#rate_object) in order to ask for currency rates tables. Spreads showed in this service are minimal spreads, the tradable spread can be higher depending on the volatility of the market.
 
@@ -432,11 +498,14 @@ The FX4BIZ-REST API provides a FX Data Feed. You can use the [Rates service](#ra
 
 | Field | Type | Description |
 |-------|------|-------------|
-| currency_pair | Array | **Required.** List of crosses.`EURGBP;EURUSD` |
-| type | String | **Required.** List the crosses for all the rates wished. `real-time` |
-| date | Date | For historical rates. `YYYY-MM-DD` |
+| instruments | String | **Required.** A string representing a list of crosses. Crosses must be separated with commas. <br />You can chain as many crosses as you want, as long as they're separated with commas. |
 
-As a response to this query, you will receive an Array containing the `type`, the `date` and the [Rate](#rate_object) for all rates asked.
+*Exemple:*
+```
+/rates?instruments=EURGBP,EURUSD
+```
+
+As a response to this query, you will receive an Array made of [Rate objects](#rate_object) for all rates asked.
 
 #### <a id="get-quote"></a> Retrieve Quote ####
 
@@ -445,7 +514,7 @@ Method: GET
 URL: /quote
 ```
 The Retrieve Quote service is a read-only service permitting to ask for the real-time rate before to execute a trade. 
-*Caution:* It is not possible to trade with the Retrieve Quote service, you have to utilize the [Trade Service](#submit-trade) in order to placing new trades. 
+*Caution:* It is not possible to trade with the Retrieve Quote service, you have to use the [Trade Service](#submit-trade) in order to placing new trades. 
 
 *Parameters:*
 
@@ -778,24 +847,26 @@ When a transfer is specified as part of a JSON body, it is encoded as an object 
 
 #### <a id="rate_object"></a> Rate Object ####
 
-When a rate is specified as part of a JSON body, it is encoded as an object with four fields:
+As a rate is specified in a JSON body, it's encoded as an object with five fields:
 
 | Field | Type | Description |
 |-------|------|-------------|
-| mid_market | String (Quoted decimal) | The average rate of the market between the bid and the ask rate |
-| core | String (Quoted decimal) | The interbank rate provided by the FX partner of FX4BIZ |
-| applied | String (Quoted decimal) | The rate applied by FX4Biz for this transaction |
 | currency_pair | String | The cross of currency used for the rates provided |
+| mid_market | String (Quoted decimal) | The average rate of the market between the bid and the ask rate. |
+| date | Date | The date of the last update on this currency. |
+| core_ask | String (Quoted decimal) | The interbank BID rate provided by the FX partner of FX4BIZ . |
+| core_bid | String (Quoted decimal) | The interbank ASK rate provided by the FX partner of FX4BIZ. |
 
 Example Rate Object:
 
 ```js
-    "rate":{
-      "mid_market": "1.1005",
-      "core_bid": "1.1004",
-      "core_offer": "1.1006",
-      "currency_pair": "EURUSD",
-    }
+    "rate":  {
+	    "currency_pair": "EURGBP",
+	    "min_market": "0.726500",
+	    "date": "2015-03-31 13:15:04",
+	    "core_ask": "0.726500",
+	    "core_bid": "0.726500"
+	}
 ```
 
 #### <a id="quote_object"></a> Quote Object ####
