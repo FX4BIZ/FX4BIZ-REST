@@ -500,7 +500,7 @@ The FX4BIZ-REST API provides a FX Data Feed. You can use the [Rates service](#ra
 |-------|------|-------------|
 | instruments | String | **Required.** A string representing a list of crosses. Crosses must be separated with commas. <br />You can chain as many crosses as you want, as long as they're separated with commas. |
 
-*Exemple:*
+*Example:*
 ```
 /rates?instruments=EURGBP,EURUSD
 ```
