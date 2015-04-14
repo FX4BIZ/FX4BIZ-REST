@@ -36,6 +36,11 @@ Our API is divided into sections based on different concepts in our system. Each
 * [Retrieve Trades Book - `GET /trades`](#get-trade-book)
 * [Retrieve Trade Details - `GET /trade/{trade_id}`](#get-trade-details)
 
+#### Logs ####
+
+* [Retrieve Logs - `GET /logs`](#get-logs)
+* [Retrieve a log entry with a nonce  - `GET /logs/{nonce}`](#get-log-by-nonce)
+
 ## API Reference ##
 
 The FX4BIZ API is organized around [REST](http://en.wikipedia.org/wiki/Representational_state_transfer). Our API is designed to have predictable, resource-oriented URLs and use the HTTP response codes to indicate API errors. We use built-in HTTP features, like HTTP authentication and HTTP verbs, which can be understood by off-the-shelf HTTP clients, and we support [cross-origin resource sharing](http://en.wikipedia.org/wiki/Representational_state_transfer) to allow you to interact securely with our API from a client-side web application. [JSON](http://www.json.org/) will be returned in all responses from the API, including errors.
@@ -53,6 +58,7 @@ The FX4BIZ API is organized around [REST](http://en.wikipedia.org/wiki/Represent
 * [Trade Object](#trade_object)
 * [Transfer Object](#transfer_object)
 * [Quote Object](#trade_object)
+* [Log Object](#log_object)
 
 #### Formatting Conventions ####
 
@@ -566,6 +572,60 @@ Retrieve the list of trades executed. We sort trades by validation date.
 
 As a response, you will receive an array containing the `trade_id`, the `validation_date` and the `amount` for all trades validated.
 
+### Log Services ###
+
+As a developper, you might want to go further than sending request and recieve responses.  
+The FX4BIZ API allows you to access the logs of its own services, to provide you some details about what you send, and what it's done on the platform.
+
+You can retrieve informations during a certain time.  
+This time passed, your log entry will be lost.
+
+| HTTP Method | Time |
+|-------------|------|
+| GET | 1 hour |
+| POST, PUT | 1 week |
+
+#### <a id="get-logs"></a> Retrieve Logs ####
+
+```
+Method: 	GET
+URL: 		/logs
+```
+The FX4BIZ-REST API provides a log feed about request you made, allowing you to know exactly what your request do on the platform.  
+This request uses the login sent in your header to get logs about this user's actions.
+
+*Parameters:*
+
+This request is appliable for the [pagination format](#pagination).
+
+*Example:*
+```
+/logs?per_page=10&page=1
+```
+
+As a response to this query, you will receive an Array made of [Log objects](#log_object) for all the log you're concerned.
+
+#### <a id="get-log-by-nonce"></a> Retrieve a log entry with a nonce ####
+
+```
+Method: 	GET
+URL: 		/logs/{nonce}
+```
+In case of somewhat happens during the request, the FX4BIZ API allows you to retrive a log entry by its nonce.  
+
+*Parameters:*
+
+| Field | Type | Description |
+|-------|------|-------------|
+| nonce | String | **Required.** The nonce used to authenticate the request. As the one in the header, this nonce has to be [Base64](http://fr.wikipedia.org/wiki/Base64) encoded. |
+
+*Example:*
+```
+/logs/MzI0ZWQ0YTA0NmJhM2VmZWZiNzYyMTkzMWQ1ZjY2M2I=
+```
+
+As a response to this query, you will receive an Array made of one [Log object](#log_object) corresponding with the nonce you sent.
+
 ### API objects ###
 
 #### <a id="account_object"></a> Account Object ####
@@ -880,6 +940,44 @@ Example Quote Object:
 
 ```js
 --> TBD
+```
+
+#### <a id="log_object"></a> Log Object ####
+
+When a `log` is specified as part of a JSON body, it is encoded as an object with four fields:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| CreatedAt | Date | The date when the log entry was created. |
+| ClosedAt | Date | The date when the log entry was closed. |
+| TokenNonce | String | The nonce used in the HTTP header to authenticate the request. |
+| RemoteAddress | String | The address of the request's emiter. |
+| RequestMethod | String | The [HTTP method](http://fr.wikipedia.org/wiki/Hypertext_Transfer_Protocol#M.C3.A9thodes) of the request. |
+| UriRequested | String | The [Universal Resource Identifier](http://fr.wikipedia.org/wiki/Uniform_Resource_Identifier) given for this request. |
+| ParametersGiven | String | The optional parameters *(e.g. after the ?)* given for this request. |
+| RequestBody | String | The [HTTP](http://fr.wikipedia.org/wiki/Hypertext_Transfer_Protocol) request body. |
+| HttpResponseCode | Integer | The [HTTP response code](http://fr.wikipedia.org/wiki/Liste_des_codes_HTTP). |
+| ResponseBody | String | The text sent by the server as a result for the request. |
+| RestErrorTypeId | Integer | If there is an error during the processing the request, this id could be used to find this error. |
+| Login | String | The login used for the request. |
+
+Example Log Object:
+
+```js
+"log": {
+	"CreatedAt": "2015-04-14 10:12:40",
+	"ClosedAt": "2015-04-14 10:12:40",
+	"TokenNonce": "MjVmOGZmYjI2MjU3NzlkMw==",
+	"RemoteAddress": "::1",
+	"RequestMethod": "GET",
+	"UriRequested": "/app_dev.php/api/rates/EURUSD",
+	"ParametersGiven": "a:0:{}",
+	"RequestBody": null,
+	"HttpResponseCode": "200",
+	"ResponseBody": "{"rates":[{"currency_pair":"EURUSD","min_market":"1.074300","date":"2015-03-31 13:15:04","core_ask":"1.074300","core_bid":"1.074300"}]}",
+	"RestErrorTypeId": null,
+	"Login": "p00005m",
+}
 ```
 
 ### Formatting Conventions ###
