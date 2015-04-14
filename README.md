@@ -92,12 +92,12 @@ Created="2014-03-20T12:51:45Z"
 
 The following sections describe each component in detail:
 
-**X-WSSE :** This is the name of the [HTTP](http://en.wikipedia.org/wiki/HTTP) header we use for authenticating the request.  
-**UsernameToken :** This is the authentication method. The X-WSSE header must contain a UsernameToken as we only support token-based authentication.  
-**Username :** This field contains the username you were provided during onboarding.  
-**PasswordDigest :** This field contains the hashed token which will prove the authenticity of your request. It is essential that you recompute this hash for every request as a hash is only valid for a certain period of time, and then it expires.  
-**Nonce :** This is a random value used to make your request unique so it cannot be replicated by any other unknown party.  
-**Created :** This field contains the current UTC, GMT, ZULU timestamp (YYYY-MM-DDTHH:MM:SS) according to the [ISO8601](http://fr.wikipedia.org/wiki/ISO_8601) format, *e.g. 2014-03-20T12:51:45+01:00*.
+**X-WSSE :** Name of the [HTTP](http://en.wikipedia.org/wiki/HTTP) header we use for authenticating the request.  
+**UsernameToken :** Authentication method. The X-WSSE header must contain a UsernameToken as we only support token-based authentication.  
+**Username :** Field containing the username you were provided during onboarding.  
+**PasswordDigest :** Field containing the hashed token which will prove the authenticity of your request. It is essential that you recompute this hash for every request as a hash is only valid for a certain period of time, and then it expires.  
+**Nonce :** A random value used to make your request unique so it cannot be replicated by any other unknown party.  
+**Created :** Field containing the current UTC, GMT, ZULU timestamp (YYYY-MM-DDTHH:MM:SS) according to the [ISO8601](http://fr.wikipedia.org/wiki/ISO_8601) format, *e.g. 2014-03-20T12:51:45+01:00*.
 
 ####Computing the Password Digest####
 
