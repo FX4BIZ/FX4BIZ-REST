@@ -205,8 +205,6 @@ Method: POST
 URL: /account
 ```
 By submitting a new account, supply the relevant details in order to pay a beneficiary.
-The beneficiary account can be a `wallet` account if your beneficiary has already an account with FX4BIZ. 
-The big asset of submitting payments between two `wallet` accounts is the access to a free of charge and instant transfer.
 
 *Caution.* All your own `wallet` accounts are created automatically when subscribing with FX4BIZ.
 
@@ -215,23 +213,35 @@ This service include verifications on the format of the account created.
 The API has been made in order to accept local specification of cross-boarder payments.
 
 The Api accepts the following formats of `external bank` accounts :
-- Bic & Iban
-- Local UK format
-- Local US format
-- Local CA format
-- Other local formats (unspecified but different from the previous).
+-	Austrian Bankleitzahl
+-	Australian Bank State Branch
+-	German Bankleitzahl
+-	Canadian Payments Association Payment Routing Number
+-	Spanish Domestic Interbanking Code
+-	Fedwire Routing Number
+-	HEBIC (Hellenic Bank Identification Code)
+-	Bank Code of Hong Kong
+-	Irish National Clearing Code (NSC)
+-	Indian Financial System Code (IFSC)
+-	Italian Domestic Identification Code
+-	New Zealand National Clearing Code
+-	Polish National Clearing Code (KNR)
+-	Portuguese National Clearing Code
+-	Russian Central Bank Identification Code
+-	UK Domestic Sort Code
+-	Swiss Clearing Code
+-	South African National Clearing Code
 
 *Parameters:*
 
 | Field | Type | Description |
 |-------|------|-------------|
-| Correspondent Bank | [Correspondent Bank Object](#correspondent_bank_object) | **Required for local format.** The intermediary bank details, used to reach the beneficiary bank. |
-| Beneficiary Bank | [Beneficiary Bank Object](#beneficiary_bank_object) | **Required.** The recipient bank details, holding the account. |
-| Beneficiary | [Beneficiary Object](#beneficiary_object) | **Required.** The recipient details, owner of the account. |
 | number | String | **Required.** The recipient account number or Iban. `xxx4548` |
 | currency | String | **Required.** Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the account currency. `EUR` |
 | tag | String | Custom Data. `John Doe bank account EUR` |
-| type | String | **Required.** The category of account. `external bank` |
+| CorrespondentBic | String | The intermediary bank BIC code. |
+| Beneficiary Bank | [Beneficiary Bank Object](#beneficiary_bank_object) | **Required.** The recipient bank details, holding the account. |
+| Beneficiary | [Beneficiary Object](#beneficiary_object) | **Required.** The recipient details, owner of the account. |
 
 As a response to this query, you will receive a json response containing details of the [Account](#account_object) created. The unique account_id must be stored and used in your future payments.
 
@@ -1016,6 +1026,7 @@ In general, the HTTP status code is indicative of where the problem occurred:
     * Unless otherwise specified, methods are expected to return `200 OK` on success.
 * Codes in the 400-499 range indicate that the request was invalid or incorrect somehow (e.g. a required parameter was missing, a trade failed, etc.). For example:
     * `400 Bad Request` occurs if the JSON body is malformed. This includes syntax errors as well as when invalid or mutually-exclusive options are selected.
+    * `403  Forbidden` occurs if there is a problem with your authentication on the server.
     * `404 Not Found` occurs if the path specified does not exist, or does not support that method (for example, trying to POST to a URL that only serves GET requests)
 * Codes in the 500-599 range indicate that the server experienced a problem. This could be due to a network outage or a bug in the software somewhere. For example:
     * `500 Internal Server Error` occurs when the server does not catch an error. This is always a bug. If you can reproduce the error, file it at [our bug tracker in your FX4Biz platform](https://fx4bizplatform.com/login).
@@ -1026,23 +1037,19 @@ When possible, the server provides a JSON response body with more information ab
 
 | Field | Type | Description |
 |-------|------|-------------|
-| success | Boolean | `false` indicates that an error occurred. |
-| error_type | String | A short code identifying a general category for the error that occurred. |
-| error | String | A human-readable summary of the error that occurred. |
-| message | String | (May be omitted) A longer human-readable explanation for the error. |
+| errorCode | Integer | The code referring the error. |
+| errorType | String | A short description identifying a general category for the error that occurred. |
+| link | String | An hyperlink to access the page that describes more accurately the error. |
 
 *Example error:*
 
 ```js
-{
-    "success": false,
-    "error_type": "invalid_id",
-    "error": "Invalid parameter: account_id",
-    "message": "Your payment must have a counterparty"
+"Error": {
+	"ErrorCode": 9,
+	"ErrorType": "Entry already exists",
+	"Link": "http://fx4bix.com/RestError/OTFlNGY5ZWVlOTNjODZkZDVhZjg3YTlkNzBmMzgxZmI=/9"
 }
 ```
-
-**Handling errors**
 
 Our API libraries can raise exceptions for many reasons, such as failed trade, invalid parameters, authentications errors, and network unavailability. We recommend always trying to gracefully handle exceptions from our API.
 
