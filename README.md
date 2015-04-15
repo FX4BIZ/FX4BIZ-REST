@@ -232,20 +232,20 @@ The Api accepts the following formats of `external bank` accounts :
 -	Swiss Clearing Code
 -	South African National Clearing Code
 
-Of course, it is possible to reference third party `wallet` accounts and pay it as a beneficiary.
+Of course, it is possible to reference third party `wallet` accounts and pay as a beneficiary.
 
 *Parameters:*
 
 | Field | Type | Description |
 |-------|------|-------------|
-| number | String | **Required.** The recipient account number or Iban. `xxx4548` |
-| currency | String | **Required.** Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the account currency. `EUR` |
-| tag | String | Custom Data. `John Doe bank account EUR` |
+| Number | String | **Required.** The recipient account number or Iban. `xxx4548` |
+| Currency | String | **Required.** Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the account currency. `EUR` |
+| Tag | String | Custom Data. `John Doe bank account EUR` |
 | CorrespondentBic | String | The intermediary bank BIC code. |
-| Beneficiary Bank | [Beneficiary Bank Object](#beneficiary_bank_object) | **Required.** The recipient bank details, holding the account. |
+| BeneficiaryBank | [Beneficiary Bank Object](#beneficiary_bank_object) | **Required.** The recipient bank details, holding the account. |
 | Beneficiary | [Beneficiary Object](#beneficiary_object) | **Required.** The recipient details, owner of the account. |
 
-As a response to this query, you will receive a json response containing details of the [Account](#account_object) created. The unique account_id must be stored and used in your future payments.
+As a response to this query, you will receive a json response containing details of the [Account](#account_object) created. The unique AccountId must be stored and used in your future payments.
 
 #### <a id="get-accounts-list"></a> Retrieve accounts list ####
 
