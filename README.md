@@ -232,6 +232,8 @@ The Api accepts the following formats of `external bank` accounts :
 -	Swiss Clearing Code
 -	South African National Clearing Code
 
+Of course, it is possible to reference third party `wallet` accounts and pay it as a beneficiary.
+
 *Parameters:*
 
 | Field | Type | Description |
