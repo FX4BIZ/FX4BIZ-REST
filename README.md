@@ -10,10 +10,12 @@ Our API is divided into sections based on different concepts in our system. Each
 
 #### External Bank Accounts ####
 
-* [Submit new external bank account - `POST /externalbankaccounts`](#post-account-create)
-* [Retrieve external bank accounts list - `GET /externalbankaccounts`](#get-accounts-list)
-* [Retrieve external bank account details - `GET /externalbankaccounts/{account_id}`](#get-account-details)
-* [Delete external bank account - `DELETE /externalbankaccounts/{account_id}`](#delete-account)
+* [Submit new external bank account - `POST /externalbankaccounts`](#post-account-create) !["alt"](http://png-3.findicons.com/files/icons/1689/splashy/16/check.png)
+* [Retrieve external bank accounts list - `GET /externalbankaccounts`](#get-accounts-list) !["alt"](http://png-3.findicons.com/files/icons/1689/splashy/16/check.png)
+* [Retrieve external bank account details - `GET /externalbankaccounts/{id}`](#get-account-details) !["alt"](http://png-3.findicons.com/files/icons/1689/splashy/16/check.png)
+* [Delete external bank account - `DELETE /externalbankaccounts/{id}`](#delete-account) !["alt"](http://png-3.findicons.com/files/icons/1689/splashy/16/check.png)
+
+<hr />
 
 #### Wallet Accounts ####
 
@@ -39,7 +41,7 @@ Our API is divided into sections based on different concepts in our system. Each
 
 #### Trades ####
 
-* [Retrieve Rates - `GET /rates`](#get-rates)
+* [Retrieve Rates - `GET /rates`](#get-rates) !["alt"](http://png-3.findicons.com/files/icons/1689/splashy/16/check.png)
 * [Request Quote - `POST /quote`](#get-quote)
 * [Submit Trade - `POST /trade`](#get-trade)
 * [Cancel Trade - `DELETE /trade/{trade_id}`](#cancel-trade)
@@ -48,8 +50,8 @@ Our API is divided into sections based on different concepts in our system. Each
 
 #### Logs ####
 
-* [Retrieve Logs - `GET /logs`](#get-logs)
-* [Retrieve a log entry with a nonce  - `GET /logs/{nonce}`](#get-log-by-nonce)
+* [Retrieve Logs - `GET /logs`](#get-logs) !["alt"](http://png-3.findicons.com/files/icons/1689/splashy/16/check.png)
+* [Retrieve a log entry with a nonce  - `GET /logs/{nonce}`](#get-log-by-nonce) !["alt"](http://png-3.findicons.com/files/icons/1689/splashy/16/check.png)
 
 ## API Reference ##
 
@@ -57,7 +59,7 @@ The FX4BIZ API is organized around [REST](http://en.wikipedia.org/wiki/Represent
 
 #### Objects List ####
 
-* [Account Object](#account_object)
+* [External Bank Account Object](#account_object)
 * [Address Object](#address_object)
 * [Balance Object](#balance_object)
 * [Holder Bank Object](#beneficiary_bank_object)
@@ -170,36 +172,33 @@ In the FX4BIZ API, what we call `external bank` account, can be either your own 
         "tag": "My wallet account EUR",
         "number": "xxx4548",
         "currency": "EUR",
-        "correspondant_bank":{
+        "correspondantBank":{
             "bic": "AGRIFRPP",
             "name": "CREDIT AGRICOLE SA",
             "address": {
                 "street": "BUILDING PASTEUR, BLOC 1: 91-93, BOULEVARD PASTEUR",
-                "post_code": "75015",
-                "city_name": "Paris",
-                "state_or_province": "",
+                "postCode": "75015",
+                "city": "Paris",
                 "country": "FRANCE"
             }
         },
-        "beneficiary_bank": {
+        "holderBank": {
             "bic": "FXBBBEBB",
             "name": "FX4BIZ SA",
             "address": {
                 "street": "Avenue Louise, 350",
-                "post_code": "1050",
-                "city_name": "Bruxelles",
-                "state_or_province": "Bruxelles-Capitale",
+                "postCode": "1050",
+                "city": "Bruxelles",
                 "country": "FR"
             }
         },
-        "beneficiary": {
+        "holder": {
             "name": "John Doe",
             "type": "individual",
             "address": {
                 "street": "1 My Road",
-                "post_code": "ZIP",
-                "city_name": "London",
-                "state_or_province": "",
+                "postCode": "ZIP",
+                "city": "London",
                 "country": "UK",
             }
         }
@@ -277,7 +276,7 @@ As a response to this query, you will receive an Array containing the [External 
 
 ```
 Method: GET 
-URL: /externalbankaccount/{account_id}
+URL: /externalbankaccount/{id}
 ```
 This request allows you to see the details related to an account, to confirm display the beneficiary information in your application for example.  
 
@@ -285,7 +284,7 @@ This request allows you to see the details related to an account, to confirm dis
 
 | Field | Type | Description |
 |-------|------|-------------|
-| account_id | Integer | **Required.** The ID of the external bank account you want. <br :>As ID's are listed with the [Account Object](#account_object), You can retrive this by listing all external bank accounts for the current user. |
+| id | Integer | **Required.** The ID of the external bank account you want. <br :>As ID's are listed with the [Account Object](#account_object), You can retrive this by listing all external bank accounts for the current user. |
 
 *Example:*
 ```
@@ -297,7 +296,7 @@ As a response to this query, you will receive the details of the [External Bank 
 
 ```
 Method: DELETE 
-URL: /externalbankaccount/{account_id}
+URL: /externalbankaccount/{id}
 ```
 Delete an account.
 
