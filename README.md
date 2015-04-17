@@ -8,12 +8,6 @@ We recommend FX4BIZ-REST for financial institutions just getting started with FX
 
 Our API is divided into sections based on different concepts in our system. Each section is made up of a series of calls.
 
-* [Retrieve Transfer History - `GET /transfers`](#get-transfers-list)
-* [Retrieve Transfer Details - `GET /transfer/{transfer_id}`](#get-transfer-details)
-
-
-
-
 #### External Bank Accounts ####
 
 * [Submit new external bank account - `POST /externalbankaccounts`](#post-account-create)
@@ -37,6 +31,11 @@ Our API is divided into sections based on different concepts in our system. Each
 * [Retrieve Payment Details - `GET /payment/{payment_id}`](#get-payment-history)
 * [Update Payment Details - `PUT /payment/{payment_id}`](#put-payment-details)
 * [Cancel Payment  - `DELETE /payment/{payment_id}`](#delete-payment)
+
+#### Financial Movements ####
+
+* [Retrieve Financial Movements History - `GET /financialmovement`](#get-transfers-list)
+* [Retrieve Financial Movements Details - `GET /financialmovement/{id}`](#get-transfer-details)
 
 #### Trades ####
 
@@ -452,6 +451,35 @@ URL: /payment/{payment_id}
 ```
 
 As a response to this query, you will receive a confirmation that the [Payment](#payment_object) is deleted properly.
+
+### Financial Movements Services ###
+
+#### <a id="get-transfers-list"></a> Get financial movements history ####
+
+```
+Method: GET 
+URL: /financialmovements
+```
+Request the list of financial movements that has been received or sent on a specific period of time.
+
+*Parameters:*
+
+| Field | Type | Description |
+|-------|------|-------------|
+| from_date | Date | List all transfers that has been credited or debited on your wallets account since this `booking_date`. `YYYY-MM-DD` |
+| to_date | Date | List all transfers that has been credited or debited on your wallets account until this `booking_date`. `YYYY-MM-DD` | 
+
+As a response to this query, you will receive an Array containing the `transfer_id`, `booking_date`, `value_date` and the [Amount](#amount_object) for all transfers that has been credited or debited on `booking date`.
+
+#### <a id="get-transfer-details"></a> Retrieve financial movements details ####
+
+```
+Method: GET 
+URL: /financial movements/{id}
+```
+Request information on a particular financial movement that has been credited or debited to a wallet. 
+
+As a response to this query, you will receive the details of the [Financial Movement Object](#transfer_object).
 
 ### Trade Services ###
 
@@ -871,19 +899,19 @@ When a `trade` is specified as part of a JSON body, it is encoded as an object w
     }
 ```
 
-#### <a id="transfer_object"></a> Transfer Object ####
+#### <a id="transfer_object"></a> Financial Movements Object ####
 
-When a transfer is specified as part of a JSON body, it is encoded as an object with the following fields:
+When a financial movement is specified as part of a JSON body, it is encoded as an object with the following fields:
 
 *Object resources:*
 
 | Field | Type | Description |
 |-------|------|-------------|
 | amount | [Amount Object](#amount_object) | **Required.** The nominal amount to be transfered. `10,000.00 GBP` |
-| account_source | [Account Object](#account_object) | Details of the settlement account. |
-| account_target | [Account Object](#account_object) | Details of the delivery account. |
-| booking_date | Date | `YYYY-MM-DD` |
-| value_date | Date | `YYYY-MM-DD` |
+| accountSource | [Account Object](#account_object) | Details of the settlement account. |
+| accountTarget | [Account Object](#account_object) | Details of the delivery account. |
+| bookingDate | Date | `YYYY-MM-DD` |
+| valueDate | Date | `YYYY-MM-DD` |
 | communication | String | Communication in the free format field of the transfer. `Invoice XXX` |
 
 *Example Transfer Object:*
