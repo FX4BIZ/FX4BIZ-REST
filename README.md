@@ -19,7 +19,6 @@ Our API is divided into sections based on different concepts in our system. Each
 * [Submit new external bank account - `POST /externalbankaccounts`](#post-account-create)
 * [Retrieve external bank accounts list - `GET /externalbankaccounts`](#get-accounts-list)
 * [Retrieve external bank account details - `GET /externalbankaccounts/{account_id}`](#get-account-details)
-* [Update external bank account Details - `PUT /externalbankaccounts/{account_id}`](#put-account-details)
 * [Delete external bank account - `DELETE /externalbankaccounts/{account_id}`](#delete-account)
 
 #### Wallet Accounts ####
@@ -254,15 +253,10 @@ Of course, it is possible to reference third party `wallet` accounts and pay as 
 | Currency | String | **Required.** Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the account currency. `EUR` |
 | Tag | String | Custom Data. `John Doe bank account EUR` |
 | CorrespondentBic | String | The intermediary bank BIC code. |
-<<<<<<< HEAD
 | holderBank | [Holder Bank Object](#beneficiary_bank_object) | **Required.** The recipient bank details, holding the account. |
 | holder | [Holder Object](#beneficiary_object) | **Required.** The recipient details, owner of the account. |
-=======
-| BeneficiaryBank | [Beneficiary Bank Object](#beneficiary_bank_object) | **Required.** The recipient bank details, holding the account. |
-| Beneficiary | [Beneficiary Object](#beneficiary_object) | **Required.** The recipient details, owner of the account. |
->>>>>>> 28c8c3412747a783083a4d67513c11c27d6ca79e
 
-As a response to this query, you will receive a json response containing details of the [Account](#account_object) created. The unique AccountId must be stored and used in your future payments.
+As a response to this query, you will receive a json response containing details of the [External Bank Account](#account_object) created. The unique AccountId must be stored and used in your future payments.
 
 #### <a id="get-accounts-list"></a> Retrieve external bank accounts list ####
 
@@ -320,38 +314,7 @@ Update information on an account or modify beneficiary bank or correspondent ban
 | tag | String | Custom Data. `External bank account EUR` |
 
 As a response to this query, you will receive the details of the [Account](#account_object) with updated information.
-<!--
 
-
-#### <a id="get-transfers-list"></a> Get transfers history ####
-
-```
-Method: GET 
-URL: /transfers
-```
-Request the list of transfers that has been received or sent on a specific period of time.
-
-*Parameters:*
-
-| Field | Type | Description |
-|-------|------|-------------|
-| from_date | Date | List all transfers that has been credited or debited on your wallets account since this `booking_date`. `YYYY-MM-DD` |
-| to_date | Date | List all transfers that has been credited or debited on your wallets account until this `booking_date`. `YYYY-MM-DD` | 
-
-As a response to this query, you will receive an Array containing the `transfer_id`, `booking_date`, `value_date` and the [Amount](#amount_object) for all transfers that has been credited or debited on `booking date`.
-
-#### <a id="get-transfer-details"></a> Retrieve transfer details ####
-
-```
-Method: GET 
-URL: /transfer/{transfer_id}
-```
-Request information on a particular transfer that has been credited or debited to a wallet. 
-
-As a response to this query, you will receive the details of the [Transfer](#transfer_object).
-
-
--->
 #### <a id="delete-account"></a> Delete external bank account ####
 
 ```
