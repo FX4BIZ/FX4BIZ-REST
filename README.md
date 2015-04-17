@@ -665,9 +665,8 @@ When an address is specified as part of a JSON body, it is encoded as an object 
 | Field | Type | Description |
 |-------|------|-------------|
 | street | String | `350 Avenue Louise` |
-| post_code | String | `1050` |
+| postCode | String | `1050` |
 | city | String | `Bruxelles` |
-| state_or_province | String | `Bruxelles-Capitale` |
 | country | String | `BE` |
 
 *Example Address Object:*
@@ -678,7 +677,6 @@ When an address is specified as part of a JSON body, it is encoded as an object 
       "street": "4 NEW YORK PLAZA, FLOOR 15",
       "post_code": "10004",
       "city": "NEW YORK",
-      "state_or_province": "NY",
       "country": "US"
     }
 }
@@ -739,8 +737,8 @@ When a beneficiary bank is specified as part of a JSON body, it is encoded as an
 | Field | Type | Description |
 |-------|------|-------------|
 | bic | String | **Required if swift format.** Eight or eleve-digit [ISO 9362 Business Identifier Code](http://en.wikipedia.org/wiki/ISO_9362) specifying the Recipient Bank. `CHASUS33XXX` |
-| clearing_type | String | **Required if local format.** Two-digit code specifying the local clearing network. `FW` |
-| clearing_number | String | **Required if local format.** The branch number on the local clearing network `021000021` |
+| clearingType | String | **Required if local format.** Two-digit code specifying the local clearing network. `FW` |
+| clearingCode | String | **Required if local format.** The branch number on the local clearing network `021000021` |
 | name | String | **Required if local format.** The beneficiary bank name. `JPMORGAN CHASE BANK, N.A.` |
 | address | [Address Object](#address_object) | **Required if local format.** The beneficiary bank address. |
 
@@ -749,8 +747,8 @@ When a beneficiary bank is specified as part of a JSON body, it is encoded as an
 ```js
 {
   "bic": "CHASUS33",
-  "clearing_type": "FW",
-  "clearing_code": "021000021",
+  "clearingType": "FW",
+  "clearingCode": "021000021",
   "name": "JPMORGAN CHASE BANK, N.A.",
   "address": {address}
 }
@@ -775,7 +773,7 @@ The Holder Object must store the following fields:
 
 ```js
 {
-    "beneficiary": {
+    "holder": {
         "name": "John Doe",
         "type": "Individual",
         "address": {address},
@@ -900,22 +898,22 @@ As a rate is specified in a JSON body, it's encoded as an object with five field
 
 | Field | Type | Description |
 |-------|------|-------------|
-| currency_pair | String | The cross of currency used for the rates provided |
-| mid_market | String (Quoted decimal) | The average rate of the market between the bid and the ask rate. |
+| currencyPair | String | The cross of currency used for the rates provided |
+| midMarket | String (Quoted decimal) | The average rate of the market between the bid and the ask rate. |
 | date | Date | The date of the last update on this currency. |
-| core_ask | String (Quoted decimal) | The interbank BID rate provided by the FX partner of FX4BIZ . |
-| core_bid | String (Quoted decimal) | The interbank ASK rate provided by the FX partner of FX4BIZ. |
+| coreAsk | String (Quoted decimal) | The interbank BID rate provided by the FX partner of FX4BIZ . |
+| coreBid | String (Quoted decimal) | The interbank ASK rate provided by the FX partner of FX4BIZ. |
 
 Example Rate Object:
 
 ```js
-    "rate":  {
-	    "currency_pair": "EURGBP",
-	    "min_market": "0.726500",
-	    "date": "2015-03-31 13:15:04",
-	    "core_ask": "0.726500",
-	    "core_bid": "0.726500"
-	}
+"rate":{
+	"currencyPair":"EURGBP",
+	"minMarket":"0.726500",
+	"date":"2015-03-31 13:15:04",
+	"coreAsk":"0.726500",
+	"coreBid":"0.726500"
+}
 ```
 
 #### <a id="quote_object"></a> Quote Object ####
