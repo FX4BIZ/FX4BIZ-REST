@@ -292,28 +292,7 @@ This request allows you to see the details related to an account, to confirm dis
 ```
 /externalbankaccounts/2041
 ```
-As a response to this query, you will receive the details of the [Account](#account_object).
-
-#### <a id="put-account-details"></a> Update account details ####
-
-```
-Method: PUT 
-URL: /account/{account_id}
-```
-Update information on an account or modify beneficiary bank or correspondent bank related to this one. 
-
-*Parameters:*
-
-| Field | Type | Description |
-|-------|------|-------------|
-| Correspondent Bank | [Correspondent Bank Object](#correspondent_bank_object) | **Required for local format.** The intermediary bank details, used to reach the beneficiary bank. |
-| Beneficiary Bank | [Holder Bank Object](#beneficiary_bank_object) | **Required.** The recipient bank details, holding the account. |
-| Beneficiary | [Holder Object](#beneficiary_object) | **Required.** The recipient details, owner of the account. |
-| number | String | **Required.** The recipient account number or Iban. `xxx4548` |
-| currency | String | **Required.** Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the account currency. `EUR` |
-| tag | String | Custom Data. `External bank account EUR` |
-
-As a response to this query, you will receive the details of the [Account](#account_object) with updated information.
+As a response to this query, you will receive the details of the [External Bank Account](#account_object).
 
 #### <a id="delete-account"></a> Delete external bank account ####
 
