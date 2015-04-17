@@ -8,15 +8,27 @@ We recommend FX4BIZ-REST for financial institutions just getting started with FX
 
 Our API is divided into sections based on different concepts in our system. Each section is made up of a series of calls.
 
-#### Accounts ####
-
-* [Submit New Account - `POST /account`](#post-account-create)
-* [Retrieve Accounts list - `GET /accounts`](#get-accounts-list)
-* [Retrieve Account Details - `GET /account/{account_id}`](#get-account-details)
-* [Update Account Details - `PUT /account/{account_id}`](#put-account-details)
 * [Retrieve Transfer History - `GET /transfers`](#get-transfers-list)
 * [Retrieve Transfer Details - `GET /transfer/{transfer_id}`](#get-transfer-details)
-* [Delete Account - `DELETE /account/{account_id}`](#delete-account)
+
+
+
+
+#### External Bank Accounts ####
+
+* [Submit new external bank account - `POST /externalbankaccounts`](#post-account-create)
+* [Retrieve external bank accounts list - `GET /externalbankaccounts`](#get-accounts-list)
+* [Retrieve external bank account details - `GET /externalbankaccounts/{account_id}`](#get-account-details)
+* [Update external bank account Details - `PUT /externalbankaccounts/{account_id}`](#put-account-details)
+* [Delete external bank account - `DELETE /externalbankaccounts/{account_id}`](#delete-account)
+
+#### Wallet Accounts ####
+
+* [Submit new wallet account - `POST /account`](#post-account-create)
+* [Retrieve wallet accounts list - `GET /accounts`](#get-accounts-list)
+* [Retrieve wallet account details - `GET /account/{account_id}`](#get-account-details)
+* [Update wallet account details - `PUT /account/{account_id}`](#put-account-details)
+* [Delete wallet account - `DELETE /account/{account_id}`](#delete-account)
 
 #### Payments ####
 
@@ -50,8 +62,8 @@ The FX4BIZ API is organized around [REST](http://en.wikipedia.org/wiki/Represent
 * [Account Object](#account_object)
 * [Address Object](#address_object)
 * [Balance Object](#balance_object)
-* [Beneficiary Bank Object](#beneficiary_bank_object)
-* [Beneficiary Object](#beneficiary_object)
+* [Holder Bank Object](#beneficiary_bank_object)
+* [Holder Object](#beneficiary_object)
 * [Correspondent Bank Object](#correspondent_bank_object)
 * [Payment Object](#payment_object)
 * [Rate Object](#rate_object)
@@ -144,9 +156,9 @@ $header = sprintf('X-WSSE: UsernameToken Username="%s", PasswordDigest="%s", Non
 ```
 
 
-### <a id="account_services"></a> Account Services 
+### <a id="account_services"></a> External Bank Account Services ###
 
-There are two kinds of accounts with FX4BIZ. What we call `wallet` account, which is your own or a third party account hold in the FX4BIZ books and `external bank` account, which can be either your own account in another bank or a third party recipient account.
+In the FX4BIZ API, what we call `external bank` account, can be either your own account in another bank or a third party recipient account.
 
 **As an example, a response for `GET /account/{account_id}/details` looks like this:**
 ```js
@@ -198,17 +210,17 @@ There are two kinds of accounts with FX4BIZ. What we call `wallet` account, whic
 }
 ```
 
-#### <a id="post-account-create"></a> Submit account ####
+#### <a id="post-account-create"></a> Submit a new external bank account ####
 
 ```
 Method: POST 
-URL: /account
+URL: /externalbankaccounts
 ```
-By submitting a new account, supply the relevant details in order to pay a beneficiary.
+By submitting a new external bankaccount, supply the relevant details in order to pay a beneficiary.
 
 *Caution.* All your own `wallet` accounts are created automatically when subscribing with FX4BIZ.
 
-The Submit account service also permits to reference `external bank` accounts which are your own accounts or a third party account hold in another bank.
+The Submit external bank account service allows to reference `external bank` accounts which are your own accounts or a third party account hold in another bank.
 This service include verifications on the format of the account created.
 The API has been made in order to accept local specification of cross-boarder payments.
 
@@ -240,30 +252,45 @@ The Api accepts the following formats of `external bank` accounts :
 | currency | String | **Required.** Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the account currency. `EUR` |
 | tag | String | Custom Data. `John Doe bank account EUR` |
 | CorrespondentBic | String | The intermediary bank BIC code. |
-| Beneficiary Bank | [Beneficiary Bank Object](#beneficiary_bank_object) | **Required.** The recipient bank details, holding the account. |
-| Beneficiary | [Beneficiary Object](#beneficiary_object) | **Required.** The recipient details, owner of the account. |
+| holderBank | [Holder Bank Object](#beneficiary_bank_object) | **Required.** The recipient bank details, holding the account. |
+| holder | [Holder Object](#beneficiary_object) | **Required.** The recipient details, owner of the account. |
 
 As a response to this query, you will receive a json response containing details of the [Account](#account_object) created. The unique account_id must be stored and used in your future payments.
 
-#### <a id="get-accounts-list"></a> Retrieve accounts list ####
+#### <a id="get-accounts-list"></a> Retrieve external bank accounts list ####
 
 ```
 Method: GET 
-URL: /accounts
+URL: /externalbankaccounts
 ```
-If you list an account
-This service also provides the balance for `wallet` type accounts.
+With the FX4BIZ API, you can list all the external bank accounts hold by the person or compagny of a certain user.  
+The user is not to be passed as a parameter since it's the one you use to authenticate that will be used.
+
+*Example:*
+```
+/externalbankaccounts/
+```
 
 As a response to this query, you will receive an Array containing the `account_id` and the [Balance](#balance_object) for each `wallet` account.
 
-#### <a id="get-account-details"></a> Retrieve account details ####
+#### <a id="get-account-details"></a> Retrieve external bank account details ####
 
 ```
 Method: GET 
-URL: /account/{account_id}
+URL: /externalbankaccount/{account_id}
 ```
-If you want to see the details related to an account, to confirm display the beneficiary information in your application for example
+This request allows you to see the details related to an account, to confirm display the beneficiary information in your application for example.  
 
+*Parameters*  
+
+| Field | Type | Description |
+|-------|------|-------------|
+| account_id | Integer | **Required.** The ID of the external bank account you want. <br :>As ID's are listed with the [Account Object](#account_object), You can retrive this by listing all external bank accounts for the current user. |
+
+*Example:*
+```
+/externalbankaccounts/2041
+```
 As a response to this query, you will receive the details of the [Account](#account_object).
 
 #### <a id="put-account-details"></a> Update account details ####
@@ -279,13 +306,15 @@ Update information on an account or modify beneficiary bank or correspondent ban
 | Field | Type | Description |
 |-------|------|-------------|
 | Correspondent Bank | [Correspondent Bank Object](#correspondent_bank_object) | **Required for local format.** The intermediary bank details, used to reach the beneficiary bank. |
-| Beneficiary Bank | [Beneficiary Bank Object](#beneficiary_bank_object) | **Required.** The recipient bank details, holding the account. |
-| Beneficiary | [Beneficiary Object](#beneficiary_object) | **Required.** The recipient details, owner of the account. |
+| Beneficiary Bank | [Holder Bank Object](#beneficiary_bank_object) | **Required.** The recipient bank details, holding the account. |
+| Beneficiary | [Holder Object](#beneficiary_object) | **Required.** The recipient details, owner of the account. |
 | number | String | **Required.** The recipient account number or Iban. `xxx4548` |
 | currency | String | **Required.** Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the account currency. `EUR` |
 | tag | String | Custom Data. `External bank account EUR` |
 
 As a response to this query, you will receive the details of the [Account](#account_object) with updated information.
+<!--
+
 
 #### <a id="get-transfers-list"></a> Get transfers history ####
 
@@ -314,17 +343,17 @@ Request information on a particular transfer that has been credited or debited t
 
 As a response to this query, you will receive the details of the [Transfer](#transfer_object).
 
-#### <a id="delete-account"></a> Delete account ####
+
+-->
+#### <a id="delete-account"></a> Delete external bank account ####
 
 ```
 Method: DELETE 
-URL: /account/{account_id}
+URL: /externalbankaccount/{account_id}
 ```
 Delete an account.
 
-As a response to this query, you will receive a JSON confirmation that the account has been deleted properly.
-
-*Caution:* A `wallet` account cannot be deleted.
+As a response to this query, you will receive a HTTP 200 if the deleting was successfull, or an error if it wasn't.
 
 ### Payment Service ###
 
@@ -638,7 +667,7 @@ As a response to this query, you will receive an Array made of one [Log object](
 
 ### API objects ###
 
-#### <a id="account_object"></a> Account Object ####
+#### <a id="account_object"></a> External Bank Account Object ####
 
 When an account is specified as part of a JSON body, it is encoded as an object with the following fields:
 
@@ -654,9 +683,9 @@ When an account is specified as part of a JSON body, it is encoded as an object 
 | status |  String | Status of the account `active` |
 | type |  String | type of account `wallet` |
 | number | String | Iban or account number. `xxx384` |
-| Correspondent Bank | [Correspondent Bank Object](#correspondent_bank_object) | **Required for local format.** The intermediary bank details, used to reach the beneficiary bank. |
-| Beneficiary Bank | [Beneficiary Bank Object](#beneficiary_bank_object) | **Required.** The recipient bank details, holding the account. |
-| Beneficiary | [Beneficiary Object](#beneficiary_object) | **Required.** The recipient details, owner of the account. |
+| correspondentBank | [Correspondent Bank Object](#correspondent_bank_object) | **Required for local format.** The intermediary bank details, used to reach the beneficiary bank. |
+| holderBank | [Holder Bank Object](#beneficiary_bank_object) | **Required.** The recipient bank details, holding the account. |
+| holder | [Holder Object](#beneficiary_object) | **Required.** The recipient details, owner of the account. |
 
 *Example Account Object:*
 
@@ -672,8 +701,8 @@ When an account is specified as part of a JSON body, it is encoded as an object 
         "number": "xxx4548",
         "currency": "EUR",
         "correspondant_bank":{correspondent_bank}
-        "beneficiary_bank":{beneficiary_bank}
-        "beneficiary":{beneficiary}
+        "holderBank":{beneficiary_bank}
+        "holder":{beneficiary}
     }
 }
 ```
@@ -752,7 +781,7 @@ When the balance is specified as part of a JSON body, it is encoded as an object
 }
 ```
 
-#### <a id="beneficiary_bank_object"></a> Beneficiary Bank Object ####
+#### <a id="beneficiary_bank_object"></a> Holder Bank Object ####
 
 When a beneficiary bank is specified as part of a JSON body, it is encoded as an object with the following fields:
 
@@ -766,7 +795,7 @@ When a beneficiary bank is specified as part of a JSON body, it is encoded as an
 | name | String | **Required if local format.** The beneficiary bank name. `JPMORGAN CHASE BANK, N.A.` |
 | address | [Address Object](#address_object) | **Required if local format.** The beneficiary bank address. |
 
-*Example Beneficiary Bank Object:*
+*Example Holder Bank Object:*
 
 ```js
 {
@@ -778,11 +807,11 @@ When a beneficiary bank is specified as part of a JSON body, it is encoded as an
 }
 ```
 
-#### <a id="beneficiary_object"></a> Beneficiary Object ####
+#### <a id="beneficiary_object"></a> Holder Object ####
 
 Definition: Beneficiary - The Individual or Organisation to receive payment.
 May also be referred to as: Supplier/Vendor/Payee/Recipient
-The Beneficiary object must store the following fields:
+The Holder Object must store the following fields:
 
 *Object resources:*
 
@@ -792,7 +821,7 @@ The Beneficiary object must store the following fields:
 | type | String | **Required.** The type of account owner. `Individual` |
 | address | [Address Object](#address_object) | The account owner address. |
 
-*Example Beneficiary Object:*
+*Example Holder Object:*
 
 ```js
 {
