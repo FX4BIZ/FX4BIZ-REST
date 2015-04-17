@@ -624,9 +624,9 @@ When an account is specified as part of a JSON body, it is encoded as an object 
 
 | Field | Type | Description |
 |-------|------|-------------|
-| account_id |  String | The id of the account. `xxx` |
-| created_date |  Date Time | The creation date of the object: `2014-01-12T00:00:00+00:00` |
-| created_by |  String | The creation date of the object: `api` |
+| id |  String | The id of the account. `xxx` |
+| createdDate |  Date Time | The creation date of the object: `2014-01-12T00:00:00+00:00` |
+| createdBy |  String | The creation date of the object: `api` |
 | currency | String | Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the account currency. `USD` |
 | tag |  String | Custom data. `reference` |
 | status |  String | Status of the account `active` |
