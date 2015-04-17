@@ -272,7 +272,7 @@ The user is not to be passed as a parameter since it's the one you use to authen
 /externalbankaccounts/
 ```
 
-As a response to this query, you will receive an Array containing the `account_id` and the [Balance](#balance_object) for each `wallet` account.
+As a response to this query, you will receive an Array containing the [External Bank Account Object](#account_object) for each external account.
 
 #### <a id="get-account-details"></a> Retrieve external bank account details ####
 
