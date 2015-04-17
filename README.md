@@ -807,6 +807,7 @@ When a beneficiary bank is specified as part of a JSON body, it is encoded as an
 }
 ```
 
+
 #### <a id="beneficiary_object"></a> Holder Object ####
 
 Definition: Beneficiary - The Individual or Organisation to receive payment.
