@@ -244,18 +244,25 @@ The Api accepts the following formats of `external bank` accounts :
 -	Swiss Clearing Code
 -	South African National Clearing Code
 
+Of course, it is possible to reference third party `wallet` accounts and pay as a beneficiary.
+
 *Parameters:*
 
 | Field | Type | Description |
 |-------|------|-------------|
-| number | String | **Required.** The recipient account number or Iban. `xxx4548` |
-| currency | String | **Required.** Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the account currency. `EUR` |
-| tag | String | Custom Data. `John Doe bank account EUR` |
+| Number | String | **Required.** The recipient account number or Iban. `xxx4548` |
+| Currency | String | **Required.** Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the account currency. `EUR` |
+| Tag | String | Custom Data. `John Doe bank account EUR` |
 | CorrespondentBic | String | The intermediary bank BIC code. |
+<<<<<<< HEAD
 | holderBank | [Holder Bank Object](#beneficiary_bank_object) | **Required.** The recipient bank details, holding the account. |
 | holder | [Holder Object](#beneficiary_object) | **Required.** The recipient details, owner of the account. |
+=======
+| BeneficiaryBank | [Beneficiary Bank Object](#beneficiary_bank_object) | **Required.** The recipient bank details, holding the account. |
+| Beneficiary | [Beneficiary Object](#beneficiary_object) | **Required.** The recipient details, owner of the account. |
+>>>>>>> 28c8c3412747a783083a4d67513c11c27d6ca79e
 
-As a response to this query, you will receive a json response containing details of the [Account](#account_object) created. The unique account_id must be stored and used in your future payments.
+As a response to this query, you will receive a json response containing details of the [Account](#account_object) created. The unique AccountId must be stored and used in your future payments.
 
 #### <a id="get-accounts-list"></a> Retrieve external bank accounts list ####
 
@@ -1048,7 +1055,7 @@ As an additional convention, all responses from FX4Biz-REST contain a `"success"
 
 #### <a id="errors_conventions"></a> Errors ####
 
-FX4BIZ uses conventional HTTP response codes to indicate success or failure of an PAI resuest. The body of the response contains more detailed information on the cause of the problem.
+FX4BIZ uses conventional HTTP response codes to indicate success or failure of an PAI request. The body of the response contains more detailed information on the cause of the problem.
 
 In general, the HTTP status code is indicative of where the problem occurred:
 
@@ -1067,9 +1074,9 @@ When possible, the server provides a JSON response body with more information ab
 
 | Field | Type | Description |
 |-------|------|-------------|
-| errorCode | Integer | The code referring the error. |
-| errorType | String | A short description identifying a general category for the error that occurred. |
-| link | String | An hyperlink to access the page that describes more accurately the error. |
+| ErrorCode | Integer | The code referring the error. |
+| ErrorType | String | A short description identifying a general category for the error that occurred. |
+| Link | String | An hyperlink to access the page that describes more accurately the error. |
 
 *Example error:*
 
