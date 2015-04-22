@@ -119,6 +119,10 @@ URL: /externalbankaccounts
 With the FX4BIZ API, you can list all the external bank accounts hold by the person or compagny of a certain user.  
 The user is not to be passed as a parameter since it's the one you use to authenticate that will be used.
 
+*Parameters:*
+
+This request is appliable for the [pagination format](../conventions/formatingConventions.md#pagination).
+
 *Example:*
 ```
 /externalbankaccounts/
