@@ -1,6 +1,7 @@
 # API Objects #
 
 * [External Bank Account Object](#account_object)
+* [Wallet Object](#wallet_object)
 * [Address Object](#address_object)
 * [Balance Object](#balance_object)
 * [Holder Bank Object](#beneficiary_bank_object)
@@ -18,6 +19,48 @@
 #### <a id="account_object"></a> External Bank Account Object ####
 
 When an account is specified as part of a JSON body, it is encoded as an object with the following fields:
+
+*Object resources:*
+
+| Field | Type | Description |
+|-------|------|-------------|
+| id |  String | The id of the account. `xxx` |
+| createdDate |  Date Time | The creation date of the object: `2014-01-12T00:00:00+00:00` |
+| createdBy |  String | The creation date of the object: `api` |
+| currency | String | Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the account currency. `USD` |
+| tag |  String | Custom data. `reference` |
+| status |  String | Status of the account `active` |
+| type |  String | type of account `wallet` |
+| number | String | Iban or account number. `xxx384` |
+| correspondentBank | [Correspondent Bank Object](#correspondent_bank_object) | **Required for local format.** The intermediary bank details, used to reach the beneficiary bank. |
+| holderBank | [Holder Bank Object](#beneficiary_bank_object) | **Required.** The recipient bank details, holding the account. |
+| holder | [Holder Object](#beneficiary_object) | **Required.** The recipient details, owner of the account. |
+
+*Example Account Object:*
+
+```js
+{
+    "account": {
+        "id": "xxx"
+        "status": "active",
+        "type": "wallet",
+        "created_date": "2014-01-12T00:00:00+00:00",
+        "created_by": "api",
+        "tag": "My wallet account EUR",
+        "number": "xxx4548",
+        "currency": "EUR",
+        "correspondant_bank":{correspondent_bank}
+        "holderBank":{beneficiary_bank}
+        "holder":{beneficiary}
+    }
+}
+```
+
+<hr />
+
+#### <a id="wallet_object"></a>Wallet Object ####
+
+When an wallet is specified as part of a JSON body, it is encoded as an object with the following fields:
 
 *Object resources:*
 

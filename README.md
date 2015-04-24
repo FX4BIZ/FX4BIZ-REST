@@ -43,11 +43,9 @@ Our API is divided into sections based on different concepts in our system. Each
 
 #### [Wallet Accounts](./services/walletAccountService.md) ####
 
-* [Submit new wallet account - `POST /account`](./services/walletAccountService.md#post-account-create)
-* [Retrieve wallet accounts list - `GET /accounts`](./services/walletAccountService.md#get-accounts-list)
-* [Retrieve wallet account details - `GET /account/{account_id}`](./services/walletAccountService.md#get-account-details)
-* [Update wallet account details - `PUT /account/{account_id}`](./services/walletAccountService.md#put-account-details)
-* [Delete wallet account - `DELETE /account/{account_id}`](./services/walletAccountService.md#delete-account)
+* [Retrieve wallet list - `GET /wallets`](./services/walletAccountService.md#get-wallet-list)
+* [Retrieve wallet details - `GET /wallets/{id}`](./services/walletAccountService.md#get-wallet-details)
+* [Retrieve wallet balance for a given date - `GET /wallets/{id}/balance/{date}`](./services/walletAccountService.md#get-wallet-balance-from-date)
 
 #### [Payments](./services/paymentService.md) ####
 
