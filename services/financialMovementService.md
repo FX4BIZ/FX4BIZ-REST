@@ -9,7 +9,7 @@
 
 ## Details ##
 
-#### <a id="get-transfers-list"></a> Get financial movements history ####
+#### <a id="get-transfers-list"></a> Get Financial Movements History ####
 
 ```
 Method: GET 
@@ -21,10 +21,10 @@ Request the list of financial movements that has been received or sent on a spec
 
 | Field | Type | Description |
 |-------|------|-------------|
-| from_date | Date | List all transfers that has been credited or debited on your wallets account since this `booking_date`. `YYYY-MM-DD` |
-| to_date | Date | List all transfers that has been credited or debited on your wallets account until this `booking_date`. `YYYY-MM-DD` | 
+| fromDate | Date | List all financial movements that has been credited or debited on your wallet accounts since this `bookingDate`. `YYYY-MM-DD` |
+| toDate | Date | List all financial movements that has been credited or debited on your wallet accounts until this `bookingDate`. `YYYY-MM-DD` | 
 
-As a response to this query, you will receive an Array containing the `transfer_id`, `booking_date`, `value_date` and the [Amount](../objects/objects.md#amount_object) for all transfers that has been credited or debited on `booking date`.
+As a response to this query, you will receive an Array containing the `transferId`, `bookingDate`, `valueDate` and the [Amount](../objects/objects.md#amount_object) for all transfers that has been credited or debited on `bookingDate`.
 
 <hr />
 
@@ -32,7 +32,7 @@ As a response to this query, you will receive an Array containing the `transfer_
 
 ```
 Method: GET 
-URL: /financial movements/{id}
+URL: /financialmovements/{id}
 ```
 Request information on a particular financial movement that has been credited or debited to a wallet. 
 
