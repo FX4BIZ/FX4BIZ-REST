@@ -16,11 +16,11 @@
 Method: GET 
 URL: /wallets
 ```
-With the FX4BIZ API, you can list all the wallets hold by a person or compagny.  
+With the FX4BIZ API, you can list all the wallets hold by a person or company.  
 
 *Parameters:*
 
-This request is appliable for the [pagination format](../conventions/formatingConventions.md#pagination).
+This request is applicable for the [pagination format](../conventions/formatingConventions.md#pagination).
 
 *Example:*
 ```
