@@ -9,8 +9,8 @@ As an example, a response for `GET /account/{account_id}/details` looks like thi
         "id": "xxx"
         "status": "active",
         "type": "wallet",
-        "created_date": "2014-01-12T00:00:00+00:00",
-        "created_by": "api",
+        "createdDate": "2014-01-12T00:00:00+00:00",
+        "createdBy": "api",
         "tag": "My wallet account EUR",
         "number": "xxx4548",
         "currency": "EUR",
