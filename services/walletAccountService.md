@@ -16,7 +16,7 @@
 Method: GET 
 URL: /wallets
 ```
-With the FX4BIZ API, you can list all the wallets hold by a person or company.  
+With the FX4BIZ API, you can list all the wallet accounts that you hold. 
 
 *Parameters:*
 
