@@ -17,14 +17,21 @@ URL: /financialmovements
 ```
 Request the list of financial movements that has been received or sent on a specific period of time.
 
-*Parameters:*
+**Parameters:**
 
 | Field | Type | Description |
 |-------|------|-------------|
 | from_date | Date | List all transfers that has been credited or debited on your wallets account since this `booking_date`. `YYYY-MM-DD` |
 | to_date | Date | List all transfers that has been credited or debited on your wallets account until this `booking_date`. `YYYY-MM-DD` | 
 
-As a response to this query, you will receive an Array containing the `transfer_id`, `booking_date`, `value_date` and the [Amount](../objects/objects.md#amount_object) for all transfers that has been credited or debited on `booking date`.
+**Returns:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| id | Integer | The id refering the financial movement. |
+| bookingDate | Date | The booking date of the financial movement. |
+| valueDate | Date | The value date of the financial movement. |
+| amount | [Amount Object](../objects/objects.md#amount_object) | An object reprsenting the amount concerned by the financial movement. |
 
 <hr />
 
@@ -36,4 +43,15 @@ URL: /financial movements/{id}
 ```
 Request information on a particular financial movement that has been credited or debited to a wallet. 
 
-As a response to this query, you will receive the details of the [Financial Movement Object](../objects/objects.md#financial_movement_object).
+**Parameters:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| id | Integer | The id refering the financial movement. |
+
+**Returns:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| financialMovement | [Financial Movement Object](../objects/objects.md#financial_movement_object) | An object describing the requested financial movement. |
+
