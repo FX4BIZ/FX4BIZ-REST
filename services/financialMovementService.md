@@ -21,8 +21,8 @@ Request the list of financial movements that has been received or sent on a spec
 
 | Field | Type | Description |
 |-------|------|-------------|
-| from_date | Date | List all transfers that has been credited or debited on your wallets account since this `booking_date`. `YYYY-MM-DD` |
-| to_date | Date | List all transfers that has been credited or debited on your wallets account until this `booking_date`. `YYYY-MM-DD` | 
+| fromDate | Date | List all transfers that has been credited or debited on your wallets account since this `booking_date`. `YYYY-MM-DD` |
+| toDate | Date | List all transfers that has been credited or debited on your wallets account until this `booking_date`. `YYYY-MM-DD` | 
 
 **Returns:**
 
