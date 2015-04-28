@@ -22,7 +22,7 @@ With the FX4BIZ API, you can list all the wallet accounts that you hold.
 
 This request is applicable for the [pagination format](../conventions/formatingConventions.md#pagination).
 
-**Returns:** `Array["wallet_]`
+**Returns:**
 
 | Field | Type | Description |
 |-------|------|-------------|
