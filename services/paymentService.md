@@ -20,39 +20,39 @@ As an example, a response for `GET /payment/{:id}` looks like this:
         "status": "Awaiting Confirmation",
         "type": "Standard",
         "tag": "Invoice xxx",
-        "created_date": "2014-01-12T00:00:00+00:00",
-        "initial_execution_date": "2014-01-12T00:00:00+00:00",
+        "createdDate": "2014-01-12T00:00:00+00:00",
+        "initialExecutionDate": "2014-01-12T00:00:00+00:00",
         "amount": {
             "value": "125000.00",
             "currency": "USD"
         "account": {
-            "account_id": "xxx"
+            "accountId": "xxx"
             "status": "active",
             "type": "wallet",
-            "created_date": "2014-01-12T00:00:00+00:00",
-            "created_by": "api",
+            "createdDate": "2014-01-12T00:00:00+00:00",
+            "createdBy": "api",
             "tag": "John Doe wallet account with FX4BIZ",
             "number": "xxx4548",
             "currency": "EUR",
-            "correspondant_bank":{
+            "correspondantBank":{
                 "bic": "AGRIFRPP",
                 "name": "CREDIT AGRICOLE SA",
                 "address": {
                     "street": "BUILDING PASTEUR, BLOC 1: 91-93, BOULEVARD PASTEUR",
-                    "post_code": "75015",
-                    "city_name": "Paris",
-                    "state_or_province": "",
+                    "postCode": "75015",
+                    "cityName": "Paris",
+                    "stateOrProvince": "",
                     "country": "FRANCE"
                 }
             },
-            "beneficiary_bank": {
+            "beneficiaryBank": {
                 "bic": "FXBBBEBB",
                 "name": "FX4BIZ SA",
                 "address": {
                     "street": "Avenue Louise, 350",
-                    "post_code": "1050",
-                    "city_name": "Bruxelles",
-                    "state_or_province": "Bruxelles-Capitale",
+                    "postCode": "1050",
+                    "cityName": "Bruxelles",
+                    "stateOrProvince": "Bruxelles-Capitale",
                     "country": "FR"
                 }
             },
@@ -61,9 +61,9 @@ As an example, a response for `GET /payment/{:id}` looks like this:
                 "type": "individual",
                 "address": {
                     "street": "1 My Road",
-                    "post_code": "ZIP",
-                    "city_name": "London",
-                    "state_or_province": "",
+                    "postCode": "ZIP",
+                    "cityName": "London",
+                    "stateOrProvince": "",
                     "country": "UK"
                 }
             }
@@ -97,9 +97,9 @@ Use this path in order to schedule a new payment.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| account_id | String | **Required.** Id of the destination account. `xxx` |
+| accountId | String | **Required.** Id of the destination account. `xxx` |
 | amount | [Amount Object](../objects/objects.md#amount_object) | **Required.** Amount to be sent. `10000.00+GBP` *Caution.* The currency of the amount sent must be equal to the currency of the beneficiary account. |
-| execution_date | Date | Initial execution date of you payment. `YYYY-MM-DD` |
+| executionDate | Date | Initial execution date of you payment. `YYYY-MM-DD` |
 
 As a response to this query, you will receive the details of the [Payment](../objects/objects.md#payment_object) created.
 
@@ -111,14 +111,14 @@ As a response to this query, you will receive the details of the [Payment](../ob
 Method: PUT 
 URL: /payment/{payment_id}/confirm
 ```
-Payments that has been scheduled must be confirmed in order to be release. 
+Payments that has been scheduled must be confirmed in order to be released. 
 If the payment is not confirmed on scheduled date of operation, it will be postponed to the next operation date available.
 
 As a response to this query, you will receive the updated details of the [Payment](../objects/objects.md#payment_object) confirmed.
 
 <hr />
 
-#### <a id="get-payments-history"></a> Retrieve payments history ####
+#### <a id="get-payments-history"></a> Retrieve Payments History ####
 
 ```
 Method: GET
@@ -130,10 +130,10 @@ Request the list of payments that has been created on a specific period of time.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| from_date | Date | `YYYY-MM-DD` |
-| to_date | Date | `YYYY-MM-DD` | 
+| fromDate | Date | `YYYY-MM-DD` |
+| toDate | Date | `YYYY-MM-DD` | 
 
-As a response to this query, you will receive an Array with the `payment_id`, `creation_date`, `execution_date` and `amount`  of the [Payment] of all payment created.
+As a response to this query, you will receive an Array with the `payment_id`, `creation_date`, `execution_date` and `amount` of all [Payments](../objects/objects.md#payment_object) created.
 
 <hr />
 

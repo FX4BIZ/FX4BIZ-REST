@@ -44,13 +44,13 @@ When an account is specified as part of a JSON body, it is encoded as an object 
         "id": "xxx"
         "status": "active",
         "type": "wallet",
-        "created_date": "2014-01-12T00:00:00+00:00",
-        "created_by": "api",
+        "createdDate": "2014-01-12T00:00:00+00:00",
+        "createdBy": "api",
         "tag": "My wallet account EUR",
         "number": "xxx4548",
         "currency": "EUR",
-        "correspondant_bank":{correspondent_bank}
-        "holderBank":{beneficiary_bank}
+        "correspondantBank":{correspondentBank}
+        "holderBank":{beneficiaryBank}
         "holder":{beneficiary}
     }
 }
@@ -60,7 +60,7 @@ When an account is specified as part of a JSON body, it is encoded as an object 
 
 #### <a id="wallet_object"></a>Wallet Object ####
 
-When an wallet is specified as part of a JSON body, it is encoded as an object with the following fields:
+When a wallet is specified as part of a JSON body, it is encoded as an object with the following fields:
 
 *Object resources:*
 
@@ -86,13 +86,13 @@ When an wallet is specified as part of a JSON body, it is encoded as an object w
         "id": "xxx"
         "status": "active",
         "type": "wallet",
-        "created_date": "2014-01-12T00:00:00+00:00",
-        "created_by": "api",
+        "createdDate": "2014-01-12T00:00:00+00:00",
+        "createdBy": "api",
         "tag": "My wallet account EUR",
         "number": "xxx4548",
         "currency": "EUR",
-        "correspondant_bank":{correspondent_bank}
-        "holderBank":{beneficiary_bank}
+        "correspondantBank":{correspondentBank}
+        "holderBank":{beneficiaryBank}
         "holder":{beneficiary}
     }
 }
@@ -119,7 +119,7 @@ When an address is specified as part of a JSON body, it is encoded as an object 
 {
     "address": {
       "street": "4 NEW YORK PLAZA, FLOOR 15",
-      "post_code": "10004",
+      "postCode": "10004",
       "city": "NEW YORK",
       "country": "US"
     }
@@ -160,9 +160,9 @@ When the balance is specified as part of a JSON body, it is encoded as an object
 
 | Field | Type | Description |
 |-------|------|-------------|
-| closing_date | Date | The closing date of the balance details given. `2014-01-12` |
-| booking_amount | [Amount Object](#amount_object) | The closing balance of the account. `10,000.00 GBP`|
-| value_amount | [Amount Object](#amount_object) | The closing value of the account. `10,000.00 GBP`|
+| closingDate | Date | The closing date of the balance details given. `2014-01-12` |
+| bookingAmount | [Amount Object](#amount_object) | The closing balance of the account. `10,000.00 GBP`|
+| valueAmount | [Amount Object](#amount_object) | The closing value of the account. `10,000.00 GBP`|
 
 *Example balance Object:*
 
@@ -170,8 +170,8 @@ When the balance is specified as part of a JSON body, it is encoded as an object
 {
     "balance": {
         "date": "2014-01-12",
-        "booking_amount": {amount},
-        "value_amount": {amount}
+        "bookingAmount": {amount},
+        "valueAmount": {amount}
     }
 }
 ```
@@ -208,8 +208,8 @@ When a beneficiary bank is specified as part of a JSON body, it is encoded as an
 
 #### <a id="beneficiary_object"></a> Holder Object ####
 
-Definition: Beneficiary - The Individual or Organisation to receive payment.
-May also be referred to as: Supplier/Vendor/Payee/Recipient
+Definition: Holder - The Individual or Organisation that hold an account.
+May also be referred to as: Beneficiary/Supplier/Vendor/Payee/Recipient
 The Holder Object must store the following fields:
 
 *Object resources:*
@@ -268,28 +268,28 @@ When a `payment` is specified as part of a JSON body, it is encoded as an object
 |-------|------|-------------|
 | payment_id | String | **Required.** id of the payment. `xxx` |
 | status | String | Payment status. `Awaiting Confirmation` |
-| created_date | Date Time | Creation date of the payment. `2014-01-12T00:00:00+00:00` |
-| updated_date | Date Time | Last update on the payment. `2014-01-12T00:00:00+00:00` |
-| initial_execution_date | Date | The initial date of execution when the payment is created. `YYYY-MM-DD` |
-| confirmation_date | Date | We consider the payment confirmed when the status turns scheduled. `YYYY-MM-DD` |
-| execution_date | Date | We consider the payment executed when the status turns finalized. `YYYY-MM-DD` |
+| createdDate | Date Time | Creation date of the payment. `2014-01-12T00:00:00+00:00` |
+| updatedFate | Date Time | Last update on the payment. `2014-01-12T00:00:00+00:00` |
+| initialExecutionDate | Date | The initial date of execution when the payment is created. `YYYY-MM-DD` |
+| confirmationDate | Date | We consider the payment confirmed when the status turns scheduled. `YYYY-MM-DD` |
+| executionDate | Date | We consider the payment executed when the status turns finalized. `YYYY-MM-DD` |
 | amount | [Amount Object](#amount_object) | **Required.** The nominal amount to be transfered. `10,000.00 GBP` |
 | type | String | Defines the type of payment affected. `Standard` |
 | tag | String | Custom reference on the payment. `Invoice xxx` |
-| account_id | [Account Object](#account_object) | **Required.** Details of the destination account. |
+| accountId | [Account Object](#account_object) | **Required.** Details of the destination account. |
 
 *Example Payment Object:*
 
 ```js
     "payment":{
-        "payment_id": "xxx",
+        "paymentId": "xxx",
         "status": "Awaiting Confirmation",
         "type": "Standard",
         "tag": "Invoice xxx",
-        "created_date": "2014-01-12T00:00:00+00:00",
-        "initial_execution_date": "2014-01-12T00:00:00+00:00",
+        "createdDate": "2014-01-12T00:00:00+00:00",
+        "initialExecutionDate": "2014-01-12T00:00:00+00:00",
         "amount": {amount},
-        "account_id": {account},
+        "accountId": {account},
     },
 ```
 
@@ -303,34 +303,34 @@ When a `trade` is specified as part of a JSON body, it is encoded as an object w
 
 | Field | Type | Description |
 |-------|------|-------------|
-| trade_id | String | **Required.** id of trade `xxx` |
-| nominal_amount | [Amount Object](#amount_object) | **Required.** The nominal amount of the trade. `10,000.00 GBP` |
-| settlement_amount | [Amount Object](#amount_object) | **Required.** The amount that will be debited on the related source `wallet` account at delivery date. `10,000.00 GBP` |
-| delivered_amount | [Amount Object](#amount_object) | **Required.** The amount that will be credited on the related target `wallet` account at delivery date. `10,000.00 GBP` |
-| rate_applied | String | **Required.** The nominal amount of the trade. `1.10000` |
-| currency_pair | String | **Required.** The instrument related to the rate applied. `EURUSD` |
+| tradeId | String | **Required.** id of trade `xxx` |
+| nominalAmount | [Amount Object](#amount_object) | **Required.** The nominal amount of the trade. `10,000.00 GBP` |
+| settlementAmount | [Amount Object](#amount_object) | **Required.** The amount that will be debited on the related source `wallet` account at delivery date. `10,000.00 GBP` |
+| deliveredAmount | [Amount Object](#amount_object) | **Required.** The amount that will be credited on the related target `wallet` account at delivery date. `10,000.00 GBP` |
+| rateApplied | String | **Required.** The nominal amount of the trade. `1.10000` |
+| currencyPair | String | **Required.** The instrument related to the rate applied. `EURUSD` |
 | rate | [Rate Object](#rate_object) | **Required.** The Core and mid-market real time rates related to this trade. |
-| delivery_date | Date | `YYYY-MM-DD` |
-| created_date | Date | `YYYY-MM-DD` |
+| deliveryDate | Date | `YYYY-MM-DD` |
+| createdDate | Date | `YYYY-MM-DD` |
 
 *Example Trade Object:*
 
 ```js
     "trade": {
-        "created_date": "2014-01-12T00:00:00+00:00",
-        "delivery_date": "2014-01-12T00:00:00+00:00",
-        "nominal_amount": {amount},
-        "rate_applied": "1.1002",
-        "currency_pair": "EURUSD",
+        "createdDate": "2014-01-12T00:00:00+00:00",
+        "deliveryDate": "2014-01-12T00:00:00+00:00",
+        "nominalAmount": {amount},
+        "rateApplied": "1.1002",
+        "currencyPair": "EURUSD",
         "rate": {rate}
-        "settlement_amount": {amount},
-        "delivered_amount": {amount},
+        "settlementAmount": {amount},
+        "deliveredAmount": {amount},
     }
 ```
 
 <hr />
 
-#### <a id="financial_movment_object"></a> Financial Movements Object ####
+#### <a id="financial_movement_object"></a> Financial Movements Object ####
 
 When a financial movement is specified as part of a JSON body, it is encoded as an object with the following fields:
 
@@ -345,7 +345,7 @@ When a financial movement is specified as part of a JSON body, it is encoded as 
 | valueDate | Date | `YYYY-MM-DD` |
 | communication | String | Communication in the free format field of the transfer. `Invoice XXX` |
 
-*Example Transfer Object:*
+*Example Financial Movement Object:*
 
 ```js
 -> TBD
@@ -356,6 +356,8 @@ When a financial movement is specified as part of a JSON body, it is encoded as 
 #### <a id="rate_object"></a> Rate Object ####
 
 As a rate is specified in a JSON body, it's encoded as an object with five fields:
+
+*Object resources:*
 
 | Field | Type | Description |
 |-------|------|-------------|
@@ -370,7 +372,7 @@ Example Rate Object:
 ```js
 "rate":{
 	"currencyPair":"EURGBP",
-	"minMarket":"0.726500",
+	"midMarket":"0.726500",
 	"date":"2015-03-31 13:15:04",
 	"coreAsk":"0.726500",
 	"coreBid":"0.726500"
@@ -396,7 +398,7 @@ Example Quote Object:
 
 #### <a id="log_object"></a> Log Object ####
 
-When a `log` is specified as part of a JSON body, it is encoded as an object with four fields:
+When a `log` is specified as part of a JSON body, it is encoded as an object with the following fields:
 
 | Field | Type | Description |
 |-------|------|-------------|
@@ -417,18 +419,18 @@ Example Log Object:
 
 ```js
 "log": {
-	"CreatedAt": "2015-04-14 10:12:40",
-	"ClosedAt": "2015-04-14 10:12:40",
-	"TokenNonce": "MjVmOGZmYjI2MjU3NzlkMw==",
-	"RemoteAddress": "::1",
-	"RequestMethod": "GET",
-	"UriRequested": "/app_dev.php/api/rates/EURUSD",
-	"ParametersGiven": "a:0:{}",
-	"RequestBody": null,
-	"HttpResponseCode": "200",
-	"ResponseBody": "{"rates":[{"currency_pair":"EURUSD","min_market":"1.074300","date":"2015-03-31 13:15:04","core_ask":"1.074300","core_bid":"1.074300"}]}",
-	"RestErrorTypeId": null,
-	"Login": "p00005m",
+	"createdAt": "2015-04-14 10:12:40",
+	"closedAt": "2015-04-14 10:12:40",
+	"tokenNonce": "MjVmOGZmYjI2MjU3NzlkMw==",
+	"remoteAddress": "::1",
+	"requestMethod": "GET",
+	"uriRequested": "/app_dev.php/api/rates/EURUSD",
+	"parametersGiven": "a:0:{}",
+	"requestBody": null,
+	"httpResponseCode": "200",
+	"responseBody": "{"rates":[{"currencyPair":"EURUSD","midMarket":"1.074300","date":"2015-03-31 13:15:04","coreAsk":"1.074300","coreBid":"1.074300"}]}",
+	"restErrorTypeId": null,
+	"login": "p00005m",
 }
 ```
 

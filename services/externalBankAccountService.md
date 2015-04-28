@@ -9,8 +9,8 @@ As an example, a response for `GET /account/{account_id}/details` looks like thi
         "id": "xxx"
         "status": "active",
         "type": "wallet",
-        "created_date": "2014-01-12T00:00:00+00:00",
-        "created_by": "api",
+        "createdDate": "2014-01-12T00:00:00+00:00",
+        "createdBy": "api",
         "tag": "My wallet account EUR",
         "number": "xxx4548",
         "currency": "EUR",
@@ -65,11 +65,11 @@ As an example, a response for `GET /account/{account_id}/details` looks like thi
 Method: POST 
 URL: /externalbankaccounts
 ```
-By submitting a new external bankaccount, supply the relevant details in order to pay a beneficiary.
+By submitting a new `external bank` account, you must supply the relevant details in order to pay a beneficiary.
 
-*Caution.* All your own `wallet` accounts are created automatically when subscribing with FX4BIZ.
+*Caution.* All your own `wallet` accounts have been created automatically when subscribing with FX4BIZ.
 
-The Submit external bank account service allows to reference `external bank` accounts which are your own accounts or a third party account hold in another bank.
+The Submit External Bank Account service allows to reference `external bank` accounts which are your own accounts or a third party account hold in another bank.
 This service include verifications on the format of the account created.
 The API has been made in order to accept local specification of cross-boarder payments.
 
@@ -99,18 +99,18 @@ Of course, it is possible to reference third party `wallet` accounts and pay as 
 
 | Field | Type | Description |
 |-------|------|-------------|
-| Number | String | **Required.** The recipient account number or Iban. `xxx4548` |
-| Currency | String | **Required.** Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the account currency. `EUR` |
-| Tag | String | Custom Data. `John Doe bank account EUR` |
-| CorrespondentBic | String | The intermediary bank BIC code. |
+| number | String | **Required.** The recipient account number or Iban. `xxx4548` |
+| currency | String | **Required.** Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the account currency. `EUR` |
+| tag | String | Custom Data. `John Doe bank account EUR` |
+| correspondentBic | String | The intermediary bank BIC code. |
 | holderBank | [Holder Bank Object](../objects/objects.md#beneficiary_bank_object) | **Required.** The recipient bank details, holding the account. |
 | holder | [Holder Object](../objects/objects.md#beneficiary_object) | **Required.** The recipient details, owner of the account. |
 
-As a response to this query, you will receive a json response containing details of the [External Bank Account](../objects/objects.md#account_object) created. The unique AccountId must be stored and used in your future payments.
+As a response to this query, you will receive a json response containing details of the [External Bank Account](../objects/objects.md#account_object) created. The unique `accountId` must be stored and used for your future payments.
 
 <hr />
 
-#### <a id="get-accounts-list"></a> Retrieve external bank accounts list ####
+#### <a id="get-accounts-list"></a> Retrieve External Bank Accounts List ####
 
 ```
 Method: GET 
@@ -132,13 +132,13 @@ As a response to this query, you will receive an Array containing the [External 
 
 <hr />
 
-#### <a id="get-account-details"></a> Retrieve external bank account details ####
+#### <a id="get-account-details"></a> Retrieve External Bank Account Details ####
 
 ```
 Method: GET 
 URL: /externalbankaccount/{id}
 ```
-This request allows you to see the details related to an account, to confirm display the beneficiary information in your application for example.  
+This request allows you to see the details related to an account. In order to confirm, you can display the beneficiary information in your application for example.  
 
 *Parameters*  
 
