@@ -44,18 +44,22 @@ URL: 		/rates
 ```
 The FX4BIZ-REST API provides a FX Data Feed. You can use the [Rates service](../objects/objects.md#rate_object) in order to ask for currency rates tables. Spreads showed in this service are minimal spreads, the tradable spread can be higher depending on the volatility of the market.
 
-*Parameters:*
+**Parameters:**
 
 | Field | Type | Description |
 |-------|------|-------------|
 | instruments | String | **Required.** A string representing a list of crosses. Crosses must be separated with commas. <br />You can chain as many crosses as you want, as long as they're separated with commas. |
 
-*Example:*
+**Returns:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| rates | Array[[Rate objects](../objects/objects.md#rate_object)] | An array containing crosses requested. |
+
+**Example:**
 ```
 /rates?instruments=EURGBP,EURUSD
 ```
-
-As a response to this query, you will receive an Array made of [Rate objects](../objects/objects.md#rate_object) for all rates asked.
 
 <hr />
 
