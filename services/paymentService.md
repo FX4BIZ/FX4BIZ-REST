@@ -14,61 +14,20 @@ When you confirm a payment for processing, make sure you have sufficient funds i
 
 As an example, a response for `GET /payment/{:id}` looks like this:
 ```js
-{
-    "payment": {
-        "id": "xxx",
-        "status": "Awaiting Confirmation",
-        "type": "Standard",
-        "tag": "Invoice xxx",
-        "createdDate": "2014-01-12T00:00:00+00:00",
-        "initialExecutionDate": "2014-01-12T00:00:00+00:00",
-        "amount": {
-            "value": "125000.00",
-            "currency": "USD"
-        "account": {
-            "accountId": "xxx"
-            "status": "active",
-            "type": "wallet",
-            "createdDate": "2014-01-12T00:00:00+00:00",
-            "createdBy": "api",
-            "tag": "John Doe wallet account with FX4BIZ",
-            "number": "xxx4548",
-            "currency": "EUR",
-            "correspondantBank":{
-                "bic": "AGRIFRPP",
-                "name": "CREDIT AGRICOLE SA",
-                "address": {
-                    "street": "BUILDING PASTEUR, BLOC 1: 91-93, BOULEVARD PASTEUR",
-                    "postCode": "75015",
-                    "cityName": "Paris",
-                    "stateOrProvince": "",
-                    "country": "FRANCE"
-                }
-            },
-            "beneficiaryBank": {
-                "bic": "FXBBBEBB",
-                "name": "FX4BIZ SA",
-                "address": {
-                    "street": "Avenue Louise, 350",
-                    "postCode": "1050",
-                    "cityName": "Bruxelles",
-                    "stateOrProvince": "Bruxelles-Capitale",
-                    "country": "FR"
-                }
-            },
-            "beneficiary": {
-                "name": "John Doe",
-                "type": "individual",
-                "address": {
-                    "street": "1 My Road",
-                    "postCode": "ZIP",
-                    "cityName": "London",
-                    "stateOrProvince": "",
-                    "country": "UK"
-                }
-            }
-        }
-    }
+"payment": {
+    "id": "XXXX",
+    "tag": "XXXXXXXXXXX",
+    "status": "Planified",
+    "createdDate": "2015-04-24 10:50:24",
+    "desiredExecutionDate": "2015-04-24 00:00:00",
+    "executionDate": "2015-04-24 00:00:00",
+    "type": "Transfer",
+    "beneficiaryName": "John Doe",
+    "beneficiaryAccountNumber": "XXXXXXXXXXXXXX",
+    "amount": {amount},
+    "feeOption": "SEPA",
+    "communication": "Payment to Jane Doe",
+    "mail": "mail@example.com"
 }
 ```
 
@@ -126,14 +85,23 @@ URL: /payments
 ```
 Request the list of payments that has been created on a specific period of time.
 
-*Parameters:*
+**Parameters:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| fromDate | Date | `YYYY-MM-DD` |
-| toDate | Date | `YYYY-MM-DD` | 
+| fromDate | Date | **Optionnal** A date representing the starting date to search payments. |
+| toDate | Date | **Optionnal** A date representing the ending date to search payments. | 
 
-As a response to this query, you will receive an Array with the `payment_id`, `creation_date`, `execution_date` and `amount` of all [Payments](../objects/objects.md#payment_object) created.
+**Returns:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| payments | Array[[Payment Object](../objects/objects.md#payment_object)] | An array of [Payment Object](../objects/objects.md#payment_object) describing payments you made. |
+
+**Example:**
+```
+/payments/
+```
 
 <hr />
 
@@ -145,8 +113,20 @@ URL: /payment
 ```
 Retrieve the details of a specific payment.
 
-As a response to this query, you will receive the details of the [Payment](../objects/objects.md#payment_object).
+| Field | Type | Description |
+|-------|------|-------------|
+| id | Integer | **Required** The ID of the payment you want. |
 
+**Returns:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| payment | [Payment Object](../objects/objects.md#payment_object) | A [Payment Object](../objects/objects.md#payment_object) describing the payment you requested. |
+
+**Example:**
+```
+/payments/89456
+```
 <hr />
 
 #### <a id="put-payment"></a> Update Payment Details####
