@@ -254,7 +254,7 @@ When a `payment` is specified as part of a JSON body, it is encoded as an object
 
 | Field | Type | Description |
 |-------|------|-------------|
-| payment_id | String | **Required.** id of the payment. `xxx` |
+| id | String | **Required.** id of the payment. `xxx` |
 | status | String | Payment status. `Awaiting Confirmation` |
 | createdDate | Date Time | Creation date of the payment. `2014-01-12T00:00:00+00:00` |
 | desiredExecutionDate | Date | The initial date of execution when the payment is created. `YYYY-MM-DD` |
