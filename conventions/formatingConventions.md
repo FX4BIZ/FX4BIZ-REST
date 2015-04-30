@@ -54,17 +54,17 @@ When possible, the server provides a JSON response body with more information ab
 
 | Field | Type | Description |
 |-------|------|-------------|
-| ErrorCode | Integer | The code referring the error. |
-| ErrorType | String | A short description identifying a general category for the error that occurred. |
-| Link | String | An hyperlink to access the page that describes more accurately the error. |
+| errorCode | Integer | The code referring the error. |
+| errorType | String | A short description identifying a general category for the error that occurred. |
+| link | String | An hyperlink to access the page that describes more accurately the error. |
 
-*Example error:*
+**Example:**
 
 ```js
-"Error": {
-	"ErrorCode": 9,
-	"ErrorType": "Entry already exists",
-	"Link": "http://fx4bix.com/RestError/OTFlNGY5ZWVlOTNjODZkZDVhZjg3YTlkNzBmMzgxZmI=/9"
+"error": {
+	"errorCode": 9,
+	"errorType": "Entry already exists",
+	"link": "http://fx4bix.com/RestError/OTFlNGY5ZWVlOTNjODZkZDVhZjg3YTlkNzBmMzgxZmI=/9"
 }
 ```
 
@@ -74,12 +74,12 @@ Our API libraries can raise exceptions for many reasons, such as failed trade, i
 
 All top-level FX4BIZ API resources have support for bulk fetches - "list" API methods. For instance you can [list accounts`](#get-account-list), [list transfers`](#get-transfers-list), etc... These list API methods share a common structure.
 
-*Parameters:*
+**Parameters:**
 
 | Field | Type | Description |
 |-------|------|-------------|
 | page | String | index of the page (start to 1) Default value: `1` |
-| per_page | String | number of items returned. Default value: `10` Max: `100` |
+| per_page | String | number of items returned. Default value: `50` |
 
 ## <a id="quoted_numbers"></a> Quoted Numbers ##
 
