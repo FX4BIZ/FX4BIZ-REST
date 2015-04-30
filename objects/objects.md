@@ -39,20 +39,18 @@ When an account is specified as part of a JSON body, it is encoded as an object 
 *Example Account Object:*
 
 ```js
-{
-    "account": {
-        "id": "xxx"
-        "status": "active",
-        "type": "wallet",
-        "createdDate": "2014-01-12T00:00:00+00:00",
-        "createdBy": "api",
-        "tag": "My wallet account EUR",
-        "number": "xxx4548",
-        "currency": "EUR",
-        "correspondantBank":{correspondentBank}
-        "holderBank":{beneficiaryBank}
-        "holder":{beneficiary}
-    }
+"account": {
+    "id": "xxx"
+    "status": "active",
+    "type": "wallet",
+    "createdDate": "2014-01-12T00:00:00+00:00",
+    "createdBy": "api",
+    "tag": "My wallet account EUR",
+    "number": "xxx4548",
+    "currency": "EUR",
+    "correspondantBank":{correspondentBank}
+    "holderBank":{beneficiaryBank}
+	"holder":{beneficiary}
 }
 ```
 
@@ -81,20 +79,18 @@ When a wallet is specified as part of a JSON body, it is encoded as an object wi
 *Example Account Object:*
 
 ```js
-{
-    "account": {
-        "id": "xxx"
-        "status": "active",
-        "type": "wallet",
-        "createdDate": "2014-01-12T00:00:00+00:00",
-        "createdBy": "api",
-        "tag": "My wallet account EUR",
-        "number": "xxx4548",
-        "currency": "EUR",
-        "correspondantBank":{correspondentBank}
-        "holderBank":{beneficiaryBank}
-        "holder":{beneficiary}
-    }
+"wallet": {
+    "id": "xxx"
+    "status": "active",
+    "type": "wallet",
+    "createdDate": "2014-01-12T00:00:00+00:00",
+    "createdBy": "api",
+    "tag": "My wallet account EUR",
+    "number": "xxx4548",
+    "currency": "EUR",
+    "correspondantBank":{correspondentBank}
+    "holderBank":{beneficiaryBank}
+	"holder":{beneficiary}
 }
 ```
 
@@ -108,21 +104,19 @@ When an address is specified as part of a JSON body, it is encoded as an object 
 
 | Field | Type | Description |
 |-------|------|-------------|
-| street | String | `350 Avenue Louise` |
-| postCode | String | `1050` |
-| city | String | `Bruxelles` |
-| country | String | `BE` |
+| street | String | The street for the address described. |
+| postCode | String | The ZIP/Post code for the address described. |
+| city | String | The city for the address described. |
+| country | String | The two-letters abbreviation for the country, following the [ISO-3166](http://fr.wikipedia.org/wiki/ISO_3166) for the address described. |
 
 *Example Address Object:*
 
 ```js
-{
-    "address": {
-      "street": "4 NEW YORK PLAZA, FLOOR 15",
-      "postCode": "10004",
-      "city": "NEW YORK",
-      "country": "US"
-    }
+"address": {
+	"street": "4 NEW YORK PLAZA, FLOOR 15",
+	"postCode": "10004",
+	"city": "NEW YORK",
+	"country": "US"
 }
 ```
 
@@ -142,11 +136,9 @@ When an amount of currency is specified as part of a JSON body, it is encoded as
 *Example Amount Object:*
 
 ```js
-{
-    "amount": {
-      "value": "10000.00",
-      "currency": "GBP"
-    }
+"amount": {
+	"value": "10000.00",
+	"currency": "GBP"
 }
 ```
 
@@ -167,12 +159,10 @@ When the balance is specified as part of a JSON body, it is encoded as an object
 *Example balance Object:*
 
 ```js
-{
-    "balance": {
-        "date": "2014-01-12",
-        "bookingAmount": {amount},
-        "valueAmount": {amount}
-    }
+"balance": {
+    "closingDate": "2014-01-12",
+    "bookingAmount": {amount},
+    "valueAmount": {amount}
 }
 ```
 
@@ -195,12 +185,12 @@ When a beneficiary bank is specified as part of a JSON body, it is encoded as an
 *Example Holder Bank Object:*
 
 ```js
-{
-  "bic": "CHASUS33",
-  "clearingType": "FW",
-  "clearingCode": "021000021",
-  "name": "JPMORGAN CHASE BANK, N.A.",
-  "address": {address}
+"beneficiaryBank" {
+	"bic": "CHASUS33",
+	"clearingType": "FW",
+	"clearingCode": "021000021",
+	"name": "JPMORGAN CHASE BANK, N.A.",
+	"address": {address}
 }
 ```
 
@@ -223,12 +213,10 @@ The Holder Object must store the following fields:
 *Example Holder Object:*
 
 ```js
-{
-    "holder": {
-        "name": "John Doe",
-        "type": "Individual",
-        "address": {address},
-    }
+"holder": {
+    "name": "John Doe",
+    "type": "Individual",
+    "address": {address},
 }
 ```
 
@@ -253,7 +241,7 @@ When a correspondent bank of an account is specified as part of a JSON body, it 
     "bic": "AGRIFRPP",
     "name": "CREDIT AGRICOLE SA",
     "address": {address}
-},
+}
 ```
 
 <hr />
@@ -281,16 +269,16 @@ When a `payment` is specified as part of a JSON body, it is encoded as an object
 *Example Payment Object:*
 
 ```js
-    "payment":{
-        "paymentId": "xxx",
-        "status": "Awaiting Confirmation",
-        "type": "Standard",
-        "tag": "Invoice xxx",
-        "createdDate": "2014-01-12T00:00:00+00:00",
-        "initialExecutionDate": "2014-01-12T00:00:00+00:00",
-        "amount": {amount},
-        "accountId": {account},
-    },
+"payment":{
+    "paymentId": "xxx",
+    "status": "Awaiting Confirmation",
+    "type": "Standard",
+    "tag": "Invoice xxx",
+    "createdDate": "2014-01-12T00:00:00+00:00",
+    "initialExecutionDate": "2014-01-12T00:00:00+00:00",
+    "amount": {amount},
+    "accountId": {account},
+}
 ```
 
 <hr />
@@ -316,16 +304,16 @@ When a `trade` is specified as part of a JSON body, it is encoded as an object w
 *Example Trade Object:*
 
 ```js
-    "trade": {
-        "createdDate": "2014-01-12T00:00:00+00:00",
-        "deliveryDate": "2014-01-12T00:00:00+00:00",
-        "nominalAmount": {amount},
-        "rateApplied": "1.1002",
-        "currencyPair": "EURUSD",
-        "rate": {rate}
-        "settlementAmount": {amount},
-        "deliveredAmount": {amount},
-    }
+"trade": {
+    "createdDate": "2014-01-12T00:00:00+00:00",
+    "deliveryDate": "2014-01-12T00:00:00+00:00",
+    "nominalAmount": {amount},
+    "rateApplied": "1.1002",
+    "currencyPair": "EURUSD",
+    "rate": {rate}
+    "settlementAmount": {amount},
+    "deliveredAmount": {amount},
+}
 ```
 
 <hr />
@@ -338,17 +326,31 @@ When a financial movement is specified as part of a JSON body, it is encoded as 
 
 | Field | Type | Description |
 |-------|------|-------------|
-| amount | [Amount Object](#amount_object) | **Required.** The nominal amount to be transfered. `10,000.00 GBP` |
-| accountSource | [Account Object](#account_object) | Details of the settlement account. |
-| accountTarget | [Account Object](#account_object) | Details of the delivery account. |
-| bookingDate | Date | `YYYY-MM-DD` |
-| valueDate | Date | `YYYY-MM-DD` |
-| communication | String | Communication in the free format field of the transfer. `Invoice XXX` |
+| id | Integer | The id of the financial movement. |
+| bookingDate | Date | The booking date of the financial movement. |
+| valueDate | Date | The value date of the financial movement. |
+| orderingAccountNumber | String | The number refering the ordering account. |
+| BeneficiaryAccountNumber | String | The number refering the beneficiary account. |
+| orderingCustomer | String | A free formatted String representing the ordering customer with it's name and it's address. |
+| orderingInstitution | String | A free formatted String representing the ordering institution with it's name and it's address. |
+| beneficiaryCustomer | String | A free formatted String representing the beneficiary customer with it's name and it's address. |
+| account | [Account Object](#account_object) | Details of the settlement account. |
+
 
 *Example Financial Movement Object:*
 
 ```js
--> TBD
+"financialMovement": {
+    "id": "XXX",
+    "bookingDate": "2015-04-24 08:55:18",
+    "valueDate": "2015-04-24 00:00:00",
+    "orderingAccountNumber": "XXXXXXXXXXXXXXXXXXX",
+    "BeneficiaryAccountNumber": "XXXXXXXXXXXXXXXXXXX",
+    "orderingCustomer": "John Doe 31 1st New York US",
+    "orderingInstitution": "JPMORGAN CHASE BANK, N.A. 4 NEW YORK PLAZA FLOOR 15 NEW YORK,NY 10004 US",
+    "BeneficiaryCustomer": "Jane Doe 32 1st New York US",
+    "amount": {amount}
+}
 ```
 
 <hr />

@@ -1,11 +1,11 @@
 # Formatting Conventions #
 
 
-The `FX4BIZ-rest` API conforms to the following general behavior for [RESTful API](http://en.wikipedia.org/wiki/Representational_state_transfer):
+The FX4BIZ Rest API conforms to the following general behavior for [RESTful API](http://en.wikipedia.org/wiki/Representational_state_transfer):
 
-* You make HTTP (or HTTPS) requests to the API endpoint, indicating the desired resources within the URL itself. (The public server, for the sake of security, only accepts HTTPS requests.)
-* The HTTP method identifies what you are trying to do.  Generally, HTTP `GET` requests are used to retrieve information, while HTTP `POST` requests are used to make changes or submit information.
-* If more complicated information needs to be sent, it will be included as JSON-formatted data within the body of the HTTP POST request.
+* You make [HTTPS](http://en.wikipedia.org/wiki/HTTPS) requests to the API endpoint, indicating the desired resources within the URL itself. (The public server, for the sake of security, only accepts [HTTPS](http://en.wikipedia.org/wiki/HTTPS) requests.)
+* The [HTTP method](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) identifies what you are trying to do.  Generally, HTTP `GET` requests are used to retrieve information, while HTTP `POST` requests are used to make changes or submit information.
+* If more complicated information needs to be sent, it will be included as [JSON-formatted](http://en.wikipedia.org/wiki/JSON) data within the body of the HTTP POST request.
   * This means that you must set `Content-Type: application/json` in the headers when sending POST requests with a body.
 * Upon successful completion, the server returns an [HTTP status code](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) of 200 OK, and a `Content-Type` value of `application/json`.  The body of the response will be a JSON-formatted object containing the information returned by the endpoint.
 

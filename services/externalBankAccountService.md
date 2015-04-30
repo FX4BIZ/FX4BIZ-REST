@@ -44,7 +44,6 @@ As an example, a response for `GET /account/{account_id}/details` looks like thi
                 "country": "UK",
             }
         }
-        
     }
 }
 ```
@@ -52,8 +51,8 @@ As an example, a response for `GET /account/{account_id}/details` looks like thi
 
 | Route | Description |
 |-------|-------------|
-| [`POST /externalbankaccounts`](#post-account-create) | Submit new external bank account |
-| [`GET /externalbankaccounts`](#get-accounts-list) | Retrieve external bank accounts list |
+| [`POST /externalbankaccounts/`](#post-account-create) | Submit new external bank account |
+| [`GET /externalbankaccounts/`](#get-accounts-list) | Retrieve external bank accounts list |
 | [`GET /externalbankaccounts/{id}`](#get-account-details) | Retrieve external bank account details |
 | [`DELETE /externalbankaccounts/{id}`](#delete-account) | Delete external bank account |
 
@@ -63,7 +62,7 @@ As an example, a response for `GET /account/{account_id}/details` looks like thi
 
 ```
 Method: POST 
-URL: /externalbankaccounts
+URL: /externalbankaccounts/
 ```
 By submitting a new `external bank` account, you must supply the relevant details in order to pay a beneficiary.
 
@@ -95,7 +94,7 @@ The Api accepts the following formats of `external bank` accounts :
 
 Of course, it is possible to reference third party `wallet` accounts and pay as a beneficiary.
 
-*Parameters:*
+**Parameters:**
 
 | Field | Type | Description |
 |-------|------|-------------|
@@ -106,7 +105,16 @@ Of course, it is possible to reference third party `wallet` accounts and pay as 
 | holderBank | [Holder Bank Object](../objects/objects.md#beneficiary_bank_object) | **Required.** The recipient bank details, holding the account. |
 | holder | [Holder Object](../objects/objects.md#beneficiary_object) | **Required.** The recipient details, owner of the account. |
 
-As a response to this query, you will receive a json response containing details of the [External Bank Account](../objects/objects.md#account_object) created. The unique `accountId` must be stored and used for your future payments.
+**Returns:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| account | [External Bank Account Object](../objects/objects.md#account_object) | An object representing the external bank account you just created |
+
+**Example:**
+```
+/externalbankaccounts/
+```
 
 <hr />
 
@@ -114,21 +122,25 @@ As a response to this query, you will receive a json response containing details
 
 ```
 Method: GET 
-URL: /externalbankaccounts
+URL: /externalbankaccounts/
 ```
 With the FX4BIZ API, you can list all the external bank accounts hold by the person or compagny of a certain user.  
 The user is not to be passed as a parameter since it's the one you use to authenticate that will be used.
 
-*Parameters:*
+**Parameters:**
 
 This request is appliable for the [pagination format](../conventions/formatingConventions.md#pagination).
 
-*Example:*
+**Returns:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| accounts | Array[[External Bank Account Object](../objects/objects.md#account_object)] | An array containing [External Bank Account Object](../objects/objects.md#account_object) describing requested external bank accounts. |
+
+**Example:**
 ```
 /externalbankaccounts/
 ```
-
-As a response to this query, you will receive an Array containing the [External Bank Account Object](../objects/objects.md#account_object) for each external account.
 
 <hr />
 
@@ -140,17 +152,22 @@ URL: /externalbankaccount/{id}
 ```
 This request allows you to see the details related to an account. In order to confirm, you can display the beneficiary information in your application for example.  
 
-*Parameters*  
+**Parameters:**  
 
 | Field | Type | Description |
 |-------|------|-------------|
-| id | Integer | **Required.** The ID of the external bank account you want. <br :>As ID's are listed with the [Account Object](../objects/objects.md#account_object), You can retrive this by listing all external bank accounts for the current user. |
+| id | Integer | **Required.** The ID of the external bank account you want. <br :>As ID's are listed with the [External Bank Account Objects](../objects/objects.md#account_object), You can retrive this by listing all external bank accounts for the current user. |
 
-*Example:*
+**Returns:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| account | [External Bank Account Object](../objects/objects.md#account_object) | An [External Bank Account Object](../objects/objects.md#account_object) containing details about external bank account requested. |
+
+**Example:**
 ```
 /externalbankaccounts/2041
 ```
-As a response to this query, you will receive the details of the [External Bank Account](../objects/objects.md#account_object).
 
 <hr />
 
@@ -162,4 +179,19 @@ URL: /externalbankaccount/{id}
 ```
 Delete an account.
 
-As a response to this query, you will receive a HTTP 200 if the deleting was successfull, or an error if it wasn't.
+**Parameters:**  
+
+| Field | Type | Description |
+|-------|------|-------------|
+| id | Integer | **Required.** The ID of the external bank account you want to delete. |
+
+**Returns:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| - | Boolean | TRUE if the deletion is complete, or an error if exceptions occurs. |
+
+**Example:**
+```
+/externalbankaccounts/2041
+```

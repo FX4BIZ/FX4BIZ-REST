@@ -1,5 +1,7 @@
 # WALLET ACCOUNT SERVICE #
 
+In the FX4BIZ API, what we call a `wallet` account, is a payment account in FX4BIZ, allowing you to send and receive funds.
+
 ## Route ##
 
 | Route | Description |
@@ -14,7 +16,7 @@
 
 ```
 Method: GET 
-URL: /wallets
+URL: /wallets/
 ```
 With the FX4BIZ API, you can list all the wallet accounts that you hold. 
 
@@ -26,12 +28,13 @@ This request is applicable for the [pagination format](../conventions/formatingC
 
 | Field | Type | Description |
 |-------|------|-------------|
-| id | Integer | The id of the wallet. |
-| tag | String | The wording of the wallet. |
-| currency | String | The currency of the wallet. |
-| bookingAmount | Float | The booking amount (`e.g. the total money in the wallet, minus the immobilizations`) in the wallet. |
-| valueAmount | Float | The total amount avalable in the wallet. |
-| DateLastFinancialMovement | Date | The date of the last financial move with this wallet. |
+| wallets | Array[Object] | An Array of objects representing wallets. |
+| Object.id | Integer | The id of the wallet. |
+| Object.tag | String | The wording of the wallet. |
+| Object.currency | String | The currency of the wallet. |
+| Object.bookingAmount | [Amount Object](../objects/objects.md#amount_object) | The booking amount (`e.g. the total money in the wallet, minus the immobilizations`) in the wallet. |
+| Object.valueAmount | [Amount Object](../objects/objects.md#amount_object) | The total amount avalable in the wallet. |
+| Object.DateLastFinancialMovement | Date | The date of the last financial move with this wallet. |
 
 **Example:**
 ```

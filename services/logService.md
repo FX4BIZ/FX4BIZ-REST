@@ -28,16 +28,20 @@ URL: 		/logs
 The FX4BIZ-REST API provides a log feed about request you made, allowing you to know exactly what your request do on the platform.  
 This request uses the login sent in your header to get logs about this user's actions.
 
-*Parameters:*
+**Parameters:**
 
 This request is appliable for the [pagination format](../conventions/formatingConventions.md#pagination).
 
-*Example:*
+**Returns:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| logs | Array[[Log objects](../objects/objects.md#log_object)] | An array of [Log objects](../objects/objects.md#log_object) representing the logs you've generated with your requests. |
+
+**Example:**
 ```
 /logs?per_page=10&page=1
 ```
-
-As a response to this query, you will receive an Array made of [Log objects](../objects/objects.md#log_object) for all the log you're concerned.
 
 <hr />
 
@@ -49,16 +53,19 @@ URL: 		/logs/{nonce}
 ```
 In case of somewhat happens during the request, the FX4BIZ API allows you to retrive a log entry by its nonce.  
 
-*Parameters:*
+**Parameters:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| nonce | String | **Required.** The nonce used to authenticate the request. As the one in the header, this nonce has to be [Base64](http://fr.wikipedia.org/wiki/Base64) encoded. |
+| nonce | String | **Required.** The nonce used to authenticate the request. As the one in the header, this nonce has to be [Base64](http://fr.wikipedia.org/wiki/Base64) encoded. The nonce you get with `GET /logs` is already encoded. |
 
-*Example:*
+**Returns:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| log | [Log object](../objects/objects.md#log_object) | A [Log object](../objects/objects.md#log_object) corresponding with the nonce you sent |
+
+**Example:**
 ```
 /logs/MzI0ZWQ0YTA0NmJhM2VmZWZiNzYyMTkzMWQ1ZjY2M2I=
 ```
-
-As a response to this query, you will receive an Array made of one [Log object](../objects/objects.md#log_object) corresponding with the nonce you sent.
-

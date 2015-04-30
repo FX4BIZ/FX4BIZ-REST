@@ -40,7 +40,7 @@ As an example, a response for `GET /trade/{:id}` object looks like this:
 
 ```
 Method: 	GET
-URL: 		/rates
+URL: 		/rates/{instruments}
 ```
 The FX4BIZ-REST API provides a FX Data Feed. You can use the [Rates service](../objects/objects.md#rate_object) in order to ask for currency rates tables. Spreads showed in this service are minimal spreads, the tradable spread can be higher depending on the volatility of the market.
 

@@ -24,7 +24,7 @@ The following sections describe each component in detail:
 **Username :** Field containing the username you were provided during onboarding.  
 **PasswordDigest :** Field containing the hashed token which will prove the authenticity of your request. It is essential that you recompute this hash for every request as a hash is only valid for a certain period of time, and then it expires.  
 **Nonce :** A random value used to make your request unique so it cannot be replicated by any other unknown party.  
-**Created :** Field containing the current UTC, GMT, ZULU timestamp (YYYY-MM-DDTHH:MM:SS) according to the [ISO8601](http://fr.wikipedia.org/wiki/ISO_8601) format, *e.g. 2014-03-20T12:51:45+01:00*.
+**Created :** Field containing the current UTC, GMT, ZULU timestamp (YYYY-MM-DDTHH:MM:SSZ) according to the [ISO8601](http://fr.wikipedia.org/wiki/ISO_8601) format, *e.g. 2014-03-20T12:51:45Z*.
 
 ##Computing the Password Digest##
 

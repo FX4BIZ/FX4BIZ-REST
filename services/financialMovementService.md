@@ -1,10 +1,12 @@
 # FINANCIAL MOVEMENT SERVICE #
 
+The FX4BIZ Rest API allows you to get all financial movements from your [Wallets](./walletAccountService.md).
+
 ## Route ##
 
 | Route | Description |
 |-------|-------------|
-| [`GET /financialmovement`](#get-transfers-list) | Retrieve Financial Movements History |
+| [`GET /financialmovement/`](#get-transfers-list) | Retrieve Financial Movements History |
 | [`GET /financialmovement/{id}`](#get-transfer-details) | Retrieve Financial Movements Details |
 
 ## Details ##
@@ -13,7 +15,7 @@
 
 ```
 Method: GET 
-URL: /financialmovements
+URL: /financialmovements/
 ```
 Request the list of financial movements that has been received or sent on a specific period of time.
 
@@ -21,17 +23,23 @@ Request the list of financial movements that has been received or sent on a spec
 
 | Field | Type | Description |
 |-------|------|-------------|
-| fromDate | Date | List all transfers that has been credited or debited on your wallets account since this `booking_date`. `YYYY-MM-DD` |
-| toDate | Date | List all transfers that has been credited or debited on your wallets account until this `booking_date`. `YYYY-MM-DD` | 
+| fromDate | Date | **Optionnal** A date representing the starting date to search financial movements on your wallets. |
+| toDate | Date | **Optionnal** A date representing the ending date to search financial movements on your wallets. | 
 
 **Returns:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| id | Integer | The id refering the financial movement. |
-| bookingDate | Date | The booking date of the financial movement. |
-| valueDate | Date | The value date of the financial movement. |
-| amount | [Amount Object](../objects/objects.md#amount_object) | An object reprsenting the amount concerned by the financial movement. |
+| financialMovements | Array[Object] | An Array of objects representing financial movements. |
+| Object.id | Integer | The id refering the financial movement. |
+| Object.bookingDate | Date | The booking date of the financial movement. |
+| Object.valueDate | Date | The value date of the financial movement. |
+| Object.amount | [Amount Object](../objects/objects.md#amount_object) | An object reprsenting the amount concerned by the financial movement. |
+
+**Example:**
+```
+/financialmovements/?fromDate=2010-01-01&toDate?2015-04-30
+```
 
 <hr />
 
@@ -39,7 +47,7 @@ Request the list of financial movements that has been received or sent on a spec
 
 ```
 Method: GET 
-URL: /financial movements/{id}
+URL: /financialmovements/{id}
 ```
 Request information on a particular financial movement that has been credited or debited to a wallet. 
 
@@ -55,3 +63,7 @@ Request information on a particular financial movement that has been credited or
 |-------|------|-------------|
 | financialMovement | [Financial Movement Object](../objects/objects.md#financial_movement_object) | An object describing the requested financial movement. |
 
+**Example:**
+```
+/financialmovements/1552
+```
