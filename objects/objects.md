@@ -257,28 +257,19 @@ When a `payment` is specified as part of a JSON body, it is encoded as an object
 | payment_id | String | **Required.** id of the payment. `xxx` |
 | status | String | Payment status. `Awaiting Confirmation` |
 | createdDate | Date Time | Creation date of the payment. `2014-01-12T00:00:00+00:00` |
-| updatedFate | Date Time | Last update on the payment. `2014-01-12T00:00:00+00:00` |
-| initialExecutionDate | Date | The initial date of execution when the payment is created. `YYYY-MM-DD` |
-| confirmationDate | Date | We consider the payment confirmed when the status turns scheduled. `YYYY-MM-DD` |
+| wantedExecutionDate | Date | The initial date of execution when the payment is created. `YYYY-MM-DD` |
 | executionDate | Date | We consider the payment executed when the status turns finalized. `YYYY-MM-DD` |
 | amount | [Amount Object](#amount_object) | **Required.** The nominal amount to be transfered. `10,000.00 GBP` |
 | type | String | Defines the type of payment affected. `Standard` |
 | tag | String | Custom reference on the payment. `Invoice xxx` |
-| accountId | [Account Object](#account_object) | **Required.** Details of the destination account. |
+| beneficiaryName | String | The name of the beneficiary. |
+| beneficiaryAccountNumber | String | The account number of the beneficiary. |
+
 
 *Example Payment Object:*
 
 ```js
-"payment":{
-    "paymentId": "xxx",
-    "status": "Awaiting Confirmation",
-    "type": "Standard",
-    "tag": "Invoice xxx",
-    "createdDate": "2014-01-12T00:00:00+00:00",
-    "initialExecutionDate": "2014-01-12T00:00:00+00:00",
-    "amount": {amount},
-    "accountId": {account},
-}
+
 ```
 
 <hr />
