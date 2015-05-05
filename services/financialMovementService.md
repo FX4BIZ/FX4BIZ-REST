@@ -33,6 +33,7 @@ Request the list of financial movements that has been received or sent on a spec
 | financialMovements | Array[Object] | An Array of objects representing financial movements. |
 | Object.id | Integer | The id refering the financial movement. |
 | Object.bookingDate | Date | The booking date of the financial movement. |
+| Object.accountNumber | String | The account refering financial movement. |
 | Object.valueDate | Date | The value date of the financial movement. |
 | Object.amount | [Amount Object](../objects/objects.md#amount_object) | An object reprsenting the amount concerned by the financial movement. |
 
