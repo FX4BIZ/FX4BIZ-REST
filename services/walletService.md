@@ -6,13 +6,13 @@ In the FX4BIZ API, what we call a `wallet` account, is a payment account in FX4B
 
 | Route | Description |
 |-------|-------------|
-| [`GET /wallets`](#get_wallets) | Retrieve wallet list |
+| [`GET /wallets`](#cget_wallets) | Retrieve wallet list |
 | [`GET /wallets/{id}`](#get_wallets) | Retrieve wallet details |
 | [`GET /wallets/{id}/balance/{date}`](#get_wallets_balance) | Retrieve wallet balance for a given date |
 
 ## Details ##
 
-#### <a id="get-wallet-list"></a> Retrieve wallet list ####
+#### <a id="cget_wallets"></a> Retrieve wallet list ####
 
 ```
 Method: GET 
@@ -43,7 +43,7 @@ This request is applicable for the [pagination format](../conventions/formatingC
 
 <hr />
 
-#### <a id="get-wallet-details"></a> Retrieve wallet details ####
+#### <a id="get_wallets"></a> Retrieve wallet details ####
 
 ```
 Method: GET 
@@ -70,7 +70,7 @@ This request allows you to see the details related to an wallets, to confirm dis
 
 <hr />
 
-#### <a id="get-wallet-balance-from-date"></a> Retrieve wallet balance for a given date ####
+#### <a id="get_wallets_balance"></a> Retrieve wallet balance for a given date ####
 
 ```
 Method: GET 
