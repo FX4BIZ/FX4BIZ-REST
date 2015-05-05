@@ -81,11 +81,32 @@ All top-level FX4BIZ API resources have support for bulk fetches - "list" API me
 | page | String | index of the page (start to 1) Default value: `1` |
 | per_page | String | number of items returned. Default value: `50` |
 
-## <a id="quoted_numbers"></a> Quoted Numbers ##
+## <a id="anonymous_object"></a> Anonymous objects ##
 
-In any case where a large number should be specified, FX4Biz-REST uses a string instead of the native JSON number type. This avoids problems with JSON libraries which might automatically convert numbers into native types with differing range and precision.
+Some request of the FX4BIZ REST API send, as a response, anomymous objects, or arrays of anonymous objects.  
+Here is an example to understand the notation of these objects :
 
-You should parse these numbers into a numeric data type with adequate precision. If it is not clear how much precision you need, we recommend using an arbitrary-precision data type.
+| Field | Type | Description |
+|-------|------|-------------|
+| foo | Array[Object] | `foo` is an Array containing anonymous objects |
+| Object.bar | String | `bar` is a String typed property of the anonymous object `Object`. <br /> In a [DOM](http://fr.wikipedia.org/wiki/Document_Object_Model) representation, you can access `bar` via `foo[].bar`
+
+Here is the JSON corresponding the description above : 
+
+```js
+{
+	...
+	"foo" [
+		{
+			"bar":"something"
+		},
+		{
+			"bar":"somethingElse"
+		}
+	]
+	...
+}
+```
 
 ## <a id="versioning"></a> Versioning ##
 

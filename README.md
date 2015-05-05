@@ -101,7 +101,7 @@ Our API is divided into sections based on different concepts in our system. Each
 * [Cut-Off Times](./conventions/formatingConventions.md#cut_off_times)
 * [Errors](./conventions/formatingConventions.md#errors_conventions)
 * [Pagination](./conventions/formatingConventions.md#pagination)
-* [Quoted numbers](./conventions/formatingConventions.md#quoted_numbers)
+* [Anonymous objects](./conventions/formatingConventions.md#anonymous_object)
 * [Versioning](./conventions/formatingConventions.md#versioning)
 
 ## LICENCE ##
