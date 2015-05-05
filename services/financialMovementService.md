@@ -42,7 +42,7 @@ This request is appliable for the [pagination format](../conventions/formatingCo
 
 **Example:**
 ```
-/financialmovements/?fromDate=2010-01-01&toDate?2015-04-30
+/financialmovements/?number=XXXXXXXXXXX&fromDate=2010-01-01&toDate?2015-04-30&per_page=10&page=1
 ```
 
 <hr />
