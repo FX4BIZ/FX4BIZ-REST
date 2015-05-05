@@ -64,8 +64,8 @@ Our API is divided into sections based on different concepts in our system. Each
 
 #### [Financial Movements](./services/financialmovementService.md) ####
 
-* [Retrieve Financial Movements History - `GET /financialmovements`](./services/financialmovementService.md#cget_financialmovement)
-* [Retrieve Financial Movements Details - `GET /financialmovements/{id}`](./services/financialmovementService.md#get_financialmovement)
+* [Retrieve Financial Movements History - `GET /financialmovements`](./services/financialmovementService.md#cget_financialmovements)
+* [Retrieve Financial Movements Details - `GET /financialmovements/{id}`](./services/financialmovementService.md#get_financialmovements)
 
 #### [Trades](./services/tradeService.md) ####
 
