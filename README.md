@@ -42,10 +42,10 @@ Our API is divided into sections based on different concepts in our system. Each
 
 #### [External Bank Accounts](./services/externalBankAccountService.md) ####
 
-* [Submit new external bank account - `POST /externalbankaccounts`](./services/externalBankAccountService.md#post-account-create) 
-* [Retrieve external bank accounts list - `GET /externalbankaccounts`](./services/externalBankAccountService.md#get-accounts-list) 
-* [Retrieve external bank account details - `GET /externalbankaccounts/{id}`](./services/externalBankAccountService.md#get-account-details) 
-* [Delete external bank account - `DELETE /externalbankaccounts/{id}`](./services/externalBankAccountService.md#delete-account) 
+* [Submit new external bank account - `POST /externalbankaccounts`](./services/externalBankAccountService.md#post_externalbankaccounts) 
+* [Retrieve external bank accounts list - `GET /externalbankaccounts`](./services/externalBankAccountService.md#cget_externalbankaccounts) 
+* [Retrieve external bank account details - `GET /externalbankaccounts/{id}`](./services/externalBankAccountService.md#get_externalbankaccounts) 
+* [Delete external bank account - `DELETE /externalbankaccounts/{id}`](./services/externalBankAccountService.md#delete_externalbankaccounts) 
 
 #### [Wallet Accounts](./services/walletAccountService.md) ####
 

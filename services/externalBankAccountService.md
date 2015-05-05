@@ -51,14 +51,14 @@ As an example, a response for `GET /account/{account_id}/details` looks like thi
 
 | Route | Description |
 |-------|-------------|
-| [`POST /externalbankaccounts/`](#post-account-create) | Submit new external bank account |
-| [`GET /externalbankaccounts/`](#get-accounts-list) | Retrieve external bank accounts list |
-| [`GET /externalbankaccounts/{id}`](#get-account-details) | Retrieve external bank account details |
-| [`DELETE /externalbankaccounts/{id}`](#delete-account) | Delete external bank account |
+| [`POST /externalbankaccounts/`](#post_externalbankaccounts) | Submit new external bank account |
+| [`GET /externalbankaccounts/`](#cget_externalbankaccounts) | Retrieve external bank accounts list |
+| [`GET /externalbankaccounts/{id}`](#get_externalbankaccounts) | Retrieve external bank account details |
+| [`DELETE /externalbankaccounts/{id}`](#delete_externalbankaccounts) | Delete external bank account |
 
 ## Details ##
 
-#### <a id="post-account-create"></a> Submit a new external bank account ####
+#### <a id="post_externalbankaccounts"></a> Submit a new external bank account ####
 
 ```
 Method: POST 
@@ -118,7 +118,7 @@ Of course, it is possible to reference third party `wallet` accounts and pay as 
 
 <hr />
 
-#### <a id="get-accounts-list"></a> Retrieve External Bank Accounts List ####
+#### <a id="cget_externalbankaccounts"></a> Retrieve External Bank Accounts List ####
 
 ```
 Method: GET 
@@ -144,7 +144,7 @@ This request is appliable for the [pagination format](../conventions/formatingCo
 
 <hr />
 
-#### <a id="get-account-details"></a> Retrieve External Bank Account Details ####
+#### <a id="get_externalbankaccounts"></a> Retrieve External Bank Account Details ####
 
 ```
 Method: GET 
@@ -171,7 +171,7 @@ This request allows you to see the details related to an account. In order to co
 
 <hr />
 
-#### <a id="delete-account"></a> Delete external bank account ####
+#### <a id="delete_externalbankaccounts"></a> Delete external bank account ####
 
 ```
 Method: DELETE 
