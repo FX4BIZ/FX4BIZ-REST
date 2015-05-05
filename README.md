@@ -78,8 +78,8 @@ Our API is divided into sections based on different concepts in our system. Each
 
 #### [Logs](./services/logService.md) ####
 
-* [Retrieve Logs - `GET /logs`](./services/logService.md#get-logs) 
-* [Retrieve a log entry with a nonce  - `GET /logs/{nonce}`](./services/logService.md#get-log-by-nonce) 
+* [Retrieve Logs - `GET /logs`](./services/logService.md#get_logs) 
+* [Retrieve a log entry with a nonce  - `GET /logs/{nonce}`](./services/logService.md#get_log) 
 
 ## [API Objects](./objects/objects.md) ##
 

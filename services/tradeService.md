@@ -27,7 +27,7 @@ As an example, a response for `GET /trade/{:id}` object looks like this:
 
 | Route | Description |
 |-------|-------------|
-| [`GET /rates`](#get-rates) | Retrieve Rates |
+| [`GET /rates`](#get_rates) | Retrieve Rates |
 | [`POST /quote`](#get-quote) | Request Quote |
 | [`POST /trade`](#get-trade) | Submit Trade |
 | [`DELETE /trade/{trade_id}`](#cancel-trade) | Cancel Trade |

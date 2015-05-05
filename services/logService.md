@@ -15,12 +15,12 @@ This time passed, your log entry will be lost.
 
 | Route | Description |
 |-------|-------------|
-| [`GET /logs`](#get-logs) | Retrieve Logs |
-| [`GET /logs/{nonce}`](#get-log-by-nonce) | Retrieve a log entry with a nonce |
+| [`GET /logs`](#get_logs) | Retrieve Logs |
+| [`GET /logs/{nonce}`](#get_log) | Retrieve a log entry with a nonce |
 
 ## Details ##
 
-#### <a id="get-logs"></a> Retrieve Logs ####
+#### <a id="get_logs"></a> Retrieve Logs ####
 ```
 Method: 	GET
 URL: 		/logs
@@ -45,7 +45,7 @@ This request is appliable for the [pagination format](../conventions/formatingCo
 
 <hr />
 
-#### <a id="get-log-by-nonce"></a> Retrieve a log entry with a nonce ####
+#### <a id="get_log"></a> Retrieve a log entry with a nonce ####
 
 ```
 Method: 	GET
