@@ -67,9 +67,9 @@ Our API is divided into sections based on different concepts in our system. Each
 * [Retrieve Financial Movements History - `GET /financialmovement`](./services/financialMovementService.md#get-transfers-list)
 * [Retrieve Financial Movements Details - `GET /financialmovement/{id}`](./services/financialMovementService.md#get-transfer-details)
 
-#### [Trades](./services/tradesService.md) ####
+#### [Trades](./services/tradeService.md) ####
 
-* [Retrieve Rates - `GET /rates`](./services/tradesService.md#get-rates)
+* [Retrieve Rates - `GET /rates`](./services/tradesService.md#get_rates)
 * [Request Quote - `POST /quote`](./services/tradesService.md#get-quote)
 * [Submit Trade - `POST /trade`](./services/tradesService.md#get-trade)
 * [Cancel Trade - `DELETE /trade/{trade_id}`](./services/tradesService.md#cancel-trade)
