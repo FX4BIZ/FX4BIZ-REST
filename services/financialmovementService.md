@@ -11,7 +11,7 @@ The FX4BIZ Rest API allows you to get all financial movements from your [Wallets
 
 ## Details ##
 
-#### <a id="cget_financialmovement"></a> Get financial movements history ####
+#### <a id="cget_financialmovements"></a> Get financial movements history ####
 
 ```
 Method: GET 
@@ -47,7 +47,7 @@ This request is appliable for the [pagination format](../conventions/formatingCo
 
 <hr />
 
-#### <a id="get_financialmovement"></a> Retrieve financial movements details ####
+#### <a id="get_financialmovements"></a> Retrieve financial movements details ####
 
 ```
 Method: GET 
