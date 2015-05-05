@@ -40,18 +40,18 @@ As a part of the authentication process is based on time, your systems should be
 
 Our API is divided into sections based on different concepts in our system. Each section is made up of a series of calls.
 
-#### [External Bank Accounts](./services/externalBankAccountService.md) ####
+#### [External Bank Accounts](./services/externalbankaccountService.md) ####
 
-* [Submit new external bank account - `POST /externalbankaccounts`](./services/externalBankAccountService.md#post_externalbankaccounts) 
-* [Retrieve external bank accounts list - `GET /externalbankaccounts`](./services/externalBankAccountService.md#cget_externalbankaccounts) 
-* [Retrieve external bank account details - `GET /externalbankaccounts/{id}`](./services/externalBankAccountService.md#get_externalbankaccounts) 
-* [Delete external bank account - `DELETE /externalbankaccounts/{id}`](./services/externalBankAccountService.md#delete_externalbankaccounts) 
+* [Submit new external bank account - `POST /externalbankaccounts`](./services/externalbankaccountService.md#post_externalbankaccounts) 
+* [Retrieve external bank accounts list - `GET /externalbankaccounts`](./services/externalbankaccountService.md#cget_externalbankaccounts) 
+* [Retrieve external bank account details - `GET /externalbankaccounts/{id}`](./services/externalbankaccountService.md#get_externalbankaccounts) 
+* [Delete external bank account - `DELETE /externalbankaccounts/{id}`](./services/externalbankaccountService.md#delete_externalbankaccounts) 
 
-#### [Wallet Accounts](./services/walletAccountService.md) ####
+#### [Wallet Accounts](./services/walletService.md) ####
 
-* [Retrieve wallet list - `GET /wallets`](./services/walletAccountService.md#get-wallet-list)
-* [Retrieve wallet details - `GET /wallets/{id}`](./services/walletAccountService.md#get-wallet-details)
-* [Retrieve wallet balance for a given date - `GET /wallets/{id}/balance/{date}`](./services/walletAccountService.md#get-wallet-balance-from-date)
+* [Retrieve wallet list - `GET /wallets`](./services/walletService.md#get-wallet-list)
+* [Retrieve wallet details - `GET /wallets/{id}`](./services/walletService.md#get-wallet-details)
+* [Retrieve wallet balance for a given date - `GET /wallets/{id}/balance/{date}`](./services/walletService.md#get-wallet-balance-from-date)
 
 #### [Payments](./services/paymentService.md) ####
 
