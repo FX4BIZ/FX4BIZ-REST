@@ -37,8 +37,8 @@ As an example, a response for `GET /payment/{:id}` looks like this:
 |-------|-------------|
 | [`POST /payment`](#submit-payment)| Submit Payment |
 | [`PUT /payment/{payment_id}/confirm`](#confirm-payment) | Confirm Payment |
-| [`GET /payments`](#get-payment-history) | Retrieve Payments History |
-| [`GET /payment/{payment_id}`](#get-payment-history) | Retrieve Payment Details | 
+| [`GET /payments`](#cget_payments) | Retrieve Payments History |
+| [`GET /payment/{payment_id}`](#get_payments) | Retrieve Payment Details | 
 | [`PUT /payment/{payment_id}`](#put-payment-details) | Update Payment Details |
 | [`DELETE /payment/{payment_id}`](#delete-payment) | Cancel Payment |
 
@@ -77,7 +77,7 @@ As a response to this query, you will receive the updated details of the [Paymen
 
 <hr />
 
-#### <a id="get-payments-history"></a> Retrieve Payments History ####
+#### <a id="cget_payments"></a> Retrieve Payments History ####
 
 ```
 Method: GET
@@ -105,7 +105,7 @@ Request the list of payments that has been created on a specific period of time.
 
 <hr />
 
-#### <a id="get-payment-details"></a> Retrieve Payment Details ####
+#### <a id="get_payments"></a> Retrieve Payment Details ####
 
 ```
 Method: GET

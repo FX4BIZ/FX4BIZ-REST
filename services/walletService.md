@@ -6,9 +6,9 @@ In the FX4BIZ API, what we call a `wallet` account, is a payment account in FX4B
 
 | Route | Description |
 |-------|-------------|
-| [`GET /wallets`](#get-wallet-list) | Retrieve wallet list |
-| [`GET /wallets/{id}`](#get-wallet-details) | Retrieve wallet details |
-| [`GET /wallets/{id}/balance/{date}`](#get-wallet-balance-from-date) | Retrieve wallet balance for a given date |
+| [`GET /wallets`](#get_wallets) | Retrieve wallet list |
+| [`GET /wallets/{id}`](#get_wallets) | Retrieve wallet details |
+| [`GET /wallets/{id}/balance/{date}`](#get_wallets_balance) | Retrieve wallet balance for a given date |
 
 ## Details ##
 

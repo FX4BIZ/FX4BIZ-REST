@@ -49,23 +49,23 @@ Our API is divided into sections based on different concepts in our system. Each
 
 #### [Wallet Accounts](./services/walletService.md) ####
 
-* [Retrieve wallet list - `GET /wallets`](./services/walletService.md#get-wallet-list)
-* [Retrieve wallet details - `GET /wallets/{id}`](./services/walletService.md#get-wallet-details)
-* [Retrieve wallet balance for a given date - `GET /wallets/{id}/balance/{date}`](./services/walletService.md#get-wallet-balance-from-date)
+* [Retrieve wallet list - `GET /wallets`](./services/walletService.md#cget_wallets)
+* [Retrieve wallet details - `GET /wallets/{id}`](./services/walletService.md#get-wallets)
+* [Retrieve wallet balance for a given date - `GET /wallets/{id}/balance/{date}`](./services/walletService.md#get_wallets_balance)
 
 #### [Payments](./services/paymentService.md) ####
 
 * [Submit Payment - `POST /payment`](./services/paymentService.md#submit-payment)
 * [Confirm Payment - `PUT /payment/{payment_id}/confirm`](./services/paymentService.md#confirm-payment)
-* [Retrieve Payments History - `GET /payments`](./services/paymentService.md#get-payment-history)
-* [Retrieve Payment Details - `GET /payment/{payment_id}`](./services/paymentService.md#get-payment-history)
+* [Retrieve Payments History - `GET /payments`](./services/paymentService.md#cget_payments)
+* [Retrieve Payment Details - `GET /payment/{payment_id}`](./services/paymentService.md#get_payments)
 * [Update Payment Details - `PUT /payment/{payment_id}`](./services/paymentService.md#put-payment-details)
 * [Cancel Payment  - `DELETE /payment/{payment_id}`](./services/paymentService.md#delete-payment)
 
-#### [Financial Movements](./services/financialMovementService.md) ####
+#### [Financial Movements](./services/financialmovementService.md) ####
 
-* [Retrieve Financial Movements History - `GET /financialmovement`](./services/financialMovementService.md#get-transfers-list)
-* [Retrieve Financial Movements Details - `GET /financialmovement/{id}`](./services/financialMovementService.md#get-transfer-details)
+* [Retrieve Financial Movements History - `GET /financialmovements`](./services/financialmovementService.md#cget_financialmovement)
+* [Retrieve Financial Movements Details - `GET /financialmovements/{id}`](./services/financialmovementService.md#get_financialmovement)
 
 #### [Trades](./services/tradeService.md) ####
 

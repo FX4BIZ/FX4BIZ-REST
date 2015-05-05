@@ -6,12 +6,12 @@ The FX4BIZ Rest API allows you to get all financial movements from your [Wallets
 
 | Route | Description |
 |-------|-------------|
-| [`GET /financialmovement/`](#get-transfers-list) | Retrieve Financial Movements History |
-| [`GET /financialmovement/{id}`](#get-transfer-details) | Retrieve Financial Movements Details |
+| [`GET /financialmovements/`](#cget_financialmovement) | Retrieve Financial Movements History |
+| [`GET /financialmovements/{id}`](#get_financialmovement) | Retrieve Financial Movements Details |
 
 ## Details ##
 
-#### <a id="get-transfers-list"></a> Get financial movements history ####
+#### <a id="cget_financialmovement"></a> Get financial movements history ####
 
 ```
 Method: GET 
@@ -47,7 +47,7 @@ This request is appliable for the [pagination format](../conventions/formatingCo
 
 <hr />
 
-#### <a id="get-transfer-details"></a> Retrieve financial movements details ####
+#### <a id="get_financialmovement"></a> Retrieve financial movements details ####
 
 ```
 Method: GET 
