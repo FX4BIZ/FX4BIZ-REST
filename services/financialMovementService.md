@@ -23,8 +23,11 @@ Request the list of financial movements that has been received or sent on a spec
 
 | Field | Type | Description |
 |-------|------|-------------|
+| number | String | **Optionnal** An account number to specify on which wallet you would retreive the financial movements. | 
 | fromDate | Date | **Optionnal** A date representing the starting date to search financial movements on your wallets. |
 | toDate | Date | **Optionnal** A date representing the ending date to search financial movements on your wallets. | 
+
+This request is appliable for the [pagination format](../conventions/formatingConventions.md#pagination).
 
 **Returns:**
 
