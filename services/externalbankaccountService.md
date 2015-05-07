@@ -189,7 +189,9 @@ Delete an account.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| - | Boolean | TRUE if the deletion is complete, or an error if exceptions occurs. |
+| process | Object | An object containing the result of the process. |
+| Object.result | Boolean | A boolean value describing if the process succeeded or not. |
+
 
 **Example:**
 ```
