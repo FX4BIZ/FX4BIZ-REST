@@ -67,6 +67,5 @@ $digest = base64_encode(sha1($nonce.$ts.$password, true));
 
 // Getting the X-WSSE header to put in your request
 $header = sprintf('X-WSSE: UsernameToken Username="%s", PasswordDigest="%s", Nonce="%s", Created="%s"',$username, $digest, $nonce64, $date);
-
 ```
 
