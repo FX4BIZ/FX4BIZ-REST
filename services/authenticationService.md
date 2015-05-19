@@ -63,7 +63,7 @@ $date = gmdate('c');
 $date = substr($date,0,19)."Z" ;
 
 // Getting the password digest
-$digest = base64_encode(sha1($nonce.$ts.$password, true));
+$digest = base64_encode(sha1($nonce.$date.$password, true));
 
 // Getting the X-WSSE header to put in your request
 $header = sprintf('X-WSSE: UsernameToken Username="%s", PasswordDigest="%s", Nonce="%s", Created="%s"',$username, $digest, $nonce64, $date);
