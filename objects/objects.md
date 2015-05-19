@@ -130,14 +130,14 @@ When an amount of currency is specified as part of a JSON body, it is encoded as
 
 | Field | Type | Description |
 |-------|------|-------------|
-| value  | String (Quoted decimal) | The quantity of the currency. `25000000.00` |
+| value  | Float | The quantity of the currency. `25000000.00` |
 | currency | String | Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the amount currency. `USD` |
 
 *Example Amount Object:*
 
 ```js
 "amount": {
-	"value": "10000.00",
+	"value": 10000.00,
 	"currency": "GBP"
 }
 ```
@@ -258,7 +258,6 @@ When a `payment` is specified as part of a JSON body, it is encoded as an object
 | status | String | Payment status. `Awaiting Confirmation` |
 | createdDate | Date Time | Creation date of the payment. `2014-01-12T00:00:00+00:00` |
 | desiredExecutionDate | Date | The initial date of execution when the payment is created. `YYYY-MM-DD` |
-| executionDate | Date | We consider the payment executed when the status turns finalized. `YYYY-MM-DD` |
 | amount | [Amount Object](#amount_object) | **Required.** The nominal amount to be transfered. `10,000.00 GBP` |
 | type | String | Defines the type of payment affected. `Standard` |
 | tag | String | Custom reference on the payment. `Invoice xxx` |
@@ -266,7 +265,6 @@ When a `payment` is specified as part of a JSON body, it is encoded as an object
 | beneficiaryAccountNumber | String | The account number of the beneficiary. |
 | feeOption | String | The fee option used for the payment. |
 | communication | String | The wording of the payment. |
-| mail | String | Mail address refering the payment. |
 
 *Example Payment Object:*
 

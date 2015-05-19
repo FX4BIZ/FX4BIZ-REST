@@ -2,32 +2,33 @@
 
 Sending funds from your FX4BIZ wallet account to your own bank account or a third-party recipient involves two steps:
 
-1. Generate the payment object with the [Create Payment method](#submit-payment). 
+1. Generate the payment object with the [Submit Payment method](#post_payment). 
 When you submit a payment to be scheduled, you assign a unique id to that payment. 
 
 *Caution:* The payment created will be automatically rolled to the next closest working days if not confirmed in the scheduled date of operation.
 
-2. Confirm the payment to the API for processing, using the [Confirm Payment method](#confirm-payment). 
+2. Confirm the payment to the API for processing, using the [Confirm Payment method](#put_payments_confirm). 
 When you confirm a payment for processing, make sure you have sufficient funds in your wallet account balance. The funds transfer will be automatically locked-in if the wallet account balance is not sufficient. Make sure you always have enough funds on your wallet.
 
 *Caution:* If the balance of your wallet account is not sufficient to cover the payment amount, funds may be locked-in by FX4BIZ.
 
-As an example, a response for `GET /payment/{:id}` looks like this:
+As an example, a response for `GET /payment/{id}` looks like this:
 ```js
 "payment": {
     "id": "XXXX",
-    "tag": "XXXXXXXXXXX",
-    "status": "Planified",
-    "createdDate": "2015-04-24 10:50:24",
-    "desiredExecutionDate": "2015-04-24 00:00:00",
-    "executionDate": "2015-04-24 00:00:00",
+    "tag": "XXXXXX",
+    "status": "Finalized",
+    "createdDate": "2015-01-01 00:00:00",
+    "desiredExecutionDate": "2015-01-01 12:00:00",
     "type": "Transfer",
     "beneficiaryName": "John Doe",
-    "beneficiaryAccountNumber": "XXXXXXXXXXXXXX",
-    "amount": {amount},
-    "feeOption": "SEPA",
-    "communication": "Payment to Jane Doe",
-    "mail": "mail@example.com"
+    "beneficiaryAccountNumber": "XXXXXXXXXXXXXXX",
+    "amount": {
+        "value": 10000.00,
+        "currency": "USD"
+    },
+    "feeOption": "OUR",
+    "communication": null
 }
 ```
 
@@ -35,8 +36,8 @@ As an example, a response for `GET /payment/{:id}` looks like this:
 
 | Route | Description |
 |-------|-------------|
-| [`POST /payment`](#submit-payment)| Submit Payment |
-| [`PUT /payment/{payment_id}/confirm`](#confirm-payment) | Confirm Payment |
+| [`POST /payment`](#post_payment)| Submit Payment |
+| [`PUT /payment/{payment_id}/confirm`](#put_payments_confirm) | Confirm Payment |
 | [`GET /payments`](#cget_payments) | Retrieve Payments History |
 | [`GET /payment/{payment_id}`](#get_payments) | Retrieve Payment Details | 
 | [`PUT /payment/{payment_id}`](#put-payment-details) | Update Payment Details |
@@ -44,7 +45,7 @@ As an example, a response for `GET /payment/{:id}` looks like this:
 
 ## Details ##
 
-#### <a id="submit-payment"></a> Submit a payment ####
+#### <a id="post_payment"></a> Submit a payment ####
 
 ```
 Method: POST 
@@ -59,22 +60,49 @@ Use this path in order to schedule a new payment.
 | accountId | String | **Required.** Id of the destination account. `xxx` |
 | amount | [Amount Object](../objects/objects.md#amount_object) | **Required.** Amount to be sent. `10000.00+GBP` *Caution.* The currency of the amount sent must be equal to the currency of the beneficiary account. |
 | executionDate | Date | Initial execution date of you payment. `YYYY-MM-DD` |
+| communication | String | A string representing the communication for the beneficiary. (76 chars max.) |
+| tag | String | **Optionnal** The wording concerning the payment. |
+| feeCurrency  | String | **Optionnal** A string representing the fee currency. By default, this is the payment currency. |
+| ChargeFeeOption | String | **Optionnal** A string representing the fee change option for this payment. `BEN | OUR` |
+| PriorityFeeOption | String | **Optionnal** A string representing wether this payment as a normal priority, or it as to be done quick. `normal | speed` |
 
-As a response to this query, you will receive the details of the [Payment](../objects/objects.md#payment_object) created.
+**Returns:**
 
+| Field | Type | Description |
+|-------|------|-------------|
+| payment | [Payment Object](../objects/objects.md#payment_object) | A [Payment Object](../objects/objects.md#payment_object) describing the payment you submitted. |
+
+**Example:**
+```
+/payments/
+```
 <hr />
 
-#### <a id="confirm-payment"></a> Confirm a payment ####
+#### <a id="put_payments_confirm"></a> Confirm a payment ####
 
 ```
 Method: PUT 
-URL: /payment/{payment_id}/confirm
+URL: /payment/{id}/confirm
 ```
 Payments that has been scheduled must be confirmed in order to be released. 
 If the payment is not confirmed on scheduled date of operation, it will be postponed to the next operation date available.
 
-As a response to this query, you will receive the updated details of the [Payment](../objects/objects.md#payment_object) confirmed.
+**Parameters:**
 
+| Field | Type | Description |
+|-------|------|-------------|
+| id | Integer | **Required** The ID of the payment you want to confirm. |
+
+**Returns:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| payment | [Payment Object](../objects/objects.md#payment_object) | A [Payment Object](../objects/objects.md#payment_object) describing the payment you confirmed. |
+
+**Example:**
+```
+/payments/89456/confirm
+```
 <hr />
 
 #### <a id="cget_payments"></a> Retrieve Payments History ####
@@ -109,9 +137,11 @@ Request the list of payments that has been created on a specific period of time.
 
 ```
 Method: GET
-URL: /payment
+URL: /payments/{id}
 ```
 Retrieve the details of a specific payment.
+
+**Parameters:**
 
 | Field | Type | Description |
 |-------|------|-------------|
@@ -137,15 +167,38 @@ URL: /payment/{payment_id}
 ```
 Update information on a specific payment.
 
-As a response to this query, you will receive the updated details of the [Payment](../objects/objects.md#payment_object).
+**Parameters:**
 
+-> TBD
+
+**Returns:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| payment | [Payment Object](../objects/objects.md#payment_object) | A [Payment Object](../objects/objects.md#payment_object) describing the payment you modified. |
+
+**Example:**
+```
+/payments/89456
+```
 <hr />
 
 #### <a id="delete-payment"></a> Cancel Payment ####
 
 ```
 Method: DELETE
-URL: /payment/{payment_id}
+URL: /payment/{id}
 ```
 
-As a response to this query, you will receive a confirmation that the [Payment](../objects/objects.md#payment_object) is deleted properly.
+**Parameters:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| id | Integer | **Required** The ID of the payment you want to delete. |
+
+**Returns:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| process | Object | An object containing the result of the process. |
+| Object.result | Boolean | A boolean value describing if the process succeeded or not. |
