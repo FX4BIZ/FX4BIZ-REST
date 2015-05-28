@@ -63,7 +63,7 @@ Use this path in order to schedule a new payment.
 | communication | String | A string representing the communication for the beneficiary. (76 chars max.) |
 | tag | String | **Optionnal** The wording concerning the payment. |
 | feeCurrency  | String | **Optionnal** A string representing the fee currency. By default, this is the payment currency. |
-| chargeFeeOption | String | **Optionnal** A string representing the fee change option for this payment. `BEN | OUR` |
+| chargeFeeOption | String | **Optionnal** A string representing the fee change option for this payment. The default fee option is `OUR`. `BEN | OUR` |
 | priorityFeeOption | String | **Optionnal** A string representing wether this payment as a normal priority, or it as to be done quick. `normal | speed` |
 
 **Returns:**
