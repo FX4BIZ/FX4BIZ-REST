@@ -36,7 +36,7 @@ As an example, a response for `GET /payment/{id}` looks like this:
 
 | Route | Description |
 |-------|-------------|
-| [`POST /payment`](#post_payment)| Submit Payment |
+| [`POST /payment`](#post_payments)| Submit Payment |
 | [`PUT /payment/{payment_id}/confirm`](#put_payments_confirm) | Confirm Payment |
 | [`GET /payments`](#cget_payments) | Retrieve Payments History |
 | [`GET /payment/{payment_id}`](#get_payments) | Retrieve Payment Details | 
@@ -45,7 +45,7 @@ As an example, a response for `GET /payment/{id}` looks like this:
 
 ## Details ##
 
-#### <a id="post_payment"></a> Submit a payment ####
+#### <a id="post_payments"></a> Submit a payment ####
 
 ```
 Method: POST 
