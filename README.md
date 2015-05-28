@@ -55,7 +55,7 @@ Our API is divided into sections based on different concepts in our system. Each
 
 #### [Payments](./services/paymentService.md) ####
 
-* [Submit Payment - `POST /payment`](./services/paymentService.md#submit-payment)
+* [Submit Payment - `POST /payment`](./services/paymentService.md#post_payment)
 * [Confirm Payment - `PUT /payment/{payment_id}/confirm`](./services/paymentService.md#confirm-payment)
 * [Retrieve Payments History - `GET /payments`](./services/paymentService.md#cget_payments)
 * [Retrieve Payment Details - `GET /payment/{payment_id}`](./services/paymentService.md#get_payments)
