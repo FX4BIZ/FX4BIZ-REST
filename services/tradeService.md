@@ -107,7 +107,7 @@ As a response, you will receive the details of the [Trade](../objects/objects.md
 
 <hr />
 
-#### <a id="api_post_trades_on_quote"></a> Execute Trade ####
+#### <a id="api_post_trades_on_quote"></a> Execute trade with an existing quote ####
 
 ```
 Method: POST
