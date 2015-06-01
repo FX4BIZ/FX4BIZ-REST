@@ -41,7 +41,7 @@ As an example, a response for `GET /payment/{id}` looks like this:
 | [`GET /payments`](#cget_payments) | Retrieve Payments History |
 | [`GET /payment/{payment_id}`](#get_payments) | Retrieve Payment Details | 
 | [`PUT /payment/{payment_id}`](#put-payment-details) | Update Payment Details |
-| [`DELETE /payment/{payment_id}`](#delete-payment) | Cancel Payment |
+| [`DELETE /payment/{payment_id}`](#delete_payments) | Cancel Payment |
 
 ## Details ##
 
@@ -183,7 +183,7 @@ Update information on a specific payment.
 ```
 <hr />
 
-#### <a id="delete-payment"></a> Cancel Payment ####
+#### <a id="delete_payments"></a> Cancel Payment ####
 
 ```
 Method: DELETE
