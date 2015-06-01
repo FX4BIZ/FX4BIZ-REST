@@ -120,7 +120,7 @@ This request allows you to submit a new wallet for a given currency.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| wallet | [Wallet Object](../objects/objects.md#account_object) | An object representing the wallet you just created. |
+| wallet | [Wallet Object](../objects/objects.md#wallet_object) | An object representing the wallet you just created. |
 
 **Example:**
 ```
@@ -150,7 +150,7 @@ This request allows you to submit a new wallet for a given currency and a given 
 
 | Field | Type | Description |
 |-------|------|-------------|
-| wallet | [Wallet Object](../objects/objects.md#account_object) | An object representing the wallet you just created. |
+| wallet | [Wallet Object](../objects/objects.md#wallet_object) | An object representing the wallet you just created. |
 
 **Example:**
 ```

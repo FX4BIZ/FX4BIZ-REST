@@ -49,9 +49,11 @@ Our API is divided into sections based on different concepts in our system. Each
 
 #### [Wallet Accounts](./services/walletService.md) ####
 
-* [Retrieve wallet list - `GET /wallets`](./services/walletService.md#cget_wallets)
+* [Retrieve wallet list - `GET /wallets/`](./services/walletService.md#cget_wallets)
 * [Retrieve wallet details - `GET /wallets/{id}`](./services/walletService.md#get-wallets)
 * [Retrieve wallet balance for a given date - `GET /wallets/{id}/balance/{date}`](./services/walletService.md#get_wallets_balance)
+* [Submit new wallet - `POST /wallets/`](./services/walletService.md#post_wallets)
+* [Submit new wallet with an holder - `POST /wallets/withholder`](./services/walletService.md#post_wallets_with_holder)
 
 #### [Payments](./services/paymentService.md) ####
 
