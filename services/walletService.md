@@ -154,7 +154,7 @@ This request allows you to submit a new wallet for a given currency and a given 
 
 **Example:**
 ```
-/externalbankaccounts/withholder/
+/wallets/withholder/
 ```
 
 <hr />
