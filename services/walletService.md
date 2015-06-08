@@ -109,6 +109,7 @@ URL: /wallets/
 ```
 
 This request allows you to submit a new wallet for a given currency.
+**Caution :** This service is only avalable for FX4BIZ users that have suscribed to the wallet option program.
 
 **Parameters:**
 
