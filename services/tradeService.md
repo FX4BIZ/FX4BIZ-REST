@@ -28,7 +28,7 @@ As an example, a response for `GET /trade/{:id}` object looks like this:
 | Route | Description |
 |-------|-------------|
 | [`GET /rates`](#get_rates) | Retrieve Rates |
-| [`POST /quote`](#get-quote) | Request Quote |
+| [`POST /quote`](#post-quotes) | Request Quote |
 | [`POST /trade`](#get-trade) | Submit Trade |
 | [`POST /trade/onquote`](#get-trade) | Submit Trade with an existing quote |
 | [`DELETE /trade/{trade_id}`](#cancel-trade) | Cancel Trade |
@@ -64,7 +64,7 @@ The FX4BIZ-REST API provides a FX Data Feed. You can use the [Rates service](../
 
 <hr />
 
-#### <a id="post_quote"></a> Retrieve Quote ####
+#### <a id="post_quotes"></a> Retrieve Quote ####
 
 ```
 Method: POST
@@ -81,6 +81,18 @@ The Retrieve Quote service is a read-only service permitting to ask for the real
 | currency_target | String | **Required.** Id of the destination account. `xxx` |
 | amount | [Amount Object](../objects/objects.md#amount_object) | **Required.** Amount to be sent. `10000.00+GBP` *Caution.* The currency of the amount sent must be equal to the currency of the beneficiary account. |
 | execution_date | Date | Initial execution date of you payment. `YYYY-MM-DD` |
+
+**Returns:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| quote | [Quote object](../objects/objects.md#quote_object) | A [Quote object](../objects/objects.md#quote_object) representing the quote requested. |
+
+**Example:**
+```
+/quotes/
+```
+
 
 As a response to this query, you will receive the [Quote](../objects/objects.md#quote_object) required.
 
