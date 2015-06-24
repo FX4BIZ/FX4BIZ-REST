@@ -71,8 +71,8 @@ Our API is divided into sections based on different concepts in our system. Each
 
 #### [Trades](./services/tradeService.md) ####
 
-* [Retrieve Rates - `GET /rates`](./services/tradesService.md#get_rates)
-* [Request Quote - `POST /quote`](./services/tradesService.md#post-quotes)
+* [Retrieve Rates - `GET /rates`](./services/tradeService.md#get_rates)
+* [Request Quote - `POST /quote`](./services/tradeService.md#post-quotes)
 * [Submit Trade - `POST /trade`](./services/tradesService.md#get-trade)
 * [Cancel Trade - `DELETE /trade/{trade_id}`](./services/tradesService.md#cancel-trade)
 * [Retrieve Trades Book - `GET /trades`](./services/tradesService.md#get-trade-book)
