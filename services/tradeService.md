@@ -68,7 +68,7 @@ The FX4BIZ-REST API provides a FX Data Feed. You can use the [Rates service](../
 
 ```
 Method: POST
-URL: /quote
+URL: /quotes/
 ```
 The Retrieve Quote service is a read-only service permitting to ask for the real-time rate before to execute a trade. 
 *Caution:* It is not possible to trade with the Retrieve Quote service, you have to use the [Trade Service](#submit-trade) in order to placing new trades. 
