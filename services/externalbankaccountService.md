@@ -62,7 +62,7 @@ As an example, a response for `GET /account/{account_id}/details` looks like thi
 
 ```
 Method: POST 
-URL: /externalbankaccounts/
+URL: /externalBankAccounts/
 ```
 By submitting a new `external bank` account, you must supply the relevant details in order to pay a beneficiary.
 
@@ -113,7 +113,7 @@ Of course, it is possible to reference third party `wallet` accounts and pay as 
 
 **Example:**
 ```
-/externalbankaccounts/
+/externalBankAccounts/
 ```
 
 <hr />
@@ -122,7 +122,7 @@ Of course, it is possible to reference third party `wallet` accounts and pay as 
 
 ```
 Method: GET 
-URL: /externalbankaccounts/
+URL: /externalBankAccounts/
 ```
 With the FX4BIZ API, you can list all the external bank accounts hold by the person or compagny of a certain user.  
 The user is not to be passed as a parameter since it's the one you use to authenticate that will be used.
@@ -139,7 +139,7 @@ This request is appliable for the [pagination format](../conventions/formatingCo
 
 **Example:**
 ```
-/externalbankaccounts/
+/externalBankAccounts/
 ```
 
 <hr />
@@ -148,7 +148,7 @@ This request is appliable for the [pagination format](../conventions/formatingCo
 
 ```
 Method: GET 
-URL: /externalbankaccount/{id}
+URL: /externalBankAccounts/{id}
 ```
 This request allows you to see the details related to an account. In order to confirm, you can display the beneficiary information in your application for example.  
 
@@ -166,7 +166,7 @@ This request allows you to see the details related to an account. In order to co
 
 **Example:**
 ```
-/externalbankaccounts/2041
+/externalBankAccounts/2041
 ```
 
 <hr />
@@ -175,7 +175,7 @@ This request allows you to see the details related to an account. In order to co
 
 ```
 Method: DELETE 
-URL: /externalbankaccount/{id}
+URL: /externalBankAccounts/{id}
 ```
 Delete an account.
 
@@ -195,5 +195,5 @@ Delete an account.
 
 **Example:**
 ```
-/externalbankaccounts/2041
+/externalBankAccounts/2041
 ```
