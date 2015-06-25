@@ -77,8 +77,6 @@ The Retrieve Quote service is a read-only service permitting to ask for the real
 
 | Field | Type | Description |
 |-------|------|-------------|
-| settlementWalletId | String | **Required.** Id of the source account. `xxx` |
-| deliveryWalletId | String | **Required.** Id of the destination account. `xxx` |
 | currencyPair | String | **Required.** The currency pair representing the quote requessted. `EURUSD` |
 | side | String | **Required.** The side repressenting the quote. `S` to sell and `B` to buy. |
 | amount | [Amount Object](../objects/objects.md#amount_object) | **Required.** Amount to be sent. `10000.00+GBP` *Caution.* The currency of the amount sent must be equal to the currency of the beneficiary account. |
@@ -112,8 +110,10 @@ This services permits to execute trade.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| currency_source | String | **Required.** Id of the destination account. `xxx` |
-| currency_target | String | **Required.** Id of the destination account. `xxx` |
+| settlementWalletId | String | **Required.** Id of the source account. `xxx` |
+| deliveryWalletId | String | **Required.** Id of the destination account. `xxx` |
+| currencyPair | String | **Required.** The currency pair representing the quote requessted. `EURUSD` |
+| side | String | **Required.** The side repressenting the quote. `S` to sell and `B` to buy. |
 | amount | [Amount Object](../objects/objects.md#amount_object) | **Required.** Amount to be sent. `10000.00+GBP` *Caution.* The currency of the amount sent must be equal to the currency of the beneficiary account. |
 | execution_date | Date | Initial execution date of you payment. `YYYY-MM-DD` |
 
