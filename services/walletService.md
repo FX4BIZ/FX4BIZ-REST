@@ -2,6 +2,42 @@
 
 In the FX4BIZ API, what we call a `wallet` account, is a payment account in FX4BIZ, allowing you to send and receive funds.
 
+As an example, a response for `GET /externalBankAccounts/{id}` looks like this:
+```js
+"wallet": {
+    "id": "XXXXXX",
+    "createdDate": "2013-10-01 13:28:53",
+    "createdBy": "M. Maxime Champoux(MO Manager FX4Biz)",
+    "currency": "EUR",
+    "tag": "E-compte EUR",
+    "status": "authorized",
+    "type": "wallet",
+    "number": "XXXXXXXXXX",
+    "correspondentBank": null,
+    "holderBank": {
+        "bic": "DEUTBEBEXXX",
+        "clearingCodeType": "",
+        "clearingCode": "825",
+        "name": "DEUTSCHE BANK A.G.",
+        "address": {
+            "street": "17 AVENUE MARNIX  ",
+            "postCode": "1000",
+            "city": "BRUSSELS",
+            "country": "BE"
+        }
+    },
+    "holder": {
+        "name": "XXXXXXXXXXXXXXXXXXX",
+        "type": "corporate",
+        "address": {
+            "street": "XXXXXXXXXXXXXX",
+            "postCode": "75001",
+            "city": "Paris",
+            "country": "FR"
+        }
+    }
+}
+```
 ## Route ##
 
 | Route | Description |
@@ -31,12 +67,12 @@ This request is applicable for the [pagination format](../conventions/formatingC
 | Field | Type | Description |
 |-------|------|-------------|
 | wallets | Array[Object] | An Array of objects representing wallets. |
-| Object.id | Integer | The id of the wallet. |
+| Object.id | String | The ID of the wallet. |
 | Object.tag | String | The wording of the wallet. |
 | Object.currency | String | The currency of the wallet. |
 | Object.bookingAmount | [Amount Object](../objects/objects.md#amount_object) | The booking amount (`e.g. the total money in the wallet, minus the immobilizations`) in the wallet. |
 | Object.valueAmount | [Amount Object](../objects/objects.md#amount_object) | The total amount avalable in the wallet. |
-| Object.DateLastFinancialMovement | Date | The date of the last financial move with this wallet. |
+| Object.dateLastFinancialMovement | String | The date of the last financial move with this wallet. |
 
 **Example:**
 ```
@@ -55,9 +91,9 @@ This request allows you to see the details related to an wallets, to confirm dis
 
 **Parameters:**
 
-| Field | Type | Description |
-|-------|------|-------------|
-| id | Integer | **Required.** The ID of the external bank account you want. |
+| Required | Field | Type | Description |
+|----------|-------|------|-------------|
+| Required | id | String | The ID of the external bank account you want. |
 
 **Returns:**
 
@@ -82,16 +118,16 @@ This request allows you to see the details of a wallet balance at a given date.
 
 **Parameters:**  
 
-| Field | Type | Description |
-|-------|------|-------------|
-| id | Integer | **Required.** The ID of the external bank account you want. |
-| date | Date | **Required.** The date to search the balance of the wallet. <br />This date should be in the format `YYYY-MM-DD` |
+| Required | Field | Type | Description |
+|----------|-------|------|-------------|
+| Required | id | String | The ID of the external bank account you want. |
+| Required | date | String | The date to search the balance of the wallet. <br />This date should be in the format `YYYY-MM-DD` |
 
 **Returns:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| id | Integer | The id of the wallet. |
+| id | String | The ID of the wallet. |
 | balance | [Balance Object](../objects/objects.md#balance_object) | An object representing the balance of the account. |
 
 **Example:**
@@ -113,9 +149,9 @@ This request allows you to submit a new wallet for a given currency.
 
 **Parameters:**
 
-| Field | Type | Description |
-|-------|------|-------------|
-| currency | String | **Required** Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the wallet currency. `USD` |
+| Required | Field | Type | Description |
+|----------|-------|------|-------------|
+| Required | currency | String | Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the wallet currency. `USD` |
 
 **Returns:**
 
@@ -142,10 +178,10 @@ This request allows you to submit a new wallet for a given currency and a given 
 
 **Parameters:**
 
-| Field | Type | Description |
-|-------|------|-------------|
-| currency | String | **Required** Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the wallet currency. `USD` |
-| holder | [Holder Object](../objects/objects.md#beneficiary_object) | **Required.** The recipient details, owner of the wallet. |
+| Required | Field | Type | Description |
+|----------|-------|------|-------------|
+| Required | currency | String | Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the wallet currency. `USD` |
+| Required | holder | [Holder Object](../objects/objects.md#beneficiary_object) | The recipient details, owner of the wallet. |
 
 **Returns:**
 

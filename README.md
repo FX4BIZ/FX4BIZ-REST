@@ -42,27 +42,26 @@ Our API is divided into sections based on different concepts in our system. Each
 
 #### [External Bank Accounts](./services/externalbankaccountService.md) ####
 
-* [Submit new external bank account - `POST /externalbankaccounts`](./services/externalbankaccountService.md#post_externalbankaccounts) 
-* [Retrieve external bank accounts list - `GET /externalbankaccounts`](./services/externalbankaccountService.md#cget_externalbankaccounts) 
-* [Retrieve external bank account details - `GET /externalbankaccounts/{id}`](./services/externalbankaccountService.md#get_externalbankaccounts) 
-* [Delete external bank account - `DELETE /externalbankaccounts/{id}`](./services/externalbankaccountService.md#delete_externalbankaccounts) 
+* [Submit new external bank account `POST /externalBankAccounts/`](./services/externalbankaccountService.md#post_externalbankaccounts)
+* [Retrieve external bank accounts list `GET /externalBankAccounts/`](./services/externalbankaccountService.md#cget_externalbankaccounts)
+* [Retrieve external bank account details `GET /externalBankAccounts/{id}`](./services/externalbankaccountService.md#get_externalbankaccounts)
+* [Delete an external bank account `DELETE /externalBankAccounts/{id}`](./services/externalbankaccountService.md#delete_externalbankaccounts)
 
 #### [Wallet Accounts](./services/walletService.md) ####
 
-* [Retrieve wallet list - `GET /wallets/`](./services/walletService.md#cget_wallets)
-* [Retrieve wallet details - `GET /wallets/{id}`](./services/walletService.md#get-wallets)
-* [Retrieve wallet balance for a given date - `GET /wallets/{id}/balance/{date}`](./services/walletService.md#get_wallets_balance)
-* [Submit new wallet - `POST /wallets/`](./services/walletService.md#post_wallets)
-* [Submit new wallet with an holder - `POST /wallets/withholder`](./services/walletService.md#post_wallets_with_holder)
+* [Retrieve wallet list `GET /wallets`](./services/walletService.md#cget_wallets)
+* [Retrieve wallet details `GET /wallets/{id}`](./services/walletService.md#get_wallets)
+* [Retrieve wallet balance for a given date `GET /wallets/{id}/balance/{date}`](./services/walletService.md#get_wallets_balance)
+* [Submit new wallet `POST /wallets/`](./services/walletService.md#post_wallets)
+* [Submit new wallet with an holder `POST /wallets/withholder`](./services/walletService.md#post_wallets_with_holder)
 
 #### [Payments](./services/paymentService.md) ####
 
-* [Submit Payment - `POST /payment`](./services/paymentService.md#post_payments)
-* [Confirm Payment - `PUT /payment/{payment_id}/confirm`](./services/paymentService.md#confirm-payment)
-* [Retrieve Payments History - `GET /payments`](./services/paymentService.md#cget_payments)
-* [Retrieve Payment Details - `GET /payment/{payment_id}`](./services/paymentService.md#get_payments)
-* [Update Payment Details - `PUT /payment/{payment_id}`](./services/paymentService.md#put-payment-details)
-* [Cancel Payment  - `DELETE /payment/{payment_id}`](./services/paymentService.md#delete-payment)
+| [Submit a Payment `POST /payment`](./services/paymentService.md#post_payments)
+| [Confirm Payment `PUT /payment/{id}/confirm`](./services/paymentService.md#put_payments_confirm)
+| [Retrieve Payments History `GET /payments`](./services/paymentService.md#cget_payments)
+| [Retrieve Payment Details `GET /payment/{id}`](./services/paymentService.md#get_payments)
+| [Cancel Payment `DELETE /payment/{id}`](./services/paymentService.md#delete_payments)
 
 #### [Financial Movements](./services/financialmovementService.md) ####
 
@@ -71,22 +70,24 @@ Our API is divided into sections based on different concepts in our system. Each
 
 #### [Trades](./services/tradeService.md) ####
 
-* [Retrieve Rates - `GET /rates`](./services/tradeService.md#get_rates)
-* [Request Quote - `POST /quote`](./services/tradeService.md#post_quotes)
-* [Submit Trade - `POST /trade`](./services/tradesService.md#get-trade)
-* [Cancel Trade - `DELETE /trade/{trade_id}`](./services/tradesService.md#cancel-trade)
-* [Retrieve Trades Book - `GET /trades`](./services/tradesService.md#get-trade-book)
-* [Retrieve Trade Details - `GET /trade/{trade_id}`](./services/tradesService.md#get-trade-details)
+* [Retrieve Rates `GET /rates`](./services/tradeService.md#get_rates)
+* [Request Quote `POST /quotes`](./services/tradeService.md#post_quotes)
+* [Submit Trade `POST /trades`](./services/tradeService.md#post_trades)
+* [Submit Trade with an existing quote `POST /trades/onquote/{id}`](./services/tradeService.md#post_trades_on_quote)
+* [Retrieve Trades Book `GET /trades/`](./services/tradeService.md#cget_trades)
+* [Retrieve Trade Details `GET /trades/{id}`](./services/tradeService.md#get_trades)
 
 #### [Logs](./services/logService.md) ####
 
-* [Retrieve Logs - `GET /logs`](./services/logService.md#get_logs) 
-* [Retrieve a log entry with a nonce  - `GET /logs/{nonce}`](./services/logService.md#get_log) 
+* [Retrieve Logs `GET /logs`](./services/logService.md#get_logs) 
+* [Retrieve a log entry with a nonce `GET /logs/{nonce}`](./services/logService.md#get_log) 
 
 ## [API Objects](./objects/objects.md) ##
 
 * [External Bank Account Object](./objects/objects.md#account_object)
+* [Wallet Object](./objects/objects.md#wallet_object)
 * [Address Object](./objects/objects.md#address_object)
+* [Amount Object](./objects/objects.md#amount_object)
 * [Balance Object](./objects/objects.md#balance_object)
 * [Holder Bank Object](./objects/objects.md#beneficiary_bank_object)
 * [Holder Object](./objects/objects.md#beneficiary_object)
@@ -94,7 +95,7 @@ Our API is divided into sections based on different concepts in our system. Each
 * [Payment Object](./objects/objects.md#payment_object)
 * [Rate Object](./objects/objects.md#rate_object)
 * [Trade Object](./objects/objects.md#trade_object)
-* [Transfer Object](./objects/objects.md#transfer_object)
+* [Financial Movement Object](./objects/objects.md#financial_movement_object)
 * [Quote Object](./objects/objects.md#trade_object)
 * [Log Object](./objects/objects.md#log_object)
 

@@ -3,6 +3,7 @@
 * [External Bank Account Object](#account_object)
 * [Wallet Object](#wallet_object)
 * [Address Object](#address_object)
+* [Amount Object](#amount_object)
 * [Balance Object](#balance_object)
 * [Holder Bank Object](#beneficiary_bank_object)
 * [Holder Object](#beneficiary_object)
@@ -20,7 +21,7 @@
 
 When an account is specified as part of a JSON body, it is encoded as an object with the following fields:
 
-*Object resources:*
+**Object resources:**
 
 | Field | Type | Description |
 |-------|------|-------------|
@@ -36,14 +37,14 @@ When an account is specified as part of a JSON body, it is encoded as an object 
 | holderBank | [Holder Bank Object](#beneficiary_bank_object) | **Required.** The recipient bank details, holding the account. |
 | holder | [Holder Object](#beneficiary_object) | **Required.** The recipient details, owner of the account. |
 
-*Example Account Object:*
+**Example Account Object:**
 
 ```js
 "account": {
     "id": "xxx"
     "status": "active",
     "type": "wallet",
-    "createdDate": "2014-01-12T00:00:00+00:00",
+    "createdDate": "2014-01-12 00:00:00",
     "createdBy": "api",
     "tag": "My wallet account EUR",
     "number": "xxx4548",
@@ -296,28 +297,41 @@ When a `trade` is specified as part of a JSON body, it is encoded as an object w
 
 | Field | Type | Description |
 |-------|------|-------------|
-| tradeId | String | **Required.** id of trade `xxx` |
-| nominalAmount | [Amount Object](#amount_object) | **Required.** The nominal amount of the trade. `10,000.00 GBP` |
-| settlementAmount | [Amount Object](#amount_object) | **Required.** The amount that will be debited on the related source `wallet` account at delivery date. `10,000.00 GBP` |
-| deliveredAmount | [Amount Object](#amount_object) | **Required.** The amount that will be credited on the related target `wallet` account at delivery date. `10,000.00 GBP` |
-| rateApplied | String | **Required.** The nominal amount of the trade. `1.10000` |
-| currencyPair | String | **Required.** The instrument related to the rate applied. `EURUSD` |
-| rate | [Rate Object](#rate_object) | **Required.** The Core and mid-market real time rates related to this trade. |
-| deliveryDate | Date | `YYYY-MM-DD` |
-| createdDate | Date | `YYYY-MM-DD` |
+| id | String | The ID of the quote. |
+| side | String | The side of the quote. 'B' for buy, and 'S' for sell. |
+| settlementAmount | [Amount Object](#amount_object)  | The [Amount Object](#amount_object) representing the amount to settle. |
+| deliveredAmount | [Amount Object](#amount_object)  | The [Amount Object](#amount_object) representing the amount to be delivered. |
+| currencyPair | String | The currency pair representing the quote.  |
+| rate | [Rate Object](#rate_object) | The [Rate Object](#rate_object) describing the rate of the quote. |
+| createdDate | String | The creation date of the quote. |
+| deliveryDate | String | The delivery date of the trade. `YYYY-MM-DD` |
 
 *Example Trade Object:*
 
 ```js
 "trade": {
-    "createdDate": "2014-01-12T00:00:00+00:00",
-    "deliveryDate": "2014-01-12T00:00:00+00:00",
-    "nominalAmount": {amount},
-    "rateApplied": "1.1002",
+"quote": {
+    "id": "NTUzMzA",
+    "side": "B",
+    "settlementAmount": {
+        "value": 9013.89,
+        "curreny": "EUR"
+    },
+    "deliveredAmount": {
+        "value": 10000,
+        "currency": "USD"
+    },
     "currencyPair": "EURUSD",
-    "rate": {rate}
-    "settlementAmount": {amount},
-    "deliveredAmount": {amount},
+    "rate": {
+        "currencyPair": "EURUSD",
+        "midMarket": 1.1094,
+        "coreAsk": 1.1094,
+        "coreBid": 1.1174,
+        "date": "2015-06-29 11:46:36"
+    },
+    "createdDate": "2015-06-29 11:46:36",
+    "deliveryDate": "2015-06-30 00:00:00"
+}
 }
 ```
 
@@ -369,20 +383,20 @@ As a rate is specified in a JSON body, it's encoded as an object with five field
 | Field | Type | Description |
 |-------|------|-------------|
 | currencyPair | String | The cross of currency used for the rates provided |
-| midMarket | String (Quoted decimal) | The average rate of the market between the bid and the ask rate. |
-| date | Date | The date of the last update on this currency. |
-| coreAsk | String (Quoted decimal) | The interbank BID rate provided by the FX partner of FX4BIZ . |
-| coreBid | String (Quoted decimal) | The interbank ASK rate provided by the FX partner of FX4BIZ. |
+| midMarket | Float | The average rate of the market between the bid and the ask rate. |
+| date | String | The date of the last update on this currency. |
+| coreAsk | Float | The interbank BID rate provided by the FX partner of FX4BIZ . |
+| coreBid | Float | The interbank ASK rate provided by the FX partner of FX4BIZ. |
 
 Example Rate Object:
 
 ```js
 "rate":{
 	"currencyPair":"EURGBP",
-	"midMarket":"0.726500",
+	"midMarket":0.726500,
 	"date":"2015-03-31 13:15:04",
-	"coreAsk":"0.726500",
-	"coreBid":"0.726500"
+	"coreAsk":0.726500,
+	"coreBid":0.726500
 }
 ```
 
@@ -394,11 +408,38 @@ When a `quote` is specified as part of a JSON body, it is encoded as an object w
 
 | Field | Type | Description |
 |-------|------|-------------|
+| id | String | The ID of the quote. |
+| side | String | The side of the quote. 'B' for buy, and 'S' for sell. |
+| settlementAmount | [Amount Object](#amount_object)  | The [Amount Object](#amount_object) representing the amount to settle. |
+| deliveredAmount | [Amount Object](#amount_object)  | The [Amount Object](#amount_object) representing the amount to be delivered. |
+| currencyPair | String | The currency pair representing the quote.  |
+| rate | [Rate Object](#rate_object) | The [Rate Object](#rate_object) describing the rate of the quote. |
+| createdDate | String | The creation date of the quote. |
 
 Example Quote Object:
 
 ```js
---> TBD
+"quote": {
+    "id": "NTUzMzA",
+    "side": "B",
+    "settlementAmount": {
+        "value": 9013.89,
+        "curreny": "EUR"
+    },
+    "deliveredAmount": {
+        "value": 10000,
+        "currency": "USD"
+    },
+    "currencyPair": "EURUSD",
+    "rate": {
+        "currencyPair": "EURUSD",
+        "midMarket": 1.1094,
+        "coreAsk": 1.1094,
+        "coreBid": 1.1174,
+        "date": "2015-06-29 11:46:36"
+    },
+    "createdDate": "2015-06-29 11:46:36"
+}
 ```
 
 <hr />

@@ -36,12 +36,11 @@ As an example, a response for `GET /payment/{id}` looks like this:
 
 | Route | Description |
 |-------|-------------|
-| [`POST /payment`](#post_payments)| Submit Payment |
-| [`PUT /payment/{payment_id}/confirm`](#put_payments_confirm) | Confirm Payment |
+| [`POST /payment`](#post_payments)| Submit a Payment |
+| [`PUT /payment/{id}/confirm`](#put_payments_confirm) | Confirm Payment |
 | [`GET /payments`](#cget_payments) | Retrieve Payments History |
-| [`GET /payment/{payment_id}`](#get_payments) | Retrieve Payment Details | 
-| [`PUT /payment/{payment_id}`](#put-payment-details) | Update Payment Details |
-| [`DELETE /payment/{payment_id}`](#delete_payments) | Cancel Payment |
+| [`GET /payment/{id}`](#get_payments) | Retrieve Payment Details | 
+| [`DELETE /payment/{id}`](#delete_payments) | Cancel Payment |
 
 ## Details ##
 
@@ -49,23 +48,23 @@ As an example, a response for `GET /payment/{id}` looks like this:
 
 ```
 Method: POST 
-URL: /payment
+URL: /payments/
 ```
-Use this path in order to schedule a new payment. 
+You can use this request in order to schedule a new payment. 
 
 **Parameters:**
 
-| Field | Type | Description |
-|-------|------|-------------|
-| accountId | String | **Required.** Id of the destination account. `xxx` |
-| amount | [Amount Object](../objects/objects.md#amount_object) | **Required.** Amount to be sent. `10000.00+GBP` *Caution.* The currency of the amount sent must be equal to the currency of the beneficiary account. |
-| executionDate | Date | **Required.** Initial execution date of you payment. `YYYY-MM-DD` |
-| communication | String | **Required.** A string representing the communication for the beneficiary. (76 chars max.) |
-| tag | String | **Optionnal** The wording concerning the payment. |
-| feeCurrency  | String | **Optionnal** A string representing the fee currency. By default, this is the payment currency. |
-| chargeFeeOption | String | **Optionnal** A string representing the fee change option for this payment. The default fee option is `OUR`. `BEN | OUR` |
-| priorityFeeOption | String | **Optionnal** A string representing wether this payment as a normal priority, or it as to be done quick. `normal | speed` |
-| sourceWalletId | String | **This option is required only for wallet option program users** Specify on which wallet the payment will be processed. |
+| Required | Field | Type | Description |
+|----------|-------|------|-------------|
+| Required | beneficiaryAccountId | String | The ID of the beneficiary account. |
+| Required | amount | [Amount Object](../objects/objects.md#amount_object) | Amount to be sent. *Caution.* The currency of the amount sent must be equal to the currency of the beneficiary account. |
+| Required | executionDate | String | Initial execution date of you payment. `YYYY-MM-DD` |
+| Required | feeCurrency  | String | A string representing the fee currency. |
+| Required | changePaymentOption | String | A string representing the fee payment option for this payment. |
+| Required | tag | String | The wording concerning the payment. |
+| Required | priorityPaymentOption | String | A string representing wether this payment as a normal priority, or it as to be done quick. `normal | speed` |
+| Optionnal | communication | String | A string representing the communication for the beneficiary. (76 chars max.) |
+| Required only<br /> for wallet option<br /> program users | sourceWalletId | String | Specify on which wallet the payment will be processed. |
 
 **Returns:**
 
@@ -90,9 +89,9 @@ If the payment is not confirmed on scheduled date of operation, it will be postp
 
 **Parameters:**
 
-| Field | Type | Description |
-|-------|------|-------------|
-| id | Integer | **Required** The ID of the payment you want to confirm. |
+| Required | Field | Type | Description |
+|----------|-------|------|-------------|
+| Required | id | String | The ID of the payment you want to confirm. |
 
 **Returns:**
 
@@ -116,10 +115,11 @@ Request the list of payments that has been created on a specific period of time.
 
 **Parameters:**
 
-| Field | Type | Description |
-|-------|------|-------------|
-| fromDate | Date | **Optionnal** A date representing the starting date to search payments. |
-| toDate | Date | **Optionnal** A date representing the ending date to search payments. | 
+| Required | Field | Type | Description |
+|----------|-------|------|-------------|
+| Optionnal | fromDate | String | A date representing the starting date to search payments. |
+| Optionnal | toDate | String | A date representing the ending date to search payments. | 
+| Optionnal | sort | String | A String representing the order of rendering objects. | 
 
 **Returns:**
 
@@ -129,9 +129,8 @@ Request the list of payments that has been created on a specific period of time.
 
 **Example:**
 ```
-/payments/
+/payments/?fromDate=2010-01-01&toDate=2015-06-30&sort=DESC
 ```
-
 <hr />
 
 #### <a id="get_payments"></a> Retrieve Payment Details ####
@@ -144,39 +143,15 @@ Retrieve the details of a specific payment.
 
 **Parameters:**
 
-| Field | Type | Description |
-|-------|------|-------------|
-| id | Integer | **Required** The ID of the payment you want. |
+| Required | Field | Type | Description |
+|----------|-------|------|-------------|
+| Required | id | String | The ID of the payment you want. |
 
 **Returns:**
 
 | Field | Type | Description |
 |-------|------|-------------|
 | payment | [Payment Object](../objects/objects.md#payment_object) | A [Payment Object](../objects/objects.md#payment_object) describing the payment you requested. |
-
-**Example:**
-```
-/payments/89456
-```
-<hr />
-
-#### <a id="put-payment"></a> Update Payment Details####
-
-```
-Method: PUT
-URL: /payment/{payment_id}
-```
-Update information on a specific payment.
-
-**Parameters:**
-
--> TBD
-
-**Returns:**
-
-| Field | Type | Description |
-|-------|------|-------------|
-| payment | [Payment Object](../objects/objects.md#payment_object) | A [Payment Object](../objects/objects.md#payment_object) describing the payment you modified. |
 
 **Example:**
 ```
@@ -193,9 +168,9 @@ URL: /payment/{id}
 
 **Parameters:**
 
-| Field | Type | Description |
-|-------|------|-------------|
-| id | Integer | **Required** The ID of the payment you want to delete. |
+| Required | Field | Type | Description |
+|----------|-------|------|-------------|
+| Required | id | String | The ID of the payment you want to delete. |
 
 **Returns:**
 

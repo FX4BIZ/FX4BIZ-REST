@@ -28,12 +28,11 @@ As an example, a response for `GET /trade/{:id}` object looks like this:
 | Route | Description |
 |-------|-------------|
 | [`GET /rates`](#get_rates) | Retrieve Rates |
-| [`POST /quote`](#post-quotes) | Request Quote |
-| [`POST /trade`](#get-trade) | Submit Trade |
-| [`POST /trade/onquote`](#get-trade) | Submit Trade with an existing quote |
-| [`DELETE /trade/{trade_id}`](#cancel-trade) | Cancel Trade |
-| [`GET /trades`](#get-trade-book) | Retrieve Trades Book |
-| [`GET /trade/{trade_id}`](#get-trade-details) | Retrieve Trade Details |
+| [`POST /quotes`](#post_quotes) | Request Quote |
+| [`POST /trades`](#post_trades) | Submit Trade |
+| [`POST /trades/onquote/{id}`](#post_trades_on_quote) | Submit Trade with an existing quote |
+| [`GET /trades/`](#cget_trades) | Retrieve Trades Book |
+| [`GET /trades/{id}`](#get_trades) | Retrieve Trade Details |
 
 ## Details ##
 
@@ -47,9 +46,9 @@ The FX4BIZ-REST API provides a FX Data Feed. You can use the [Rates service](../
 
 **Parameters:**
 
-| Field | Type | Description |
-|-------|------|-------------|
-| instruments | String | **Required.** A string representing a list of crosses. Crosses must be separated with commas. <br />You can chain as many crosses as you want, as long as they're separated with commas. |
+| Required | Field | Type | Description |
+|----------|-------|------|-------------|
+| Required | instruments | String | A string representing a list of crosses. Crosses must be separated with commas. <br />You can chain as many crosses as you want, as long as they're separated with commas. |
 
 **Returns:**
 
@@ -75,12 +74,12 @@ The Retrieve Quote service is a read-only service permitting to ask for the real
 
 *Parameters:*
 
-| Field | Type | Description |
-|-------|------|-------------|
-| currencyPair | String | **Required.** The currency pair representing the quote requessted. `EURUSD` |
-| side | String | **Required.** The side repressenting the quote. `S` to sell and `B` to buy. |
-| amount | [Amount Object](../objects/objects.md#amount_object) | **Required.** Amount to be sent. `10000.00+GBP` *Caution.* The currency of the amount sent must be equal to the currency of the beneficiary account. |
-| execution_date | Date | Initial execution date of you payment. `YYYY-MM-DD` |
+| Required | Field | Type | Description |
+|----------|-------|------|-------------|
+| Required | currencyPair | String | The currency pair representing the quote requessted. `EURUSD` |
+| Required | side | String | The side repressenting the quote. `S` to sell and `B` to buy. |
+| Required | amount | [Amount Object](../objects/objects.md#amount_object) | Amount to be sent. |
+| Required | deliveryDate | String | Initial delivery date of the quote. `YYYY-MM-DD` |
 
 **Returns:**
 
@@ -92,10 +91,6 @@ The Retrieve Quote service is a read-only service permitting to ask for the real
 ```
 /quotes/
 ```
-
-
-As a response to this query, you will receive the [Quote](../objects/objects.md#quote_object) required.
-
 <hr />
 
 #### <a id="post_trades"></a> Execute Trade ####
@@ -108,55 +103,103 @@ This services permits to execute trade.
 
 *Parameters:*
 
+| Required | Field | Type | Description |
+|----------|-------|------|-------------|
+| Required | settlementWalletId | String | The ID of the source account. `xxx` |
+| Required | deliveryWalletId | String | The ID of the destination account. `xxx` |
+| Required | currencyPair | String | The currency pair representing the quote requessted. `EURUSD` |
+| Required | side | String | The side repressenting the quote. `S` to sell and `B` to buy. |
+| Required | amount | [Amount Object](../objects/objects.md#amount_object) | **Required.** Amount to be sent. `10000.00+GBP` *Caution.* The currency of the amount sent must be equal to the currency of the beneficiary account. |
+| Required | deliveryDate | String | Initial execution date of you payment. `YYYY-MM-DD` |
+
+
+**Returns:**
+
 | Field | Type | Description |
 |-------|------|-------------|
-| settlementWalletId | String | **Required.** Id of the source account. `xxx` |
-| deliveryWalletId | String | **Required.** Id of the destination account. `xxx` |
-| currencyPair | String | **Required.** The currency pair representing the quote requessted. `EURUSD` |
-| side | String | **Required.** The side repressenting the quote. `S` to sell and `B` to buy. |
-| amount | [Amount Object](../objects/objects.md#amount_object) | **Required.** Amount to be sent. `10000.00+GBP` *Caution.* The currency of the amount sent must be equal to the currency of the beneficiary account. |
-| execution_date | Date | Initial execution date of you payment. `YYYY-MM-DD` |
+| quote | [Trade object](../objects/objects.md#trade_object) | A [Trade object](../objects/objects.md#trade_object) representing the trade submitted. |
 
-As a response, you will receive the details of the [Trade](../objects/objects.md#trade_object) executed.
-
+**Example:**
+```
+/trades/
+```
 <hr />
 
-#### <a id="api_post_trades_on_quote"></a> Execute trade with an existing quote ####
+#### <a id="post_trades_on_quote"></a> Execute trade with an existing quote ####
 
 ```
 Method: POST
-URL: /trade
+URL: /trades/onquote/{id}
 ```
 This services permits to execute trade.
 
 *Parameters:*
 
+| Required | Field | Type | Description |
+|----------|-------|------|-------------|
+| Required | id | String | The ID of the quote you get from [Retrieve quote](#post_quote). |
+
+**Returns:**
+
 | Field | Type | Description |
 |-------|------|-------------|
-| quoteId | Integer | **Required.** Id of the quote you get from [Retrieve quote](#post_quote). |
+| quote | [Trade object](../objects/objects.md#trade_object) | A [Trade object](../objects/objects.md#trade_object) representing the trade submitted. |
 
-As a response, you will receive the details of the [Trade](../objects/objects.md#trade_object) executed.
-
+**Example:**
+```
+/trades/onquote/{id}
+```
 <hr />
 
-#### <a id="get-trade"></a> Retrieve Trade ####
+#### <a id="cget_trades"></a> Retrieve Trades Book ####
 
 ```
 Method: GET
-URL: /trade/{trade_id}
-```
-Retrieve the trade details.
-
-As a response, you will receive the details of the [Trade](../objects/objects.md#trade_object).
-
-<hr />
-
-#### <a id="get-trades"></a> Retrieve Trades Book ####
-
-```
-Method: GET
-URL: /trades
+URL: /trades/
 ```
 Retrieve the list of trades executed. We sort trades by validation date.
 
-As a response, you will receive an array containing the `trade_id`, the `validation_date` and the `amount` for all trades validated.
+**Parameters:**
+
+| Required | Field | Type | Description |
+|----------|-------|------|-------------|
+| Optionnal | fromDate | String | A date representing the starting date to search payments. |
+| Optionnal | toDate | String | A date representing the ending date to search payments. | 
+| Optionnal | sort | String | A String representing the order of rendering objects. | 
+
+**Returns:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| trades | Array[[Trade Object](../objects/objects.md#trade_object)] | An array of [Trade Object](../objects/objects.md#trade_object) describing trades you requested. |
+
+**Example:**
+```
+/payments/89456/confirm
+```
+<hr />
+
+#### <a id="get_trades"></a> Retrieve Trade ####
+
+```
+Method: GET
+URL: /trade/{id}
+```
+Retrieve the trade details.
+
+**Parameters:**
+
+| Required | Field | Type | Description |
+|----------|-------|------|-------------|
+| Required | id | String | The ID of the trade you want. |
+
+**Returns:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| trade | [Trade Object](../objects/objects.md#trade_object) | A [Trade Object](../objects/objects.md#trade_object) describing trades you requested. |
+
+**Example:**
+```
+/payments/89456/confirm
+```

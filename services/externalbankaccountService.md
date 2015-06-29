@@ -2,47 +2,46 @@
 
 In the FX4BIZ API, what we call `external bank` account, can be either your own account in another bank or a third party recipient account.
 
-As an example, a response for `GET /account/{account_id}/details` looks like this:
+As an example, a response for `GET /externalBankAccounts/{id}` looks like this:
 ```js
-{
-    "account": {
-        "id": "xxx"
-        "status": "active",
-        "type": "wallet",
-        "createdDate": "2014-01-12T00:00:00+00:00",
-        "createdBy": "api",
-        "tag": "My wallet account EUR",
-        "number": "xxx4548",
-        "currency": "EUR",
-        "correspondantBank":{
-            "bic": "AGRIFRPP",
-            "name": "CREDIT AGRICOLE SA",
-            "address": {
-                "street": "BUILDING PASTEUR, BLOC 1: 91-93, BOULEVARD PASTEUR",
-                "postCode": "75015",
-                "city": "Paris",
-                "country": "FRANCE"
-            }
+"account": {
+    "id": "XXXXXX",
+    "createdDate": "2013-10-01 13:28:53",
+    "createdBy": "M. Maxime Champoux(MO Manager FX4Biz)",
+    "currency": "EUR",
+    "tag": "EUR Account BNP",
+    "status": "authorized",
+    "type": "BankingBeneficiary",
+    "number": "XXXXXXXXXXXXXXXXXXXXXXX",
+    "correspondentBank": {    
+    	"bic": "BNPAFRPPXXX",
+        "name": "BNP-PARIBAS SA (FORMERLY BANQUE NATIONALE DE PARIS S.A.)",
+        "address": {
+            "street": "16 BOULEVARD DES ITALIENS  ",
+            "postCode": "75009",
+            "city": "PARIS",
+            "country": "FR"
         },
-        "holderBank": {
-            "bic": "FXBBBEBB",
-            "name": "FX4BIZ SA",
-            "address": {
-                "street": "Avenue Louise, 350",
-                "postCode": "1050",
-                "city": "Bruxelles",
-                "country": "FR"
-            }
-        },
-        "holder": {
-            "name": "John Doe",
-            "type": "individual",
-            "address": {
-                "street": "1 My Road",
-                "postCode": "ZIP",
-                "city": "London",
-                "country": "UK",
-            }
+    "holderBank": {
+        "bic": "BNPAFRPPXXX",
+        "clearingCodeType": "",
+        "clearingCode": "3000402550",
+        "name": "BNP-PARIBAS SA (FORMERLY BANQUE NATIONALE DE PARIS S.A.)",
+        "address": {
+            "street": "16 BOULEVARD DES ITALIENS  ",
+            "postCode": "75009",
+            "city": "PARIS",
+            "country": "FR"
+        }
+    },
+    "holder": {
+        "name": "XXXXXXXXXXXXXXXXXXX",
+        "type": "corporate",
+        "address": {
+            "street": "XXXXXXXXXXXXXX",
+            "postCode": "75001",
+            "city": "Paris",
+            "country": "FR"
         }
     }
 }
@@ -51,10 +50,10 @@ As an example, a response for `GET /account/{account_id}/details` looks like thi
 
 | Route | Description |
 |-------|-------------|
-| [`POST /externalbankaccounts/`](#post_externalbankaccounts) | Submit new external bank account |
-| [`GET /externalbankaccounts/`](#cget_externalbankaccounts) | Retrieve external bank accounts list |
-| [`GET /externalbankaccounts/{id}`](#get_externalbankaccounts) | Retrieve external bank account details |
-| [`DELETE /externalbankaccounts/{id}`](#delete_externalbankaccounts) | Delete external bank account |
+| [`POST /externalBankAccounts/`](#post_externalbankaccounts) | Submit new external bank account |
+| [`GET /externalBankAccounts/`](#cget_externalbankaccounts) | Retrieve external bank accounts list |
+| [`GET /externalBankAccounts/{id}`](#get_externalbankaccounts) | Retrieve external bank account details |
+| [`DELETE /externalBankAccounts/{id}`](#delete_externalbankaccounts) | Delete an external bank account |
 
 ## Details ##
 
@@ -96,14 +95,14 @@ Of course, it is possible to reference third party `wallet` accounts and pay as 
 
 **Parameters:**
 
-| Field | Type | Description |
-|-------|------|-------------|
-| number | String | **Required.** The recipient account number or Iban. `xxx4548` |
-| currency | String | **Required.** Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the account currency. `EUR` |
-| tag | String | Custom Data. `John Doe bank account EUR` |
-| correspondentBic | String | The intermediary bank BIC code. |
-| holderBank | [Holder Bank Object](../objects/objects.md#beneficiary_bank_object) | **Required.** The recipient bank details, holding the account. |
-| holder | [Holder Object](../objects/objects.md#beneficiary_object) | **Required.** The recipient details, owner of the account. |
+| Required | Field | Type | Description |
+|----------|-------|------|-------------|
+| Required | number | String | The recipient account number or Iban. `xxx4548` |
+| Required | currency | String | Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the account currency. `EUR` |
+| Required | holderBank | [Holder Bank Object](../objects/objects.md#beneficiary_bank_object) | The recipient bank details, holding the account. |
+| Required | holder | [Holder Object](../objects/objects.md#beneficiary_object) | The recipient details, owner of the account. |
+| Optionnal | tag | String | Custom Data. `John Doe bank account EUR` |
+| Optionnal | correspondentBic | String | The intermediary bank BIC code. |
 
 **Returns:**
 
@@ -154,9 +153,9 @@ This request allows you to see the details related to an account. In order to co
 
 **Parameters:**  
 
-| Field | Type | Description |
-|-------|------|-------------|
-| id | Integer | **Required.** The ID of the external bank account you want. <br :>As ID's are listed with the [External Bank Account Objects](../objects/objects.md#account_object), You can retrive this by listing all external bank accounts for the current user. |
+| Required | Field | Type | Description |
+|----------|-------|------|-------------|
+| Required | id | String | The ID of the external bank account you want. <br :>As ID's are listed with the [External Bank Account Objects](../objects/objects.md#account_object), You can retrive this by listing all external bank accounts for the current user. |
 
 **Returns:**
 
@@ -171,19 +170,19 @@ This request allows you to see the details related to an account. In order to co
 
 <hr />
 
-#### <a id="delete_externalbankaccounts"></a> Delete external bank account ####
+#### <a id="delete_externalbankaccounts"></a> Delete an external bank account ####
 
 ```
 Method: DELETE 
 URL: /externalBankAccounts/{id}
 ```
-Delete an account.
+Delete an external bank account.
 
 **Parameters:**  
 
-| Field | Type | Description |
-|-------|------|-------------|
-| id | Integer | **Required.** The ID of the external bank account you want to delete. |
+| Required | Field | Type | Description |
+|----------|-------|------|-------------|
+| Required | id | String | The ID of the external bank account you want to delete. |
 
 **Returns:**
 

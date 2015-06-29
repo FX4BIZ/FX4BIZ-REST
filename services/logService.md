@@ -55,9 +55,9 @@ In case of somewhat happens during the request, the FX4BIZ API allows you to ret
 
 **Parameters:**
 
-| Field | Type | Description |
-|-------|------|-------------|
-| nonce | String | **Required.** The nonce used to authenticate the request. As the one in the header, this nonce has to be [Base64](http://fr.wikipedia.org/wiki/Base64) encoded. The nonce you get with `GET /logs` is already encoded. |
+| Required | Field | Type | Description |
+|----------|-------|------|-------------|
+| Required | nonce | String | The nonce used to authenticate the request. As the one in the header, this nonce has to be [Base64](http://fr.wikipedia.org/wiki/Base64) encoded. The nonce you get with `GET /logs` is already encoded. |
 
 **Returns:**
 
