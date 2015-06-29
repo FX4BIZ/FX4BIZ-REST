@@ -26,7 +26,7 @@ When an account is specified as part of a JSON body, it is encoded as an object 
 | Field | Type | Description |
 |-------|------|-------------|
 | id |  String | The id of the account. `xxx` |
-| createdDate |  Date Time | The creation date of the object: `2014-01-12T00:00:00+00:00` |
+| createdDate | String | The creation date of the object: `YYYY-MM-DD HH:MM:SS` |
 | createdBy |  String | The creation date of the object: `api` |
 | currency | String | Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the account currency. `USD` |
 | tag |  String | Custom data. `reference` |
@@ -66,7 +66,7 @@ When a wallet is specified as part of a JSON body, it is encoded as an object wi
 | Field | Type | Description |
 |-------|------|-------------|
 | id |  String | The id of the account. `xxx` |
-| createdDate |  Date Time | The creation date of the object: `2014-01-12T00:00:00+00:00` |
+| createdDate | String | The creation date of the object: `YYYY-MM-DD HH:MM:SS` |
 | createdBy |  String | The creation date of the object: `api` |
 | currency | String | Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the account currency. `USD` |
 | tag |  String | Custom data. `reference` |
@@ -153,9 +153,9 @@ When the balance is specified as part of a JSON body, it is encoded as an object
 
 | Field | Type | Description |
 |-------|------|-------------|
-| closingDate | Date | The closing date of the balance details given. `2014-01-12` |
-| bookingAmount | [Amount Object](#amount_object) | The closing balance of the account. `10,000.00 GBP`|
-| valueAmount | [Amount Object](#amount_object) | The closing value of the account. `10,000.00 GBP`|
+| closingDate | String | The closing date of the balance details given. `YYYY-MM-DD` |
+| bookingAmount | [Amount Object](#amount_object) | The closing balance of the account. |
+| valueAmount | [Amount Object](#amount_object) | The closing value of the account. |
 
 *Example balance Object:*
 
@@ -257,36 +257,36 @@ When a `payment` is specified as part of a JSON body, it is encoded as an object
 |-------|------|-------------|
 | id | String | **Required.** id of the payment. `xxx` |
 | status | String | Payment status. `Awaiting Confirmation` |
-| createdDate | Date Time | Creation date of the payment. `2014-01-12T00:00:00+00:00` |
-| desiredExecutionDate | Date | The initial date of execution when the payment is created. `YYYY-MM-DD` |
-| executionDate | Date | The  date of execution of the payment. `YYYY-MM-DD` |
+| createdDate | String | Creation date of the payment. `YYYY-MM-DD HH:MM:SS` |
+| desiredExecutionDate | String | The initial date of execution when the payment is created. `YYYY-MM-DD` |
+| executionDate | String | The  date of execution of the payment. `YYYY-MM-DD` |
 | amount | [Amount Object](#amount_object) | **Required.** The nominal amount to be transfered. `10,000.00 GBP` |
 | tag | String | Custom reference on the payment. `Invoice xxx` |
 | beneficiaryAccountId | String | The ID of the beneficiary account. |
+| sourceWalletId | String | Specify on which wallet the payment will be processed. |
 | communication | String | The wording of the payment. |
 | priorityPaymentOption | String | A string representing wether this payment as a normal priority, or it as to be done quick. |
-| sourceWalletId | String | Specify on which wallet the payment will be processed. |
 | feePaymentOption | String | A string representing the fee payment option for this payment. |
 
 *Example Payment Object:*
 
 ```js
 "payment": {
-    "id": "XXXXXXX",
-    "tag": "XXXXXXXXXX",
+    "id": "XXXXXX",
     "status": "WaitingConfirmation",
-    "createdDate": "2015-06-29 14:46:11",
-    "desiredExecutionDate": "2015-06-30 00:00:00",
-    "executionDate": "2015-06-30 00:00:00",
-    "accountBeneficiaryId": "XXXXXXX",
-    "sourceWalletId": "XXXXXXX",
+    "createdDate": "2015-06-29 16:50:30",
+    "desiredExecutionDate": "2015-06-30",
+    "executionDate": "2015-06-30",
     "amount": {
-        "value": "100000.00",
+        "value": "5500.00",
         "currency": "USD"
     },
-    "feePaymentOption": "OUR",
-    "priorityPaymentOption": "speed",
-    "communication": "XXXXXXX"
+    "tag": "XXXXXX",
+    "beneficiaryAccountId": "XXXXXX",
+    "sourceWalletId": "XXXXXX",
+    "communication": "XXXXXX",
+    "priorityPaymentOption": "normal",
+    "feePaymentOption": "BEN"
 }
 ```
 
@@ -351,29 +351,31 @@ When a financial movement is specified as part of a JSON body, it is encoded as 
 | Field | Type | Description |
 |-------|------|-------------|
 | id | Integer | The id of the financial movement. |
-| bookingDate | Date | The booking date of the financial movement. |
-| valueDate | Date | The value date of the financial movement. |
+| bookingDate | String | The booking date of the financial movement. `YYYY-MM-DD HH:MM:SS` |
+| valueDate | String | The value date of the financial movement. `YYYY-MM-DD HH:MM:SS` |
 | orderingAccountNumber | String | The number refering the ordering account. |
-| BeneficiaryAccountNumber | String | The number refering the beneficiary account. |
+| beneficiaryAccountNumber | String | The number refering the beneficiary account. |
 | orderingCustomer | String | A free formatted String representing the ordering customer with it's name and it's address. |
 | orderingInstitution | String | A free formatted String representing the ordering institution with it's name and it's address. |
 | beneficiaryCustomer | String | A free formatted String representing the beneficiary customer with it's name and it's address. |
-| account | [Account Object](#account_object) | Details of the settlement account. |
-
+| amount | [Amount Object](#amount_object)  | The [Amount Object](#amount_object) of the financial movement. |
 
 *Example Financial Movement Object:*
 
 ```js
 "financialMovement": {
-    "id": "XXX",
-    "bookingDate": "2015-04-24 08:55:18",
-    "valueDate": "2015-04-24 00:00:00",
-    "orderingAccountNumber": "XXXXXXXXXXXXXXXXXXX",
-    "BeneficiaryAccountNumber": "XXXXXXXXXXXXXXXXXXX",
-    "orderingCustomer": "John Doe 31 1st New York US",
-    "orderingInstitution": "JPMORGAN CHASE BANK, N.A. 4 NEW YORK PLAZA FLOOR 15 NEW YORK,NY 10004 US",
-    "BeneficiaryCustomer": "Jane Doe 32 1st New York US",
-    "amount": {amount}
+        "id": "XXXXXXX",
+        "bookingDate": "2015-04-30 00:00:00",
+        "valueDate": "2015-04-30 00:00:00",
+        "orderingAccountNumber": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+        "beneficiaryAccountNumber": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+        "orderingCustomer": "Diamants Plus Avenue de l'opéra Paris FR",
+        "orderingInstitution": "BNP-PARIBAS SA (FORMERLY BANQUE NATIONALE DE PARIS S.A.) 16 BOULEVARD DES ITALIENS   75450 PARIS CEDEX 09 FR",
+        "BeneficiaryCustomer": "Diamants Plus Avenue de l'opéra Paris FR",
+        "amount": {
+            "value": "4573.00",
+            "currency": "EUR"
+        }
 }
 ```
 
@@ -389,7 +391,7 @@ As a rate is specified in a JSON body, it's encoded as an object with five field
 |-------|------|-------------|
 | currencyPair | String | The cross of currency used for the rates provided |
 | midMarket | Float | The average rate of the market between the bid and the ask rate. |
-| date | String | The date of the last update on this currency. |
+| date | String | The date of the last update on this currency. `YYYY-MM-DD HH:MM:SS` |
 | coreAsk | Float | The interbank BID rate provided by the FX partner of FX4BIZ . |
 | coreBid | Float | The interbank ASK rate provided by the FX partner of FX4BIZ. |
 
@@ -447,8 +449,8 @@ When a `log` is specified as part of a JSON body, it is encoded as an object wit
 
 | Field | Type | Description |
 |-------|------|-------------|
-| CreatedAt | Date | The date when the log entry was created. |
-| ClosedAt | Date | The date when the log entry was closed. |
+| CreatedAt | Date | The date when the log entry was created. `YYYY-MM-DD HH:MM:SS` |
+| ClosedAt | Date | The date when the log entry was closed. `YYYY-MM-DD HH:MM:SS` |
 | TokenNonce | String | The nonce used in the HTTP header to authenticate the request. |
 | RemoteAddress | String | The address of the request's emiter. |
 | RequestMethod | String | The [HTTP method](http://fr.wikipedia.org/wiki/Hypertext_Transfer_Protocol#M.C3.A9thodes) of the request. |
