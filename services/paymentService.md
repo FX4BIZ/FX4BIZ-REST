@@ -3,44 +3,20 @@
 Sending funds from your FX4BIZ wallet account to your own bank account or a third-party recipient involves two steps:
 
 1. Generate the payment object with the [Submit Payment method](#post_payment). 
-When you submit a payment to be scheduled, you assign a unique id to that payment. 
-
-*Caution:* The payment created will be automatically rolled to the next closest working days if not confirmed in the scheduled date of operation.
+When you submit a payment to be scheduled, you assign a unique id to that payment. <br />**Caution:** The payment created will be automatically rolled to the next closest working days if not confirmed in the scheduled date of operation.
 
 2. Confirm the payment to the API for processing, using the [Confirm Payment method](#put_payments_confirm). 
-When you confirm a payment for processing, make sure you have sufficient funds in your wallet account balance. The funds transfer will be automatically locked-in if the wallet account balance is not sufficient. Make sure you always have enough funds on your wallet.
-
-*Caution:* If the balance of your wallet account is not sufficient to cover the payment amount, funds may be locked-in by FX4BIZ.
-
-As an example, a response for `GET /payment/{id}` looks like this:
-```js
-"payment": {
-    "id": "XXXX",
-    "tag": "XXXXXX",
-    "status": "Finalized",
-    "createdDate": "2015-01-01 00:00:00",
-    "desiredExecutionDate": "2015-01-01 12:00:00",
-    "type": "Transfer",
-    "beneficiaryName": "John Doe",
-    "beneficiaryAccountNumber": "XXXXXXXXXXXXXXX",
-    "amount": {
-        "value": 10000.00,
-        "currency": "USD"
-    },
-    "feeOption": "OUR",
-    "communication": null
-}
-```
+When you confirm a payment for processing, make sure you have sufficient funds in your wallet account balance. The funds transfer will be automatically locked-in if the wallet account balance is not sufficient. Make sure you always have enough funds on your wallet. <br />**Caution:** If the balance of your wallet account is not sufficient to cover the payment amount, funds may be locked-in by FX4BIZ.
 
 ## Routes ##
 
 | Route | Description |
 |-------|-------------|
-| [`POST /payment`](#post_payments)| Submit a Payment |
-| [`PUT /payment/{id}/confirm`](#put_payments_confirm) | Confirm Payment |
+| [`POST /payments`](#post_payments)| Submit a Payment |
+| [`PUT /payments/{id}/confirm`](#put_payments_confirm) | Confirm Payment |
 | [`GET /payments`](#cget_payments) | Retrieve Payments History |
-| [`GET /payment/{id}`](#get_payments) | Retrieve Payment Details | 
-| [`DELETE /payment/{id}`](#delete_payments) | Cancel Payment |
+| [`GET /payments/{id}`](#get_payments) | Retrieve Payment Details | 
+| [`DELETE /payments/{id}`](#delete_payments) | Cancel Payment |
 
 ## Details ##
 
@@ -54,17 +30,17 @@ You can use this request in order to schedule a new payment.
 
 **Parameters:**
 
-| Required | Field | Type | Description |
-|----------|-------|------|-------------|
-| Required | beneficiaryAccountId | String | The ID of the beneficiary account. |
-| Required | amount | [Amount Object](../objects/objects.md#amount_object) | Amount to be sent. *Caution.* The currency of the amount sent must be equal to the currency of the beneficiary account. |
-| Required | executionDate | String | Initial execution date of you payment. `YYYY-MM-DD` |
-| Required | feeCurrency  | String | A string representing the fee currency. |
-| Required | changePaymentOption | String | A string representing the fee payment option for this payment. |
-| Required | tag | String | The wording concerning the payment. |
-| Required | priorityPaymentOption | String | A string representing wether this payment as a normal priority, or it as to be done quick. `normal | speed` |
-| Optionnal | communication | String | A string representing the communication for the beneficiary. (76 chars max.) |
-| Required only<br /> for wallet option<br /> program users | sourceWalletId | String | Specify on which wallet the payment will be processed. |
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| beneficiaryAccountId | String | Required | The ID of the beneficiary account. |
+| amount | [Amount Object](../objects/objects.md#amount_object) | Required | Amount to be sent. *Caution.* The currency of the amount sent must be equal to the currency of the beneficiary account. |
+| executionDate | String | Required | Initial execution date of you payment. `YYYY-MM-DD` |
+| feeCurrency  | String | Required | A string representing the fee currency. |
+| feePaymentOption | String | Required | A string representing the fee payment option for this payment. |
+| tag | String | Required | The wording concerning the payment. |
+| priorityPaymentOption | String | Required | A string representing wether this payment as a normal priority, or it as to be done quick. `normal | speed` |
+| sourceWalletId | String | Required | Specify on which wallet the payment will be processed. |
+| communication | String | Optionnal | A string representing the communication for the beneficiary. (76 chars max.) |
 
 **Returns:**
 
@@ -89,9 +65,9 @@ If the payment is not confirmed on scheduled date of operation, it will be postp
 
 **Parameters:**
 
-| Required | Field | Type | Description |
-|----------|-------|------|-------------|
-| Required | id | String | The ID of the payment you want to confirm. |
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| id | String | Required | The ID of the payment you want to confirm. |
 
 **Returns:**
 
@@ -115,11 +91,11 @@ Request the list of payments that has been created on a specific period of time.
 
 **Parameters:**
 
-| Required | Field | Type | Description |
-|----------|-------|------|-------------|
-| Optionnal | fromDate | String | A date representing the starting date to search payments. |
-| Optionnal | toDate | String | A date representing the ending date to search payments. | 
-| Optionnal | sort | String | A String representing the order of rendering objects. | 
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| fromDate | String |  Optionnal | A date representing the starting date to search payments. |
+| toDate | String |  Optionnal | A date representing the ending date to search payments. | 
+| sort | String |  Optionnal | A String representing the order of rendering objects. | 
 
 **Returns:**
 
@@ -143,9 +119,9 @@ Retrieve the details of a specific payment.
 
 **Parameters:**
 
-| Required | Field | Type | Description |
-|----------|-------|------|-------------|
-| Required | id | String | The ID of the payment you want. |
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| id | String | Required | The ID of the payment you want. |
 
 **Returns:**
 
@@ -168,9 +144,9 @@ URL: /payment/{id}
 
 **Parameters:**
 
-| Required | Field | Type | Description |
-|----------|-------|------|-------------|
-| Required | id | String | The ID of the payment you want to delete. |
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| id | String | Required | The ID of the payment you want to delete. |
 
 **Returns:**
 

@@ -2,24 +2,6 @@
 
 The FX4BIZ Rest API allows you to get all financial movements from your [Wallets](./walletAccountService.md).
 
-As an example, a response for `GET /financialmovements/{id}` looks like this:
-```js
-"financialMovement": {
-    "id": "XXXXXX",
-    "bookingDate": "2015-04-30 00:00:00",
-    "valueDate": "2015-04-30 00:00:00",
-    "orderingAccountNumber": "XXXXXXXXXXXXXXXXXXXXXXXXX",
-    "BeneficiaryAccountNumber": "XXXXXXXXXXXXXXXXXX",
-    "orderingCustomer": "XXXXXXXXXXXXXXXXXXXXXX",
-    "orderingInstitution": "BNP-PARIBAS SA (FORMERLY BANQUE NATIONALE DE PARIS S.A.) 16 BOULEVARD DES ITALIENS   75450 PARIS CEDEX 09 FR",
-    "BeneficiaryCustomer": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-    "amount": {
-        "value": "4573.00",
-        "currency": "EUR"
-    }
-}
-```
-
 ## Route ##
 
 | Route | Description |
@@ -39,11 +21,11 @@ Request the list of financial movements that has been received or sent on a spec
 
 **Parameters:**
 
-| Required | Field | Type | Description |
-|----------|-------|------|-------------|
-| Optionnal | number | String | An account number to specify on which wallet you would retreive the financial movements. | 
-| Optionnal | fromDate | String | A date representing the starting date to search financial movements on your wallets. |
-| Optionnal | toDate | String | A date representing the ending date to search financial movements on your wallets. | 
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| number | String | Optionnal | An account number to specify on which wallet you would retreive the financial movements. | 
+| fromDate | String | Optionnal | A date representing the starting date to search financial movements on your wallets. |
+| toDate | String | Optionnal | A date representing the ending date to search financial movements on your wallets. | 
 
 This request is appliable for the [pagination format](../conventions/formatingConventions.md#pagination).
 
@@ -75,9 +57,9 @@ Request information on a particular financial movement that has been credited or
 
 **Parameters:**
 
-| Required | Field | Type | Description |
-|----------|-------|------|-------------|
-| Required | id | String | The ID refering the financial movement. |
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| id | String | Required | The ID refering the financial movement. |
 
 **Returns:**
 

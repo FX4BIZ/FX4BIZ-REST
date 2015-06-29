@@ -2,42 +2,6 @@
 
 In the FX4BIZ API, what we call a `wallet` account, is a payment account in FX4BIZ, allowing you to send and receive funds.
 
-As an example, a response for `GET /externalBankAccounts/{id}` looks like this:
-```js
-"wallet": {
-    "id": "XXXXXX",
-    "createdDate": "2013-10-01 13:28:53",
-    "createdBy": "M. Maxime Champoux(MO Manager FX4Biz)",
-    "currency": "EUR",
-    "tag": "E-compte EUR",
-    "status": "authorized",
-    "type": "wallet",
-    "number": "XXXXXXXXXX",
-    "correspondentBank": null,
-    "holderBank": {
-        "bic": "DEUTBEBEXXX",
-        "clearingCodeType": "",
-        "clearingCode": "825",
-        "name": "DEUTSCHE BANK A.G.",
-        "address": {
-            "street": "17 AVENUE MARNIX  ",
-            "postCode": "1000",
-            "city": "BRUSSELS",
-            "country": "BE"
-        }
-    },
-    "holder": {
-        "name": "XXXXXXXXXXXXXXXXXXX",
-        "type": "corporate",
-        "address": {
-            "street": "XXXXXXXXXXXXXX",
-            "postCode": "75001",
-            "city": "Paris",
-            "country": "FR"
-        }
-    }
-}
-```
 ## Route ##
 
 | Route | Description |
@@ -91,9 +55,9 @@ This request allows you to see the details related to an wallets, to confirm dis
 
 **Parameters:**
 
-| Required | Field | Type | Description |
-|----------|-------|------|-------------|
-| Required | id | String | The ID of the external bank account you want. |
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| id | String | Required | The ID of the external bank account you want. |
 
 **Returns:**
 
@@ -118,10 +82,10 @@ This request allows you to see the details of a wallet balance at a given date.
 
 **Parameters:**  
 
-| Required | Field | Type | Description |
-|----------|-------|------|-------------|
-| Required | id | String | The ID of the external bank account you want. |
-| Required | date | String | The date to search the balance of the wallet. <br />This date should be in the format `YYYY-MM-DD` |
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| id | String | Required | The ID of the external bank account you want. |
+| date | String | Required | The date to search the balance of the wallet. <br />This date should be in the format `YYYY-MM-DD` |
 
 **Returns:**
 
@@ -149,9 +113,9 @@ This request allows you to submit a new wallet for a given currency.
 
 **Parameters:**
 
-| Required | Field | Type | Description |
-|----------|-------|------|-------------|
-| Required | currency | String | Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the wallet currency. `USD` |
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| currency | String | Required | Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the wallet currency. `USD` |
 
 **Returns:**
 
@@ -178,10 +142,10 @@ This request allows you to submit a new wallet for a given currency and a given 
 
 **Parameters:**
 
-| Required | Field | Type | Description |
-|----------|-------|------|-------------|
-| Required | currency | String | Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the wallet currency. `USD` |
-| Required | holder | [Holder Object](../objects/objects.md#beneficiary_object) | The recipient details, owner of the wallet. |
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| currency | String | Required | Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the wallet currency. `USD` |
+| holder | [Holder Object](../objects/objects.md#beneficiary_object) | Required | The recipient details, owner of the wallet. |
 
 **Returns:**
 

@@ -259,31 +259,34 @@ When a `payment` is specified as part of a JSON body, it is encoded as an object
 | status | String | Payment status. `Awaiting Confirmation` |
 | createdDate | Date Time | Creation date of the payment. `2014-01-12T00:00:00+00:00` |
 | desiredExecutionDate | Date | The initial date of execution when the payment is created. `YYYY-MM-DD` |
+| executionDate | Date | The  date of execution of the payment. `YYYY-MM-DD` |
 | amount | [Amount Object](#amount_object) | **Required.** The nominal amount to be transfered. `10,000.00 GBP` |
-| type | String | Defines the type of payment affected. `Standard` |
 | tag | String | Custom reference on the payment. `Invoice xxx` |
-| beneficiaryName | String | The name of the beneficiary. |
-| beneficiaryAccountNumber | String | The account number of the beneficiary. |
-| feeOption | String | The fee option used for the payment. |
+| beneficiaryAccountId | String | The ID of the beneficiary account. |
 | communication | String | The wording of the payment. |
+| priorityPaymentOption | String | A string representing wether this payment as a normal priority, or it as to be done quick. |
+| sourceWalletId | String | Specify on which wallet the payment will be processed. |
+| feePaymentOption | String | A string representing the fee payment option for this payment. |
 
 *Example Payment Object:*
 
 ```js
 "payment": {
-    "id": "XXXX",
-    "tag": "XXXXXXXXXXX",
-    "status": "Planified",
-    "createdDate": "2015-04-24 10:50:24",
-    "desiredExecutionDate": "2015-04-24 00:00:00",
-    "executionDate": "2015-04-24 00:00:00",
-    "type": "Transfer",
-    "beneficiaryName": "John Doe",
-    "beneficiaryAccountNumber": "XXXXXXXXXXXXXX",
-    "amount": {amount},
-    "feeOption": "SEPA",
-    "communication": "Payment to Jane Doe",
-    "mail": "mail@example.com"
+    "id": "XXXXXXX",
+    "tag": "XXXXXXXXXX",
+    "status": "WaitingConfirmation",
+    "createdDate": "2015-06-29 14:46:11",
+    "desiredExecutionDate": "2015-06-30 00:00:00",
+    "executionDate": "2015-06-30 00:00:00",
+    "accountBeneficiaryId": "XXXXXXX",
+    "sourceWalletId": "XXXXXXX",
+    "amount": {
+        "value": "100000.00",
+        "currency": "USD"
+    },
+    "feePaymentOption": "OUR",
+    "priorityPaymentOption": "speed",
+    "communication": "XXXXXXX"
 }
 ```
 
@@ -301,6 +304,8 @@ When a `trade` is specified as part of a JSON body, it is encoded as an object w
 | side | String | The side of the quote. 'B' for buy, and 'S' for sell. |
 | settlementAmount | [Amount Object](#amount_object)  | The [Amount Object](#amount_object) representing the amount to settle. |
 | deliveredAmount | [Amount Object](#amount_object)  | The [Amount Object](#amount_object) representing the amount to be delivered. |
+| settlementWalletId | String | The ID of the source account. `xxx` |
+| deliveryWalletId | String | The ID of the destination account. `xxx` |
 | currencyPair | String | The currency pair representing the quote.  |
 | rate | [Rate Object](#rate_object) | The [Rate Object](#rate_object) describing the rate of the quote. |
 | createdDate | String | The creation date of the quote. |
@@ -310,7 +315,6 @@ When a `trade` is specified as part of a JSON body, it is encoded as an object w
 
 ```js
 "trade": {
-"quote": {
     "id": "NTUzMzA",
     "side": "B",
     "settlementAmount": {
@@ -321,6 +325,8 @@ When a `trade` is specified as part of a JSON body, it is encoded as an object w
         "value": 10000,
         "currency": "USD"
     },
+    "settlementWalletId": "XXXXX",
+    "deliveryWalletId": "XXXXX",
     "currencyPair": "EURUSD",
     "rate": {
         "currencyPair": "EURUSD",
@@ -331,7 +337,6 @@ When a `trade` is specified as part of a JSON body, it is encoded as an object w
     },
     "createdDate": "2015-06-29 11:46:36",
     "deliveryDate": "2015-06-30 00:00:00"
-}
 }
 ```
 
@@ -410,11 +415,10 @@ When a `quote` is specified as part of a JSON body, it is encoded as an object w
 |-------|------|-------------|
 | id | String | The ID of the quote. |
 | side | String | The side of the quote. 'B' for buy, and 'S' for sell. |
-| settlementAmount | [Amount Object](#amount_object)  | The [Amount Object](#amount_object) representing the amount to settle. |
-| deliveredAmount | [Amount Object](#amount_object)  | The [Amount Object](#amount_object) representing the amount to be delivered. |
 | currencyPair | String | The currency pair representing the quote.  |
 | rate | [Rate Object](#rate_object) | The [Rate Object](#rate_object) describing the rate of the quote. |
 | createdDate | String | The creation date of the quote. |
+| deliveryDate | String | The delivery date of the quote. `YYYY-MM-DD` |
 
 Example Quote Object:
 
@@ -422,14 +426,6 @@ Example Quote Object:
 "quote": {
     "id": "NTUzMzA",
     "side": "B",
-    "settlementAmount": {
-        "value": 9013.89,
-        "curreny": "EUR"
-    },
-    "deliveredAmount": {
-        "value": 10000,
-        "currency": "USD"
-    },
     "currencyPair": "EURUSD",
     "rate": {
         "currencyPair": "EURUSD",
@@ -438,7 +434,8 @@ Example Quote Object:
         "coreBid": 1.1174,
         "date": "2015-06-29 11:46:36"
     },
-    "createdDate": "2015-06-29 11:46:36"
+    "createdDate": "2015-06-29 11:46:36",
+    "deliveryDate": "2015-06-30 00:00:00"
 }
 ```
 
