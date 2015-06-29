@@ -9,14 +9,15 @@ We recommend FX4BIZ-REST for financial institutions just getting started with FX
 #### 1. Create your account with FX4BIZ ####
 
 Please contact our institutional team in order to open an API account.
-* Maxime Champoux @ mch@fx4biz.com
+* Maxime Champoux @ mch@fxforbiz.com
 
 *Caution: We need to get all your required legal docs in order to create your new account.*
 
 #### 2. Get your test environment ####
 
 Please contact our IT Team in order to have access to our Test environnement.
-* Laurent Maluski @ lma@fx4biz.com
+* Laurent Maluski @ lma@fxforbiz.com
+* Adrien Gras @ agr@fxforbiz.com
 
 #### 3. Go live ! ####
 
@@ -49,7 +50,7 @@ Our API is divided into sections based on different concepts in our system. Each
 
 #### [Wallet Accounts](./services/walletService.md) ####
 
-* [Retrieve wallet list `GET /wallets`](./services/walletService.md#cget_wallets)
+* [Retrieve wallet list `GET /wallets/`](./services/walletService.md#cget_wallets)
 * [Retrieve wallet details `GET /wallets/{id}`](./services/walletService.md#get_wallets)
 * [Retrieve wallet balance for a given date `GET /wallets/{id}/balance/{date}`](./services/walletService.md#get_wallets_balance)
 * [Submit new wallet `POST /wallets/`](./services/walletService.md#post_wallets)
@@ -57,29 +58,29 @@ Our API is divided into sections based on different concepts in our system. Each
 
 #### [Payments](./services/paymentService.md) ####
 
-* [Submit a Payment `POST /payment`](./services/paymentService.md#post_payments)
-* [Confirm Payment `PUT /payment/{id}/confirm`](./services/paymentService.md#put_payments_confirm)
-* [Retrieve Payments History `GET /payments`](./services/paymentService.md#cget_payments)
-* [Retrieve Payment Details `GET /payment/{id}`](./services/paymentService.md#get_payments)
-* [Cancel Payment `DELETE /payment/{id}`](./services/paymentService.md#delete_payments)
+* [Submit a Payment `POST /payments/`](./services/paymentService.md#post_payments)
+* [Confirm Payment `PUT /payments/{id}/confirm`](./services/paymentService.md#put_payments_confirm)
+* [Retrieve Payments History `GET /payments/`](./services/paymentService.md#cget_payments)
+* [Retrieve Payment Details `GET /payments/{id}`](./services/paymentService.md#get_payments)
+* [Cancel Payment `DELETE /payments/{id}`](./services/paymentService.md#delete_payments)
 
 #### [Financial Movements](./services/financialmovementService.md) ####
 
-* [Retrieve Financial Movements History - `GET /financialmovements`](./services/financialmovementService.md#cget_financialmovements)
+* [Retrieve Financial Movements History - `GET /financialmovements/`](./services/financialmovementService.md#cget_financialmovements)
 * [Retrieve Financial Movements Details - `GET /financialmovements/{id}`](./services/financialmovementService.md#get_financialmovements)
 
 #### [Trades](./services/tradeService.md) ####
 
-* [Retrieve Rates `GET /rates`](./services/tradeService.md#get_rates)
-* [Request Quote `POST /quotes`](./services/tradeService.md#post_quotes)
-* [Submit Trade `POST /trades`](./services/tradeService.md#post_trades)
+* [Retrieve Rates `GET /rates/{instruments}`](./services/tradeService.md#get_rates)
+* [Request Quote `POST /quotes/`](./services/tradeService.md#post_quotes)
+* [Submit Trade `POST /trades/`](./services/tradeService.md#post_trades)
 * [Submit Trade with an existing quote `POST /trades/onquote/{id}`](./services/tradeService.md#post_trades_on_quote)
 * [Retrieve Trades Book `GET /trades/`](./services/tradeService.md#cget_trades)
 * [Retrieve Trade Details `GET /trades/{id}`](./services/tradeService.md#get_trades)
 
 #### [Logs](./services/logService.md) ####
 
-* [Retrieve Logs `GET /logs`](./services/logService.md#get_logs) 
+* [Retrieve Logs `GET /logs/`](./services/logService.md#get_logs) 
 * [Retrieve a log entry with a nonce `GET /logs/{nonce}`](./services/logService.md#get_log) 
 
 ## [API Objects](./objects/objects.md) ##

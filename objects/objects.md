@@ -480,4 +480,3 @@ Example Log Object:
 	"login": "p00005m",
 }
 ```
-

@@ -12,9 +12,9 @@ When you confirm a payment for processing, make sure you have sufficient funds i
 
 | Route | Description |
 |-------|-------------|
-| [`POST /payments`](#post_payments)| Submit a Payment |
+| [`POST /payments/`](#post_payments)| Submit a Payment |
 | [`PUT /payments/{id}/confirm`](#put_payments_confirm) | Confirm Payment |
-| [`GET /payments`](#cget_payments) | Retrieve Payments History |
+| [`GET /payments/`](#cget_payments) | Retrieve Payments History |
 | [`GET /payments/{id}`](#get_payments) | Retrieve Payment Details | 
 | [`DELETE /payments/{id}`](#delete_payments) | Cancel Payment |
 

@@ -111,3 +111,4 @@ Here is the JSON corresponding the description above :
 ## <a id="versioning"></a> Versioning ##
 
 When we make backwards-incompatible changes to the API, we realease new dated versions.
+

@@ -146,9 +146,9 @@ Retrieve the list of trades executed. We sort trades by validation date.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| fromDate | String | Optionnal | A date representing the starting date to search payments. |
-| toDate | String | Optionnal | A date representing the ending date to search payments. | 
-| sort | String | Optionnal | A String representing the order of rendering objects. | 
+| fromDate | String | Optionnal | A date representing the starting date to search payments. `YYYY-MM-DD` |
+| toDate | String | Optionnal | A date representing the ending date to search payments. `YYYY-MM-DD` | 
+| sort | String | Optionnal | A String representing the order of rendering objects. `YYYY-MM-DD` | 
 
 **Returns:**
 

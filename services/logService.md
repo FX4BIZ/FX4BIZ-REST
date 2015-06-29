@@ -15,7 +15,7 @@ This time passed, your log entry will be lost.
 
 | Route | Description |
 |-------|-------------|
-| [`GET /logs`](#get_logs) | Retrieve Logs |
+| [`GET /logs/`](#get_logs) | Retrieve Logs |
 | [`GET /logs/{nonce}`](#get_log) | Retrieve a log entry with a nonce |
 
 ## Details ##
@@ -23,7 +23,7 @@ This time passed, your log entry will be lost.
 #### <a id="get_logs"></a> Retrieve Logs ####
 ```
 Method: 	GET
-URL: 		/logs
+URL: 		/logs/
 ```
 The FX4BIZ-REST API provides a log feed about request you made, allowing you to know exactly what your request do on the platform.  
 This request uses the login sent in your header to get logs about this user's actions.
@@ -40,7 +40,7 @@ This request is appliable for the [pagination format](../conventions/formatingCo
 
 **Example:**
 ```
-/logs?per_page=10&page=1
+/logs/?per_page=10&page=1
 ```
 
 <hr />
