@@ -57,11 +57,11 @@ Our API is divided into sections based on different concepts in our system. Each
 
 #### [Payments](./services/paymentService.md) ####
 
-| [Submit a Payment `POST /payment`](./services/paymentService.md#post_payments)
-| [Confirm Payment `PUT /payment/{id}/confirm`](./services/paymentService.md#put_payments_confirm)
-| [Retrieve Payments History `GET /payments`](./services/paymentService.md#cget_payments)
-| [Retrieve Payment Details `GET /payment/{id}`](./services/paymentService.md#get_payments)
-| [Cancel Payment `DELETE /payment/{id}`](./services/paymentService.md#delete_payments)
+* [Submit a Payment `POST /payment`](./services/paymentService.md#post_payments)
+* [Confirm Payment `PUT /payment/{id}/confirm`](./services/paymentService.md#put_payments_confirm)
+* [Retrieve Payments History `GET /payments`](./services/paymentService.md#cget_payments)
+* [Retrieve Payment Details `GET /payment/{id}`](./services/paymentService.md#get_payments)
+* [Cancel Payment `DELETE /payment/{id}`](./services/paymentService.md#delete_payments)
 
 #### [Financial Movements](./services/financialmovementService.md) ####
 
