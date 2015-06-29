@@ -152,3 +152,4 @@ Delete an external bank account.
 ```
 /externalBankAccounts/2041
 ```
+
