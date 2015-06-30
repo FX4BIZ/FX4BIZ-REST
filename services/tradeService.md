@@ -120,7 +120,7 @@ This services permits to execute trade.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| id | String | Required | The ID of the quote you get from [Retrieve quote](#post_quote). |
+| quoteId | String | Required | The ID of the quote you get from [Retrieve quote](#post_quote). |
 | settlementWalletId | String | Required | The ID of the source account. `xxx` |
 | deliveryWalletId | String | Required | The ID of the destination account. `xxx` |
 
