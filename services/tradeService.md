@@ -112,7 +112,7 @@ This services permits to execute trade.
 
 ```
 Method: POST
-URL: /trades/onquote/{id}
+URL: /trades/onquote/
 ```
 This services permits to execute trade.
 
@@ -121,6 +121,8 @@ This services permits to execute trade.
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
 | id | String | Required | The ID of the quote you get from [Retrieve quote](#post_quote). |
+| settlementWalletId | String | Required | The ID of the source account. `xxx` |
+| deliveryWalletId | String | Required | The ID of the destination account. `xxx` |
 
 **Returns:**
 
@@ -130,7 +132,7 @@ This services permits to execute trade.
 
 **Example:**
 ```
-/trades/onquote/{id}
+/trades/onquote/
 ```
 <hr />
 
