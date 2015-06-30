@@ -13,7 +13,7 @@ The FX4BIZ-rest API supports online trading for the following contracts: TOD (Sa
 | [`GET /rates`](#get_rates) | Retrieve Rates |
 | [`POST /quotes`](#post_quotes) | Request Quote |
 | [`POST /trades`](#post_trades) | Submit Trade |
-| [`POST /trades/onquote/{id}`](#post_trades_on_quote) | Submit Trade with an existing quote |
+| [`POST /trades/onquote/`](#post_trades_on_quote) | Submit Trade with an existing quote |
 | [`GET /trades/`](#cget_trades) | Retrieve Trades Book |
 | [`GET /trades/{id}`](#get_trades) | Retrieve Trade Details |
 

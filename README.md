@@ -74,7 +74,7 @@ Our API is divided into sections based on different concepts in our system. Each
 * [Retrieve Rates `GET /rates/{instruments}`](./services/tradeService.md#get_rates)
 * [Request Quote `POST /quotes/`](./services/tradeService.md#post_quotes)
 * [Submit Trade `POST /trades/`](./services/tradeService.md#post_trades)
-* [Submit Trade with an existing quote `POST /trades/onquote/{id}`](./services/tradeService.md#post_trades_on_quote)
+* [Submit Trade with an existing quote `POST /trades/onquote/`](./services/tradeService.md#post_trades_on_quote)
 * [Retrieve Trades Book `GET /trades/`](./services/tradeService.md#cget_trades)
 * [Retrieve Trade Details `GET /trades/{id}`](./services/tradeService.md#get_trades)
 
