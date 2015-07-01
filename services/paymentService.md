@@ -6,7 +6,8 @@ Sending funds from your FX4BIZ wallet account to your own bank account or a thir
 When you submit a payment to be scheduled, you assign a unique id to that payment. <br />**Caution:** The payment created will be automatically rolled to the next closest working days if not confirmed in the scheduled date of operation.
 
 2. Confirm the payment to the API for processing, using the [Confirm Payment method](#put_payments_confirm). 
-When you confirm a payment for processing, make sure you have sufficient funds in your wallet account balance. The funds transfer will be automatically locked-in if the wallet account balance is not sufficient. Make sure you always have enough funds on your wallet. <br />**Caution:** If the balance of your wallet account is not sufficient to cover the payment amount, funds may be locked-in by FX4BIZ.
+When you confirm a payment for processing, make sure you have sufficient funds in your wallet account balance. 
+<br />**Caution:** If the balance of your wallet account is not sufficient to cover the payment amount, funds may be locked-in by FX4BIZ.
 
 ## Routes ##
 
@@ -34,13 +35,13 @@ You can use this request in order to schedule a new payment.
 |-------|------|----------|-------------|
 | beneficiaryAccountId | String | Required | The ID of the beneficiary account. |
 | amount | [Amount Object](../objects/objects.md#amount_object) | Required | Amount to be sent. *Caution.* The currency of the amount sent must be equal to the currency of the beneficiary account. |
-| executionDate | String | Required | Initial execution date of you payment. `YYYY-MM-DD` |
-| feeCurrency  | String | Required | A string representing the fee currency. |
-| feePaymentOption | String | Required | A string representing the fee payment option for this payment. |
-| tag | String | Required | The wording concerning the payment. |
+| desiredExecutionDate | String | Required | Initial execution date of you payment. `YYYY-MM-DD` |
+| feeCurrency  | String | Required | A string representing the currency related to the charges applied on your payment. |
+| feePaymentOption | String | Required | A string representing the charges option to be applied to this payment. |
+| tag | String | Required | A custom reference that you want to be related to this payment in the system. This tag is not communicated to the beneficiary. |
 | priorityPaymentOption | String | Required | A string representing wether this payment as a normal priority, or it as to be done quick. `normal | speed` |
 | sourceWalletId | String | Required | Specify on which wallet the payment will be processed. |
-| communication | String | Optionnal | A string representing the communication for the beneficiary. (76 chars max.) |
+| communication | String | Optionnal | A Free format string representing the communication for the beneficiary. (76 chars max.) |
 
 **Returns:**
 
