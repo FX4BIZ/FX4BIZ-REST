@@ -42,7 +42,7 @@ This request is appliable for the [pagination format](../conventions/formatingCo
 
 **Example:**
 ```js
-GET /financialmovements/?number=XXXXXXXXXXX&fromDate=2010-01-01&toDate?2015-04-30&per_page=10&page=1
+GET /financialmovements/?number=165168513581&fromDate=2010-01-01&toDate?2015-04-30&per_page=10&page=1
 ```
 
 <hr />
@@ -69,5 +69,5 @@ Request information on a particular financial movement that has been credited or
 
 **Example:**
 ```js
-GET /financialmovements/1552
+GET /financialmovements/TD4eIf
 ```

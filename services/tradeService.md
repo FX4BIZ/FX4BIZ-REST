@@ -215,5 +215,5 @@ Retrieve the trade details.
 
 **Example:**
 ```js
-GET /trades/89456
+GET /trades/TD4ebA
 ```

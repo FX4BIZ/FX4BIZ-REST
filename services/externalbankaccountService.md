@@ -149,7 +149,7 @@ This request allows you to see the details related to an account. In order to co
 
 **Example:**
 ```js
-GET /externalBankAccounts/2041
+GET /externalBankAccounts/NT4aB1
 ```
 
 <hr />
@@ -178,6 +178,6 @@ Delete an external bank account.
 
 **Example:**
 ```js
-DELETE /externalBankAccounts/2041
+DELETE /externalBankAccounts/ND4EbA
 ```
 

@@ -92,7 +92,7 @@ If the payment is not confirmed before the end of scheduled date of operation, i
 
 **Example:**
 ```js
-PUT /payments/89456/confirm
+PUT /payments/TDK4eB/confirm
 ```
 <hr />
 
@@ -147,7 +147,7 @@ Retrieve the details of a specific payment.
 
 **Example:**
 ```js
-GET /payments/89456
+GET /payments/AB4bsE
 ```
 <hr />
 
@@ -173,5 +173,5 @@ URL: /payment/{id}
 
 **Example:**
 ```js
-DELETE /payments/89456
+DELETE /payments/TE4Ba3
 ```
