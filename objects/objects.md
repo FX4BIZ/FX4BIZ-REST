@@ -334,8 +334,8 @@ When a financial movement is specified as part of a JSON body, it is encoded as 
 | Field | Type | Description |
 |-------|------|-------------|
 | id | [ID](../conventions/formatingConventions.md#type_id) | The [ID](../conventions/formatingConventions.md#type_id) of the financial movement. |
-| bookingDate | [DateTime](../conventions/formatingConventions.md#type_datetime) | The booking [DateTime](../conventions/formatingConventions.md#type_datetime) of the financial movement. |
-| valueDate | [DateTime](../conventions/formatingConventions.md#type_datetime) | The value [DateTime](../conventions/formatingConventions.md#type_datetime) of the financial movement. |
+| bookingDate | [Date](../conventions/formatingConventions.md#type_date) | The booking [Date](../conventions/formatingConventions.md#type_date) of the financial movement. |
+| valueDate | [Date](../conventions/formatingConventions.md#type_date) | The value [Date](../conventions/formatingConventions.md#type_date) of the financial movement. |
 | orderingAccountNumber | String(40) | The number refering the ordering account. |
 | beneficiaryAccountNumber | String(40) | The number refering the beneficiary account. |
 | orderingCustomer | String | A free formatted String representing the ordering customer with it's name and it's address. |
@@ -348,8 +348,8 @@ When a financial movement is specified as part of a JSON body, it is encoded as 
 ```js
 "financialMovement": {
         "id": "XXXXXXX",
-        "bookingDate": "2015-04-30 00:00:00",
-        "valueDate": "2015-04-30 00:00:00",
+        "bookingDate": "2015-04-30",
+        "valueDate": "2015-04-30",
         "orderingAccountNumber": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
         "beneficiaryAccountNumber": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
         "orderingCustomer": "Diamants Plus Avenue de l'opéra Paris FR",
@@ -405,7 +405,7 @@ When a `quote` is specified as part of a JSON body, it is encoded as an object w
 | currencyPair | [CurrencyPair](../conventions/formatingConventions.md#type_currencypair) | The [CurrencyPair](../conventions/formatingConventions.md#type_currencypair) representing the quote.  |
 | rate | [Rate Object](#rate_object) | The [Rate Object](#rate_object) describing the rate of the quote. |
 | createdDate | [DateTime](../conventions/formatingConventions.md#type_datetime) | The creation [DateTime](../conventions/formatingConventions.md#type_datetime) of the quote. |
-| deliveryDate | [DateTime](../conventions/formatingConventions.md#type_datetime) | The delivery [DateTime](../conventions/formatingConventions.md#type_datetime) of the quote. |
+| deliveryDate | [Date](../conventions/formatingConventions.md#type_date) | The delivery [Date](../conventions/formatingConventions.md#type_date) of the quote. |
 
 **Example:**
 
@@ -414,15 +414,9 @@ When a `quote` is specified as part of a JSON body, it is encoded as an object w
     "id": "NTUzMzA",
     "side": "B",
     "currencyPair": "EURUSD",
-    "rate": {
-        "currencyPair": "EURUSD",
-        "midMarket": 1.1094,
-        "coreAsk": 1.1094,
-        "coreBid": 1.1174,
-        "date": "2015-06-29 11:46:36"
-    },
+    "rate": {fate},
     "createdDate": "2015-06-29 11:46:36",
-    "deliveryDate": "2015-06-30 00:00:00"
+    "deliveryDate": "2015-06-30"
 }
 ```
 
@@ -483,9 +477,7 @@ As some of our process just need to send you back the confirmation that this pro
 **Example:**
 
 ```js
-"correspondant_bank":{
-    "bic": "AGRIFRPP",
-    "name": "CREDIT AGRICOLE SA",
-    "address": {address}
+"process":{
+    "result": true,
 }
 ```
