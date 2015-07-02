@@ -342,6 +342,11 @@ When a financial movement is specified as part of a JSON body, it is encoded as 
 | orderingInstitution | String | A free formatted String representing the ordering institution with it's name and it's address. |
 | beneficiaryCustomer | String | A free formatted String representing the beneficiary customer with it's name and it's address. |
 | amount | [Amount Object](#amount_object)  | The [Amount Object](#amount_object) of the financial movement. |
+| orderingAmount | Float | The amount ordered for this financial movement. |
+| beneficiaryAmount | Float | The amount delivered by this financial movement to the beneficiary. |
+| RemittanceInformation  | Communication of the financial movement. |
+| chargesDetails  | String | The change details of the financial movement, |
+| exchangeRate | Float | The exchange rate applied to the financial movement. |
 
 **Example:**
 
@@ -355,10 +360,12 @@ When a financial movement is specified as part of a JSON body, it is encoded as 
         "orderingCustomer": "Diamants Plus Avenue de l'opéra Paris FR",
         "orderingInstitution": "BNP-PARIBAS SA (FORMERLY BANQUE NATIONALE DE PARIS S.A.) 16 BOULEVARD DES ITALIENS   75450 PARIS CEDEX 09 FR",
         "BeneficiaryCustomer": "Diamants Plus Avenue de l'opéra Paris FR",
-        "amount": {
-            "value": "4573.00",
-            "currency": "EUR"
-        }
+        "amount": {amount},
+        "orderingAmount": {amount},
+        "beneficiaryAmount": {amount},
+        "RemittanceInformation": "Billing #1385438",
+        "chargesDetails": "-4200 USD BEN",
+        "exchangeRate": 1.2400
 }
 ```
 
