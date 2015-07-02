@@ -1,105 +1,21 @@
 # WALLET ACCOUNT SERVICE #
 
-In the FX4BIZ API, what we call a `wallet` account, is a payment account in FX4BIZ, allowing you to send and receive funds.
+In the FX4BIZ API, what we call a "wallet" account can be either a physical iban account, or a virtual iban account with FX4BIZ. 
+
+A virtual account is an administrative "subaccount" of one physical iban account (the "masteraccount"). Cash can be earmarked as belonging to a virtual account so that you can easily allocate funds per business unit, per client, or incoming/outgoing transactions).
 
 ## Route ##
 
 | Route | Description |
 |-------|-------------|
-| [`GET /wallets/`](#cget_wallets) | Retrieve wallet list |
-| [`GET /wallets/{id}`](#get_wallets) | Retrieve wallet details |
-| [`GET /wallets/{id}/balance/{date}`](#get_wallets_balance) | Retrieve wallet balance for a given date |
 | [`POST /wallets/`](#post_wallets) | Submit new wallet |
 | [`POST /wallets/withholder`](#post_wallets_with_holder) | Submit new wallet with an holder |
+| [`GET /wallets/`](#cget_wallets) | Retrieve wallets list |
+| [`GET /wallets/{id}`](#get_wallets) | Retrieve wallet details |
+| [`GET /wallets/{id}/balance/{date}`](#get_wallets_balance) | Retrieve wallet balance for a given date |
 
 ## Details ##
 
-#### <a id="cget_wallets"></a> Retrieve wallet list ####
-
-```
-Method: GET 
-URL: /wallets/
-```
-With the FX4BIZ API, you can list all the wallet accounts that you hold. 
-
-**Parameters:**
-
-This request is applicable for the [pagination format](../conventions/formatingConventions.md#pagination).
-
-**Returns:**
-
-| Field | Type | Description |
-|-------|------|-------------|
-| wallets | Array[Object] | An Array of objects representing wallets. |
-| Object.id | String | The ID of the wallet. |
-| Object.tag | String | The wording of the wallet. |
-| Object.currency | String | The currency of the wallet. |
-| Object.bookingAmount | [Amount Object](../objects/objects.md#amount_object) | The booking amount (`e.g. the total money in the wallet, minus the immobilizations`) in the wallet. |
-| Object.valueAmount | [Amount Object](../objects/objects.md#amount_object) | The total amount avalable in the wallet. |
-| Object.dateLastFinancialMovement | String | The date of the last financial move with this wallet. |
-
-**Example:**
-```
-/wallets/
-```
-
-<hr />
-
-#### <a id="get_wallets"></a> Retrieve wallet details ####
-
-```
-Method: GET 
-URL: /wallets/{id}
-```
-This request allows you to see the details related to an wallets, to confirm display the beneficiary information in your application for example.  
-
-**Parameters:**
-
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| id | String | Required | The ID of the external bank account you want. |
-
-**Returns:**
-
-| Field | Type | Description |
-|-------|------|-------------|
-| wallet | [Wallet Object](../objects/objects.md#wallet_object) | An object representing the wallet requested. |
-
-**Example:**
-```
-/wallets/2041
-```
-
-<hr />
-
-#### <a id="get_wallets_balance"></a> Retrieve wallet balance for a given date ####
-
-```
-Method: GET 
-URL: /wallets/{id}/balance/{date}
-```
-This request allows you to see the details of a wallet balance at a given date. 
-
-**Parameters:**  
-
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| id | String | Required | The ID of the external bank account you want. |
-| date | String | Required | The date to search the balance of the wallet. <br />This date should be in the format `YYYY-MM-DD` |
-
-**Returns:**
-
-| Field | Type | Description |
-|-------|------|-------------|
-| id | String | The ID of the wallet. |
-| balance | [Balance Object](../objects/objects.md#balance_object) | An object representing the balance of the account. |
-
-**Example:**
-```
-/wallets/2041/balance/2015-04-30
-```
-
-<hr />
 
 #### <a id="post_wallets"></a> Submit a new wallet ####
 
@@ -115,7 +31,7 @@ This request allows you to submit a new wallet for a given currency.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| currency | String | Required | Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the wallet currency. `USD` |
+| currency | [Currency](../conventions/formatingConventions.md#type_currency) | Required | A [Currency](../conventions/formatingConventions.md#type_currency) specifying the wallet currency. `USD` |
 
 **Returns:**
 
@@ -124,8 +40,11 @@ This request allows you to submit a new wallet for a given currency.
 | wallet | [Wallet Object](../objects/objects.md#wallet_object) | An object representing the wallet you just created. |
 
 **Example:**
-```
-/wallets/
+```js
+POST /wallets/
+{
+	"currency":"EUR"
+}
 ```
 
 <hr />
@@ -144,7 +63,7 @@ This request allows you to submit a new wallet for a given currency and a given 
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| currency | String | Required | Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the wallet currency. `USD` |
+| currency | [Currency](../conventions/formatingConventions.md#type_currency) | Required | A [Currency](../conventions/formatingConventions.md#type_currency) specifying the wallet currency. `USD` |
 | holder | [Holder Object](../objects/objects.md#beneficiary_object) | Required | The recipient details, owner of the wallet. |
 
 **Returns:**
@@ -154,8 +73,113 @@ This request allows you to submit a new wallet for a given currency and a given 
 | wallet | [Wallet Object](../objects/objects.md#wallet_object) | An object representing the wallet you just created. |
 
 **Example:**
+```js
+POST /wallets/withholder/
+{
+    "currency": "AUD",
+    "holder": {
+        "name": "Australian client #5763",
+        "type": "Individual",
+        "address": {
+            "street": "12 1st Street",
+            "postCode": "12500",
+            "city": "Sidney",
+            "country": "AU"
+        }
+    }
+}
 ```
-/wallets/withholder/
+
+<hr />
+
+#### <a id="cget_wallets"></a> Retrieve wallets list ####
+
+```
+Method: GET 
+URL: /wallets/
+```
+With the Retrieve wallet list service, you can list obtain the list of all wallet account hold with FX4BIZ. The object return in the Array is a simplified version of the [Wallet Object](../objects/objects.md#wallet_object) providing you the main information on the wallet without any additional request. 
+
+**Parameters:**
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| sort | String | Optionnal | A String representing the order of rendering wallets by their creation date. `ASC | DESC` | 
+
+
+This request is applicable for the [pagination format](../conventions/formatingConventions.md#pagination).
+
+**Returns:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| wallets | Array[Object] | An Array of objects representing wallets. |
+| Object.id | [ID](../conventions/formatingConventions.md#type_id) | The ID of the wallet. |
+| Object.tag | String | The custom wording of the wallet. |
+| Object.currency | [Currency](../conventions/formatingConventions.md#type_currency) | The currency of the wallet. |
+| Object.bookingAmount | [Amount Object](../objects/objects.md#amount_object) | Total amount booked on the account. |
+| Object.valueAmount | [Amount Object](../objects/objects.md#amount_object) | The total amount available in the wallet. |
+| Object.dateLastFinancialMovement | [Date](../conventions/formatingConventions.md#type_date) | The [Date](../conventions/formatingConventions.md#type_date) of the last financial move in this wallet. |
+
+**Example:**
+```js
+GET /wallets/?per_page=20&page=2&sort=DESC
+```
+
+<hr />
+
+#### <a id="get_wallets"></a> Retrieve wallet details ####
+
+```
+Method: GET 
+URL: /wallets/{id}
+```
+This request allows you to see the details related to a specific wallet. 
+
+**Parameters:**
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| id | [ID](../conventions/formatingConventions.md#type_id) | Required | The [ID](../conventions/formatingConventions.md#type_id) of the external bank account you want. |
+
+**Returns:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| wallet | [Wallet Object](../objects/objects.md#wallet_object) | An object representing the wallet requested. |
+
+**Example:**
+```JS
+GET /wallets/2041
+```
+
+<hr />
+
+#### <a id="get_wallets_balance"></a> Retrieve wallet balance for a given date ####
+
+```
+Method: GET 
+URL: /wallets/{id}/balance/{date}
+```
+This request allows you to see the details of a wallet balance at a given date. 
+
+**Parameters:**  
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| id | [ID](../conventions/formatingConventions.md#type_id) | Required | The [ID](../conventions/formatingConventions.md#type_id) of the external bank account you want. |
+| date | [Date](../conventions/formatingConventions.md#type_date) | Required | The [Date](../conventions/formatingConventions.md#type_date) to search the balance of the wallet. <br />This date should be in the format `YYYY-MM-DD` |
+
+**Returns:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| id | [ID](../conventions/formatingConventions.md#type_id) | The [ID](../conventions/formatingConventions.md#type_id) of the wallet. |
+| balance | [Balance Object](../objects/objects.md#balance_object) | An object representing the balance of the account. |
+
+**Example:**
+```js
+GET /wallets/2041/balance/2015-04-30
 ```
 
 <hr />

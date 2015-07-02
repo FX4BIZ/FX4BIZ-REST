@@ -54,7 +54,7 @@ Of course, it is possible to reference third party `wallet` accounts and execute
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
 | number | String | Required | The recipient account number or Iban. `xxx4548` |
-| currency | String | Required | Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the account currency. `EUR` |
+| currency | [Currency](../conventions/formatingConventions.md#type_currency) | Required | A [Currency](../conventions/formatingConventions.md#type_currency) specifying the account currency. `EUR` |
 | holderBank | [Holder Bank Object](../objects/objects.md#beneficiary_bank_object) | Required | The recipient bank details, holding the account. |
 | holder | [Holder Object](../objects/objects.md#beneficiary_object) | Required | The recipient details, owner of the account. |
 | tag | String | Optionnal | Custom Data. `John Doe bank account EUR` |
@@ -67,8 +67,36 @@ Of course, it is possible to reference third party `wallet` accounts and execute
 | account | [External Bank Account Object](../objects/objects.md#account_object) | An object representing the external bank account you just created |
 
 **Example:**
-```
-/externalBankAccounts/
+```js
+POST /externalBankAccounts/
+{
+    "currency": "EUR",
+    "tag": "My EUR account",
+    "number": "5495115813572165205435",
+    "correspondentBankBic": "AGRIFRPP",
+    "holderBank": {
+        "bic": "CHASUS33",
+        "clearingCodeType": "FW",
+        "clearingCode": "021000021",
+        "name": "JPMORGAN CHASE BANK, N.A.",
+        "address": {
+            "street": "4 NEW YORK PLAZA FLOOR 15",
+            "postCode": "100004",
+            "city": "New York",
+            "country": "US"
+        }
+    },
+    "holder": {
+        "name": "Client 453",
+        "type": "Corporate",
+        "address": {
+            "street": "5  1st street",
+            "postCode": "10004",
+            "city": "New York",
+            "country": "US"
+        }
+    }
+}
 ```
 
 <hr />
@@ -93,8 +121,8 @@ This request is appliable for the [pagination format](../conventions/formatingCo
 | accounts | Array[[External Bank Account Object](../objects/objects.md#account_object)] | An array containing [External Bank Account Object](../objects/objects.md#account_object) describing requested external bank accounts. |
 
 **Example:**
-```
-/externalBankAccounts/
+```js
+GET /externalBankAccounts/
 ```
 
 <hr />
@@ -111,7 +139,7 @@ This request allows you to see the details related to an account. In order to co
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| id | String | Required | The ID of the external bank account you want. <br :>As ID's are listed with the [External Bank Account Objects](../objects/objects.md#account_object), You can retrive this by listing all external bank accounts for the current user. |
+| id | [ID](../conventions/formatingConventions.md#type_id)  | Required | The [ID](../conventions/formatingConventions.md#type_id) of the external bank account you want. <br :>As ID's are listed with the [External Bank Account Objects](../objects/objects.md#account_object), You can retrive this by listing all external bank accounts for the current user. |
 
 **Returns:**
 
@@ -120,8 +148,8 @@ This request allows you to see the details related to an account. In order to co
 | account | [External Bank Account Object](../objects/objects.md#account_object) | An [External Bank Account Object](../objects/objects.md#account_object) containing details about external bank account requested. |
 
 **Example:**
-```
-/externalBankAccounts/2041
+```js
+GET /externalBankAccounts/2041
 ```
 
 <hr />
@@ -138,7 +166,7 @@ Delete an external bank account.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| id | String | Required | The ID of the external bank account you want to delete. |
+| id | [ID](../conventions/formatingConventions.md#type_id) | Required | The [ID](../conventions/formatingConventions.md#type_id) of the external bank account you want to delete. |
 
 **Returns:**
 
@@ -149,7 +177,7 @@ Delete an external bank account.
 
 
 **Example:**
-```
-/externalBankAccounts/2041
+```js
+DELETE /externalBankAccounts/2041
 ```
 

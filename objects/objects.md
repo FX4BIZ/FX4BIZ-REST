@@ -25,9 +25,9 @@ When an account is specified as part of a JSON body, it is encoded as an object 
 
 | Field | Type | Description |
 |-------|------|-------------|
-| id |  String | The id of the account. `xxx` |
-| createdDate | String | The creation date of the object: `YYYY-MM-DD HH:MM:SS` |
-| createdBy |  String | The creation date of the object: `api` |
+| id |  [ID](../conventions/formatingConventions.md#type_id) | The [ID](../conventions/formatingConventions.md#type_id) of the account. `xxx` |
+| createdDate | [DateTime](../conventions/formatingConventions.md#type_datetime) | The creation [DateTime](../conventions/formatingConventions.md#type_datetime) of the object: `YYYY-MM-DD HH:MM:SS` |
+| createdBy |  String | The creation user of the object: `api` |
 | currency | String | Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the account currency. `USD` |
 | tag |  String | Custom data. `reference` |
 | status |  String | Status of the account `active` |
@@ -65,8 +65,8 @@ When a wallet is specified as part of a JSON body, it is encoded as an object wi
 
 | Field | Type | Description |
 |-------|------|-------------|
-| id |  String | The id of the account. `xxx` |
-| createdDate | String | The creation date of the object: `YYYY-MM-DD HH:MM:SS` |
+| id |  [ID](../conventions/formatingConventions.md#type_id) | The [ID](../conventions/formatingConventions.md#type_id) of the account. `xxx` |
+| createdDate | [DateTime](../conventions/formatingConventions.md#type_datetime) | The creation [DateTime](../conventions/formatingConventions.md#type_datetime) of the object: `YYYY-MM-DD HH:MM:SS` |
 | createdBy |  String | The creation date of the object: `api` |
 | currency | String | Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the account currency. `USD` |
 | tag |  String | Custom data. `reference` |
@@ -132,7 +132,7 @@ When an amount of currency is specified as part of a JSON body, it is encoded as
 | Field | Type | Description |
 |-------|------|-------------|
 | value  | Float | The quantity of the currency. `25000000.00` |
-| currency | String | Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) specifying the amount currency. `USD` |
+| currency | [Currency](../conventions/formatingConventions.md#type_currency) | The [Currency](../conventions/formatingConventions.md#type_currency) specifying the amount currency. `USD` |
 
 *Example Amount Object:*
 
@@ -153,7 +153,7 @@ When the balance is specified as part of a JSON body, it is encoded as an object
 
 | Field | Type | Description |
 |-------|------|-------------|
-| closingDate | String | The closing date of the balance details given. `YYYY-MM-DD` |
+| closingDate | [Date](../conventions/formatingConventions.md#type_date) | The closing [Date](../conventions/formatingConventions.md#type_date) of the balance details given. `YYYY-MM-DD` |
 | bookingAmount | [Amount Object](#amount_object) | The closing balance of the account. |
 | valueAmount | [Amount Object](#amount_object) | The closing value of the account. |
 
@@ -255,15 +255,15 @@ When a `payment` is specified as part of a JSON body, it is encoded as an object
 
 | Field | Type | Description |
 |-------|------|-------------|
-| id | String | **Required.** id of the payment. `xxx` |
+| id | [ID](../conventions/formatingConventions.md#type_id) | The [ID](../conventions/formatingConventions.md#type_id) of the payment. `xxx` |
 | status | String | Payment status. `Awaiting Confirmation` |
-| createdDate | String | Creation date of the payment. `YYYY-MM-DD HH:MM:SS` |
-| desiredExecutionDate | String | The initial date of execution when the payment is created. `YYYY-MM-DD` |
-| executionDate | String | The  date of execution of the payment. `YYYY-MM-DD` |
+| createdDate | [DateTime](../conventions/formatingConventions.md#type_datetime) | Creation [DateTime](../conventions/formatingConventions.md#type_datetime) of the payment. `YYYY-MM-DD HH:MM:SS` |
+| desiredExecutionDate | [Date](../conventions/formatingConventions.md#type_date) | The initial [Date](../conventions/formatingConventions.md#type_date) of execution when the payment is created. `YYYY-MM-DD` |
+| executionDate | [Date](../conventions/formatingConventions.md#type_date) | The  [Date](../conventions/formatingConventions.md#type_date) of execution of the payment. `YYYY-MM-DD` |
 | amount | [Amount Object](#amount_object) | **Required.** The nominal amount to be transfered. `10,000.00 GBP` |
 | tag | String | Custom reference on the payment. `Invoice xxx` |
-| beneficiaryAccountId | String | The ID of the beneficiary account. |
-| sourceWalletId | String | Specify on which wallet the payment will be processed. |
+| beneficiaryAccountId | [ID](../conventions/formatingConventions.md#type_id) | The [ID](../conventions/formatingConventions.md#type_id) of the beneficiary account. |
+| sourceWalletId | [ID](../conventions/formatingConventions.md#type_id) | The [ID](../conventions/formatingConventions.md#type_id) of the wallet the payment will be processed. |
 | communication | String | The wording of the payment. |
 | priorityPaymentOption | String | A string representing wether this payment as a normal priority, or it as to be done quick. |
 | feePaymentOption | String | A string representing the fee payment option for this payment. |
@@ -300,16 +300,16 @@ When a `trade` is specified as part of a JSON body, it is encoded as an object w
 
 | Field | Type | Description |
 |-------|------|-------------|
-| id | String | The ID of the quote. |
+| id | [ID](../conventions/formatingConventions.md#type_id) | The [ID](../conventions/formatingConventions.md#type_id) of the quote. |
 | side | String | The side of the quote. 'B' for buy, and 'S' for sell. |
 | settlementAmount | [Amount Object](#amount_object)  | The [Amount Object](#amount_object) representing the amount to settle. |
 | deliveredAmount | [Amount Object](#amount_object)  | The [Amount Object](#amount_object) representing the amount to be delivered. |
-| settlementWalletId | String | The ID of the source account. `xxx` |
-| deliveryWalletId | String | The ID of the destination account. `xxx` |
-| currencyPair | String | The currency pair representing the quote.  |
+| settlementWalletId | [ID](../conventions/formatingConventions.md#type_id) | The [ID](../conventions/formatingConventions.md#type_id) of the source account. `xxx` |
+| deliveryWalletId | [ID](../conventions/formatingConventions.md#type_id) | The [ID](../conventions/formatingConventions.md#type_id) of the destination account. `xxx` |
+| currencyPair | [CurrencyPair](../conventions/formatingConventions.md#type_currencypair) | The currency pair representing the quote.  |
 | rate | [Rate Object](#rate_object) | The [Rate Object](#rate_object) describing the rate of the quote. |
-| createdDate | String | The creation date of the quote. |
-| deliveryDate | String | The delivery date of the trade. `YYYY-MM-DD` |
+| createdDate | [DateTime](../conventions/formatingConventions.md#type_datetime) | The creation [DateTime](../conventions/formatingConventions.md#type_datetime) of the quote. |
+| deliveryDate | [DateTime](../conventions/formatingConventions.md#type_datetime) | The delivery [DateTime](../conventions/formatingConventions.md#type_datetime) of the trade. |
 
 *Example Trade Object:*
 
@@ -350,9 +350,9 @@ When a financial movement is specified as part of a JSON body, it is encoded as 
 
 | Field | Type | Description |
 |-------|------|-------------|
-| id | Integer | The id of the financial movement. |
-| bookingDate | String | The booking date of the financial movement. `YYYY-MM-DD HH:MM:SS` |
-| valueDate | String | The value date of the financial movement. `YYYY-MM-DD HH:MM:SS` |
+| id | [ID](../conventions/formatingConventions.md#type_id) | The [ID](../conventions/formatingConventions.md#type_id) of the financial movement. |
+| bookingDate | [DateTime](../conventions/formatingConventions.md#type_datetime) | The booking [DateTime](../conventions/formatingConventions.md#type_datetime) of the financial movement. |
+| valueDate | [DateTime](../conventions/formatingConventions.md#type_datetime) | The value [DateTime](../conventions/formatingConventions.md#type_datetime) of the financial movement. |
 | orderingAccountNumber | String | The number refering the ordering account. |
 | beneficiaryAccountNumber | String | The number refering the beneficiary account. |
 | orderingCustomer | String | A free formatted String representing the ordering customer with it's name and it's address. |
@@ -389,7 +389,7 @@ As a rate is specified in a JSON body, it's encoded as an object with five field
 
 | Field | Type | Description |
 |-------|------|-------------|
-| currencyPair | String | The cross of currency used for the rates provided |
+| currencyPair | [CurrencyPair](../conventions/formatingConventions.md#type_currencypair) | The [CurrencyPair](../conventions/formatingConventions.md#type_currencypair) used for the rates provided |
 | midMarket | Float | The average rate of the market between the bid and the ask rate. |
 | date | String | The date of the last update on this currency. `YYYY-MM-DD HH:MM:SS` |
 | coreAsk | Float | The interbank BID rate provided by the FX partner of FX4BIZ . |
@@ -415,12 +415,12 @@ When a `quote` is specified as part of a JSON body, it is encoded as an object w
 
 | Field | Type | Description |
 |-------|------|-------------|
-| id | String | The ID of the quote. |
+| id | [ID](../conventions/formatingConventions.md#type_id) | The [ID](../conventions/formatingConventions.md#type_id) of the quote. |
 | side | String | The side of the quote. 'B' for buy, and 'S' for sell. |
-| currencyPair | String | The currency pair representing the quote.  |
+| currencyPair | [CurrencyPair](../conventions/formatingConventions.md#type_currencypair) | The [CurrencyPair](../conventions/formatingConventions.md#type_currencypair) representing the quote.  |
 | rate | [Rate Object](#rate_object) | The [Rate Object](#rate_object) describing the rate of the quote. |
-| createdDate | String | The creation date of the quote. |
-| deliveryDate | String | The delivery date of the quote. `YYYY-MM-DD` |
+| createdDate | [DateTime](../conventions/formatingConventions.md#type_datetime) | The creation [DateTime](../conventions/formatingConventions.md#type_datetime) of the quote. |
+| deliveryDate | [DateTime](../conventions/formatingConventions.md#type_datetime) | The delivery [DateTime](../conventions/formatingConventions.md#type_datetime) of the quote. |
 
 Example Quote Object:
 
@@ -449,8 +449,8 @@ When a `log` is specified as part of a JSON body, it is encoded as an object wit
 
 | Field | Type | Description |
 |-------|------|-------------|
-| CreatedAt | Date | The date when the log entry was created. `YYYY-MM-DD HH:MM:SS` |
-| ClosedAt | Date | The date when the log entry was closed. `YYYY-MM-DD HH:MM:SS` |
+| CreatedAt |  [DateTime](../conventions/formatingConventions.md#type_datetime) | The  [DateTime](../conventions/formatingConventions.md#type_datetime) when the log entry was created. |
+| ClosedAt |  [DateTime](../conventions/formatingConventions.md#type_datetime) | The  [DateTime](../conventions/formatingConventions.md#type_datetime) when the log entry was closed. |
 | TokenNonce | String | The nonce used in the HTTP header to authenticate the request. |
 | RemoteAddress | String | The address of the request's emiter. |
 | RequestMethod | String | The [HTTP method](http://fr.wikipedia.org/wiki/Hypertext_Transfer_Protocol#M.C3.A9thodes) of the request. |

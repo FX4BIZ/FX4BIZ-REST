@@ -33,14 +33,14 @@ You can use this request in order to schedule a new payment.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| beneficiaryAccountId | String | Required | The ID of the beneficiary account. |
+| beneficiaryAccountId | [ID](../conventions/formatingConventions.md#type_id) | Required | The [ID](../conventions/formatingConventions.md#type_id) of the beneficiary account. |
 | amount | [Amount Object](../objects/objects.md#amount_object) | Required | Amount to be sent. *Caution.* The currency of the amount sent must be equal to the currency of the beneficiary account. |
-| desiredExecutionDate | String | Required | Initial execution date of you payment. `YYYY-MM-DD` |
-| feeCurrency  | String | Required | A string representing the currency related to the charges applied on your payment. |
-| feePaymentOption | String | Required | A string representing the charges option to be applied to this payment. |
-| tag | String | Required | A custom reference that you want to be related to this payment in the system. This tag is not communicated to the beneficiary. |
-| priorityPaymentOption | String | Required | A string representing wether this payment as a normal priority, or it as to be done quick. `normal | speed` |
-| sourceWalletId | String | Required | Specify on which wallet the payment will be processed. |
+| desiredExecutionDate | [Date](../conventions/formatingConventions.md#type_date) | Required | Initial execution [Date](../conventions/formatingConventions.md#type_date) of you payment. `YYYY-MM-DD` |
+| feeCurrency  | [Currency](../conventions/formatingConventions.md#type_currency) | Required | A [Currency](../conventions/formatingConventions.md#type_currency) representing the currency related to the charges applied on your payment. |
+| feePaymentOption | String | Required | A string representing the charges option to be applied to this payment. `BEN | OUR | SHARE` |
+| priorityPaymentOption | String | Required | A string representing wether this payment as a normal priority, or it as to be done quick. `normal | urgent` |
+| sourceWalletId | [ID](../conventions/formatingConventions.md#type_id) | Required | Specify the [ID](../conventions/formatingConventions.md#type_id) of the wallet the payment will be processed. |
+| tag | String | Optionnal | A custom reference that you want to be related to this payment in the system. This tag is not communicated to the beneficiary. |
 | communication | String | Optionnal | A Free format string representing the communication for the beneficiary. (76 chars max.) |
 
 **Returns:**
@@ -50,8 +50,22 @@ You can use this request in order to schedule a new payment.
 | payment | [Payment Object](../objects/objects.md#payment_object) | A [Payment Object](../objects/objects.md#payment_object) describing the payment you submitted. |
 
 **Example:**
-```
-/payments/
+```js
+POST /payments/
+{
+    "beneficiaryAccountId": "ND4xBE",
+    "amount": {
+        "value": 100000,
+        "currency": "USD"
+    },
+    "desiredExecutionDate": "2015-09-15",
+    "feeCurrency": "USD",
+    "feePaymentOption": "BEN",
+    "tag": "payment #1535",
+    "priorityPaymentOption": "urgent",
+    "communication": "billing  for order #15135413",
+    "sourceWalletId": "ND5aHB"
+}
 ```
 <hr />
 
@@ -61,14 +75,14 @@ You can use this request in order to schedule a new payment.
 Method: PUT 
 URL: /payment/{id}/confirm
 ```
-Payments that has been scheduled must be confirmed in order to be released. 
-If the payment is not confirmed on scheduled date of operation, it will be postponed to the next operation date available.
+Payments that has been scheduled must be confirmed in order to be released.<br />
+If the payment is not confirmed before the end of scheduled date of operation, it will be automatically postponed to the next operation date available.
 
 **Parameters:**
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| id | String | Required | The ID of the payment you want to confirm. |
+| id | [ID](../conventions/formatingConventions.md#type_id) | Required | The [ID](../conventions/formatingConventions.md#type_id) of the payment you want to confirm. |
 
 **Returns:**
 
@@ -77,8 +91,8 @@ If the payment is not confirmed on scheduled date of operation, it will be postp
 | payment | [Payment Object](../objects/objects.md#payment_object) | A [Payment Object](../objects/objects.md#payment_object) describing the payment you confirmed. |
 
 **Example:**
-```
-/payments/89456/confirm
+```js
+PUT /payments/89456/confirm
 ```
 <hr />
 
@@ -86,7 +100,7 @@ If the payment is not confirmed on scheduled date of operation, it will be postp
 
 ```
 Method: GET
-URL: /payments
+URL: /payments/{status}/
 ```
 Request the list of payments that has been created on a specific period of time.
 
@@ -94,9 +108,10 @@ Request the list of payments that has been created on a specific period of time.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| fromDate | String |  Optionnal | A date representing the starting date to search payments. |
-| toDate | String |  Optionnal | A date representing the ending date to search payments. | 
-| sort | String |  Optionnal | A String representing the order of rendering objects. | 
+| status | String |  Required | A String representing the status of the payments you want to get. `all | Planified | Rejected | Finalized | Canceled | Refused | blocked | WaitingConfirmation` | 
+| fromDate | [Date](../conventions/formatingConventions.md#type_date) |  Optionnal | A [Date](../conventions/formatingConventions.md#type_date) representing the starting date to search payments. |
+| toDate | [Date](../conventions/formatingConventions.md#type_date) |  Optionnal | A [Date](../conventions/formatingConventions.md#type_date) representing the ending date to search payments. | 
+| sort | String |  Optionnal | A String representing the order of rendering objects. `ASC | DESC`| 
 
 **Returns:**
 
@@ -105,8 +120,8 @@ Request the list of payments that has been created on a specific period of time.
 | payments | Array[[Payment Object](../objects/objects.md#payment_object)] | An array of [Payment Object](../objects/objects.md#payment_object) describing payments you made. |
 
 **Example:**
-```
-/payments/?fromDate=2010-01-01&toDate=2015-06-30&sort=DESC
+```js
+GET /payments/all/?fromDate=2010-01-01&toDate=2015-06-30&sort=DESC
 ```
 <hr />
 
@@ -122,7 +137,7 @@ Retrieve the details of a specific payment.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| id | String | Required | The ID of the payment you want. |
+| id | [ID](../conventions/formatingConventions.md#type_id) | Required | The [ID](../conventions/formatingConventions.md#type_id) of the payment you want. |
 
 **Returns:**
 
@@ -131,8 +146,8 @@ Retrieve the details of a specific payment.
 | payment | [Payment Object](../objects/objects.md#payment_object) | A [Payment Object](../objects/objects.md#payment_object) describing the payment you requested. |
 
 **Example:**
-```
-/payments/89456
+```js
+GET /payments/89456
 ```
 <hr />
 
@@ -147,7 +162,7 @@ URL: /payment/{id}
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| id | String | Required | The ID of the payment you want to delete. |
+| id | [ID](../conventions/formatingConventions.md#type_id) | Required | The [ID](../conventions/formatingConventions.md#type_id) of the payment you want to delete. |
 
 **Returns:**
 
@@ -155,3 +170,8 @@ URL: /payment/{id}
 |-------|------|-------------|
 | process | Object | An object containing the result of the process. |
 | Object.result | Boolean | A boolean value describing if the process succeeded or not. |
+
+**Example:**
+```js
+DELETE /payments/89456
+```

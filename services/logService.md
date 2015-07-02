@@ -39,8 +39,8 @@ This request is appliable for the [pagination format](../conventions/formatingCo
 | logs | Array[[Log objects](../objects/objects.md#log_object)] | An array of [Log objects](../objects/objects.md#log_object) representing the logs you've generated with your requests. |
 
 **Example:**
-```
-/logs/?per_page=10&page=1
+```js
+GET /logs/?per_page=10&page=1
 ```
 
 <hr />
@@ -66,6 +66,6 @@ In case of somewhat happens during the request, the FX4BIZ API allows you to ret
 | log | [Log object](../objects/objects.md#log_object) | A [Log object](../objects/objects.md#log_object) corresponding with the nonce you sent |
 
 **Example:**
-```
-/logs/MzI0ZWQ0YTA0NmJhM2VmZWZiNzYyMTkzMWQ1ZjY2M2I=
+```js
+GET /logs/MzI0ZWQ0YTA0NmJhM2VmZWZiNzYyMTkzMWQ1ZjY2M2I=
 ```

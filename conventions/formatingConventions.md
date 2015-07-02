@@ -15,7 +15,13 @@ As an additional convention, all responses from FX4Biz-REST contain a `"success"
 * [Cut-Off Times](#cut_off_times)
 * [Errors](#errors_conventions)
 * [Pagination](#pagination)
-* [Quoted numbers](#quoted_numbers)
+* [normalized Types](#anonymous_object)
+	* [ID type](#type_id)
+	* [Date type](#type_date)
+	* [DateTime type](#type_datetime)
+	* [Currency type](#type_currency)
+	* [CurrencyPair type](#type_currencypair)
+* [anonymous Objects](#anonymous_object)
 * [Versioning](#versioning)
 
 
@@ -80,6 +86,52 @@ All top-level FX4BIZ API resources have support for bulk fetches - "list" API me
 |-------|------|-------------|
 | page | String | index of the page (start to 1) Default value: `1` |
 | per_page | String | number of items returned. Default value: `50` |
+
+
+## <a id="normalized_types"></a> Normalized Types ##
+
+The FX4BIZ API uses a set of types that describe a particular parameters and values.<br />
+It allows developpers to know the format and the content to send for a particular field.
+
+### <a id="type_id"></a> ID Type ###
+
+The ID type describe an identifier for a certain object.
+
+| Type | Real type | format | description | example |
+|------|-----------|--------|-------------|---------|
+| ID | String | `^[A-Za-z0-9]{*}$` | A String representing the id of an object. This string contains alpha-numeric characters, including the capital ones. | `ND9dUV` |
+
+### <a id="type_date"></a> Date Type ###
+
+The Date type represents a date with its year, month and day.
+
+| Type | Real type | format | description | example |
+|------|-----------|--------|-------------|---------|
+| Date | String | `^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$` - `YYYY-MM-DD` | A String representing a date by its year, month and day in month. | `2015-07-14` |
+
+### <a id="type_datetime"></a> DateTime Type ###
+
+The Date type represents a date with its year, month and day, and also with hours, minutes and seconds.
+
+| Type | Real type | format | description | example |
+|------|-----------|--------|-------------|---------|
+| DateTime | String | `^((19[0,99]|2[0-9]{3})\-(0[1-9]|1[012])\-([012][0-9]|3[01])\ ([01][0-9]|2[0-3])\:([0-5][0-9])\:([0-5][0-9]))$` - `YYYY-MM-DD HH:mm:SS` | A String representing a date by its year, month, day in month, hour, minute and second. | `2015-07-14 10:55:37` |
+
+### <a id="type_currency"></a> Currency Type ###
+
+The Currency type represents a currency trigram.
+
+| Type | Real type | format | description | example |
+|------|-----------|--------|-------------|---------|
+| Currency | String | `^[A-Z]{3}$` | A String representing the Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) of a currency. This String only contains capitalized letters. | `USD` |
+
+### <a id="type_currencypair"></a> CurrencyPair Type ###
+
+The CurrencyPair type represents a currency pair, used for currency change operation.
+
+| Type | Real type | format | description | example |
+|------|-----------|--------|-------------|---------|
+| CurrencyPair | String | `^[A-Z]{6}$` | A String representing two concatenated Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) of a currency. This String only contains capitalized letters. | `EURGBP` |
 
 ## <a id="anonymous_object"></a> Anonymous objects ##
 
