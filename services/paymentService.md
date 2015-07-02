@@ -168,8 +168,8 @@ URL: /payment/{id}
 
 | Field | Type | Description |
 |-------|------|-------------|
-| process | Object | An object containing the result of the process. |
-| Object.result | Boolean | A boolean value describing if the process succeeded or not. |
+| payment | [Payment Object](../objects/objects.md#payment_object) | A [Payment Object](../objects/objects.md#payment_object) describing the payment you deleted. |
+
 
 **Example:**
 ```js
