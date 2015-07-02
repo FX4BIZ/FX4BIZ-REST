@@ -24,8 +24,8 @@ Method: POST
 URL: /wallets/
 ```
 
-This request allows you to submit a new wallet for a given currency.
-**Caution :** This service is only avalable for FX4BIZ users that have suscribed to the wallet option program.
+This request allows you to submit a new wallet for a given currency.  
+**Caution :** This service is only available for FX4BIZ users that have suscribed to the wallet option program.
 
 **Parameters:**
 
@@ -57,7 +57,7 @@ URL: /wallets/
 ```
 
 This request allows you to submit a new wallet for a given currency and a given holder.  
-**Caution :** This service is only avalable for FX4BIZ users that have suscribed to the wallet option program.
+**Caution :** This service is only available for FX4BIZ users that have suscribed to the wallet option program.
 
 **Parameters:**
 
@@ -150,7 +150,7 @@ This request allows you to see the details related to a specific wallet.
 
 **Example:**
 ```JS
-GET /wallets/2041
+GET /wallets/NT4d3a
 ```
 
 <hr />
@@ -179,7 +179,7 @@ This request allows you to see the details of a wallet balance at a given date.
 
 **Example:**
 ```js
-GET /wallets/2041/balance/2015-04-30
+GET /wallets/NT4eAD/balance/2015-04-30
 ```
 
 <hr />

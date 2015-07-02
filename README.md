@@ -99,6 +99,7 @@ Our API is divided into sections based on different concepts in our system. Each
 * [Financial Movement Object](./objects/objects.md#financial_movement_object)
 * [Quote Object](./objects/objects.md#trade_object)
 * [Log Object](./objects/objects.md#log_object)
+* [Process Result Object](./objects/objects.md#processresult_object)
 
 ## [Formatting Conventions](./conventions/formatingConventions.md) ##
 

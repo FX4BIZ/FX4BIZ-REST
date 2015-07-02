@@ -40,8 +40,8 @@ You can use this request in order to schedule a new payment.
 | feePaymentOption | String | Required | A string representing the charges option to be applied to this payment. `BEN | OUR | SHARE` |
 | priorityPaymentOption | String | Required | A string representing wether this payment as a normal priority, or it as to be done quick. `normal | urgent` |
 | sourceWalletId | [ID](../conventions/formatingConventions.md#type_id) | Required | Specify the [ID](../conventions/formatingConventions.md#type_id) of the wallet the payment will be processed. |
-| tag | String | Optionnal | A custom reference that you want to be related to this payment in the system. This tag is not communicated to the beneficiary. |
-| communication | String | Optionnal | A Free format string representing the communication for the beneficiary. (76 chars max.) |
+| tag | String(50) | Optionnal | A custom reference that you want to be related to this payment in the system. This tag is not communicated to the beneficiary. |
+| communication | String(76) | Optionnal | A Free format string representing the communication for the beneficiary. (76 chars max.) |
 
 **Returns:**
 

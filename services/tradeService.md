@@ -100,7 +100,7 @@ This services permits to execute trade.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| sourceWalletId | [ID](../conventions/formatingConventions.md#type_id) | Required | The [ID](../conventions/formatingConventions.md#type_id) of the account to be credited of the targeted amount. |
+| sourceWalletId | [ID](../conventions/formatingConventions.md#type_id) | Required | The [ID](../conventions/formatingConventions.md#type_id) of the account to be debited of the targeted amount. |
 | deliveryWalletId | [ID](../conventions/formatingConventions.md#type_id) | Required | The [ID](../conventions/formatingConventions.md#type_id) of the destination account. `xxx` |
 | currencyPair | [CurrencyPair](../conventions/formatingConventions.md#type_currencypair) | Required | The currency pair representing the quote requessted. `EURUSD` |
 | side | String | Required | Action related to the nominal amount. To be bought or sold on the market, `S` to sell and `B` to buy. |

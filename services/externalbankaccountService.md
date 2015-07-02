@@ -57,7 +57,7 @@ Of course, it is possible to reference third party `wallet` accounts and execute
 | currency | [Currency](../conventions/formatingConventions.md#type_currency) | Required | A [Currency](../conventions/formatingConventions.md#type_currency) specifying the account currency. `EUR` |
 | holderBank | [Holder Bank Object](../objects/objects.md#beneficiary_bank_object) | Required | The recipient bank details, holding the account. |
 | holder | [Holder Object](../objects/objects.md#beneficiary_object) | Required | The recipient details, owner of the account. |
-| tag | String | Optionnal | Custom Data. `John Doe bank account EUR` |
+| tag | String(50) | Optionnal | Custom Data. `John Doe bank account EUR` |
 | correspondentBic | String | Optionnal | The intermediary bank BIC code. |
 
 **Returns:**
@@ -139,7 +139,7 @@ This request allows you to see the details related to an account. In order to co
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| id | [ID](../conventions/formatingConventions.md#type_id)  | Required | The [ID](../conventions/formatingConventions.md#type_id) of the external bank account you want. <br :>As ID's are listed with the [External Bank Account Objects](../objects/objects.md#account_object), You can retrive this by listing all external bank accounts for the current user. |
+| id | [ID](../conventions/formatingConventions.md#type_id)  | Required | The [ID](../conventions/formatingConventions.md#type_id) of the external bank account you want. <br :>As ID's are listed with the [External Bank Account Objects](../objects/objects.md#account_object), You can retrieve this by listing all external bank accounts for the current user. |
 
 **Returns:**
 
