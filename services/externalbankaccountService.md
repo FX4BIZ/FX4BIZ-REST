@@ -172,9 +172,7 @@ Delete an external bank account.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| process | Object | An object containing the result of the process. |
-| Object.result | Boolean | A boolean value describing if the process succeeded or not. |
-
+| process | [Process Result Object](../objects/objects.md#processresult_object) | A [Process Result Object](../objects/objects.md#processresult_object) containing the result of the process. |
 
 **Example:**
 ```js

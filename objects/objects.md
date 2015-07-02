@@ -480,3 +480,25 @@ Example Log Object:
 	"login": "p00005m",
 }
 ```
+
+<hr />
+
+#### <a id="processresult_object"></a> Process Result Object ####
+
+As some of our process just need to send you back the confirmation that this process is successful, the API will send you a Process Result Object.
+
+*Object resources:*
+
+| Field | Type | Description |
+|-------|------|-------------|
+| result | Boolean | The result of the operation. `true` if the operation is successful, else `false` |
+
+*Example Correpondent Bank Object:*
+
+```js
+"correspondant_bank":{
+    "bic": "AGRIFRPP",
+    "name": "CREDIT AGRICOLE SA",
+    "address": {address}
+}
+```
