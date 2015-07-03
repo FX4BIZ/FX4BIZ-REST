@@ -185,4 +185,3 @@ Delete an external bank account.
 ```js
 DELETE /externalBankAccounts/ND4EbA
 ```
-

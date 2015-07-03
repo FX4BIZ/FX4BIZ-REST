@@ -217,3 +217,4 @@ Retrieve the trade details.
 ```js
 GET /trades/TD4ebA
 ```
+

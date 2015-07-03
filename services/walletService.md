@@ -181,5 +181,3 @@ This request allows you to see the details of a wallet balance at a given date.
 ```js
 GET /wallets/NT4eAD/balance/2015-04-30
 ```
-
-<hr />

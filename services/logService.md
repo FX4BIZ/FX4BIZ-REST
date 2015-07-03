@@ -69,3 +69,4 @@ In case of somewhat happens during the request, the FX4BIZ API allows you to ret
 ```js
 GET /logs/MzI0ZWQ0YTA0NmJhM2VmZWZiNzYyMTkzMWQ1ZjY2M2I=
 ```
+
