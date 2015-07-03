@@ -58,7 +58,7 @@ Of course, it is possible to reference third party `wallet` accounts and execute
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| number | String | Required | The recipient account number or Iban. `xxx4548` |
+| accountNumber | String | Required | The recipient account number or Iban. `xxx4548` |
 | currency | [Currency](../conventions/formatingConventions.md#type_currency) | Required | A [Currency](../conventions/formatingConventions.md#type_currency) specifying the account currency. `EUR` |
 | holderBank | [Holder Bank Object](../objects/objects.md#beneficiary_bank_object) | Required | The recipient bank details, holding the account. |
 | holder | [Holder Object](../objects/objects.md#beneficiary_object) | Required | The recipient details, owner of the account. |
@@ -77,7 +77,7 @@ POST /externalBankAccounts/
 {
     "currency": "EUR",
     "tag": "My EUR account",
-    "number": "5495115813572165205435",
+    "accountNumber": "5495115813572165205435",
     "correspondentBankBic": "AGRIFRPP",
     "holderBank": {
         "bic": "CHASUS33",
@@ -88,6 +88,7 @@ POST /externalBankAccounts/
             "street": "4 NEW YORK PLAZA FLOOR 15",
             "postCode": "100004",
             "city": "New York",
+            "state":"New York",
             "country": "US"
         }
     },
@@ -98,6 +99,7 @@ POST /externalBankAccounts/
             "street": "5  1st street",
             "postCode": "10004",
             "city": "New York",
+            "state":"New York',
             "country": "US"
         }
     }

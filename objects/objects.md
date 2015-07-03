@@ -29,7 +29,7 @@ When an account is specified as part of a JSON body, it is encoded as an object 
 | id |  [ID](../conventions/formatingConventions.md#type_id) | The [ID](../conventions/formatingConventions.md#type_id) of the account. |
 | currency | [Currency](../conventions/formatingConventions.md#type_currency) | The [Currency](../conventions/formatingConventions.md#type_currency) specifying the account currency. |
 | tag |  String(50) | Custom reference of the account. |
-| status |  String | Status of the account. |
+| status |  String | Status of the account. `authorized | locked | not authorized` |
 | accountNumber | String(40) | Iban or account number. |
 | correspondentBank | [Correspondent Bank Object](#correspondent_bank_object) | The intermediary bank details, used to reach the beneficiary bank. |
 | holderBank | [Holder Bank Object](#beneficiary_bank_object) | The recipient bank details, holding the account. |
@@ -39,14 +39,11 @@ When an account is specified as part of a JSON body, it is encoded as an object 
 
 ```js
 "account": {
-    "id": "NT4edA"
-    "status": "active",
-    "type": "wallet",
-    "createdDate": "2014-01-12 00:00:00",
-    "createdBy": "api user",
-    "tag": "My wallet account EUR",
-    "number": "516981638516313513",
+    "id": "NT4edA",
     "currency": "EUR",
+    "tag": "My wallet account EUR",
+    "status": "Authorized",
+    "accountNumber": "516981638516313513",
     "correspondantBank":{correspondentBank}
     "holderBank":{beneficiaryBank}
 	"holder":{beneficiary}
@@ -66,9 +63,8 @@ When a wallet is specified as part of a JSON body, it is encoded as an object wi
 | id |  [ID](../conventions/formatingConventions.md#type_id) | The [ID](../conventions/formatingConventions.md#type_id) of the account. |
 | currency | [Currency](../conventions/formatingConventions.md#type_currency) | The [Currency](../conventions/formatingConventions.md#type_currency) specifying the account currency. |
 | tag |  String(50) | Custom data. |
-| status |  String | Status of the account. |
-| type |  String | type of account |
-| number | String | Iban or account number. |
+| status |  String | Status of the account. `authorized | locked | not authorized` |
+| accountNumber | String | Iban or account number. |
 | correspondentBank | [Correspondent Bank Object](#correspondent_bank_object) | The intermediary bank details, used to reach the beneficiary bank. |
 | holderBank | [Holder Bank Object](#beneficiary_bank_object) | The recipient bank details, holding the account. |
 | holder | [Holder Object](#beneficiary_object) | The recipient details, owner of the account. |
@@ -78,12 +74,9 @@ When a wallet is specified as part of a JSON body, it is encoded as an object wi
 ```js
 "wallet": {
     "id": "ND2da3"
-    "status": "active",
-    "type": "wallet",
-    "createdDate": "2014-01-12T00:00:00+00:00",
-    "createdBy": "api user",
+    "status": "authorized",
     "tag": "My wallet account EUR",
-    "number": "654165816813556358",
+    "accountNumber": "654165816813556358",
     "currency": "EUR",
     "correspondantBank":{correspondentBank}
     "holderBank":{beneficiaryBank}
@@ -206,7 +199,7 @@ The Holder Object must store the following fields:
 | Field | Type | Description |
 |-------|------|-------------|
 | name | String(100) | The name of the account owner. |
-| type | String(10) | The type of account owner. |
+| type | String(10) | The type of account owner. `Individual | Corporate` |
 | address | [Address Object](#address_object) | The account owner address. |
 
 **Example:**
@@ -254,7 +247,7 @@ When a `payment` is specified as part of a JSON body, it is encoded as an object
 | Field | Type | Description |
 |-------|------|-------------|
 | id | [ID](../conventions/formatingConventions.md#type_id) | The [ID](../conventions/formatingConventions.md#type_id) of the payment. |
-| status | String | Payment status. `all | Planified | Rejected | Finalized | Canceled | Refused | blocked | WaitingConfirmation` |
+| status | String | Payment status. `Plannified | Canceled | Finalized` |
 | createdDate | [DateTime](../conventions/formatingConventions.md#type_datetime) | Creation [DateTime](../conventions/formatingConventions.md#type_datetime) of the payment. |
 | desiredExecutionDate | [Date](../conventions/formatingConventions.md#type_date) | The initial [Date](../conventions/formatingConventions.md#type_date) of execution when the payment is created. |
 | executionDate | [Date](../conventions/formatingConventions.md#type_date) | The  [Date](../conventions/formatingConventions.md#type_date) of execution of the payment. |
@@ -263,23 +256,23 @@ When a `payment` is specified as part of a JSON body, it is encoded as an object
 | beneficiaryAccountId | [ID](../conventions/formatingConventions.md#type_id) | The [ID](../conventions/formatingConventions.md#type_id) of the beneficiary account. |
 | sourceWalletId | [ID](../conventions/formatingConventions.md#type_id) | The [ID](../conventions/formatingConventions.md#type_id) of the wallet the payment will be processed. |
 | communication | String(76) | The wording of the payment. |
-| priorityPaymentOption | String(6) | A string representing wether this payment as a normal priority, or it as to be done quick. |
-| feePaymentOption | String(5) | A string representing the fee payment option for this payment. |
+| priorityPaymentOption | String(6) | A string representing wether this payment as a normal priority, or it as to be done quick. `normal | urgent` |
+| feePaymentOption | String(5) | A string representing the fee payment option for this payment. `BEN | OUR | SHARE` |
 
 **Example:**
 
 ```js
 "payment": {
-    "id": "XXXXXX",
+    "id": "ND4ue2",
     "status": "WaitingConfirmation",
     "createdDate": "2015-06-29 16:50:30",
     "desiredExecutionDate": "2015-06-30",
     "executionDate": "2015-06-30",
     "amount": {amount},
-    "tag": "XXXXXX",
-    "beneficiaryAccountId": "XXXXXX",
-    "sourceWalletId": "XXXXXX",
-    "communication": "XXXXXX",
+    "tag": "Invoice #11854854",
+    "beneficiaryAccountId": "NTd4ME",
+    "sourceWalletId": "ND4uME",
+    "communication": "Payment for invoce",
     "priorityPaymentOption": "normal",
     "feePaymentOption": "BEN"
 }
@@ -296,7 +289,7 @@ When a `trade` is specified as part of a JSON body, it is encoded as an object w
 | Field | Type | Description |
 |-------|------|-------------|
 | id | [ID](../conventions/formatingConventions.md#type_id) | The [ID](../conventions/formatingConventions.md#type_id) of the trade. |
-| side | String(1) | The side of the trade. 'B' for buy, and 'S' for sell. |
+| side | String(1) | The side of the trade. `B | S` |
 | sourceAmount | [Amount Object](#amount_object)  | The [Amount Object](#amount_object) representing the amount to settle. |
 | deliveredAmount | [Amount Object](#amount_object)  | The [Amount Object](#amount_object) representing the amount to be delivered. |
 | sourceWalletId | [ID](../conventions/formatingConventions.md#type_id) | The [ID](../conventions/formatingConventions.md#type_id) of the source account. |
@@ -304,7 +297,7 @@ When a `trade` is specified as part of a JSON body, it is encoded as an object w
 | currencyPair | [CurrencyPair](../conventions/formatingConventions.md#type_currencypair) | The currency pair representing the quote.  |
 | rate | [Rate Object](#rate_object) | The [Rate Object](#rate_object) describing the rate of the quote. |
 | createdDate | [DateTime](../conventions/formatingConventions.md#type_datetime) | The creation [DateTime](../conventions/formatingConventions.md#type_datetime) of the quote. |
-| deliveryDate | [DateTime](../conventions/formatingConventions.md#type_datetime) | The delivery [DateTime](../conventions/formatingConventions.md#type_datetime) of the trade. |
+| deliveryDate | [Date](../conventions/formatingConventions.md#type_date) | The delivery [Date](../conventions/formatingConventions.md#type_date) of the trade. |
 
 **Example:**
 
@@ -314,12 +307,12 @@ When a `trade` is specified as part of a JSON body, it is encoded as an object w
     "side": "B",
     "sourceAmount": {amount},
     "deliveredAmount": {amount},
-    "sourceWalletId": "XXXXX",
-    "deliveryWalletId": "XXXXX",
+    "sourceWalletId": "TD4eAB",
+    "deliveryWalletId": "ND3eaB",
     "currencyPair": "EURUSD",
     "rate": {rate},
     "createdDate": "2015-06-29 11:46:36",
-    "deliveryDate": "2015-06-30 00:00:00"
+    "deliveryDate": "2015-06-30"
 }
 ```
 
@@ -341,9 +334,8 @@ When a financial movement is specified as part of a JSON body, it is encoded as 
 | orderingCustomer | String | A free formatted String representing the ordering customer with it's name and it's address. |
 | orderingInstitution | String | A free formatted String representing the ordering institution with it's name and it's address. |
 | beneficiaryCustomer | String | A free formatted String representing the beneficiary customer with it's name and it's address. |
-| amount | [Amount Object](#amount_object)  | The [Amount Object](#amount_object) of the financial movement. |
-| orderingAmount | Float | The amount ordered for this financial movement. |
-| beneficiaryAmount | Float | The amount delivered by this financial movement to the beneficiary. |
+| orderingAmount | [Amount Object](#amount_object) | The [Amount Object](#amount_object) ordered for this financial movement. |
+| beneficiaryAmount | [Amount Object](#amount_object) | The [Amount Object](#amount_object) delivered by this financial movement to the beneficiary. |
 | RemittanceInformation  | Communication of the financial movement. |
 | chargesDetails  | String | The change details of the financial movement, |
 | exchangeRate | Float | The exchange rate applied to the financial movement. |
@@ -360,7 +352,6 @@ When a financial movement is specified as part of a JSON body, it is encoded as 
         "orderingCustomer": "Diamants Plus Avenue de l'opéra Paris FR",
         "orderingInstitution": "BNP-PARIBAS SA (FORMERLY BANQUE NATIONALE DE PARIS S.A.) 16 BOULEVARD DES ITALIENS   75450 PARIS CEDEX 09 FR",
         "BeneficiaryCustomer": "Diamants Plus Avenue de l'opéra Paris FR",
-        "amount": {amount},
         "orderingAmount": {amount},
         "beneficiaryAmount": {amount},
         "RemittanceInformation": "Billing #1385438",
@@ -408,7 +399,7 @@ When a `quote` is specified as part of a JSON body, it is encoded as an object w
 | Field | Type | Description |
 |-------|------|-------------|
 | id | [ID](../conventions/formatingConventions.md#type_id) | The [ID](../conventions/formatingConventions.md#type_id) of the quote. |
-| side | String(1) | The side of the quote. 'B' for buy, and 'S' for sell. |
+| side | String(1) | The side of the quote. `B | S` |
 | currencyPair | [CurrencyPair](../conventions/formatingConventions.md#type_currencypair) | The [CurrencyPair](../conventions/formatingConventions.md#type_currencypair) representing the quote.  |
 | rate | [Rate Object](#rate_object) | The [Rate Object](#rate_object) describing the rate of the quote. |
 | createdDate | [DateTime](../conventions/formatingConventions.md#type_datetime) | The creation [DateTime](../conventions/formatingConventions.md#type_datetime) of the quote. |
@@ -421,7 +412,7 @@ When a `quote` is specified as part of a JSON body, it is encoded as an object w
     "id": "NTUzMzA",
     "side": "B",
     "currencyPair": "EURUSD",
-    "rate": {fate},
+    "rate": {rate},
     "createdDate": "2015-06-29 11:46:36",
     "deliveryDate": "2015-06-30"
 }
