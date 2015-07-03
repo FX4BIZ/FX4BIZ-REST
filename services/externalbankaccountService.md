@@ -20,9 +20,9 @@ Method: POST
 URL: /externalBankAccounts/
 ```
 By submitting a new `external bank` account, you must supply the relevant details in order to pay a beneficiary.<br />
-**Caution.** All your own `wallet` accounts have been created automatically when subscribing with FX4BIZ.
+**Caution.** All your `physical` iban accounts hold with FX4BIZ will be automatically created when subscribing with us.
 
-The Submit External Bank Account service allows to reference `external bank` accounts which are your own accounts or a third party account hold in another bank.
+The Submit External Bank Account service allows to reference `external bank` accounts which can be either your own accounts in another bank or a third party account.
 
 Adding an external bank has some rules :
 
@@ -59,17 +59,17 @@ Of course, it is possible to reference third party `wallet` accounts and execute
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
 | accountNumber | String | Required | The recipient account number or Iban. `xxx4548` |
-| currency | [Currency](../conventions/formatingConventions.md#type_currency) | Required | A [Currency](../conventions/formatingConventions.md#type_currency) specifying the account currency. `EUR` |
+| currency | [Currency](../conventions/formatingConventions.md#type_currency) | Required | A [three digit code](../conventions/formatingConventions.md#type_currency) specifying the account currency. `EUR` |
 | holderBank | [Holder Bank Object](../objects/objects.md#beneficiary_bank_object) | Required | The recipient bank details, holding the account. |
 | holder | [Holder Object](../objects/objects.md#beneficiary_object) | Required | The recipient details, owner of the account. |
 | tag | String(50) | Optionnal | Custom Data. `John Doe bank account EUR` |
-| correspondentBic | String | Optionnal | The intermediary bank BIC code. |
+| correspondentBic | String | Optionnal | The intermediary bank identifier code. |
 
 **Returns:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| account | [External Bank Account Object](../objects/objects.md#account_object) | An object representing the external bank account you just created |
+| account | [External Bank Account Object](../objects/objects.md#account_object) | An object representing the external bank account you have just created |
 
 **Example:**
 ```js
@@ -114,7 +114,7 @@ POST /externalBankAccounts/
 Method: GET 
 URL: /externalBankAccounts/
 ```
-With the FX4BIZ API, you can list all the external bank accounts hold by the person or compagny of a certain user.  
+With the FX4BIZ API, you can list all the external bank accounts hold by the person or company of a certain user.  
 The user is not to be passed as a parameter since it's the one you use to authenticate that will be used.
 
 **Parameters:**

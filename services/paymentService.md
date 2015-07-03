@@ -33,21 +33,22 @@ You can use this request in order to schedule a new payment.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| beneficiaryAccountId | [ID](../conventions/formatingConventions.md#type_id) | Required | The [ID](../conventions/formatingConventions.md#type_id) of the beneficiary account. |
-| amount | [Amount Object](../objects/objects.md#amount_object) | Required | Amount to be sent. *Caution.* The currency of the amount sent must be equal to the currency of the beneficiary account. |
-| desiredExecutionDate | [Date](../conventions/formatingConventions.md#type_date) | Required | Initial execution [Date](../conventions/formatingConventions.md#type_date) of you payment. `YYYY-MM-DD` |
-| feeCurrency  | [Currency](../conventions/formatingConventions.md#type_currency) | Required | A [Currency](../conventions/formatingConventions.md#type_currency) representing the currency related to the charges applied on your payment. |
-| feePaymentOption | String | Required | A string representing the charges option to be applied to this payment. `BEN | OUR | SHARE` |
-| priorityPaymentOption | String | Required | A string representing wether this payment as a normal priority, or it as to be done quick. `normal | urgent` |
-| sourceWalletId | [ID](../conventions/formatingConventions.md#type_id) | Required | Specify the [ID](../conventions/formatingConventions.md#type_id) of the wallet the payment will be processed. |
+| sourceWalletId | [ID](../conventions/formatingConventions.md#type_id) | Required | The code identifying the wallet from which the payment must be processed. |
+| beneficiaryAccountId | [ID](../conventions/formatingConventions.md#type_id) | Required | The code identifying the recipient account. |
+| amount | [Amount Object](../objects/objects.md#amount_object) | Required | Amount to be sent. 
+*Caution.* The currency of the amount sent must be equal to the currency of the beneficiary account. |
+| desiredExecutionDate | [Date](../conventions/formatingConventions.md#type_date) | Required | The initial execution date of your payment. `YYYY-MM-DD` |
+| feeCurrency  | [Currency](../conventions/formatingConventions.md#type_currency) | Required | A three digit code representing the currency related to the charges applied on your payment. |
+| feePaymentOption | String | Required | A code representing the charges option to be applied to this payment. `BEN | OUR | SHARE` |
+| priorityPaymentOption | String | Required | A code representing whether this payment as a standard priority, or a priority treatment in FX4BIZ an correspondent bank systems. `normal | urgent` |
 | tag | String(50) | Optionnal | A custom reference that you want to be related to this payment in the system. This tag is not communicated to the beneficiary. |
-| communication | String(76) | Optionnal | A Free format string representing the communication for the beneficiary. (76 chars max.) |
+| communication | String(76) | Optionnal | A Free format string representing the communication for the beneficiary. |
 
 **Returns:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| payment | [Payment Object](../objects/objects.md#payment_object) | A [Payment Object](../objects/objects.md#payment_object) describing the payment you submitted. |
+| payment | [Payment Object](../objects/objects.md#payment_object) | An encoded JSON body describing payment instruction submitted. |
 
 **Example:**
 ```js
@@ -82,13 +83,13 @@ If the payment is not confirmed before the end of scheduled date of operation, i
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| id | [ID](../conventions/formatingConventions.md#type_id) | Required | The [ID](../conventions/formatingConventions.md#type_id) of the payment you want to confirm. |
+| id | [ID](../conventions/formatingConventions.md#type_id) | Required | The code identifying the payment you want to confirm. |
 
 **Returns:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| payment | [Payment Object](../objects/objects.md#payment_object) | A [Payment Object](../objects/objects.md#payment_object) describing the payment you confirmed. |
+| payment | [Payment Object](../objects/objects.md#payment_object) | An encoded JSON body advising the modification on payment status. |
 
 **Example:**
 ```js
@@ -108,16 +109,16 @@ Request the list of payments that has been created on a specific period of time.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| status | String |  Required | A String representing the status of the payments you want to get. `all | Planified | Rejected | Finalized | Canceled | Refused | blocked | WaitingConfirmation` | 
-| fromDate | [Date](../conventions/formatingConventions.md#type_date) |  Optionnal | A [Date](../conventions/formatingConventions.md#type_date) representing the starting date to search payments. |
-| toDate | [Date](../conventions/formatingConventions.md#type_date) |  Optionnal | A [Date](../conventions/formatingConventions.md#type_date) representing the ending date to search payments. | 
-| sort | String |  Optionnal | A String representing the order of rendering objects. `ASC | DESC`| 
+| status | String |  Required | A code representing the status of the payments you want to get. `all | Planified | Rejected | Finalized | Canceled | Refused | blocked | WaitingConfirmation` | 
+| fromDate | [Date](../conventions/formatingConventions.md#type_date) |  Optionnal | The starting date to search payments. |
+| toDate | [Date](../conventions/formatingConventions.md#type_date) |  Optionnal | The ending date to search payments. | 
+| sort | String |  Optionnal | A code representing the order of rendering objects. `ASC | DESC`| 
 
 **Returns:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| payments | Array[[Payment Object](../objects/objects.md#payment_object)] | An array of [Payment Object](../objects/objects.md#payment_object) describing payments you made. |
+| payments | Array[[Payment Object](../objects/objects.md#payment_object)] | An array of [Payment Object](../objects/objects.md#payment_object) advising on all the payments made. |
 
 **Example:**
 ```js
@@ -137,7 +138,7 @@ Retrieve the details of a specific payment.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| id | [ID](../conventions/formatingConventions.md#type_id) | Required | The [ID](../conventions/formatingConventions.md#type_id) of the payment you want. |
+| id | [ID](../conventions/formatingConventions.md#type_id) | Required | The code identifying the payment you want. |
 
 **Returns:**
 
@@ -162,7 +163,7 @@ URL: /payment/{id}
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| id | [ID](../conventions/formatingConventions.md#type_id) | Required | The [ID](../conventions/formatingConventions.md#type_id) of the payment you want to delete. |
+| id | [ID](../conventions/formatingConventions.md#type_id) | Required | The code identifying the payment you want to delete. |
 
 **Returns:**
 
