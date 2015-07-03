@@ -1,4 +1,4 @@
-# API Objects #
+# API Objects #  
 
 * [External Bank Account Object](#account_object)
 * [Wallet Object](#wallet_object)

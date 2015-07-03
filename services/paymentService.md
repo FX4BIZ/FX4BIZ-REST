@@ -1,4 +1,4 @@
-# PAYMENT SERVICE #
+# PAYMENT SERVICE # 
 
 Sending funds from your FX4BIZ wallet account to your own bank account or a third-party recipient involves two steps:
 

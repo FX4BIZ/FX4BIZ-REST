@@ -1,4 +1,4 @@
-# EXTERNAL BANK ACCOUNT SERVICE #
+# EXTERNAL BANK ACCOUNT SERVICE # 
 
 In the FX4BIZ API, what we call `external bank` account, can be either your own account in another bank or a third party recipient account.
 

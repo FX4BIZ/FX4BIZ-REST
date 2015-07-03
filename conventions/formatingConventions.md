@@ -1,4 +1,4 @@
-# Formatting Conventions #
+# Formatting Conventions #  
 
 
 The FX4BIZ Rest API conforms to the following general behavior for [RESTful API](http://en.wikipedia.org/wiki/Representational_state_transfer):

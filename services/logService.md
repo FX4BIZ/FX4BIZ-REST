@@ -1,4 +1,4 @@
-# LOG SERVICE #
+# LOG SERVICE #  
 
 As a developper, you might want to go further than sending request and recieve responses.  
 The FX4BIZ API allows you to access the logs of its own services, to provide you some details about what you send, and what it's done on the platform.

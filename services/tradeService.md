@@ -1,4 +1,4 @@
-# TRADE SERVICE #
+# TRADE SERVICE #  
 
 FX4BIZ provides a deliverable FX facility and deliverable FX liquidity via the FX4BIZ-REST API. You will become counterparty to FX4BIZ and can market and sell deliverable FX services to corporate and private clients as well as using such services on their behalf.  
 

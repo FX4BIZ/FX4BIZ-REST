@@ -1,4 +1,4 @@
-# WALLET ACCOUNT SERVICE #
+# WALLET ACCOUNT SERVICE #  
 
 In the FX4BIZ API, what we call a "wallet" account can be either a physical iban account, or a virtual iban account with FX4BIZ. 
 

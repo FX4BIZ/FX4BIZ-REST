@@ -1,4 +1,4 @@
-# AUTHENTICATION SERVICE #
+# AUTHENTICATION SERVICE # 
 
 Every call to the FX4BIZ API must be authenticated, which must be done by adding a custom HTTP header (X-WSSE) with your username and secret.  
 This section contains detailed instructions on how to create valid headers for the Suite REST API.
