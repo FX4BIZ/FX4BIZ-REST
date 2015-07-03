@@ -114,7 +114,7 @@ POST /externalBankAccounts/
 Method: GET 
 URL: /externalBankAccounts/
 ```
-With the FX4BIZ API, you can list all the external bank accounts hold by the person or compagny of a certain user.  
+With the FX4BIZ API, you can list all the external bank accounts hold by the person or company of a certain user.  
 The user is not to be passed as a parameter since it's the one you use to authenticate that will be used.
 
 **Parameters:**
