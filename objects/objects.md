@@ -26,11 +26,11 @@ When an account is specified as part of a JSON body, it is encoded as an object 
 
 | Field | Type | Description |
 |-------|------|-------------|
-| id |  [ID](../conventions/formatingConventions.md#type_id) | The [ID](../conventions/formatingConventions.md#type_id) of the account. `xxx` |
-| currency | [Currency](../conventions/formatingConventions.md#type_currency) | The [Currency](../conventions/formatingConventions.md#type_currency) specifying the account currency. `USD` |
-| tag |  String(50) | Custom reference of the account. `reference` |
-| status |  String | Status of the account `active` |
-| accountNumber | String(40) | Iban or account number. `xxx384` |
+| id |  [ID](../conventions/formatingConventions.md#type_id) | The [ID](../conventions/formatingConventions.md#type_id) of the account. |
+| currency | [Currency](../conventions/formatingConventions.md#type_currency) | The [Currency](../conventions/formatingConventions.md#type_currency) specifying the account currency. |
+| tag |  String(50) | Custom reference of the account. |
+| status |  String | Status of the account. |
+| accountNumber | String(40) | Iban or account number. |
 | correspondentBank | [Correspondent Bank Object](#correspondent_bank_object) | The intermediary bank details, used to reach the beneficiary bank. |
 | holderBank | [Holder Bank Object](#beneficiary_bank_object) | The recipient bank details, holding the account. |
 | holder | [Holder Object](#beneficiary_object) | The recipient details, owner of the account. |
@@ -63,17 +63,15 @@ When a wallet is specified as part of a JSON body, it is encoded as an object wi
 
 | Field | Type | Description |
 |-------|------|-------------|
-| id |  [ID](../conventions/formatingConventions.md#type_id) | The [ID](../conventions/formatingConventions.md#type_id) of the account. `xxx` |
-| createdDate | [DateTime](../conventions/formatingConventions.md#type_datetime) | The creation [DateTime](../conventions/formatingConventions.md#type_datetime) of the object: `YYYY-MM-DD HH:MM:SS` |
-| createdBy |  String | The creation date of the object: `api` |
-| currency | [Currency](../conventions/formatingConventions.md#type_currency) | The [Currency](../conventions/formatingConventions.md#type_currency) specifying the account currency. `USD` |
-| tag |  String(50) | Custom data. `reference` |
-| status |  String | Status of the account `active` |
-| type |  String | type of account `wallet` |
-| number | String | Iban or account number. `xxx384` |
-| correspondentBank | [Correspondent Bank Object](#correspondent_bank_object) | **Required for local format.** The intermediary bank details, used to reach the beneficiary bank. |
-| holderBank | [Holder Bank Object](#beneficiary_bank_object) | **Required.** The recipient bank details, holding the account. |
-| holder | [Holder Object](#beneficiary_object) | **Required.** The recipient details, owner of the account. |
+| id |  [ID](../conventions/formatingConventions.md#type_id) | The [ID](../conventions/formatingConventions.md#type_id) of the account. |
+| currency | [Currency](../conventions/formatingConventions.md#type_currency) | The [Currency](../conventions/formatingConventions.md#type_currency) specifying the account currency. |
+| tag |  String(50) | Custom data. |
+| status |  String | Status of the account. |
+| type |  String | type of account |
+| number | String | Iban or account number. |
+| correspondentBank | [Correspondent Bank Object](#correspondent_bank_object) | The intermediary bank details, used to reach the beneficiary bank. |
+| holderBank | [Holder Bank Object](#beneficiary_bank_object) | The recipient bank details, holding the account. |
+| holder | [Holder Object](#beneficiary_object) | The recipient details, owner of the account. |
 
 **Example:**
 
@@ -106,6 +104,7 @@ When an address is specified as part of a JSON body, it is encoded as an object 
 | street | String(255) | The street for the address described. |
 | postCode | String(15) | The ZIP/Post code for the address described. |
 | city | String(35) | The city for the address described. |
+| state | String(35) | The state for the address described. |
 | country | String(2) | The two-letters abbreviation for the country, following the [ISO-3166](http://fr.wikipedia.org/wiki/ISO_3166) for the address described. |
 
 **Example:**
@@ -115,6 +114,7 @@ When an address is specified as part of a JSON body, it is encoded as an object 
 	"street": "4 NEW YORK PLAZA, FLOOR 15",
 	"postCode": "10004",
 	"city": "NEW YORK",
+	"state": "New York",
 	"country": "US"
 }
 ```
@@ -129,8 +129,8 @@ When an amount of currency is specified as part of a JSON body, it is encoded as
 
 | Field | Type | Description |
 |-------|------|-------------|
-| value  | Float | The quantity of the currency. `25000000.00` |
-| currency | [Currency](../conventions/formatingConventions.md#type_currency) | The [Currency](../conventions/formatingConventions.md#type_currency) specifying the amount currency. `USD` |
+| value  | Float | The quantity of the currency. |
+| currency | [Currency](../conventions/formatingConventions.md#type_currency) | The [Currency](../conventions/formatingConventions.md#type_currency) specifying the amount currency. |
 
 **Example:**
 
@@ -151,7 +151,7 @@ When the balance is specified as part of a JSON body, it is encoded as an object
 
 | Field | Type | Description |
 |-------|------|-------------|
-| closingDate | [Date](../conventions/formatingConventions.md#type_date) | The closing [Date](../conventions/formatingConventions.md#type_date) of the balance details given. `YYYY-MM-DD` |
+| closingDate | [Date](../conventions/formatingConventions.md#type_date) | The closing [Date](../conventions/formatingConventions.md#type_date) of the balance details given. |
 | bookingAmount | [Amount Object](#amount_object) | The closing balance of the account. |
 | valueAmount | [Amount Object](#amount_object) | The closing value of the account. |
 
@@ -175,10 +175,10 @@ When a beneficiary bank is specified as part of a JSON body, it is encoded as an
 
 | Field | Type | Description |
 |-------|------|-------------|
-| bic | String(11) | Eight or eleve-digit [ISO 9362 Business Identifier Code](http://en.wikipedia.org/wiki/ISO_9362) specifying the Recipient Bank. `CHASUS33XXX` |
-| clearingType | String(2) | Two-digit code specifying the local clearing network. `FW` |
-| clearingCode | String(15) | The branch number on the local clearing network `021000021` |
-| name | String(120) | The beneficiary bank name. `JPMORGAN CHASE BANK, N.A.` |
+| bic | String(11) | Eight or eleve-digit [ISO 9362 Business Identifier Code](http://en.wikipedia.org/wiki/ISO_9362) specifying the Recipient Bank. |
+| clearingType | String(2) | Two-digit code specifying the local clearing network. |
+| clearingCode | String(15) | The branch number on the local clearing network. |
+| name | String(120) | The beneficiary bank name. |
 | address | [Address Object](#address_object) | The beneficiary bank address. |
 
 **Example:**
@@ -205,8 +205,8 @@ The Holder Object must store the following fields:
 
 | Field | Type | Description |
 |-------|------|-------------|
-| name | String(100) | The name of the account owner. `John Doe`|
-| type | String(10) | The type of account owner. `Individual` |
+| name | String(100) | The name of the account owner. |
+| type | String(10) | The type of account owner. |
 | address | [Address Object](#address_object) | The account owner address. |
 
 **Example:**
@@ -229,9 +229,9 @@ When a correspondent bank of an account is specified as part of a JSON body, it 
 
 | Field | Type | Description |
 |-------|------|-------------|
-| bic | String(11) | `CHASUS33` |
-| name | String(120) | The bank name. `CREDIT AGRICOLE SA` |
-| address | [Address Object](#address_object) | The bank address. |
+| bic | String(11) | A String representing the correspondant bank BIC. |
+| name | String(120) | The correspondant bank name. |
+| address | [Address Object](#address_object) | The correspondant bank address. |
 
 **Example:**
 
@@ -253,13 +253,13 @@ When a `payment` is specified as part of a JSON body, it is encoded as an object
 
 | Field | Type | Description |
 |-------|------|-------------|
-| id | [ID](../conventions/formatingConventions.md#type_id) | The [ID](../conventions/formatingConventions.md#type_id) of the payment. `xxx` |
+| id | [ID](../conventions/formatingConventions.md#type_id) | The [ID](../conventions/formatingConventions.md#type_id) of the payment. |
 | status | String | Payment status. `all | Planified | Rejected | Finalized | Canceled | Refused | blocked | WaitingConfirmation` |
-| createdDate | [DateTime](../conventions/formatingConventions.md#type_datetime) | Creation [DateTime](../conventions/formatingConventions.md#type_datetime) of the payment. `YYYY-MM-DD HH:MM:SS` |
-| desiredExecutionDate | [Date](../conventions/formatingConventions.md#type_date) | The initial [Date](../conventions/formatingConventions.md#type_date) of execution when the payment is created. `YYYY-MM-DD` |
-| executionDate | [Date](../conventions/formatingConventions.md#type_date) | The  [Date](../conventions/formatingConventions.md#type_date) of execution of the payment. `YYYY-MM-DD` |
-| amount | [Amount Object](#amount_object) | The nominal amount to be transfered. `10,000.00 GBP` |
-| tag | String(50) | Custom reference on the payment. `Invoice xxx` |
+| createdDate | [DateTime](../conventions/formatingConventions.md#type_datetime) | Creation [DateTime](../conventions/formatingConventions.md#type_datetime) of the payment. |
+| desiredExecutionDate | [Date](../conventions/formatingConventions.md#type_date) | The initial [Date](../conventions/formatingConventions.md#type_date) of execution when the payment is created. |
+| executionDate | [Date](../conventions/formatingConventions.md#type_date) | The  [Date](../conventions/formatingConventions.md#type_date) of execution of the payment. |
+| amount | [Amount Object](#amount_object) | The nominal amount to be transfered. |
+| tag | String(50) | Custom reference on the payment. |
 | beneficiaryAccountId | [ID](../conventions/formatingConventions.md#type_id) | The [ID](../conventions/formatingConventions.md#type_id) of the beneficiary account. |
 | sourceWalletId | [ID](../conventions/formatingConventions.md#type_id) | The [ID](../conventions/formatingConventions.md#type_id) of the wallet the payment will be processed. |
 | communication | String(76) | The wording of the payment. |
@@ -299,8 +299,8 @@ When a `trade` is specified as part of a JSON body, it is encoded as an object w
 | side | String(1) | The side of the trade. 'B' for buy, and 'S' for sell. |
 | sourceAmount | [Amount Object](#amount_object)  | The [Amount Object](#amount_object) representing the amount to settle. |
 | deliveredAmount | [Amount Object](#amount_object)  | The [Amount Object](#amount_object) representing the amount to be delivered. |
-| sourceWalletId | [ID](../conventions/formatingConventions.md#type_id) | The [ID](../conventions/formatingConventions.md#type_id) of the source account. `xxx` |
-| deliveryWalletId | [ID](../conventions/formatingConventions.md#type_id) | The [ID](../conventions/formatingConventions.md#type_id) of the destination account. `xxx` |
+| sourceWalletId | [ID](../conventions/formatingConventions.md#type_id) | The [ID](../conventions/formatingConventions.md#type_id) of the source account. |
+| deliveryWalletId | [ID](../conventions/formatingConventions.md#type_id) | The [ID](../conventions/formatingConventions.md#type_id) of the destination account. |
 | currencyPair | [CurrencyPair](../conventions/formatingConventions.md#type_currencypair) | The currency pair representing the quote.  |
 | rate | [Rate Object](#rate_object) | The [Rate Object](#rate_object) describing the rate of the quote. |
 | createdDate | [DateTime](../conventions/formatingConventions.md#type_datetime) | The creation [DateTime](../conventions/formatingConventions.md#type_datetime) of the quote. |
@@ -381,7 +381,7 @@ As a rate is specified in a JSON body, it's encoded as an object with five field
 |-------|------|-------------|
 | currencyPair | [CurrencyPair](../conventions/formatingConventions.md#type_currencypair) | The [CurrencyPair](../conventions/formatingConventions.md#type_currencypair) used for the rates provided |
 | midMarket | Float | The average rate of the market between the bid and the ask rate. |
-| date | [DateTime](../conventions/formatingConventions.md#type_datetime) | The [DateTime](../conventions/formatingConventions.md#type_datetime) representing the last update on this currency. `YYYY-MM-DD HH:MM:SS` |
+| date | [DateTime](../conventions/formatingConventions.md#type_datetime) | The [DateTime](../conventions/formatingConventions.md#type_datetime) representing the last update on this currency. |
 | coreAsk | Float | The interbank BID rate provided by the FX partner of FX4BIZ . |
 | coreBid | Float | The interbank ASK rate provided by the FX partner of FX4BIZ. |
 

@@ -19,11 +19,16 @@ In the FX4BIZ API, what we call `external bank` account, can be either your own 
 Method: POST 
 URL: /externalBankAccounts/
 ```
-By submitting a new `external bank` account, you must supply the relevant details in order to pay a beneficiary.
-
-*Caution.* All your own `wallet` accounts have been created automatically when subscribing with FX4BIZ.
+By submitting a new `external bank` account, you must supply the relevant details in order to pay a beneficiary.<br />
+**Caution.** All your own `wallet` accounts have been created automatically when subscribing with FX4BIZ.
 
 The Submit External Bank Account service allows to reference `external bank` accounts which are your own accounts or a third party account hold in another bank.
+
+Adding an external bank has some rules :
+
+* If you have the BIC/SWIFT of the bank, just submit it, and we will recover informations of the bank on our own.
+* If you do not have the BIC/SWIFT of the bank, you have to refer at least its clearing code type, its clearing code, its name and its city.
+
 This service include verifications on the format of the account created.
 The API has been made in order to accept local specification of cross-boarder payments.
 
