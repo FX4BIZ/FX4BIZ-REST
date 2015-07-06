@@ -41,8 +41,8 @@ You can use this request in order to schedule a new payment.
 | feeCurrency  | [Currency](../conventions/formatingConventions.md#type_currency) | Required | A three digit code representing the currency related to the charges applied on your payment. |
 | feePaymentOption | String | Required | A code representing the charges option to be applied to this payment. `BEN | OUR | SHARE` |
 | priorityPaymentOption | String | Required | A code representing whether this payment as a standard priority, or a priority treatment in FX4BIZ an correspondent bank systems. `normal | urgent` |
-| tag | String(50) | Optionnal | A custom reference that you want to be related to this payment in the system. This tag is not communicated to the beneficiary. |
-| communication | String(76) | Optionnal | A Free format string representing the communication for the beneficiary. |
+| tag | String(50) | Optional | A custom reference that you want to be related to this payment in the system. This tag is not communicated to the beneficiary. |
+| communication | String(76) | Optional | A Free format string representing the communication for the beneficiary. |
 
 **Returns:**
 
@@ -110,9 +110,9 @@ Request the list of payments that has been created on a specific period of time.
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
 | status | String |  Required | A code representing the status of the payments you want to get. `all | Planified | Rejected | Finalized | Canceled | Refused | blocked | WaitingConfirmation` | 
-| fromDate | [Date](../conventions/formatingConventions.md#type_date) |  Optionnal | The starting date to search payments. |
-| toDate | [Date](../conventions/formatingConventions.md#type_date) |  Optionnal | The ending date to search payments. | 
-| sort | String |  Optionnal | A code representing the order of rendering objects. `ASC | DESC`| 
+| fromDate | [Date](../conventions/formatingConventions.md#type_date) |  Optional | The starting date to search payments. |
+| toDate | [Date](../conventions/formatingConventions.md#type_date) |  Optional | The ending date to search payments. | 
+| sort | String |  Optional | A code representing the order of rendering objects. `ASC | DESC`| 
 
 **Returns:**
 

@@ -62,8 +62,8 @@ Of course, it is possible to reference third party `wallet` accounts and execute
 | currency | [Currency](../conventions/formatingConventions.md#type_currency) | Required | A [three digit code](../conventions/formatingConventions.md#type_currency) specifying the account currency. `EUR` |
 | holderBank | [Holder Bank Object](../objects/objects.md#beneficiary_bank_object) | Required | The recipient bank details, holding the account. |
 | holder | [Holder Object](../objects/objects.md#beneficiary_object) | Required | The recipient details, owner of the account. |
-| tag | String(50) | Optionnal | Custom Data. `John Doe bank account EUR` |
-| correspondentBic | String | Optionnal | The intermediary bank identifier code. |
+| tag | String(50) | Optional | Custom Data. `John Doe bank account EUR` |
+| correspondentBic | String | Optional | The intermediary bank identifier code. |
 
 **Returns:**
 

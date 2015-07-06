@@ -104,7 +104,7 @@ With the Retrieve wallet list service, you can list obtain the list of all walle
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| sort | String | Optionnal | A code representing the order of rendering wallets by their creation date. `ASC | DESC` | 
+| sort | String | Optional | A code representing the order of rendering wallets by their creation date. `ASC | DESC` | 
 
 
 This request is applicable for the [pagination format](../conventions/formatingConventions.md#pagination).

@@ -64,7 +64,7 @@ The Retrieve Quote service is a read-only service permitting to ask for a real-t
 |-------|------|----------|-------------|
 | currencyPair | [CurrencyPair](../conventions/formatingConventions.md#type_currencypair) | Required | The currency pair representing the quote requessted. `EURUSD` |
 | side | String | Required | The side repressenting the quote. `S` to sell and `B` to buy. |
-| amount | [Amount Object](../objects/objects.md#amount_object) | Required | Amount to trade. |
+| amount | Float | Required | Amount to trade. |
 | deliveryDate | [Date](../conventions/formatingConventions.md#type_date) | Required | Initial delivery date of the quote. `YYYY-MM-DD` |
 
 **Returns:**
@@ -79,10 +79,7 @@ POST /quotes/
 {
     "currencyPair": "EURUSD",
     "side": "S",
-    "amount": {
-        "value": "15000",
-        "currency": "EUR"
-    },
+    "amount": 10000
     "deliveryDate": "2015-07-10"
 }
 ```

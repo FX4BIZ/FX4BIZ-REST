@@ -405,6 +405,8 @@ When a `quote` is specified as part of a JSON body, it is encoded as an object w
 | rate | [Rate Object](#rate_object) | The Object describing the rate of the quote. |
 | createdDate | [DateTime](../conventions/formatingConventions.md#type_datetime) | The creation date of the quote. |
 | deliveryDate | [Date](../conventions/formatingConventions.md#type_date) | The delivery date of the quote. |
+| sourceAmount | [Amount Object](../objects/objects.md#amount_object) |  Amount to be sent for this quote. |
+| deliveredAmount | [Amount Object](../objects/objects.md#amount_object) | Amount to be recieved by the beneficiary for this quote. |
 
 **Example:**
 
@@ -415,7 +417,9 @@ When a `quote` is specified as part of a JSON body, it is encoded as an object w
     "currencyPair": "EURUSD",
     "rate": {rate},
     "createdDate": "2015-06-29 11:46:36",
-    "deliveryDate": "2015-06-30"
+    "deliveryDate": "2015-06-30",
+    "sourceAmount": {amount},
+    "deliveredAmount": {amount}
 }
 ```
 
