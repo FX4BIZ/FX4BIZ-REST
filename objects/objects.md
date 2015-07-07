@@ -254,7 +254,7 @@ When a `payment` is specified as part of a JSON body, it is encoded as an object
 | executionDate | [Date](../conventions/formatingConventions.md#type_date) | The effective date of execution of the payment. |
 | amount | [Amount Object](#amount_object) | The nominal amount to be transfered. |
 | tag | String(50) | The custom reference related to the payment. (For internal use only, not communicated to the beneficiary) |
-| beneficiaryAccountId | [ID](../conventions/formatingConventions.md#type_id) | The code identifying the beneficiary account. |
+| externalBankAccountId | [ID](../conventions/formatingConventions.md#type_id) | The code identifying the beneficiary account. |
 | sourceWalletId | [ID](../conventions/formatingConventions.md#type_id) | The code identifying the wallet the payment will be processed. |
 | communication | String(76) | The wording of the payment. |
 | priorityPaymentOption | String(6) | The code representing whether this payment as a normal priority or if it as to be treated with a priority status by all the routing banks. `normal | urgent` |
@@ -271,7 +271,7 @@ When a `payment` is specified as part of a JSON body, it is encoded as an object
     "executionDate": "2015-06-30",
     "amount": {amount},
     "tag": "Invoice #11854854",
-    "beneficiaryAccountId": "NTd4ME",
+    "externalBankAccountId": "NTd4ME",
     "sourceWalletId": "ND4uME",
     "communication": "Payment for invoce",
     "priorityPaymentOption": "normal",

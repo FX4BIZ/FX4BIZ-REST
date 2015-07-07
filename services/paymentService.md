@@ -34,7 +34,7 @@ You can use this request in order to schedule a new payment.
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
 | sourceWalletId | [ID](../conventions/formatingConventions.md#type_id) | Required | The code identifying the wallet from which the payment must be processed. |
-| beneficiaryAccountId | [ID](../conventions/formatingConventions.md#type_id) | Required | The code identifying the recipient account. |
+| externalBankAccountId | [ID](../conventions/formatingConventions.md#type_id) | Required | The code identifying the recipient account. |
 | amount | [Amount Object](../objects/objects.md#amount_object) | Required | Amount to be sent. <br />**Caution.** The currency of the amount sent must be equal to the currency of the beneficiary account. |
 | desiredExecutionDate | [Date](../conventions/formatingConventions.md#type_date) | Required | The initial execution date of your payment. `YYYY-MM-DD` |
 | feeCurrency  | [Currency](../conventions/formatingConventions.md#type_currency) | Required | A three digit code representing the currency related to the charges applied on your payment. |
@@ -53,7 +53,7 @@ You can use this request in order to schedule a new payment.
 ```js
 POST /payments/
 {
-    "beneficiaryAccountId": "ND4xBE",
+    "externalBankAccountId": "ND4xBE",
     "amount": {
         "value": 100000,
         "currency": "USD"
