@@ -41,7 +41,7 @@ As an additional convention, all responses from FX4Biz-REST contain a `"success"
 
 ## <a id="errors_conventions"></a> Errors ##
 
-FX4BIZ uses conventional HTTP response codes to indicate success or failure of an PAI request. The body of the response contains more detailed information on the cause of the problem.
+FX4BIZ uses conventional HTTP response codes to indicate success or failure of an API request. The body of the response contains more detailed information on the cause of the problem.
 
 In general, the HTTP status code is indicative of where the problem occurred:
 
