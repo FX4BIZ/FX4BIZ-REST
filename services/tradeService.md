@@ -165,7 +165,7 @@ POST /trades/onquote/
 
 ```
 Method: GET
-URL: /trades/{status}/
+URL: /trades/_{status}/
 ```
 Retrieve the list of trades executed.
 
@@ -186,7 +186,7 @@ Retrieve the list of trades executed.
 
 **Example:**
 ```js
-GET /trades/all/?fromDate=2015-01-01&toDate=2015-06-30&sort=DESC
+GET /trades/_all/?fromDate=2015-01-01&toDate=2015-06-30&sort=DESC
 ```
 <hr />
 

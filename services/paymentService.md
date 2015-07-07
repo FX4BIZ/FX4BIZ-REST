@@ -100,7 +100,7 @@ PUT /payments/TDK4eB/confirm
 
 ```
 Method: GET
-URL: /payments/{status}/
+URL: /payments/_{status}/
 ```
 Request the list of payments that has been created on a specific period of time.
 
@@ -121,7 +121,7 @@ Request the list of payments that has been created on a specific period of time.
 
 **Example:**
 ```js
-GET /payments/all/?fromDate=2010-01-01&toDate=2015-06-30&sort=DESC
+GET /payments/_all/?fromDate=2010-01-01&toDate=2015-06-30&sort=DESC
 ```
 <hr />
 
