@@ -133,6 +133,14 @@ The CurrencyPair type represents a currency pair, used for currency change opera
 |------|-----------|--------|-------------|---------|
 | CurrencyPair | String | `^[A-Z]{6}$` | A String representing two concatenated Three-digit [ISO 4217 Currency Code](http://www.xe.com/iso4217.php) of a currency. This String only contains capitalized letters. | `EURGBP` |
 
+### <a id="type_quoteddecimal"></a> QuotedDecimal Type ###
+
+The QuotedDecimal type describe an formatted floating number.
+
+| Type | Real type | format | description | example |
+|------|-----------|--------|-------------|---------|
+| QuotedDecimal | String | `^[0-9]{12}\.[0-9]{7}$` | A String representing a formatted floating number. | `"1.11723"` |
+
 ## <a id="anonymous_object"></a> Anonymous objects ##
 
 Some request of the FX4BIZ REST API send, as a response, anomymous objects, or arrays of anonymous objects.  

@@ -375,10 +375,10 @@ As a rate is specified in a JSON body, it's encoded as an object with the follow
 | currencyPair | [CurrencyPair](../conventions/formatingConventions.md#type_currencypair) | The three-digit code used for the rates provided |
 | midMarket | String | The average rate of the market between the bid and the ask rate. |
 | date | [DateTime](../conventions/formatingConventions.md#type_datetime) | The date representing the last update on the update. |
-| coreAsk | String | The interbank BID rate provided by the FX partner of FX4BIZ. |
-| coreBid | String | The interbank ASK rate provided by the FX partner of FX4BIZ. |
-| appliedAsk | String | The interbank BID rate applied for the transaction. |
-| appliedBid | String | The interbank ASK rate applied for the transaction. |
+| coreAsk | [QuotedDecimal](../conventions/formatingConventions.md#type_quoteddecimal) | The interbank BID rate provided by the FX partner of FX4BIZ. |
+| coreBid | [QuotedDecimal](../conventions/formatingConventions.md#type_quoteddecimal) | The interbank ASK rate provided by the FX partner of FX4BIZ. |
+| appliedAsk | [QuotedDecimal](../conventions/formatingConventions.md#type_quoteddecimal) | The interbank BID rate applied for the transaction. |
+| appliedBid | [QuotedDecimal](../conventions/formatingConventions.md#type_quoteddecimal) | The interbank ASK rate applied for the transaction. |
 
 **Example:**
 
@@ -388,7 +388,9 @@ As a rate is specified in a JSON body, it's encoded as an object with the follow
 	"midMarket":"0.726500",
 	"date":"2015-03-31 13:15:04",
 	"coreAsk":"0.726500",
-	"coreBid":"0.726500"
+	"coreBid":"0.726500",
+	"appliedAsk":"0.726500",
+	"appliedBid":"0.726500"
 }
 ```
 
