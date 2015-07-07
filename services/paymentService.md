@@ -108,7 +108,7 @@ Request the list of payments that has been created on a specific period of time.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| status | String |  Required | A code representing the status of the payments you want to get. `all | Planified | Rejected | Finalized | Canceled | Refused | blocked | WaitingConfirmation` | 
+| status | String |  Required | A code representing the status of the payments you want to get. `all | Planified | Rejected | Finalized | Canceled | Refused | blocked | WaitingConfirmation ` | 
 | fromDate | [Date](../conventions/formatingConventions.md#type_date) |  Optional | The starting date to search payments. |
 | toDate | [Date](../conventions/formatingConventions.md#type_date) |  Optional | The ending date to search payments. | 
 | sort | String |  Optional | A code representing the order of rendering objects. `ASC | DESC`| 

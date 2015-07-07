@@ -248,7 +248,7 @@ When a `payment` is specified as part of a JSON body, it is encoded as an object
 | Field | Type | Description |
 |-------|------|-------------|
 | id | [ID](../conventions/formatingConventions.md#type_id) | The [ID](../conventions/formatingConventions.md#type_id) of the payment. |
-| status | String | The code identifying the payment status. `Plannified | Canceled | Finalized` |
+| status | String | The code identifying the payment status. ` Planified | Rejected | Finalized | Canceled | Refused | blocked | WaitingConfirmation ` |
 | createdDate | [DateTime](../conventions/formatingConventions.md#type_datetime) | The creation date of the payment. |
 | desiredExecutionDate | [Date](../conventions/formatingConventions.md#type_date) | The initial date of execution when the payment is created. |
 | executionDate | [Date](../conventions/formatingConventions.md#type_date) | The effective date of execution of the payment. |
@@ -290,6 +290,7 @@ When a `trade` is specified as part of a JSON body, it is encoded as an object w
 | Field | Type | Description |
 |-------|------|-------------|
 | id | [ID](../conventions/formatingConventions.md#type_id) | The code identifying the trade. |
+| status | String | The code identifying the payment status. `Plannified | Canceled | Finalized` |
 | side | String(1) | The side of the trade. `B | S` |
 | sourceAmount | [Amount Object](#amount_object)  | The amount to be debited from the source Wallet. |
 | deliveredAmount | [Amount Object](#amount_object)  | The amount to be credited to the delivery wallet |
@@ -372,20 +373,22 @@ As a rate is specified in a JSON body, it's encoded as an object with the follow
 | Field | Type | Description |
 |-------|------|-------------|
 | currencyPair | [CurrencyPair](../conventions/formatingConventions.md#type_currencypair) | The three-digit code used for the rates provided |
-| midMarket | Float | The average rate of the market between the bid and the ask rate. |
+| midMarket | String | The average rate of the market between the bid and the ask rate. |
 | date | [DateTime](../conventions/formatingConventions.md#type_datetime) | The date representing the last update on the update. |
-| coreAsk | Float | The interbank BID rate provided by the FX partner of FX4BIZ. |
-| coreBid | Float | The interbank ASK rate provided by the FX partner of FX4BIZ. |
+| coreAsk | String | The interbank BID rate provided by the FX partner of FX4BIZ. |
+| coreBid | String | The interbank ASK rate provided by the FX partner of FX4BIZ. |
+| appliedAsk | String | The interbank BID rate applied for the transaction. |
+| appliedBid | String | The interbank ASK rate applied for the transaction. |
 
 **Example:**
 
 ```js
 "rate":{
 	"currencyPair":"EURGBP",
-	"midMarket":0.726500,
+	"midMarket":"0.726500",
 	"date":"2015-03-31 13:15:04",
-	"coreAsk":0.726500,
-	"coreBid":0.726500
+	"coreAsk":"0.726500",
+	"coreBid":"0.726500"
 }
 ```
 
