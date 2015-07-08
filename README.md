@@ -101,14 +101,14 @@ Our API is divided into sections based on different concepts in our system. Each
 * [Log Object](./objects/objects.md#log_object)
 * [Process Result Object](./objects/objects.md#processresult_object)
 
-## [Formatting Conventions](./conventions/formatingConventions.md) ##
+## [Formatting Conventions](./conventions/formattingConventions.md) ##
 
-* [Cut-Off Times](./conventions/formatingConventions.md#cut_off_times)
-* [Errors](./conventions/formatingConventions.md#errors_conventions)
-* [Pagination](./conventions/formatingConventions.md#pagination)
-* [normalized Types](./conventions/formatingConventions.md#anonymous_object)
-* [anonymous Objects](./conventions/formatingConventions.md#anonymous_object)
-* [Versioning](./conventions/formatingConventions.md#versioning)
+* [Cut-Off Times](./conventions/formattingConventions.md#cut_off_times)
+* [Errors](./conventions/formattingConventions.md#errors_conventions)
+* [Pagination](./conventions/formattingConventions.md#pagination)
+* [normalized Types](./conventions/formattingConventions.md#anonymous_object)
+* [anonymous Objects](./conventions/formattingConventions.md#anonymous_object)
+* [Versioning](./conventions/formattingConventions.md#versioning)
 
 ## LICENCE ##
 
