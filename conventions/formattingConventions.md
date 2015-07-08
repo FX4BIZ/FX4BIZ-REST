@@ -1,6 +1,5 @@
 # Formatting Conventions #  
 
-
 The FX4BIZ Rest API conforms to the following general behavior for [RESTful API](http://en.wikipedia.org/wiki/Representational_state_transfer):
 
 * You make [HTTPS](http://en.wikipedia.org/wiki/HTTPS) requests to the API endpoint, indicating the desired resources within the URL itself. (The public server, for the sake of security, only accepts [HTTPS](http://en.wikipedia.org/wiki/HTTPS) requests.)
