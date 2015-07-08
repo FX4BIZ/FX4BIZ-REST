@@ -20,6 +20,7 @@ As an additional convention, all responses from FX4Biz-REST contain a `"success"
 	* [DateTime type](#type_datetime)
 	* [Currency type](#type_currency)
 	* [CurrencyPair type](#type_currencypair)
+	* [QuotedDecimal type](#type_quoteddecimal)
 * [anonymous Objects](#anonymous_object)
 * [Versioning](#versioning)
 
