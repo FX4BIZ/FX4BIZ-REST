@@ -30,6 +30,7 @@ When an account is specified as part of a JSON body, it is encoded as an object 
 | currency | [Currency](../conventions/formatingConventions.md#type_currency) | The three-digit code specifying the currency of the account. |
 | tag |  String(50) | Custom reference of the account. |
 | status |  String | The code specifying the status of the account. `authorized | locked | not authorized` |
+| createdDate | [DateTime](../conventions/formatingConventions.md#type_datetime) | The creation date of the external bank account. |
 | accountNumber | String(40) | The code specifying the account (can be either an Iban or an account number). |
 | correspondentBank | [Correspondent Bank Object](#correspondent_bank_object) | The intermediary bank details, used to reach the beneficiary bank. |
 | holderBank | [Holder Bank Object](#beneficiary_bank_object) | The recipient bank details, holding the account. |
@@ -43,6 +44,7 @@ When an account is specified as part of a JSON body, it is encoded as an object 
     "currency": "EUR",
     "tag": "My wallet account EUR",
     "status": "Authorized",
+    "createdDate": "2015-07-01 04:14:38",
     "accountNumber": "516981638516313513",
     "correspondantBank":{correspondentBank}
     "holderBank":{beneficiaryBank}
