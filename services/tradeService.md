@@ -34,7 +34,7 @@ You can use these rates for your internal needs (charts, consolidation etc..).
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| instruments | String | Required | A code representing a list of [CurrencyPair](../conventions/formatingConventions.md#type_currencypair). Crosses must be separated with commas. <br />You can chain as many crosses as you want, as long as they're separated with commas. |
+| instruments | String | Required | A code representing a list of [CurrencyPair](../conventions/formattingConventions.md#type_currencypair). Crosses must be separated with commas. <br />You can chain as many crosses as you want, as long as they're separated with commas. |
 
 **Returns:**
 
@@ -62,10 +62,10 @@ The Retrieve Quote service is a read-only service permitting to ask for a real-t
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| currencyPair | [CurrencyPair](../conventions/formatingConventions.md#type_currencypair) | Required | The currency pair representing the quote requessted. `EURUSD` |
+| currencyPair | [CurrencyPair](../conventions/formattingConventions.md#type_currencypair) | Required | The currency pair representing the quote requessted. `EURUSD` |
 | side | String | Required | The side repressenting the quote. `S` to sell and `B` to buy. |
 | amount | [Amount Object](../objects/objects.md#amount_object) | Required | [Amount Object](../objects/objects.md#amount_object) representing the amount to trade. |
-| deliveryDate | [Date](../conventions/formatingConventions.md#type_date) | Required | Initial delivery date of the quote. `YYYY-MM-DD` |
+| deliveryDate | [Date](../conventions/formattingConventions.md#type_date) | Required | Initial delivery date of the quote. `YYYY-MM-DD` |
 
 **Returns:**
 
@@ -97,12 +97,12 @@ This services permits to execute trade.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| sourceWalletId | [ID](../conventions/formatingConventions.md#type_id) | Required | The code identifying the account to be debited of the amount of currency sold. |
-| deliveryWalletId | [ID](../conventions/formatingConventions.md#type_id) | Required | The code identifying the destination account of the amount of currencies bought. |
-| currencyPair | [CurrencyPair](../conventions/formatingConventions.md#type_currencypair) | Required | A six-digit code representing the cross of currency requested. |
+| sourceWalletId | [ID](../conventions/formattingConventions.md#type_id) | Required | The code identifying the account to be debited of the amount of currency sold. |
+| deliveryWalletId | [ID](../conventions/formattingConventions.md#type_id) | Required | The code identifying the destination account of the amount of currencies bought. |
+| currencyPair | [CurrencyPair](../conventions/formattingConventions.md#type_currencypair) | Required | A six-digit code representing the cross of currency requested. |
 | side | String | Required | Action related to the nominal amount. To be bought or sold on the market, `S` to sell and `B` to buy. |
 | amount | [Amount Object](../objects/objects.md#amount_object) | Required | Nominal amount associated to the trade. It must always be expressed in the currency of the sourceWallet.  |
-| deliveryDate | [Date](../conventions/formatingConventions.md#type_date) | Required | The date when the deliveryAmount will be delivered to the beneficiary. |
+| deliveryDate | [Date](../conventions/formattingConventions.md#type_date) | Required | Execution date of your trade. |
 
 
 **Returns:**
@@ -141,9 +141,9 @@ This services permits to execute trade.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| quoteId | [ID](../conventions/formatingConventions.md#type_id) | Required | The code identifying the quote you get from [Retrieve quote](#post_quote). |
-| sourceWalletId | [ID](../conventions/formatingConventions.md#type_id) | Required | The code identifying the account to be debited of the amount of currency sold. |
-| deliveryWalletId | [ID](../conventions/formatingConventions.md#type_id) | Required | The code identifying the destination account of the amount of currencies bought. |
+| quoteId | [ID](../conventions/formattingConventions.md#type_id) | Required | The code identifying the quote you get from [Retrieve quote](#post_quote). |
+| sourceWalletId | [ID](../conventions/formattingConventions.md#type_id) | Required | The code identifying the account to be debited of the amount of currency sold. |
+| deliveryWalletId | [ID](../conventions/formattingConventions.md#type_id) | Required | The code identifying the destination account of the amount of currencies bought. |
 
 **Returns:**
 
@@ -175,8 +175,8 @@ Retrieve the list of trades executed.
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
 | status | String |  Required | A code representing the status of the payments you want to get. `all | planified | rejected | finalized | canceled | refused | blocked | waitingconfirmation` | 
-| fromDate | [Date](../conventions/formatingConventions.md#type_date) | Optional | The date representing the starting date to search payments. `YYYY-MM-DD` |
-| toDate | [Date](../conventions/formatingConventions.md#type_date) | Optional | The date representing the ending date to search payments. `YYYY-MM-DD` | 
+| fromDate | [Date](../conventions/formattingConventions.md#type_date) | Optional | The date representing the starting date to search payments. `YYYY-MM-DD` |
+| toDate | [Date](../conventions/formattingConventions.md#type_date) | Optional | The date representing the ending date to search payments. `YYYY-MM-DD` | 
 | sort | String | Optional | A code representing the order of rendering trades by its creation date. `ASC | DESC` | 
 
 **Returns:**
@@ -203,7 +203,7 @@ Retrieve the trade details.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| id | [ID](../conventions/formatingConventions.md#type_id) | Required | The code identifying the trade you want. |
+| id | [ID](../conventions/formattingConventions.md#type_id) | Required | The code identifying the trade you want. |
 
 **Returns:**
 

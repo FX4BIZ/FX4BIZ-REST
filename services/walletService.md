@@ -31,7 +31,7 @@ This request allows you to submit a new wallet for a given currency.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| currency | [Currency](../conventions/formatingConventions.md#type_currency) | Required | A three-digit code specifying the wallet currency. `USD` |
+| currency | [Currency](../conventions/formattingConventions.md#type_currency) | Required | A three-digit code specifying the wallet currency. `USD` |
 
 **Returns:**
 
@@ -63,7 +63,7 @@ This request allows you to submit a new wallet for a given currency and a given 
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| currency | [Currency](../conventions/formatingConventions.md#type_currency) | Required | A three-digit code specifying the wallet currency. `USD` |
+| currency | [Currency](../conventions/formattingConventions.md#type_currency) | Required | A three-digit code specifying the wallet currency. `USD` |
 | holder | [Holder Object](../objects/objects.md#beneficiary_object) | Required | The recipient details, owner of the wallet. |
 
 **Returns:**
@@ -107,19 +107,19 @@ With the Retrieve wallet list service, you can list obtain the list of all walle
 | sort | String | Optional | A code representing the order of rendering wallets by their creation date. `ASC | DESC` | 
 
 
-This request is applicable for the [pagination format](../conventions/formatingConventions.md#pagination).
+This request is applicable for the [pagination format](../conventions/formattingConventions.md#pagination).
 
 **Returns:**
 
 | Field | Type | Description |
 |-------|------|-------------|
 | wallets | Array[Object] | An Array of objects representing wallets. |
-| Object.id | [ID](../conventions/formatingConventions.md#type_id) | The code identifying the wallet. |
+| Object.id | [ID](../conventions/formattingConventions.md#type_id) | The code identifying the wallet. |
 | Object.tag | String | The custom wording of the wallet. |
-| Object.currency | [Currency](../conventions/formatingConventions.md#type_currency) | The three-digit code identifying the currency of the wallet. |
+| Object.currency | [Currency](../conventions/formattingConventions.md#type_currency) | The three-digit code identifying the currency of the wallet. |
 | Object.bookingAmount | [Amount Object](../objects/objects.md#amount_object) | The total amount booked on the account. |
 | Object.valueAmount | [Amount Object](../objects/objects.md#amount_object) | The total amount available in the wallet. |
-| Object.dateLastFinancialMovement | [Date](../conventions/formatingConventions.md#type_date) | The date of the last financial move in this wallet. |
+| Object.dateLastFinancialMovement | [Date](../conventions/formattingConventions.md#type_date) | The date of the last financial move in this wallet. |
 
 **Example:**
 ```js
@@ -140,7 +140,7 @@ This request allows you to see the details related to a specific wallet.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| id | [ID](../conventions/formatingConventions.md#type_id) | Required | The code identifying the external bank account you want. |
+| id | [ID](../conventions/formattingConventions.md#type_id) | Required | The code identifying the external bank account you want. |
 
 **Returns:**
 
@@ -167,14 +167,14 @@ This request allows you to see the details of a wallet balance at a given date.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| id | [ID](../conventions/formatingConventions.md#type_id) | Required | The code identifying the external bank account you want. |
-| date | [Date](../conventions/formatingConventions.md#type_date) | Required | The date used to retrieve the balance of the wallet. |
+| id | [ID](../conventions/formattingConventions.md#type_id) | Required | The code identifying the external bank account you want. |
+| date | [Date](../conventions/formattingConventions.md#type_date) | Required | The date used to retrieve the balance of the wallet. |
 
 **Returns:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| id | [ID](../conventions/formatingConventions.md#type_id) | The code identifying the wallet. |
+| id | [ID](../conventions/formattingConventions.md#type_id) | The code identifying the wallet. |
 | balance | [Balance Object](../objects/objects.md#balance_object) | An object representing the balance of the account. |
 
 **Example:**

@@ -59,7 +59,7 @@ Of course, it is possible to reference third party `wallet` accounts and execute
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
 | accountNumber | String | Required | The recipient account number or Iban. `xxx4548` |
-| currency | [Currency](../conventions/formatingConventions.md#type_currency) | Required | A [three digit code](../conventions/formatingConventions.md#type_currency) specifying the account currency. `EUR` |
+| currency | [Currency](../conventions/formattingConventions.md#type_currency) | Required | A [three digit code](../conventions/formattingConventions.md#type_currency) specifying the account currency. `EUR` |
 | holderBank | [Holder Bank Object](../objects/objects.md#beneficiary_bank_object) | Required | The recipient bank details, holding the account. |
 | holder | [Holder Object](../objects/objects.md#beneficiary_object) | Required | The recipient details, owner of the account. |
 | tag | String(50) | Optional | Custom Data. `John Doe bank account EUR` |
@@ -123,7 +123,7 @@ The user is not to be passed as a parameter since it's the one you use to authen
 |-------|------|----------|-------------|
 | sort | String |  Optional | A code representing the order of rendering external bank accounts with their creation date. `ASC | DESC`| 
 
-This request is appliable for the [pagination format](../conventions/formatingConventions.md#pagination).
+This request is appliable for the [pagination format](../conventions/formattingConventions.md#pagination).
 
 **Returns:**
 
@@ -150,7 +150,7 @@ This request allows you to see the details related to an account. In order to co
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| id | [ID](../conventions/formatingConventions.md#type_id)  | Required | The [ID](../conventions/formatingConventions.md#type_id) of the external bank account you want. <br :>As ID's are listed with the [External Bank Account Objects](../objects/objects.md#account_object), You can retrieve this by listing all external bank accounts for the current user. |
+| id | [ID](../conventions/formattingConventions.md#type_id)  | Required | The [ID](../conventions/formattingConventions.md#type_id) of the external bank account you want. <br :>As ID's are listed with the [External Bank Account Objects](../objects/objects.md#account_object), You can retrieve this by listing all external bank accounts for the current user. |
 
 **Returns:**
 
@@ -177,7 +177,7 @@ Delete an external bank account.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| id | [ID](../conventions/formatingConventions.md#type_id) | Required | The [ID](../conventions/formatingConventions.md#type_id) of the external bank account you want to delete. |
+| id | [ID](../conventions/formattingConventions.md#type_id) | Required | The [ID](../conventions/formattingConventions.md#type_id) of the external bank account you want to delete. |
 
 **Returns:**
 

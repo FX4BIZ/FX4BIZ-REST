@@ -24,20 +24,20 @@ Request the list of financial movements that has been received or sent on a spec
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
 | number | String | Optionnal | An account number to specify on which wallet you would retrieve the financial movements. | 
-| fromDate | [Date](../conventions/formatingConventions.md#type_date) | Optionnal | The starting date to search financial movements on your wallets. |
-| toDate |  [Date](../conventions/formatingConventions.md#type_date) | Optionnal | The ending date to search financial movements on your wallets. | 
+| fromDate | [Date](../conventions/formattingConventions.md#type_date) | Optionnal | The starting date to search financial movements on your wallets. |
+| toDate |  [Date](../conventions/formattingConventions.md#type_date) | Optionnal | The ending date to search financial movements on your wallets. | 
 
-This request is appliable for the [pagination format](../conventions/formatingConventions.md#pagination).
+This request is appliable for the [pagination format](../conventions/formattingConventions.md#pagination).
 
 **Returns:**
 
 | Field | Type | Description |
 |-------|------|-------------|
 | financialMovements | Array[Object] | An Array of objects representing financial movements. |
-| Object.id | [ID](../conventions/formatingConventions.md#type_id) | The [ID](../conventions/formatingConventions.md#type_id) refering the financial movement. |
-| Object.bookingDate | [DateTime](../conventions/formatingConventions.md#type_datetime) | The booking [DateTime](../conventions/formatingConventions.md#type_datetime) of the financial movement. |
+| Object.id | [ID](../conventions/formattingConventions.md#type_id) | The [ID](../conventions/formattingConventions.md#type_id) refering the financial movement. |
+| Object.bookingDate | [DateTime](../conventions/formattingConventions.md#type_datetime) | The booking [DateTime](../conventions/formattingConventions.md#type_datetime) of the financial movement. |
 | Object.accountNumber | String | The account refering financial movement. |
-| Object.valueDate | [DateTime](../conventions/formatingConventions.md#type_datetime) | The value [DateTime](../conventions/formatingConventions.md#type_datetime) of the financial movement. |
+| Object.valueDate | [DateTime](../conventions/formattingConventions.md#type_datetime) | The value [DateTime](../conventions/formattingConventions.md#type_datetime) of the financial movement. |
 | Object.amount | [Amount Object](../objects/objects.md#amount_object) | An object reprsenting the amount concerned by the financial movement. |
 
 **Example:**
@@ -59,7 +59,7 @@ Request information on a particular financial movement that has been credited or
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| id | [ID](../conventions/formatingConventions.md#type_id) | Required | The [ID](../conventions/formatingConventions.md#type_id) referring the financial movement. |
+| id | [ID](../conventions/formattingConventions.md#type_id) | Required | The [ID](../conventions/formattingConventions.md#type_id) referring the financial movement. |
 
 **Returns:**
 

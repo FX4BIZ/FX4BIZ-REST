@@ -33,11 +33,11 @@ You can use this request in order to schedule a new payment.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| sourceWalletId | [ID](../conventions/formatingConventions.md#type_id) | Required | The code identifying the wallet from which the payment must be processed. |
-| externalBankAccountId | [ID](../conventions/formatingConventions.md#type_id) | Required | The code identifying the recipient account. |
+| sourceWalletId | [ID](../conventions/formattingConventions.md#type_id) | Required | The code identifying the wallet from which the payment must be processed. |
+| externalBankAccountId | [ID](../conventions/formattingConventions.md#type_id) | Required | The code identifying the recipient account. |
 | amount | [Amount Object](../objects/objects.md#amount_object) | Required | Amount to be sent. <br />**Caution.** The currency of the amount sent must be equal to the currency of the beneficiary account. |
-| desiredExecutionDate | [Date](../conventions/formatingConventions.md#type_date) | Required | The initial execution date of your payment. `YYYY-MM-DD` |
-| feeCurrency  | [Currency](../conventions/formatingConventions.md#type_currency) | Required | A three digit code representing the currency related to the charges applied on your payment. |
+| desiredExecutionDate | [Date](../conventions/formattingConventions.md#type_date) | Required | The initial execution date of your payment. `YYYY-MM-DD` |
+| feeCurrency  | [Currency](../conventions/formattingConventions.md#type_currency) | Required | A three digit code representing the currency related to the charges applied on your payment. |
 | feePaymentOption | String | Required | A code representing the charges option to be applied to this payment. `BEN | OUR | SHARE` |
 | priorityPaymentOption | String | Required | A code representing whether this payment as a standard priority, or a priority treatment in FX4BIZ an correspondent bank systems. `normal | urgent` |
 | tag | String(50) | Optional | A custom reference that you want to be related to this payment in the system. This tag is not communicated to the beneficiary. |
@@ -82,7 +82,7 @@ If the payment is not confirmed before the end of scheduled date of operation, i
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| id | [ID](../conventions/formatingConventions.md#type_id) | Required | The code identifying the payment you want to confirm. |
+| id | [ID](../conventions/formattingConventions.md#type_id) | Required | The code identifying the payment you want to confirm. |
 
 **Returns:**
 
@@ -109,8 +109,8 @@ Request the list of payments that has been created on a specific period of time.
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
 | status | String |  Required | A code representing the status of the trades you want to get. `all | planified | rejected | finalized | canceled | refused | blocked | waitingconfirmation ` | 
-| fromDate | [Date](../conventions/formatingConventions.md#type_date) |  Optional | The starting date to search payments. |
-| toDate | [Date](../conventions/formatingConventions.md#type_date) |  Optional | The ending date to search payments. | 
+| fromDate | [Date](../conventions/formattingConventions.md#type_date) |  Optional | The starting date to search payments. |
+| toDate | [Date](../conventions/formattingConventions.md#type_date) |  Optional | The ending date to search payments. | 
 | sort | String |  Optional | A code representing the order of rendering objects. `ASC | DESC`| 
 
 **Returns:**
@@ -137,7 +137,7 @@ Retrieve the details of a specific payment.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| id | [ID](../conventions/formatingConventions.md#type_id) | Required | The code identifying the payment you want. |
+| id | [ID](../conventions/formattingConventions.md#type_id) | Required | The code identifying the payment you want. |
 
 **Returns:**
 
@@ -162,7 +162,7 @@ URL: /payment/{id}
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| id | [ID](../conventions/formatingConventions.md#type_id) | Required | The code identifying the payment you want to delete. |
+| id | [ID](../conventions/formattingConventions.md#type_id) | Required | The code identifying the payment you want to delete. |
 
 **Returns:**
 
