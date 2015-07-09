@@ -29,8 +29,6 @@ When an account is specified as part of a JSON body, it is encoded as an object 
 | id |  [ID](../conventions/formatingConventions.md#type_id) | The code identifying the account. |
 | currency | [Currency](../conventions/formatingConventions.md#type_currency) | The three-digit code specifying the currency of the account. |
 | tag |  String(50) | Custom reference of the account. |
-| status |  String | The code specifying the status of the account. `authorized | locked | not authorized` |
-| createdDate | [DateTime](../conventions/formatingConventions.md#type_datetime) | The creation date of the external bank account. |
 | accountNumber | String(40) | The code specifying the account (can be either an Iban or an account number). |
 | correspondentBank | [Correspondent Bank Object](#correspondent_bank_object) | The intermediary bank details, used to reach the beneficiary bank. |
 | holderBank | [Holder Bank Object](#beneficiary_bank_object) | The recipient bank details, holding the account. |
@@ -43,8 +41,6 @@ When an account is specified as part of a JSON body, it is encoded as an object 
     "id": "NT4edA",
     "currency": "EUR",
     "tag": "My wallet account EUR",
-    "status": "Authorized",
-    "createdDate": "2015-07-01 04:14:38",
     "accountNumber": "516981638516313513",
     "correspondantBank":{correspondentBank}
     "holderBank":{beneficiaryBank}
@@ -124,14 +120,14 @@ When an amount of currency is specified as part of a JSON body, it is encoded as
 
 | Field | Type | Description |
 |-------|------|-------------|
-| value  | Float | The quantity of the currency. |
+| value  | [QuotedDecimal](../conventions/formatingConventions.md#type_quoteddecimal) | The quantity of the currency. |
 | currency | [Currency](../conventions/formatingConventions.md#type_currency) | The three-digit code specifying the currency related to the amount. |
 
 **Example:**
 
 ```js
 "amount": {
-	"value": 10000.00,
+	"value": "10000.00",
 	"currency": "GBP"
 }
 ```
@@ -292,13 +288,12 @@ When a `trade` is specified as part of a JSON body, it is encoded as an object w
 | Field | Type | Description |
 |-------|------|-------------|
 | id | [ID](../conventions/formatingConventions.md#type_id) | The code identifying the trade. |
-| status | String | The code identifying the payment status. `Plannified | Canceled | Finalized` |
+| status | String | The status of the trade. `planified | canceled | finalized` |
 | side | String(1) | The side of the trade. `B | S` |
 | sourceAmount | [Amount Object](#amount_object)  | The amount to be debited from the source Wallet. |
 | deliveredAmount | [Amount Object](#amount_object)  | The amount to be credited to the delivery wallet |
 | sourceWalletId | [ID](../conventions/formatingConventions.md#type_id) | The code identifying the account to be debited of the amount of currency sold. |
 | deliveryWalletId | [ID](../conventions/formatingConventions.md#type_id) | The code identifying the destination account of the amount of currencies bought. |
-| currencyPair | [CurrencyPair](../conventions/formatingConventions.md#type_currencypair) | A six-digit code representing the cross of currency or isntrument requested. |
 | rate | [Rate Object](#rate_object) | The [Rate Object](#rate_object) describing FX market information asoociated to the trade. |
 | createdDate | [DateTime](../conventions/formatingConventions.md#type_datetime) | The creation date of the trade |
 | deliveryDate | [Date](../conventions/formatingConventions.md#type_date) | The delivery date of the trade. |
@@ -308,12 +303,12 @@ When a `trade` is specified as part of a JSON body, it is encoded as an object w
 ```js
 "trade": {
     "id": "NTUzMzA",
+    "status": "Finalized",
     "side": "B",
     "sourceAmount": {amount},
     "deliveredAmount": {amount},
     "sourceWalletId": "TD4eAB",
     "deliveryWalletId": "ND3eaB",
-    "currencyPair": "EURUSD",
     "rate": {rate},
     "createdDate": "2015-06-29 11:46:36",
     "deliveryDate": "2015-06-30"
@@ -375,7 +370,7 @@ As a rate is specified in a JSON body, it's encoded as an object with the follow
 | Field | Type | Description |
 |-------|------|-------------|
 | currencyPair | [CurrencyPair](../conventions/formatingConventions.md#type_currencypair) | The three-digit code used for the rates provided |
-| midMarket | String | The average rate of the market between the bid and the ask rate. |
+| midMarket | [QuotedDecimal](../conventions/formatingConventions.md#type_quoteddecimal) | The average rate of the market between the bid and the ask rate. |
 | date | [DateTime](../conventions/formatingConventions.md#type_datetime) | The date representing the last update on the update. |
 | coreAsk | [QuotedDecimal](../conventions/formatingConventions.md#type_quoteddecimal) | The interbank BID rate provided by the FX partner of FX4BIZ. |
 | coreBid | [QuotedDecimal](../conventions/formatingConventions.md#type_quoteddecimal) | The interbank ASK rate provided by the FX partner of FX4BIZ. |
@@ -412,8 +407,8 @@ When a `quote` is specified as part of a JSON body, it is encoded as an object w
 | rate | [Rate Object](#rate_object) | The Object describing the rate of the quote. |
 | createdDate | [DateTime](../conventions/formatingConventions.md#type_datetime) | The creation date of the quote. |
 | deliveryDate | [Date](../conventions/formatingConventions.md#type_date) | The delivery date of the quote. |
-| sourceAmount | [Amount Object](../objects/objects.md#amount_object) |  Amount to be sent for this quote. |
-| deliveredAmount | [Amount Object](../objects/objects.md#amount_object) | Amount to be recieved by the beneficiary for this quote. |
+| sourceAmount | [Amount Object](../objects/objects.md#amount_object) |  Amount that will be debited for the transaction concerning the quote. |
+| deliveredAmount | [Amount Object](../objects/objects.md#amount_object) | Amount that will be credited to the beneficiary for the transaction concerning the quote. |
 
 **Example:**
 

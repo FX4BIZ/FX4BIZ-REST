@@ -139,7 +139,7 @@ The QuotedDecimal type describe an formatted floating number.
 
 | Type | Real type | format | description | example |
 |------|-----------|--------|-------------|---------|
-| QuotedDecimal | String | `^[0-9]{12}\.[0-9]{7}$` | A String representing a formatted floating number. | `"1.11723"` |
+| QuotedDecimal | String | `^((\-){?})[0-9]{12}((\.[0-9]{1-7})?)$` | A String representing a formatted floating number. | `"1.11723"` |
 
 ## <a id="anonymous_object"></a> Anonymous objects ##
 

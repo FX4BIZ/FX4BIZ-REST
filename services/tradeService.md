@@ -79,7 +79,7 @@ POST /quotes/
 {
     "currencyPair": "EURUSD",
     "side": "S",
-    "amount": 10000
+    "amount": "10000"
     "deliveryDate": "2015-07-10"
 }
 ```
@@ -99,10 +99,10 @@ This services permits to execute trade.
 |-------|------|----------|-------------|
 | sourceWalletId | [ID](../conventions/formatingConventions.md#type_id) | Required | The code identifying the account to be debited of the amount of currency sold. |
 | deliveryWalletId | [ID](../conventions/formatingConventions.md#type_id) | Required | The code identifying the destination account of the amount of currencies bought. |
-| currencyPair | [CurrencyPair](../conventions/formatingConventions.md#type_currencypair) | Required | A six-digit code representing the cross of currency or isntrument requested. `EURUSD` |
+| currencyPair | [CurrencyPair](../conventions/formatingConventions.md#type_currencypair) | Required | A six-digit code representing the cross of currency requested. |
 | side | String | Required | Action related to the nominal amount. To be bought or sold on the market, `S` to sell and `B` to buy. |
-| amount | [Amount Object](../objects/objects.md#amount_object) | Required | Nominal amount associated to the trade. It can be the source amount or the targeted amount depending on the side of your trade. Basically, this is the amount that you want to be defined.<br />  **Caution:** The currency of the amount sent must be equal to the currency of the beneficiary account. |
-| deliveryDate | [Date](../conventions/formatingConventions.md#type_date) | Required | Execution date of you trade. |
+| amount | [Amount Object](../objects/objects.md#amount_object) | Required | Nominal amount associated to the trade. It must always be expressed in the currency of the sourceWallet.  |
+| deliveryDate | [Date](../conventions/formatingConventions.md#type_date) | Required | The date when the deliveryAmount will be delivered to the beneficiary. |
 
 
 **Returns:**
@@ -128,6 +128,7 @@ POST /trades/
 ```
 <hr />
 
+<!--
 #### <a id="post_trades_on_quote"></a> Execute trade on an existing quote ####
 
 ```
@@ -160,7 +161,7 @@ POST /trades/onquote/
 }
 ```
 <hr />
-
+-->
 #### <a id="cget_trades"></a> Retrieve Trades Book ####
 
 ```
@@ -173,7 +174,7 @@ Retrieve the list of trades executed.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| status | String |  Required | A code representing the status of the payments you want to get. `all | Planified | Rejected | Finalized | Canceled | Refused | blocked | WaitingConfirmation` | 
+| status | String |  Required | A code representing the status of the payments you want to get. `all | planified | rejected | finalized | canceled | refused | blocked | waitingconfirmation` | 
 | fromDate | [Date](../conventions/formatingConventions.md#type_date) | Optional | The date representing the starting date to search payments. `YYYY-MM-DD` |
 | toDate | [Date](../conventions/formatingConventions.md#type_date) | Optional | The date representing the ending date to search payments. `YYYY-MM-DD` | 
 | sort | String | Optional | A code representing the order of rendering trades by its creation date. `ASC | DESC` | 
