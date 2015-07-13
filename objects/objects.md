@@ -191,6 +191,8 @@ When a beneficiary bank is specified as part of a JSON body, it is encoded as an
 What we call a Holder can be either an Individual or an Organisation that own the account.
 May also be referred to as: Beneficiary/Supplier/Vendor/Payee/Recipient.
 
+In the beneficiary address, only the Country is mandatory, but you can specify all fields to be more precise.
+
 The Holder Object must store the following fields:
 
 **Object resources:**
@@ -263,7 +265,7 @@ When a `payment` is specified as part of a JSON body, it is encoded as an object
 ```js
 "payment": {
     "id": "ND4ue2",
-    "status": "WaitingConfirmation",
+    "status": "waitingconfirmation",
     "createdDate": "2015-06-29 16:50:30",
     "desiredExecutionDate": "2015-06-30",
     "executionDate": "2015-06-30",
@@ -303,7 +305,7 @@ When a `trade` is specified as part of a JSON body, it is encoded as an object w
 ```js
 "trade": {
     "id": "NTUzMzA",
-    "status": "Finalized",
+    "status": "finalized",
     "side": "B",
     "sourceAmount": {amount},
     "deliveredAmount": {amount},
@@ -343,14 +345,14 @@ When a financial movement is specified as part of a JSON body, it is encoded as 
 
 ```js
 "financialMovement": {
-        "id": "XXXXXXX",
+        "id": "NTD4aB2",
         "bookingDate": "2015-04-30",
         "valueDate": "2015-04-30",
-        "orderingAccountNumber": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-        "beneficiaryAccountNumber": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-        "orderingCustomer": "Diamants Plus Avenue de l'opéra Paris FR",
+        "orderingAccountNumber": "35135135354352153543156513",
+        "beneficiaryAccountNumber": "35135135354352153543156513",
+        "orderingCustomer": "Example client 1",
         "orderingInstitution": "BNP-PARIBAS SA (FORMERLY BANQUE NATIONALE DE PARIS S.A.) 16 BOULEVARD DES ITALIENS   75450 PARIS CEDEX 09 FR",
-        "BeneficiaryCustomer": "Diamants Plus Avenue de l'opéra Paris FR",
+        "BeneficiaryCustomer": "Example client 2",
         "orderingAmount": {amount},
         "beneficiaryAmount": {amount},
         "RemittanceInformation": "Billing #1385438",
@@ -407,8 +409,8 @@ When a `quote` is specified as part of a JSON body, it is encoded as an object w
 | rate | [Rate Object](#rate_object) | The Object describing the rate of the quote. |
 | createdDate | [DateTime](../conventions/formattingConventions.md#type_datetime) | The creation date of the quote. |
 | deliveryDate | [Date](../conventions/formattingConventions.md#type_date) | The delivery date of the quote. |
-| sourceAmount | [Amount Object](../objects/objects.md#amount_object) |  Amount that will be debited. |
-| deliveredAmount | [Amount Object](../objects/objects.md#amount_object) | Amount that will be credited to the beneficiary. |
+| sourceAmount | [Amount Object](../objects/objects.md#amount_object) |  The amount to be debited from the source Wallet. |
+| deliveredAmount | [Amount Object](../objects/objects.md#amount_object) | The amount to be credited to the delivery wallet. |
 
 **Example:**
 
