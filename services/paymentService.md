@@ -14,10 +14,10 @@ When you confirm a payment for processing, make sure you have sufficient funds i
 | Route | Description |
 |-------|-------------|
 | [`POST /payments/`](#post_payments)| Submit a Payment |
-| [`PUT /payments/{id}/confirm`](#put_payments_confirm) | Confirm Payment |
+| [`PUT /payments/-{id}/confirm`](#put_payments_confirm) | Confirm Payment |
 | [`GET /payments/`](#cget_payments) | Retrieve Payments History |
-| [`GET /payments/{id}`](#get_payments) | Retrieve Payment Details | 
-| [`DELETE /payments/{id}`](#delete_payments) | Cancel Payment |
+| [`GET /payments/-{id}`](#get_payments) | Retrieve Payment Details | 
+| [`DELETE /payments/-{id}`](#delete_payments) | Cancel Payment |
 
 ## Details ##
 
@@ -73,7 +73,7 @@ POST /payments/
 
 ```
 Method: PUT 
-URL: /payment/{id}/confirm
+URL: /payment/-{id}/confirm
 ```
 Payments that has been scheduled must be confirmed in order to be released.<br />
 If the payment is not confirmed before the end of scheduled date of operation, it will be automatically postponed to the next operation date available.
@@ -92,7 +92,7 @@ If the payment is not confirmed before the end of scheduled date of operation, i
 
 **Example:**
 ```js
-PUT /payments/TDK4eB/confirm
+PUT /payments/-TDK4eB/confirm
 ```
 <hr />
 
@@ -129,7 +129,7 @@ GET /payments/_all/?fromDate=2010-01-01&toDate=2015-06-30&sort=DESC
 
 ```
 Method: GET
-URL: /payments/{id}
+URL: /payments/-{id}
 ```
 Retrieve the details of a specific payment.
 
@@ -147,7 +147,7 @@ Retrieve the details of a specific payment.
 
 **Example:**
 ```js
-GET /payments/AB4bsE
+GET /payments/-AB4bsE
 ```
 <hr />
 
@@ -155,7 +155,7 @@ GET /payments/AB4bsE
 
 ```
 Method: DELETE
-URL: /payment/{id}
+URL: /payment/-{id}
 ```
 
 **Parameters:**
@@ -173,5 +173,5 @@ URL: /payment/{id}
 
 **Example:**
 ```js
-DELETE /payments/TE4Ba3
+DELETE /payments/-TE4Ba3
 ```

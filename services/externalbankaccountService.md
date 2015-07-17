@@ -8,8 +8,8 @@ In the FX4BIZ API, what we call `external bank` account, can be either your own 
 |-------|-------------|
 | [`POST /externalBankAccounts/`](#post_externalbankaccounts) | Submit new external bank account |
 | [`GET /externalBankAccounts/`](#cget_externalbankaccounts) | Retrieve external bank accounts list |
-| [`GET /externalBankAccounts/{id}`](#get_externalbankaccounts) | Retrieve external bank account details |
-| [`DELETE /externalBankAccounts/{id}`](#delete_externalbankaccounts) | Delete an external bank account |
+| [`GET /externalBankAccounts/-{id}`](#get_externalbankaccounts) | Retrieve external bank account details |
+| [`DELETE /externalBankAccounts/-{id}`](#delete_externalbankaccounts) | Delete an external bank account |
 
 ## Details ##
 
@@ -142,7 +142,7 @@ GET /externalBankAccounts/
 
 ```
 Method: GET 
-URL: /externalBankAccounts/{id}
+URL: /externalBankAccounts/-{id}
 ```
 This request allows you to see the details related to an account. In order to confirm, you can display the beneficiary information in your application for example.  
 
@@ -160,7 +160,7 @@ This request allows you to see the details related to an account. In order to co
 
 **Example:**
 ```js
-GET /externalBankAccounts/NT4aB1
+GET /externalBankAccounts/-NT4aB1
 ```
 
 <hr />
@@ -169,7 +169,7 @@ GET /externalBankAccounts/NT4aB1
 
 ```
 Method: DELETE 
-URL: /externalBankAccounts/{id}
+URL: /externalBankAccounts/-{id}
 ```
 Delete an external bank account.
 
@@ -187,5 +187,5 @@ Delete an external bank account.
 
 **Example:**
 ```js
-DELETE /externalBankAccounts/ND4EbA
+DELETE /externalBankAccounts/-ND4EbA
 ```

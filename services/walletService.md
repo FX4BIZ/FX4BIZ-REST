@@ -11,8 +11,8 @@ A virtual account is an administrative "subaccount" of one physical iban account
 | [`POST /wallets/`](#post_wallets) | Submit new wallet |
 | [`POST /wallets/withholder`](#post_wallets_with_holder) | Submit new wallet with an holder |
 | [`GET /wallets/`](#cget_wallets) | Retrieve wallets list |
-| [`GET /wallets/{id}`](#get_wallets) | Retrieve wallet details |
-| [`GET /wallets/{id}/balance/{date}`](#get_wallets_balance) | Retrieve wallet balance for a given date |
+| [`GET /wallets/-{id}`](#get_wallets) | Retrieve wallet details |
+| [`GET /wallets/-{id}/balance/{date}`](#get_wallets_balance) | Retrieve wallet balance for a given date |
 
 ## Details ##
 
@@ -132,7 +132,7 @@ GET /wallets/?per_page=20&page=2&sort=DESC
 
 ```
 Method: GET 
-URL: /wallets/{id}
+URL: /wallets/-{id}
 ```
 This request allows you to see the details related to a specific wallet. 
 
@@ -150,7 +150,7 @@ This request allows you to see the details related to a specific wallet.
 
 **Example:**
 ```JS
-GET /wallets/NT4d3a
+GET /wallets/-NT4d3a
 ```
 
 <hr />
@@ -159,7 +159,7 @@ GET /wallets/NT4d3a
 
 ```
 Method: GET 
-URL: /wallets/{id}/balance/{date}
+URL: /wallets/-{id}/balance/{date}
 ```
 This request allows you to see the details of a wallet balance at a given date. 
 
@@ -179,5 +179,5 @@ This request allows you to see the details of a wallet balance at a given date.
 
 **Example:**
 ```js
-GET /wallets/NT4eAD/balance/2015-04-30
+GET /wallets/-NT4eAD/balance/2015-04-30
 ```

@@ -45,43 +45,42 @@ Our API is divided into sections based on different concepts in our system. Each
 
 * [Submit new external bank account `POST /externalBankAccounts/`](./services/externalbankaccountService.md#post_externalbankaccounts)
 * [Retrieve external bank accounts list `GET /externalBankAccounts/`](./services/externalbankaccountService.md#cget_externalbankaccounts)
-* [Retrieve external bank account details `GET /externalBankAccounts/{id}`](./services/externalbankaccountService.md#get_externalbankaccounts)
-* [Delete an external bank account `DELETE /externalBankAccounts/{id}`](./services/externalbankaccountService.md#delete_externalbankaccounts)
+* [Retrieve external bank account details `GET /externalBankAccounts/-{id}`](./services/externalbankaccountService.md#get_externalbankaccounts)
+* [Delete an external bank account `DELETE /externalBankAccounts/-{id}`](./services/externalbankaccountService.md#delete_externalbankaccounts)
 
 #### [Wallet Accounts](./services/walletService.md) ####
 
 * [Submit new wallet `POST /wallets/`](./services/walletService.md#post_wallets)
 * [Submit new wallet with an holder `POST /wallets/withholder`](./services/walletService.md#post_wallets_with_holder)
 * [Retrieve wallets list `GET /wallets/`](./services/walletService.md#cget_wallets)
-* [Retrieve wallet details `GET /wallets/{id}`](./services/walletService.md#get_wallets)
-* [Retrieve wallet balance for a given date `GET /wallets/{id}/balance/{date}`](./services/walletService.md#get_wallets_balance)
+* [Retrieve wallet details `GET /wallets/-{id}`](./services/walletService.md#get_wallets)
+* [Retrieve wallet balance for a given date `GET /wallets/-{id}/balance/{date}`](./services/walletService.md#get_wallets_balance)
 
 #### [Payments](./services/paymentService.md) ####
 
 * [Submit a Payment `POST /payments/`](./services/paymentService.md#post_payments)
-* [Confirm Payment `PUT /payments/{id}/confirm`](./services/paymentService.md#put_payments_confirm)
+* [Confirm Payment `PUT /payments/-{id}/confirm`](./services/paymentService.md#put_payments_confirm)
 * [Retrieve Payments History `GET /payments/`](./services/paymentService.md#cget_payments)
-* [Retrieve Payment Details `GET /payments/{id}`](./services/paymentService.md#get_payments)
-* [Cancel Payment `DELETE /payments/{id}`](./services/paymentService.md#delete_payments)
+* [Retrieve Payment Details `GET /payments/-{id}`](./services/paymentService.md#get_payments)
+* [Cancel Payment `DELETE /payments/-{id}`](./services/paymentService.md#delete_payments)
 
 #### [Financial Movements](./services/financialmovementService.md) ####
 
 * [Retrieve Financial Movements History - `GET /financialmovements/`](./services/financialmovementService.md#cget_financialmovements)
-* [Retrieve Financial Movements Details - `GET /financialmovements/{id}`](./services/financialmovementService.md#get_financialmovements)
+* [Retrieve Financial Movements Details - `GET /financialmovements/-{id}`](./services/financialmovementService.md#get_financialmovements)
 
 #### [Trades](./services/tradeService.md) ####
 
 * [Retrieve Rates `GET /rates/{instruments}`](./services/tradeService.md#get_rates)
 * [Request Quote `POST /quotes/`](./services/tradeService.md#post_quotes)
 * [Submit Trade `POST /trades/`](./services/tradeService.md#post_trades)
-* [Submit Trade with an existing quote `POST /trades/onquote/`](./services/tradeService.md#post_trades_on_quote)
 * [Retrieve Trades Book `GET /trades/`](./services/tradeService.md#cget_trades)
-* [Retrieve Trade Details `GET /trades/{id}`](./services/tradeService.md#get_trades)
+* [Retrieve Trade Details `GET /trades/-{id}`](./services/tradeService.md#get_trades)
 
 #### [Logs](./services/logService.md) ####
 
 * [Retrieve Logs `GET /logs/`](./services/logService.md#get_logs) 
-* [Retrieve a log entry with a nonce `GET /logs/{nonce}`](./services/logService.md#get_log) 
+* [Retrieve a log entry with a nonce `GET /logs/-{nonce}`](./services/logService.md#get_log) 
 
 ## [API Objects](./objects/objects.md) ##
 

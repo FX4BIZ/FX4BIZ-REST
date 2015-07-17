@@ -7,7 +7,7 @@ The FX4BIZ Rest API allows you to get all financial movements from your [Wallets
 | Route | Description |
 |-------|-------------|
 | [`GET /financialmovements/`](#cget_financialmovements) | Retrieve Financial Movements History |
-| [`GET /financialmovements/{id}`](#get_financialmovements) | Retrieve Financial Movements Details |
+| [`GET /financialmovements/-{id}`](#get_financialmovements) | Retrieve Financial Movements Details |
 
 ## Details ##
 
@@ -51,7 +51,7 @@ GET /financialmovements/?number=165168513581&fromDate=2010-01-01&toDate?2015-04-
 
 ```
 Method: GET 
-URL: /financialmovements/{id}
+URL: /financialmovements/-{id}
 ```
 Request information on a particular financial movement that has been credited or debited to a wallet. 
 
@@ -69,6 +69,6 @@ Request information on a particular financial movement that has been credited or
 
 **Example:**
 ```js
-GET /financialmovements/TD4eIf
+GET /financialmovements/-TD4eIf
 ```
 

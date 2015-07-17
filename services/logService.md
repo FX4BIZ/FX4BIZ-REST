@@ -16,7 +16,7 @@ This time passed, your log entry will be lost.
 | Route | Description |
 |-------|-------------|
 | [`GET /logs/`](#get_logs) | Retrieve Logs |
-| [`GET /logs/{nonce}`](#get_log) | Retrieve a log entry with a nonce |
+| [`GET /logs/-{nonce}`](#get_log) | Retrieve a log entry with a nonce |
 
 ## Details ##
 
@@ -49,7 +49,7 @@ GET /logs/?per_page=10&page=1
 
 ```
 Method: 	GET
-URL: 		/logs/{nonce}
+URL: 		/logs/-{nonce}
 ```
 In case of somewhat happens during the request, the FX4BIZ API allows you to retrive a log entry by its nonce.  
 

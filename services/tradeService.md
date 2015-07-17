@@ -15,9 +15,8 @@ A FX trades also involves an amount, which includes both the numeric amount and 
 | [`GET /rates`](#get_rates) | Retrieve Rates |
 | [`POST /quotes`](#post_quotes) | Request Quote |
 | [`POST /trades`](#post_trades) | Submit Trade |
-| [`POST /trades/onquote/`](#post_trades_on_quote) | Submit Trade with an existing quote |
 | [`GET /trades/`](#cget_trades) | Retrieve Trades Book |
-| [`GET /trades/{id}`](#get_trades) | Retrieve Trade Details |
+| [`GET /trades/-{id}`](#get_trades) | Retrieve Trade Details |
 
 ## Details ##
 
@@ -195,7 +194,7 @@ GET /trades/_all/?fromDate=2015-01-01&toDate=2015-06-30&sort=DESC
 
 ```
 Method: GET
-URL: /trades/{id}
+URL: /trades/-{id}
 ```
 Retrieve the trade details.
 
@@ -213,6 +212,6 @@ Retrieve the trade details.
 
 **Example:**
 ```js
-GET /trades/TD4ebA
+GET /trades/-TD4ebA
 ```
 
