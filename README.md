@@ -37,6 +37,11 @@ As our API is designed to be secured, we highly recommend you to consult our [Au
 
 As a part of the authentication process is based on time, your systems should be synchronised through [Network Time Protocol](http://en.wikipedia.org/wiki/Network_Time_Protocol) to ensure the capability of reaching our services. Our API engine has a tolerance of 2 seconds gap to ensure that all systems are capable to reach the API, whever the [Time Server](http://en.wikipedia.org/wiki/Time_server) you uses. Using our API with non-synchronized system will result in various errors in response to your query.
 
+## Testing and troubleshooting ##
+
+For testing requests and have a clear representattion of what's returned by our API, you may want to use our [API testing script](./conventions/testing.md). Easy to use, it will help you integrate the API more efficiently.  
+Also, if you have some issues, please check our [Troubleshooting section](./conventions/troubleshooting.md) to see if your issue is referenced. If it's not, please contact our IT team.  
+
 ## Available API Routes ##
 
 Our API is divided into sections based on different concepts in our system. Each section is made up of a series of calls.
