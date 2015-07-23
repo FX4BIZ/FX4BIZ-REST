@@ -51,7 +51,7 @@ JSON;
 
 echo "### TEST API ###\n\n";
 
-$nonce="",$nonce64,$date,$digest,$header;
+$nonce="";$nonce64;$date;$digest;$header;
 
 $chars = "0123456789abcdef";
 for ($i = 0; $i < 32; $i++) {
