@@ -337,7 +337,7 @@ When a financial movement is specified as part of a JSON body, it is encoded as 
 | beneficiaryCustomer | String | A free formatted String representing the beneficiary customer with it's name and it's address. |
 | orderingAmount | [Amount Object](#amount_object) | The amount instructed by the ordering customer of the transfer. |
 | beneficiaryAmount | [Amount Object](#amount_object) | The amount delivered credited in the beneficiary account. |
-| RemittanceInformation  | The communication field. |
+| RemittanceInformation | String | The communication field. |
 | chargesDetails  | String | The charges details related to the transfer. |
 | exchangeRate | Float | The exchange rate applied on the transfer. |
 
