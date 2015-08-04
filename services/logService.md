@@ -30,7 +30,7 @@ This request uses the login sent in your header to get logs about this user's ac
 
 **Parameters:**
 
-This request is appliable for the [pagination format](../conventions/formattingConventions.md#pagination).
+[Pagination format](../conventions/formattingConventions.md#pagination) can be applied on this request.
 
 **Returns:**
 

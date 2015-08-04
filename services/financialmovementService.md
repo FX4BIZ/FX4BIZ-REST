@@ -23,11 +23,11 @@ Request the list of financial movements that has been received or sent on a spec
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| walletId | [ID](../conventions/formattingConventions.md#type_id) | Optionnal | An wallet ID to specify on which wallet you would retrieve the financial movements. | 
-| fromDate | [Date](../conventions/formattingConventions.md#type_date) | Optionnal | The starting date to search financial movements on your wallets. |
-| toDate |  [Date](../conventions/formattingConventions.md#type_date) | Optionnal | The ending date to search financial movements on your wallets. | 
+| walletId | [ID](../conventions/formattingConventions.md#type_id) | Optional | A wallet ID to specify to retreive only financial movements concerning this wallet. | 
+| fromDate | [Date](../conventions/formattingConventions.md#type_date) | Optional | The starting date to search financial movements on your wallets. |
+| toDate |  [Date](../conventions/formattingConventions.md#type_date) | Optional | The ending date to search financial movements on your wallets. | 
 
-This request is appliable for the [pagination format](../conventions/formattingConventions.md#pagination).
+[Pagination format](../conventions/formattingConventions.md#pagination) can be applied on this request.
 
 **Returns:**
 

@@ -113,6 +113,8 @@ Request the list of payments that has been created on a specific period of time.
 | toDate | [Date](../conventions/formattingConventions.md#type_date) |  Optional | The ending date to search payments. | 
 | sort | String |  Optional | A code representing the order of rendering objects. `ASC | DESC`| 
 
+[Pagination format](../conventions/formattingConventions.md#pagination) can be applied on this request.
+
 **Returns:**
 
 | Field | Type | Description |

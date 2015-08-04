@@ -121,9 +121,9 @@ The user is not to be passed as a parameter since it's the one you use to authen
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| sort | String |  Optional | A code representing the order of rendering external bank accounts with their creation date. `ASC | DESC`| 
+| sort | String | Optional | A code representing the order of rendering external bank accounts with their creation date. `ASC | DESC`| 
 
-This request is appliable for the [pagination format](../conventions/formattingConventions.md#pagination).
+[Pagination format](../conventions/formattingConventions.md#pagination) can be applied on this request.
 
 **Returns:**
 

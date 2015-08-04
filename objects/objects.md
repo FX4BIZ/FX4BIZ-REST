@@ -346,20 +346,20 @@ When a financial movement is specified as part of a JSON body, it is encoded as 
 
 ```js
 "financialMovement": {
-        "id": "NTD4aB2",
-        "bookingDate": "2015-04-30",
-        "valueDate": "2015-04-30",
-        "orderingAccountNumber": "35135135354352153543156513",
-        "orderingCustomer": "Example client 1",
-        "orderingInstitution": "BNP-PARIBAS SA (FORMERLY BANQUE NATIONALE DE PARIS S.A.) 16 BOULEVARD DES ITALIENS   75450 PARIS CEDEX 09 FR",
-        "orderingAmount": {amount},
-        "beneficiaryAccountNumber": "35135135354352153543156513",
-        "beneficiaryCustomer": "Example client 2",
-        "beneficiaryInstitution": "BNP-PARIBAS SA (FORMERLY BANQUE NATIONALE DE PARIS S.A.) 16 BOULEVARD DES ITALIENS   75450 PARIS CEDEX 09 FR",
-        "beneficiaryAmount": {amount},
-        "remittanceInformation": "Billing #1385438",
-        "chargesDetails": "-4200 USD BEN",
-        "exchangeRate": 1.2400
+    "id": "NTD4aB2",
+    "bookingDate": "2015-04-30",
+    "valueDate": "2015-04-30",
+    "orderingAccountNumber": "35135135354352153543156513",
+    "orderingCustomer": "Example client 1",
+    "orderingInstitution": "BNP-PARIBAS SA (FORMERLY BANQUE NATIONALE DE PARIS S.A.) 16 BOULEVARD DES ITALIENS   75450 PARIS CEDEX 09 FR",
+    "orderingAmount": {amount},
+    "beneficiaryAccountNumber": "35135135354352153543156513",
+    "beneficiaryCustomer": "Example client 2",
+    "beneficiaryInstitution": "BNP-PARIBAS SA (FORMERLY BANQUE NATIONALE DE PARIS S.A.) 16 BOULEVARD DES ITALIENS   75450 PARIS CEDEX 09 FR",
+    "beneficiaryAmount": {amount},
+    "remittanceInformation": "Billing #1385438",
+    "chargesDetails": "-4200 USD BEN",
+    "exchangeRate": 1.2400
 }
 ```
 
@@ -419,7 +419,7 @@ When a `quote` is specified as part of a JSON body, it is encoded as an object w
 ```js
 "quote": {
     "id": "NTUzMzA",
-    "side": "B",
+    "side": "b",
     "currencyPair": "EURUSD",
     "rate": {rate},
     "createdDate": "2015-06-29 11:46:36",
@@ -439,18 +439,18 @@ When a `log` is specified as part of a JSON body, it is encoded as an object wit
 
 | Field | Type | Description |
 |-------|------|-------------|
-| CreatedAt |  [DateTime](../conventions/formattingConventions.md#type_datetime) | The  [DateTime](../conventions/formattingConventions.md#type_datetime) when the log entry was created. |
-| ClosedAt |  [DateTime](../conventions/formattingConventions.md#type_datetime) | The  [DateTime](../conventions/formattingConventions.md#type_datetime) when the log entry was closed. |
-| TokenNonce | String | The nonce used in the HTTP header to authenticate the request. |
-| RemoteAddress | String(15) | The address of the request's emiter. |
-| RequestMethod | String(6) | The [HTTP method](http://fr.wikipedia.org/wiki/Hypertext_Transfer_Protocol#M.C3.A9thodes) of the request. |
-| UriRequested | String | The [Universal Resource Identifier](http://fr.wikipedia.org/wiki/Uniform_Resource_Identifier) given for this request. |
-| ParametersGiven | String | The optional parameters *(e.g. after the ?)* given for this request. |
-| RequestBody | String | The [HTTP](http://fr.wikipedia.org/wiki/Hypertext_Transfer_Protocol) request body. |
-| HttpResponseCode | Integer | The [HTTP response code](http://fr.wikipedia.org/wiki/Liste_des_codes_HTTP). |
-| ResponseBody | String | The text sent by the server as a result for the request. |
-| RestErrorTypeId | Integer | If there is an error during the processing the request, this id could be used to find this error. |
-| Login | String(7) | The login used for the request. |
+| createdAt |  [DateTime](../conventions/formattingConventions.md#type_datetime) | The  [DateTime](../conventions/formattingConventions.md#type_datetime) when the log entry was created. |
+| closedAt |  [DateTime](../conventions/formattingConventions.md#type_datetime) | The  [DateTime](../conventions/formattingConventions.md#type_datetime) when the log entry was closed. |
+| tokenNonce | String | The nonce used in the HTTP header to authenticate the request. |
+| remoteAddress | String(15) | The address of the request's emiter. |
+| requestMethod | String(6) | The [HTTP method](http://fr.wikipedia.org/wiki/Hypertext_Transfer_Protocol#M.C3.A9thodes) of the request. |
+| uriRequested | String | The [Universal Resource Identifier](http://fr.wikipedia.org/wiki/Uniform_Resource_Identifier) given for this request. |
+| parametersGiven | String | The optional parameters *(e.g. after the ?)* given for this request. |
+| requestBody | String | The [HTTP](http://fr.wikipedia.org/wiki/Hypertext_Transfer_Protocol) request body. |
+| httpResponseCode | Integer | The [HTTP response code](http://fr.wikipedia.org/wiki/Liste_des_codes_HTTP). |
+| responseBody | String | The text sent by the server as a result for the request. |
+| restErrorTypeId | Integer | If there is an error during the processing the request, this id could be used to find this error. |
+| login | String(7) | The login used for the request. |
 
 **Example:**
 
