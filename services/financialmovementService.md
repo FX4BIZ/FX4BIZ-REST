@@ -42,7 +42,7 @@ Request the list of financial movements that has been received or sent on a spec
 
 **Example:**
 ```js
-GET /financialmovements/?number=165168513581&fromDate=2010-01-01&toDate?2015-04-30&per_page=10&page=1
+GET /financialmovements/?walletId=NT3bEa&fromDate=2010-01-01&toDate=2015-04-30&per_page=10&page=1
 ```
 
 <hr />
