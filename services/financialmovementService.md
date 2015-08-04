@@ -36,7 +36,7 @@ This request is appliable for the [pagination format](../conventions/formattingC
 | financialMovements | Array[Object] | An Array of objects representing financial movements. |
 | Object.id | [ID](../conventions/formattingConventions.md#type_id) | The [ID](../conventions/formattingConventions.md#type_id) refering the financial movement. |
 | Object.bookingDate | [DateTime](../conventions/formattingConventions.md#type_datetime) | The booking [DateTime](../conventions/formattingConventions.md#type_datetime) of the financial movement. |
-| Object.accountNumber | String | The account refering financial movement. |
+| Object.walletId | [ID](../conventions/formattingConventions.md#type_id) | The wallet ID on which the financial movement is. |
 | Object.valueDate | [DateTime](../conventions/formattingConventions.md#type_datetime) | The value [DateTime](../conventions/formattingConventions.md#type_datetime) of the financial movement. |
 | Object.amount | [Amount Object](../objects/objects.md#amount_object) | An object reprsenting the amount concerned by the financial movement. |
 
