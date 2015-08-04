@@ -331,13 +331,14 @@ When a financial movement is specified as part of a JSON body, it is encoded as 
 | bookingDate | [Date](../conventions/formattingConventions.md#type_date) | The booking date of the transfer. |
 | valueDate | [Date](../conventions/formattingConventions.md#type_date) | The value date of the transfer. |
 | orderingAccountNumber | String(40) | The number referring the ordering account of the transfer. |
-| beneficiaryAccountNumber | String(40) | The number referring the beneficiary account. |
 | orderingCustomer | String | A free formatted String representing the ordering customer with it's name and it's address. |
 | orderingInstitution | String | A free formatted String representing the ordering institution with it's name and it's address. |
-| beneficiaryCustomer | String | A free formatted String representing the beneficiary customer with it's name and it's address. |
 | orderingAmount | [Amount Object](#amount_object) | The amount instructed by the ordering customer of the transfer. |
+| beneficiaryAccountNumber | String(40) | The number referring the beneficiary account. |
+| beneficiaryCustomer | String | A free formatted String representing the beneficiary customer with it's name and it's address. |
+| beneficiaryInstitution | String | A free formatted String representing the beneficiary institution with it's name and it's address. |
 | beneficiaryAmount | [Amount Object](#amount_object) | The amount delivered credited in the beneficiary account. |
-| RemittanceInformation | String | The communication field. |
+| remittanceInformation | String | The communication field. |
 | chargesDetails  | String | The charges details related to the transfer. |
 | exchangeRate | Float | The exchange rate applied on the transfer. |
 
@@ -349,13 +350,14 @@ When a financial movement is specified as part of a JSON body, it is encoded as 
         "bookingDate": "2015-04-30",
         "valueDate": "2015-04-30",
         "orderingAccountNumber": "35135135354352153543156513",
-        "beneficiaryAccountNumber": "35135135354352153543156513",
         "orderingCustomer": "Example client 1",
         "orderingInstitution": "BNP-PARIBAS SA (FORMERLY BANQUE NATIONALE DE PARIS S.A.) 16 BOULEVARD DES ITALIENS   75450 PARIS CEDEX 09 FR",
-        "BeneficiaryCustomer": "Example client 2",
         "orderingAmount": {amount},
+        "beneficiaryAccountNumber": "35135135354352153543156513",
+        "beneficiaryCustomer": "Example client 2",
+        "beneficiaryInstitution": "BNP-PARIBAS SA (FORMERLY BANQUE NATIONALE DE PARIS S.A.) 16 BOULEVARD DES ITALIENS   75450 PARIS CEDEX 09 FR",
         "beneficiaryAmount": {amount},
-        "RemittanceInformation": "Billing #1385438",
+        "remittanceInformation": "Billing #1385438",
         "chargesDetails": "-4200 USD BEN",
         "exchangeRate": 1.2400
 }
