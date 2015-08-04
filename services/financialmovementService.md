@@ -23,7 +23,7 @@ Request the list of financial movements that has been received or sent on a spec
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| number | String | Optionnal | An account number to specify on which wallet you would retrieve the financial movements. | 
+| walletId | [ID](../conventions/formattingConventions.md#type_id) | Optionnal | An wallet ID to specify on which wallet you would retrieve the financial movements. | 
 | fromDate | [Date](../conventions/formattingConventions.md#type_date) | Optionnal | The starting date to search financial movements on your wallets. |
 | toDate |  [Date](../conventions/formattingConventions.md#type_date) | Optionnal | The ending date to search financial movements on your wallets. | 
 
