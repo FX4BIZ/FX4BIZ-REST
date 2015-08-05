@@ -27,7 +27,8 @@ The Submit External Bank Account service allows to reference `external bank` acc
 Adding an external bank has some rules :
 
 * If you have the BIC/SWIFT of the bank, just submit it, and we will recover informations of the bank on our own.
-* If you do not have the BIC/SWIFT of the bank, you have to refer at least its clearing code type, its clearing code, its name and its city.
+* If you do not have the BIC/SWIFT of the bank, you have to refer at least its clearing code type, its clearing code and its name.
+* In both cases, if values are not mentionned above, they are not required.
 
 This service include verifications on the format of the account created.
 The API has been made in order to accept local specification of cross-boarder payments.
