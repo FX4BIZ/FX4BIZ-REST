@@ -1,4 +1,4 @@
-# FX4BIZ-REST API # 
+# FX4BIZ-REST API  
 
 The FX4BIZ-REST API provides a simplified, easy-to-use interface to the FX4BIZ accounts & operations via a RESTful API. This page explains how to use the API to execute FX trades, send cross-boarder payments and monitoring accounts with FX4BIZ.
 
