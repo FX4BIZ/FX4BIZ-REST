@@ -114,6 +114,4 @@ Our API is divided into sections based on different concepts in our system. Each
 * [anonymous Objects](./conventions/formattingConventions.md#anonymous_object)
 * [Versioning](./conventions/formattingConventions.md#versioning)
 
-## LICENCE ##
 
-TBD
