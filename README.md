@@ -56,10 +56,10 @@ Our API is divided into sections based on different concepts in our system. Each
 #### [Wallet Accounts](./services/walletService.md) ####
 
 * [Submit new wallet `POST /wallets/`](./services/walletService.md#post_wallets)
-* [Submit new wallet with an holder `POST /wallets/withholder`](./services/walletService.md#post_wallets_with_holder)
 * [Retrieve wallets list `GET /wallets/`](./services/walletService.md#cget_wallets)
 * [Retrieve wallet details `GET /wallets/-{id}`](./services/walletService.md#get_wallets)
 * [Retrieve wallet balance for a given date `GET /wallets/-{id}/balance/{date}`](./services/walletService.md#get_wallets_balance)
+* [Retreive wallet IBAN `GET /wallets/generateIBAN/{branch}/{accountNumber}`](./services/walletService.md#get_wallets_iban)
 
 #### [Payments](./services/paymentService.md) ####
 
@@ -104,6 +104,7 @@ Our API is divided into sections based on different concepts in our system. Each
 * [Quote Object](./objects/objects.md#trade_object)
 * [Log Object](./objects/objects.md#log_object)
 * [Process Result Object](./objects/objects.md#processresult_object)
+* [Virtual IBAN Object](./objects/objects.md#virtualIBAN_object)
 
 ## [Formatting Conventions](./conventions/formattingConventions.md) ##
 

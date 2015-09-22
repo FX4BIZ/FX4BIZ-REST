@@ -490,3 +490,23 @@ As some of our process just need to send you back the confirmation that this pro
     "result": true,
 }
 ```
+
+<hr />
+
+#### <a id="virtualIBAN_object"></a> Virtual IBAN Object ####
+
+When a `Virtual IBAN` is specified as part of a JSON body, it is encoded as an object with the following fields:
+
+**Object resources:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| IBAN | string(16) | The virtual IBAN requested. |
+
+**Example:**
+
+```js
+"virtualIBAN": {
+	"IBAN": "BEXX9141000016XX"
+}
+```

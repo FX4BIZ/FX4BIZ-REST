@@ -24,14 +24,16 @@ Method: POST
 URL: /wallets/
 ```
 
-This request allows you to submit a new wallet for a given currency.  
-**Caution :** This service is only available for FX4BIZ users that have suscribed to the wallet option program.
+This request allows you to submit a new wallet.  
+**Caution :** The holder object in the parameters will only be considered if you suscribed to the `Multi account per currency with holder` wallet option.
 
 **Parameters:**
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
 | currency | [Currency](../conventions/formattingConventions.md#type_currency) | Required | A three-digit code specifying the wallet currency. `USD` |
+| tag | string | Optionnal | Custom data `USD wallet #3` |
+| holder | [Holder Object](../objects/objects.md#beneficiary_object) | Optionnal | The holder of the wallet. |
 
 **Returns:**
 
@@ -43,48 +45,17 @@ This request allows you to submit a new wallet for a given currency.
 ```js
 POST /wallets/
 {
-	"currency":"EUR"
-}
-```
-
-<hr />
-
-#### <a id="post_wallets_with_holder"></a> Submit a new wallet with an holder ####
-
-```
-Method: POST 
-URL: /wallets/
-```
-
-This request allows you to submit a new wallet for a given currency and a given holder.  
-**Caution :** This service is only available for FX4BIZ users that have suscribed to the wallet option program.
-
-**Parameters:**
-
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| currency | [Currency](../conventions/formattingConventions.md#type_currency) | Required | A three-digit code specifying the wallet currency. `USD` |
-| holder | [Holder Object](../objects/objects.md#beneficiary_object) | Required | The recipient details, owner of the wallet. |
-
-**Returns:**
-
-| Field | Type | Description |
-|-------|------|-------------|
-| wallet | [Wallet Object](../objects/objects.md#wallet_object) | An object representing the wallet you just created. |
-
-**Example:**
-```js
-POST /wallets/withholder/
-{
-    "currency": "AUD",
+    "currency": "USD",
+    "tag": "USD Account #3",
     "holder": {
-        "name": "Australian client #5763",
+        "name": "US client #5763",
         "type": "Individual",
         "address": {
             "street": "12 1st Street",
             "postCode": "12500",
-            "city": "Sidney",
-            "country": "AU"
+            "city": "New York",
+            "state": "NY",
+            "country": "US"
         }
     }
 }
@@ -179,4 +150,35 @@ This request allows you to see the details of a wallet balance at a given date.
 **Example:**
 ```js
 GET /wallets/-NT4eAD/balance/2015-04-30
+```
+
+<hr />
+
+#### <a id="get_wallets_iban"></a> Retreive wallet IBAN ####
+
+```
+Method: GET 
+URL: /wallets/generateIBAN/{branch}/{accountNumber}
+```
+
+This request allows you to get a virtual IBAN number for an IBAN branch and an account number.  
+The given account number is a custom number set on your own side, it has no link with a wallet.  
+**Caution :** This request is only available for clients which suscribed to the `virtual IBAN` option.
+
+**Parameters:**
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| branch | string | Required | A string representing the branch number of your virtual IBAN. `548` |
+| accountNumber | string | Required | A string representing a custom account number. `1075` |
+
+**Returns:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| virtualIBAN | [Virtual IBAN Object](../objects/objects.md#virtualIBAN_object) | An object representing the wallet you just created. |
+
+**Example:**
+```js
+GET /wallets/generateIBAN/548/1075
 ```
