@@ -62,7 +62,7 @@ Of course, it is possible to reference third party `wallet` accounts and execute
 | accountNumber | String | Required | The recipient account number or Iban. `xxx4548` |
 | currency | [Currency](../conventions/formattingConventions.md#type_currency) | Required | A [three digit code](../conventions/formattingConventions.md#type_currency) specifying the account currency. `EUR` |
 | holderBank | [Holder Bank Object](../objects/objects.md#beneficiary_bank_object) | Required | The recipient bank details, holding the account. |
-| holder | [Holder Object](../objects/objects.md#beneficiary_object) | Required | The recipient details, owner of the account. |
+| holder | [Holder Object](../objects/objects.md#beneficiary_object) | Required | The recipient details, owner of the account. **Caution :** For this part of the request, the "street" and "city" fields are required. The "state" field could be required if the country needs it. For more information about state requirement, please refer to [this page](https://github.com/FX4BIZ/FX4BIZ-REST/blob/master/objects/objects.md#address_object). |
 | tag | String(50) | Optional | Custom Data. `John Doe bank account EUR` |
 | correspondentBic | String | Optional | The intermediary bank identifier code. |
 
@@ -89,7 +89,7 @@ POST /externalBankAccounts/
             "street": "4 NEW YORK PLAZA FLOOR 15",
             "postCode": "100004",
             "city": "New York",
-            "state":"New York",
+            "state":"NY",
             "country": "US"
         }
     },
@@ -100,7 +100,7 @@ POST /externalBankAccounts/
             "street": "5  1st street",
             "postCode": "10004",
             "city": "New York",
-            "state":"New York',
+            "state":"NY",
             "country": "US"
         }
     }

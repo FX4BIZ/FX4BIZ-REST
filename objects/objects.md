@@ -95,7 +95,7 @@ When an address is specified as part of a JSON body, it is encoded as an object 
 | street | String(255) | The street for the address described. |
 | postCode | String(15) | The ZIP/Post code for the address described. |
 | city | String(35) | The city for the address described. |
-| state | String(35) | The state for the address described. This field could be required if the country use a state system, like US. |
+| state | String(2) | The state code for the address described. This field could be required if the country use a state system, like United States or Canada. To see a full list of state code, please refer to [this site](http://www.mapability.com/ei8ic/contest/states.php). |
 | country | String(2) | The two-letters abbreviation for the country, following the [ISO-3166](http://fr.wikipedia.org/wiki/ISO_3166) for the address described. |
 
 **Example:**
@@ -105,7 +105,7 @@ When an address is specified as part of a JSON body, it is encoded as an object 
 	"street": "4 NEW YORK PLAZA, FLOOR 15",
 	"postCode": "10004",
 	"city": "NEW YORK",
-	"state": "New York",
+	"state": "NY",
 	"country": "US"
 }
 ```
