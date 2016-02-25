@@ -76,6 +76,8 @@ When possible, the server provides a JSON response body with more information ab
 
 Our API libraries can raise exceptions for many reasons, such as failed trade, invalid parameters, authentications errors, and network unavailability. We recommend always trying to gracefully handle exceptions from our API.
 
+You can see a full list of errors and error details [here](http://wonderfullmalus.fr/RestError/all/).
+
 ## <a id="pagination"></a> Pagination ##
 
 All top-level FX4BIZ API resources have support for bulk fetches - "list" API methods. For instance you can [list accounts`](#get-account-list), [list transfers`](#get-transfers-list), etc... These list API methods share a common structure.
