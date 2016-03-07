@@ -76,7 +76,7 @@ When possible, the server provides a JSON response body with more information ab
 
 Our API libraries can raise exceptions for many reasons, such as failed trade, invalid parameters, authentications errors, and network unavailability. We recommend always trying to gracefully handle exceptions from our API.
 
-You can see a full list of errors and error details [here](http://wonderfullmalus.fr/RestError/all/).
+You can see a full list of errors and error details <a href="http://wonderfullmalus.fr/RestError/all/" target="_blank">here</a>.
 
 ## <a id="pagination"></a> Pagination ##
 
