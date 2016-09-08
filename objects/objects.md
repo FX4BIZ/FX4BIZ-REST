@@ -253,6 +253,8 @@ When a `payment` is specified as part of a JSON body, it is encoded as an object
 | desiredExecutionDate | [Date](../conventions/formattingConventions.md#type_date) | The initial date of execution when the payment is created. |
 | executionDate | [Date](../conventions/formattingConventions.md#type_date) | The effective date of execution of the payment. |
 | amount | [Amount Object](#amount_object) | The nominal amount to be transfered. |
+| counterValue | [Amount Object](#amount_object) | The amount of the counter value when there is a trade. |
+| rate | [Rate Object](#rate_object) | The [Rate Object](#rate_object) describing FX market information asoociated to the trade. |
 | tag | String(50) | The custom reference related to the payment. (For internal use only, not communicated to the beneficiary) |
 | externalBankAccountId | [ID](../conventions/formattingConventions.md#type_id) | The code identifying the beneficiary account. |
 | sourceWalletId | [ID](../conventions/formattingConventions.md#type_id) | The code identifying the wallet the payment will be processed. |
@@ -270,6 +272,8 @@ When a `payment` is specified as part of a JSON body, it is encoded as an object
     "desiredExecutionDate": "2015-06-30",
     "executionDate": "2015-06-30",
     "amount": {amount},
+    "counterValue": {amount},
+    "rate": {rate},
     "tag": "Invoice #11854854",
     "externalBankAccountId": "NTd4ME",
     "sourceWalletId": "ND4uME",
