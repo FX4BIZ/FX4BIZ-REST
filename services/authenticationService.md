@@ -12,7 +12,7 @@ The header has the following format, usually a single [HTTP](http://en.wikipedia
 ```js
 X-WSSE: UsernameToken
 Username="customer001",
-PasswordDigest="ZmI2ZmQ0MDIxYmQwNjcxNDkxY2RjNDNiMWExNjFkZA==",
+PasswordDigest="+QpstwYoZeToelOvVaObTdRdEZs=",
 Nonce="d36e3162829ed4c89851497a717f",
 Created="2014-03-20T12:51:45Z"
 ```
@@ -33,7 +33,7 @@ Computing the password digest involves 5 simple steps:
 1. Get a randomly generated 16 byte Nonce formatted as 32 hexadecimal characters.
 2. Get the current Created timestamp in [ISO-8601](http://fr.wikipedia.org/wiki/ISO_8601) format.
 3. Concatenate the following three values in this order: nonce, timestamp, secret.
-4. Calculate the [SHA-1](http://fr.wikipedia.org/wiki/SHA-1) hash value of the concatenated string, and make sure this value is in hexadecimal format! Some languages, like PHP, output hexadecimal hash by default. You may need to use special methods to obtain hexadecimal hashes in different languages or even convert byte to hex values by hand (see the sample codes below for more information).
+4. Calculate the [SHA-1](http://fr.wikipedia.org/wiki/SHA-1) hash value of the concatenated string, and make sure this value is in binary format! Some languages, like PHP, output hexadecimal hash by default. You may need to use special methods to obtain hexadecimal hashes in different languages or even convert byte to hex values by hand (see the sample codes below for more information).
 5. Apply a [Base64](http://fr.wikipedia.org/wiki/Base64) encoding to the resulted hash to get the final PasswordDigest value.
 
 ##Exemple of creating the X-WSSE header with PHP##
