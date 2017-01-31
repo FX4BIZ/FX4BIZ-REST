@@ -1,181 +1,2025 @@
-FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
+swagger: "2.0"
+info:
+  version: "1.0"
+  title: IBANFIRST API documentation
+  description: |
 
-# fxforbiz
+host: api.ibanfirst.com
+schemes:
+  - https
+produces:
+  - application/json
+consumes:
+  - application/json
+tags:
+  - name: External bank account
+    description: |
+      In the IBANFIRST API, what we call `external bank` account, can be either your own account in another bank or a third party recipient account.
+  - name: Wallets
+    description: |
+      In the IBANFIRST API, what we call a "wallet" account can be either a physical iban account, or a virtual iban account with IBANFIRST. 
+      A virtual account is an administrative "subaccount" of one physical iban account (the "masteraccount"). Cash can be earmarked as belonging to a virtual account so that you can easily allocate funds per business unit, per client, or incoming/outgoing transactions).
+  - name: Payments
+    description: |
+      Sending funds from your IBANFIRST wallet account to your own bank account or a third-party recipient involves two steps:
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+      1. Generate the payment object with the Submit Payment method. 
+      When you submit a payment to be scheduled, you assign a unique id to that payment.  
+      **Caution:** The payment created will be automatically rolled to the next closest working days if not confirmed in the scheduled date of operation.
 
-# Polls API Root [/]
+      2. Confirm the payment to the API for processing, using the Confirm Payment method. 
+      When you confirm a payment for processing, make sure you have sufficient funds in your wallet account balance.  
+      **Caution:** If the balance of your wallet account is not sufficient to cover the payment amount, funds may be locked-in by IBANFIRST.
+  - name: Financial movements
+    description: |
+      The IBANFIRST Rest API allows you to get all financial movements from your Wallets.
+  - name: Trades
+    description: |
+      IBANFIRST provides a deliverable FX facility and deliverable FX liquidity via the IBANFIRST-REST API. You will become counterparty to IBANFIRST and can market and sell deliverable FX services to corporate and private clients as well as using such services on their behalf.  
 
-This resource does not have any attributes. Instead it offers the initial
-API affordances in the form of the links in the JSON body.
+      The IBANFIRST-rest API supports online trading for the following contracts: TOD (Same-day), TOM (next-day), SPOT (T+2) and forward contracts up to one year.<br />
 
-It is recommend to follow the “url” link values,
-[Link](https://tools.ietf.org/html/rfc5988) or Location headers where
-applicable to retrieve resources. Instead of constructing your own URLs,
-to keep your client decoupled from implementation details.
+      FX trades are always made between two wallet accounts of a unique counterparty. IBANFIRST will automatically debit the source wallet account and credit the delivery wallet account at the date specified in the FX trade instructions. If the delivery date has been scheduled, the delivery is automatically processed in the morning before 00:30 am Paris time. If the delivery date is today (TOD), the funds is available on your wallet account by the next 20mn.
 
-## Retrieve the Entry Point [GET]
+      A FX trades also involves an amount, which includes both the numeric amount and the currency in order to define if this amount is the nominal to be bought or sold, for example: '100000.00+GBP'.
+  - name: Documents
+    description: |
+      The IBANFIRST API let you acces your online documents stored on the IBANFIRST platform.  
+      Note that the API do not send the document content, but a one-time link to access it.  
+      This one-time link is only available once. So if you need another access to the document, you have to request another link by listing documents or getting document result.
+  - name: Logs
+    description: |
+      As a developper, you might want to go further than sending request and recieve responses.  
+      The IBANFIRST API allows you to access the logs of its own services, to provide you some details about what you send, and what it's done on the platform.
+      
+      You can retrieve informations during a certain time.  
+      This time passed, your log entry will be lost.
+      
+      | HTTP Method | Time |
+      |-------------|------|
+      | GET | 1 hour |
+      | POST, PUT | 1 week |
+  - name: Auth
+    description: |
+      This service is intended to authenticate users on the API for certain cases
+paths:
+################################################
+# Exernal bank accounts
+################################################
+  /externalbankaccounts/:
+    post:
+      summary: Submit a new external bank account
+      tags:
+        - External bank account
+      description: |
+        By submitting a new `external bank` account, you must supply the relevant details in order to pay a beneficiary.<br />
+        **Caution.** All your `physical` iban accounts hold with IBANFIRST will be automatically created when subscribing with us.
+        
+        The Submit External Bank Account service allows to reference `external bank` accounts which can be either your own accounts in another bank or a third party account.
+        
+        Adding an external bank has some rules :
+        
+        * If you have the BIC/SWIFT of the bank, just submit it, and we will recover informations of the bank on our own.
+        * If you do not have the BIC/SWIFT of the bank, you have to refer at least its clearing code type, its clearing code and its name.
+        * In both cases, if values are not mentionned above, they are not required.
+        
+        This service include verifications on the format of the account created.
+        The API has been made in order to accept local specification of cross-boarder payments.
+        
+        The Api accepts the following formats of `external bank` accounts :
+        
+          - Austrian Bankleitzahl
+          - Australian Bank State Branch
+          - German Bankleitzahl
+          - Canadian Payments Association Payment Routing Number
+          - Spanish Domestic Interbanking Code
+          - Fedwire Routing Number
+          - HEBIC (Hellenic Bank Identification Code)
+          - Bank Code of Hong Kong
+          - Irish National Clearing Code (NSC)
+          - Indian Financial System Code (IFSC)
+          - Italian Domestic Identification Code
+          - New Zealand National Clearing Code
+          - Polish National Clearing Code (KNR)
+          - Portuguese National Clearing Code
+          - Russian Central Bank Identification Code
+          - UK Domestic Sort Code
+          - Swiss Clearing Code
+          - South African National Clearing Code
 
-+ Response 200 (application/json)
+        Of course, it is possible to reference third party `wallet` accounts and execute an instant and free `wallet2wallet` payment at this destination. 
+      parameters:
+        -
+          name: account
+          in: body
+          description: the account to post
+          required: true
+          schema:
+              type: object
+              required:
+                - accountNumber
+                - currency
+                - holderBank
+                - holder
+              properties:
+                accountNumber:
+                  type: string
+                  maxLength: 50
+                  description: |
+                    The recipient account number or Iban.
+                currency:
+                  description: |
+                    A three digit code specifying the account currency.
+                  $ref: '#/definitions/Currency'
+                holderBank:
+                  description: |
+                    The recipient bank details, holding the account.
+                  $ref: '#/definitions/HolderBank'
+                holder:
+                  description: |
+                    The recipient details, owner of the account. **Caution :** For this part of the request, the "street" and "city" fields are required. The "state" field could be required if the country needs it.
+                  $ref: '#/definitions/Holder'
+                tag:
+                  type: string
+                  maxLength: 50
+                  description: |
+                    Custom Data.
+                correspondentBic:
+                  type: string
+                  maxLength: 50
+                  description: |
+                    The intermediary bank identifier code.
+                  
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ExternalBankAccount'
+        default:
+          description: ERROR
+          schema:
+            $ref: '#/definitions/Error'
+    get:
+      summary: Get external bank accounts list
+      tags:
+        - External bank account
+      description: |
+        With the IBANFIRST API, you can list all the external bank accounts hold by the person or company of a certain user.  
+        The user is not to be passed as a parameter since it's the one you use to authenticate that will be used.
+      parameters:
+        -
+          name: sort
+          in: query
+          description: |
+            A code representing the order of rendering external bank accounts with their creation date.
+          required: false
+          type: string
+          enum:
+            - ASC
+            - DESC
+        -
+          name: page
+          in: query
+          description: |
+            Index of the page.
+          required: false
+          type: string
+          default: "1"
+        -
+          name: per_page
+          in: query
+          description: |
+            Inumber of items returned.
+          required: false
+          type: string
+          default: "50"
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            description: |
+              An array containing [External Bank Account Object](../objects/objects.md#account_object) describing requested external bank accounts.
+            items:
+              $ref: '#/definitions/ExternalBankAccount'
+        default:
+          description: ERROR
+          schema:
+            $ref: '#/definitions/Error'
+   
+  /externalbankaccounts/-{id}:
+    get:
+      summary: Get external bank account details
+      tags:
+        - External bank account
+      description: |
+        This request allows you to see the details related to an account. In order to confirm, you can display the beneficiary information in your application for example.  
+      parameters:
+        -
+          name: id
+          in: path
+          description: |
+            The ID of the external bank account you want. As ID's are listed with the External Bank Account Objects, You can retrieve this by listing all external bank accounts for the current user. 
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+              $ref: '#/definitions/ExternalBankAccount'
+        default:
+          description: ERROR
+          schema:
+            $ref: '#/definitions/Error'
+    
+    delete:
+      summary: Delete an external bank account
+      tags:
+        - External bank account
+      description: |
+        Delete an external bank account. 
+      parameters:
+        -
+          name: id
+          in: path
+          description: |
+            The ID of the external bank account you want to delete.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+              $ref: '#/definitions/ProcessResult'
+        default:
+          description: ERROR
+          schema:
+            $ref: '#/definitions/Error'
+          
+################################################      
+# wallets
+################################################
+  /wallets/:
+    post:
+      summary: Submit a new wallet
+      tags:
+        - Wallets
+      description: |
+        This request allows you to submit a new wallet.  
+        **Caution :** The holder object in the parameters will only be considered if you suscribed to the `Multi account per currency with holder` wallet option.
+      parameters:
+        -
+          name: wallet
+          in: body
+          description: |
+            The wallet to create
+          required: true
+          schema:
+            type: object
+            required:
+              - currency
+            properties:
+              currency:
+                description: |
+                  A three-digit code specifying the wallet currency. 
+                $ref: '#/definitions/Currency'
+              tag:
+                type: string
+                description: |
+                  Custom data.
+              holder:
+                description: |
+                  The holder of the wallet.
+                $ref: '#/definitions/Holder'
+      responses:
+        '200':
+          description: OK
+          schema:
+              $ref: '#/definitions/Wallet'
+        default:
+          description: ERROR
+          schema:
+            $ref: '#/definitions/Error'
+            
+    get:
+      summary: Get wallet list
+      tags:
+        - Wallets
+      description: |
+        With the Retrieve wallet list service, you can list obtain the list of all wallet account hold with IBANFIRST. The object return in the Array is a simplified version of the Wallet providing you the main information on the wallet without any additional request. 
+      parameters:
+        -
+          name: page
+          in: query
+          description: |
+            Index of the page.
+          required: false
+          type: string
+          default: "1"
+        -
+          name: per_page
+          in: query
+          description: |
+            Inumber of items returned.
+          required: false
+          type: string
+          default: "50"
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            description: |
+              An Array of objects representing wallets.
+            items:
+              type: object
+              description: |
+                A shorter version of the wallet
+              properties:
+                id:
+                  description: |
+                    The code identifying the wallet.
+                  $ref: '#/definitions/ID'
+                tag:
+                  type: string
+                  description: |
+                    The custom wording of the wallet.
+                currency:
+                  description: |
+                    The three-digit code identifying the currency of the wallet.
+                  $ref: '#/definitions/Currency'
+                bookingAmount:
+                  description: |
+                    The total amount booked on the account.
+                  $ref: '#/definitions/Amount'
+                valueAmount:
+                  description: |
+                    The total amount available in the wallet.
+                  $ref: '#/definitions/Amount'
+                dateLastFinancialMovement:
+                  description: |
+                    The date of the last financial move in this wallet.
+                  $ref: '#/definitions/Date'
+        default:
+          description: ERROR
+          schema:
+            $ref: '#/definitions/Error'
+          
+  /wallets/-{id}:
+    get:
+      summary: Get wallet details
+      tags:
+        - Wallets
+      description: |
+        This request allows you to see the details related to a specific wallet. 
+      parameters:
+        -
+          name: id
+          in: path
+          description: |
+            The code identifying the external bank account you want.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Wallet'
+        default:
+          description: ERROR
+          schema:
+            $ref: '#/definitions/Error'
+         
+  /wallets/-{id}/balance/{date}:
+    get:
+      summary: Retrieve wallet balance for a given date
+      tags:
+        - Wallets
+      description: |
+        This request allows you to see the details of a wallet balance at a given date. 
+      parameters:
+        -
+          name: id
+          in: path
+          description: |
+            The code identifying the external bank account you want.
+          required: true
+          type: string
+        -
+          name: date
+          in: path
+          description: |
+            The date used to retrieve the balance of the wallet.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            properties:
+              id:
+                description: |
+                  The code identifying the wallet.
+                $ref: '#/definitions/ID'
+              balance:
+                description: |
+                  An object representing the balance of the account.
+                $ref: '#/definitions/Balance'
+        default:
+          description: ERROR
+          schema:
+            $ref: '#/definitions/Error'
+         
+  /wallets/generateIBAN/{branch}/{accountNumber}:
+    get:
+      summary: Generate a virtual IBAN
+      tags:
+        - Wallets
+      description: |
+        This request allows you to get a virtual IBAN number for an IBAN branch and an account number. The given account number is a custom number set on your own side, it has no link with a wallet.  
+        **Caution :** This request is only available for clients which suscribed to the `virtual IBAN` option.
+      parameters:
+        -
+          name: branch
+          in: path
+          description: |
+            A string representing the branch number of your virtual IBAN.
+          required: true
+          type: string
+        -
+          name: accountNumber
+          in: path
+          description: |
+            A string representing a custom account number.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/VirtualIBAN'
+        default:
+          description: ERROR
+          schema:
+            $ref: '#/definitions/Error'
+         
+################################################      
+# Payments
+################################################
+  /payments/:
+    post:
+      summary: Submit a Payment
+      tags:
+        - Payments
+      description: |
+        You can use this request in order to schedule a new payment. 
+      parameters:
+        -
+          name: payment
+          in: body
+          description: |
+            The payment to post
+          required: true
+          schema:
+            type: object
+            required:
+              - sourceWalletId
+              - externalBankAccountId
+              - amount
+              - desiredExecutionDate
+              - feeCurrency
+              - feePaymentOption
+              - priorityPaymentOption
+            properties:
+              sourceWalletId:
+                description: |
+                  The code identifying the wallet from which the payment must be processed.
+                $ref: '#/definitions/ID'
+              externalBankAccountId:
+                description: |
+                  The code identifying the recipient account.
+                $ref: '#/definitions/ID'
+              amount:
+                description: |
+                  Amount to be sent.
+                  **Caution.** The currency of the amount sent must be equal to the currency of the beneficiary account.
+                $ref: '#/definitions/Amount'
+              desiredExecutionDate:
+                description: |
+                  The initial execution date of your payment.
+                $ref: '#/definitions/Date'
+              feeCurrency:
+                description: |
+                  A three digit code representing the currency related to the charges applied on your payment.
+                $ref: '#/definitions/Currency'
+              feePaymentOption:
+                description: |
+                  A code representing the charges option to be applied to this payment.
+                type: string
+                enum:
+                  - BEN
+                  - OUR
+                  - SHARE
+              priorityPaymentOption:
+                description: |
+                  A code representing whether this payment as a standard priority, or a priority treatment in IBANFIRST an correspondent bank systems.
+                type: string
+                enum:
+                  - normal
+                  - urgent
+              tag:
+                description: |
+                  A custom reference that you want to be related to this payment in the system. This tag is not communicated to the beneficiary.
+                type: string
+                maxLength: 50
+              communication:
+                description: |
+                  A Free format string representing the communication for the beneficiary.
+                type: string
+                maxLength: 76
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Payment'
+        default:
+          description: ERROR
+          schema:
+            $ref: '#/definitions/Error'
 
-        {
-            "questions_url": "/questions"
-        }
+  /payments/_{status}/:
+    get:
+      summary: Get payemts list by status
+      tags:
+        - Payments
+      description: |
+        Request the list of payments that has been created on a specific period of time.
+      parameters:
+        -
+          name: status
+          in: path
+          description: |
+            A code representing the status of the payments you want to get.
+          required: true
+          type: string
+          enum:
+            - all
+            - planified
+            - rejected
+            - finalized
+            - canceled
+            - refused
+            - blocked
+            - waitingconfirmation
+        -
+          name: fromDate
+          in: query
+          description: |
+            The starting date to search payments.
+          required: false
+          type: string
+          format: YYYY-MM-DD
+        -
+          name: toDate
+          in: query
+          description: |
+            The ending date to search payments.
+          required: false
+          type: string
+          format: YYYY-MM-DD
+        -
+          name: page
+          in: query
+          description: |
+            Index of the page.
+          required: false
+          type: string
+          default: "1"
+        -
+          name: per_page
+          in: query
+          description: |
+            Inumber of items returned.
+          required: false
+          type: string
+          default: "50"
+        -
+          name: sort
+          in: query
+          description: |
+            A code representing the order of rendering objects.
+          required: false
+          type: string
+          enum:
+            - ASC
+            - DESC
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Payment'
+        default:
+          description: ERROR
+          schema:
+            $ref: '#/definitions/Error' 
+         
+  /payments/-{id}:
+    get:
+      summary: Get payemt details
+      tags:
+        - Payments
+      description: |
+        Retrieve the details of a specific payment.
+      parameters:
+        -
+          name: id
+          in: path
+          description: |
+            The code identifying the payment you want.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Payment'
+        default:
+          description: ERROR
+          schema:
+            $ref: '#/definitions/Error' 
+         
+    delete:
+      summary: Delete a payemt
+      tags:
+        - Payments
+      description: |
+        The code identifying the payment you want to delete.
+      parameters:
+        -
+          name: id
+          in: path
+          description: |
+            The code identifying the payment you want to delete.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Payment'
+        default:
+          description: ERROR
+          schema:
+            $ref: '#/definitions/Error' 
+         
+  /payment/-{id}/confirm:
+    put:
+      summary: Confirm a payemt
+      tags:
+        - Payments
+      description: |
+        Payments that has been scheduled must be confirmed in order to be released.<br />
+        If the payment is not confirmed before the end of scheduled date of operation, it will be automatically postponed to the next operation date available.
+      parameters:
+        -
+          name: id
+          in: path
+          description: |
+            The code identifying the payment you want to delete.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Payment'
+        default:
+          description: ERROR
+          schema:
+            $ref: '#/definitions/Error' 
+         
+################################################      
+# Financial Movements
+################################################
+  /financialmovements/:
+    get:
+      summary: Retrieve Financial Movements History
+      tags:
+        - Financial movements
+      description: |
+        Request the list of financial movements that has been received or sent on a specific period of time.
+      parameters:
+        -
+          name: walletId
+          in: query
+          description: |
+            A wallet ID to specify to retreive only financial movements concerning this wallet.
+          required: false
+          type: string
+        -
+          name: fromDate
+          in: query
+          description: |
+            The starting date to search financial movements on your wallets.
+          required: false
+          type: string
+          format: YYYY-MM-DD
+        -
+          name: toDate
+          in: query
+          description: |
+            The ending date to search financial movements on your wallets.
+          required: false
+          type: string
+          format: YYYY-MM-DD
+        -
+          name: page
+          in: query
+          description: |
+            Index of the page.
+          required: false
+          type: string
+          default: "1"
+        -
+          name: per_page
+          in: query
+          description: |
+            Inumber of items returned.
+          required: false
+          type: string
+          default: "50"
+        -
+          name: sort
+          in: query
+          description: |
+            A code representing the order of rendering objects.
+          required: false
+          type: string
+          enum:
+            - ASC
+            - DESC
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  description: |
+                    The ID refering the financial movement
+                  $ref: '#/definitions/ID'
+                bookingDate:
+                  description: |
+                     The booking Datetime of the financial movement.
+                  $ref: '#/definitions/Datetime'
+                walletId:
+                  description: |
+                    The wallet ID on which the financial movement is.
+                  $ref: '#/definitions/ID'
+                valueDate:
+                  description: |
+                    The value Datetime of the financial movement.
+                  $ref: "#/definitions/Date"
+                amount:
+                  description: |
+                    An object reprsenting the amount concerned by the financial movement.
+                  $ref: '#/definitions/Amount'
+        default:
+          description: ERROR
+          schema:
+            $ref: '#/definitions/Error' 
+         
+  /financialmovements/-{id}:
+    get:
+      summary: Retrieve Financial Movements Details
+      tags:
+        - Financial movements
+      description: |
+        Request information on a particular financial movement that has been credited or debited to a wallet. 
+      parameters:
+        -
+          name: id
+          in: path
+          description: |
+            The ID referring the financial movement.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: "#/definitions/FinancialMovement"
+        default:
+          description: ERROR
+          schema:
+            $ref: '#/definitions/Error' 
+         
+################################################      
+# Trades
+################################################
+         
+  /rates/{instruments}:
+    get:
+      summary: Retrieve Rates
+      tags:
+        - Trades
+      description: |
+        The IBANFIRST-REST API provides a FX Data Feed. The Rates service is a read-only service, it provides "gross" rates: this is mid-market rates but usually with 5mn delays. You can use these rates for your internal needs (charts, consolidation etc..).  
+      parameters:
+        -
+          name: instruments
+          in: path
+          description: |
+            A code representing a list of CurrencyPair. Crosses must be separated with commas. 
+            You can chain as many crosses as you want, as long as they're separated with commas.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Rate"
+        default:
+          description: ERROR
+          schema:
+            $ref: '#/definitions/Error' 
+         
+  /quotes/:
+    post:
+      summary: Request quotes
+      tags:
+        - Trades
+      description: |
+        The Retrieve Quote service is a read-only service permitting to ask for a real-time rate. With this service you will have the same information than in the Trade service but you cannot trade with the Quote service.  
+        **Caution:** It is not possible to trade with the Retrieve Quote request, you have to use the trade request in order to placing new trades. 
+      parameters:
+        -
+          name: quote
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - currencyPair
+              - side
+              - amount
+              - deliveryDate
+            properties:
+              currencyPair:
+                description: |
+                  The currency pair representing the quote requessted.
+                $ref: '#/definitions/CurrencyPair'
+              side:
+                description: |
+                  The side repressenting the quote. `S` to sell and `B` to buy.
+                type: string
+                enum:
+                  - B
+                  - S
+              amount:
+                description: |
+                  The amount to trade.
+                $ref: '#/definitions/Amount'
+              deliveryDate:
+                description: |
+                  Initial delivery date of the quote.
+                $ref: '#/definitions/Date'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: "#/definitions/Quote"
+        default:
+          description: ERROR
+          schema:
+            $ref: '#/definitions/Error' 
+         
+  /trades/:
+    post:
+      summary: Submit trade
+      tags:
+        - Trades
+      description: |
+        This services permits to execute trade.
+      parameters:
+        -
+          name: trade
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - sourceWalletId
+              - deliveryWalletId
+              - side
+              - amount
+              - deliveryDate  
+            properties:
+              sourceWalletId:
+                description: |
+                  The code identifying the account to be debited of the amount of currency sold.
+                $ref: '#/definitions/ID'
+              deliveryWalletId:
+                description: |
+                  The code identifying the destination account of the amount of currencies bought.
+                $ref: '#/definitions/ID'
+              side:
+                description: |
+                  Action related to the nominal amount. To be bought or sold on the market, `S` to sell and `B` to buy.
+                type: string
+                enum:
+                  - B
+                  - S
+              amount:
+                description: |
+                  Nominal amount associated to the trade. It must always be expressed in the currency of the sourceWallet.
+                $ref: '#/definitions/Amount'
+              deliveryDate:
+                description: |
+                  Execution date of your trade.
+                $ref: '#/definitions/Date'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: "#/definitions/Trade"
+        default:
+          description: ERROR
+          schema:
+            $ref: '#/definitions/Error' 
+         
+  /trades/_{status}/:
+    get:
+      summary: Retrieve trade book
+      tags:
+        - Trades
+      description: |
+        Retrieve the list of trades executed.
+      parameters:
+        -
+          name: status
+          in: path
+          description: |
+            A code representing the status of the trades you want to get.
+          required: true
+          type: string
+          enum:
+            - all
+            - planified
+            - rejected
+            - finalized
+            - canceled
+            - refused
+            - blocked
+            - waitingconfirmation
+        -
+          name: fromDate
+          in: query
+          description: |
+            The starting date to search trades.
+          required: false
+          type: string
+          format: YYYY-MM-DD
+        -
+          name: toDate
+          in: query
+          description: |
+            The ending date to search trades.
+          required: false
+          type: string
+          format: YYYY-MM-DD
+        -
+          name: page
+          in: query
+          description: |
+            Index of the page.
+          required: false
+          type: string
+          default: "1"
+        -
+          name: per_page
+          in: query
+          description: |
+            Inumber of items returned.
+          required: false
+          type: string
+          default: "50"
+        -
+          name: sort
+          in: query
+          description: |
+            A code representing the order of rendering objects.
+          required: false
+          type: string
+          enum:
+            - ASC
+            - DESC
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Trade'
+        default:
+          description: ERROR
+          schema:
+            $ref: '#/definitions/Error' 
+         
+  /trades/-{id}:
+    get:
+      summary: Retrieve trade details
+      tags:
+        - Trades
+      description: |
+        Retrieve the trade details.
+      parameters:
+        -
+          name: id
+          in: path
+          description: |
+            The code identifying the trade you want.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Trade'
+        default:
+          description: ERROR
+          schema:
+            $ref: '#/definitions/Error' 
+     
+################################################      
+# Documents
+################################################
+  /documents/:
+    get:
+      summary: Retrieve documents list
+      tags:
+        - Documents
+      description: |
+        The IBANFIRST-REST API allows you to retrieve your documents from the IBANFIRST platform. This request gives you a more simple view than the document detail request.
+      parameters:
+        -
+          name: page
+          in: query
+          description: |
+            Index of the page.
+          required: false
+          type: string
+          default: "1"
+        -
+          name: per_page
+          in: query
+          description: |
+            Inumber of items returned.
+          required: false
+          type: string
+          default: "50"
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  description: |
+                    The code identifying the document.
+                  $ref: '#/definitions/ID'
+                name:
+                  description: |
+                    The name of the document.
+                  type: string
+                type:
+                  description: |
+                    Teh type of the document.
+                  type: string
+                createdDate:
+                  description: |
+                    The creation date of the document.
+                  $ref: '#/definitions/Datetime'
+                link:
+                  description: |
+                    The one-time link to the document.
+                  type: string
+        default:
+          description: ERROR
+          schema:
+            $ref: '#/definitions/Error' 
+       
+  /documents/-{id}:
+    get:
+      summary: Retrieve documents details
+      tags:
+        - Documents
+      description: |
+        Retrieve details from a given document.
+      parameters:
+        -
+          name: id
+          in: path
+          description: |
+            The unique identifier of the document you want.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Document'
+        default:
+          description: ERROR
+          schema:
+            $ref: '#/definitions/Error' 
+            
+  /documents/RIB/:
+    get:
+      summary: Retrieve RIB
+      tags:
+        - Documents
+      description: |
+        Retrieve details of the RIB for the wallet
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Document'
+        default:
+          description: ERROR
+          schema:
+            $ref: '#/definitions/Error' 
+     
+################################################      
+# Logs
+################################################
+         
+  /logs/:
+    get:
+      summary: Retrieve log list
+      tags:
+        - Logs
+      description: |
+        The IBANFIRST-REST API provides a log feed about request you made, allowing you to know exactly what your request do on the platform.  
+        This request uses the login sent in your header to get logs about this user's actions.
+      parameters:
+        -
+          name: page
+          in: query
+          description: |
+            Index of the page.
+          required: false
+          type: string
+          default: "1"
+        -
+          name: per_page
+          in: query
+          description: |
+            Inumber of items returned.
+          required: false
+          type: string
+          default: "50"
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Log'
+        default:
+          description: ERROR
+          schema:
+            $ref: '#/definitions/Error' 
+         
+  /logs/-{nonce}:
+    get:
+      summary: Retrieve log details
+      tags:
+        - Logs
+      description: |
+        In case of somewhat happens during the request, the IBANFIRST API allows you to retrive a log entry by its nonce.  
+      parameters:
+        -
+          name: nonce
+          in: path
+          description: |
+            The nonce used to authenticate the request. As the one in the header, this nonce has to be Base64 encoded. The nonce you get with `GET /logs` is already encoded.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Log'
+        default:
+          description: ERROR
+          schema:
+            $ref: '#/definitions/Error' 
+       
+################################################      
+# Auth
+################################################
 
-## Group Question
+  /APIHelpers/Auth/WithToken/{token}/:
+    get:
+      summary: Authenticate user and getting informations
+      tags:
+        - Auth
+      description: |
+        This request authenticate a user and return informations about it.
+      
+        Unless other requests, this request do not use the prefix "api", so you must call it directly with <url_root>/APIHelpers/Auth/WithToken/{token}/. Also, in case of error, the type of error message is different. It is only made of a string indicating the error.
+        
+      parameters:
+        -
+          name: token
+          in: path
+          description: |
+            The API token of the user.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/UserInformation'
+        default:
+          description: ERROR
+          schema:
+            type: object
+            description: |
+              Container of the error message.
+            properties:
+              message:
+                type: string
+                description: |
+                  The description of the error
+               
+  /APIHelpers/Auth/Invalidate/Token/{token}/:
+    get:
+      summary: Invalidate a token
+      tags:
+        - Auth
+      description: |
+        This request allows you to invalidate a user API token.
+      
+        Unless other requests, this request do not use the prefix "api", so you must call it directly with <url_root>/APIHelpers/Auth/WithToken/{token}/. Also, in case of error, the type of error message is different. It is only made of a string indicating the error.
+        
+      parameters:
+        -
+          name: token
+          in: path
+          description: |
+            The API token of the user.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ProcessResult'
+        default:
+          description: ERROR
+          schema:
+            type: object
+            description: |
+              Container of the error message.
+            properties:
+              message:
+                type: string
+                description: |
+                  The description of the error
+            
+definitions:
+# OBJECT
+  ExternalBankAccount:
+    type: object
+    properties:
+      id:
+        description: |
+          The code identifying the account.
+        $ref: '#/definitions/ID'
+      currency:
+        description: |
+          The three-digit code specifying the currency of the account.
+        $ref: '#/definitions/Currency'
+      tag:
+        type: string
+        maxLength: 50
+        description: |
+          Custom reference of the account.
+      accountNumber:
+        type: string
+        maxLength: 40
+        description: |
+          The code specifying the account (can be either an Iban or an account number).
+      correspondentBank:
+        description: |
+          The intermediary bank details, used to reach the beneficiary bank.
+        $ref: '#/definitions/CorrespondantBank'
+      holderBank:
+        description: |
+          The recipient bank details, holding the account.
+        $ref: '#/definitions/HolderBank'
+      holder:
+        description: |
+          The recipient details, owner of the account.
+        $ref: '#/definitions/Holder'
 
-Resources related to questions in the API.
+  Wallet:
+    type: object
+    description: |
+      Representation of a Wallet
+    properties:
+      id:
+        description: |
+          The code identifying of the account.
+        $ref: '#/definitions/ID'
+      currency:
+        description: |
+          The three-digit code specifying the currency of the account.
+        $ref: '#/definitions/Currency'
+      tag:
+        type: string
+        maxLength: 50
+        description: |
+          Custom reference associated to this wallet. (For internal use only, not communicated to any beneficiary).
+      status:
+        type: string
+        description: |
+          The code identifying the status of the account.
+        enum:
+          - authorized
+          - locked
+          - not authorized
+      accountNumber:
+        type: string
+        maxLength: 40
+        description: |
+          Iban or account number.
+      correspondentBank:
+        description: |
+          The intermediary bank details, used to reach the beneficiary bank.
+        $ref: '#/definitions/CorrespondantBank'
+      holderBank:
+        description: |
+          The recipient bank details, holding the account.
+        $ref: '#/definitions/HolderBank'
+      holder:
+        description: |
+          The recipient details, owner of the account.
+        $ref: '#/definitions/Holder'  
+  
+  Address:
+    type: object
+    description: |
+      Representation of an address
+    properties:
+      street:
+        type: string
+        maxLength: 255
+        description: |
+          The street and street number for the address described.
+      postCode:
+        type: string
+        maxLength: 15
+        description: |
+          The ZIP/Post code for the address described.
+      city:
+        type: string
+        maxLength: 35
+        description: |
+          The city for the address described.
+      state:
+        type: string
+        maxLength: 2
+        description: |
+          The state code for the address described. This field could be required if the country use a state system, like United States or Canada. To see a full list of state code, please refer to http://www.mapability.com/ei8ic/contest/states.php.
+      country:
+        type: string
+        maxLength: 8
+        description: |
+          The two-letters abbreviation for the country, following the ISO-3166 for the address described.
+  
+  Amount:
+    type: object
+    description: |
+      Representation of an amount.
+    properties:
+      value:
+        description: |
+          The quantity of the currency.
+        $ref: '#/definitions/QuotedDecimal'
+      currency:
+        description: |
+          The three-digit code specifying the currency related to the amount.
+        $ref: '#/definitions/Currency'
+        
+  Balance:
+    type: object
+    description: |
+      Representation of a balance.
+    properties:
+      closingDate:
+        description: |
+          The closing date of the balance details given.
+        $ref: '#/definitions/Date'
+      bookingAmount:
+        description: |
+          The closing balance of the account.
+        $ref: '#/definitions/Amount'
+      valueAmount:
+        description: |
+          The closing value of the account.
+        $ref: '#/definitions/Amount'
+      
+  HolderBank:
+    type: object
+    description: |
+      Representation of a beneficiary bank.
+    properties:
+      bic:
+        type: string
+        maxLength: 11
+        description: | 
+          Eight or eleven-digit ISO 9362 Business Identifier Code specifying the Recipient Bank.
+      clearingType:
+        type: string
+        maxLength: 2
+        description: |
+          The two-digit code specifying the local clearing network.
+      clearingCode:
+        type: string
+        maxLength: 15
+        description: |
+          The code identifying the branch number on the local clearing network.
+      name:
+        type: string
+        maxLength: 120
+        description: |
+          The beneficiary bank name.
+      address:
+        description: |
+          The beneficiary bank address.
+        $ref: '#/definitions/Address'
+        
+  Holder:
+    type: object
+    description: |
+      What we call a Holder can be either an Individual or an Organisation that own the account.
+      May also be referred to as: Beneficiary/Supplier/Vendor/Payee/Recipient.
+      
+      In the beneficiary address, only the Country is mandatory, but you can specify all fields to be more precise.
+    properties:
+      name:
+        type: string
+        maxLength: 100
+        description: |
+          The name of the account owner.
+      type:
+        type: string
+        maxLength: 10
+        description: |
+          The code identifying the type of account owner.
+        enum:
+          - Individual
+          - Corporate
+      address:
+        description: |
+          The account owner address.
+        $ref: '#/definitions/Address'
+        
+  CorrespondantBank:
+    type: object
+    description: |
+      Representation of a correspondant bank.
+    properties:
+      bic:
+        type: string
+        maxLength: 11
+        description: | 
+          Eight or eleven-digit ISO 9362 Business Identifier Code specifying the Recipient Bank.
+      name:
+        type: string
+        maxLength: 120
+        description: |
+          The beneficiary bank name.
+      address:
+        description: |
+          The correspondant bank address.
+        $ref: '#/definitions/Address'
+  
+  Payment:
+    type: object
+    description: |
+      Representation of a payment.
+    properties:
+      id:
+        description: |
+          The code identifying the payment.
+        $ref: '#/definitions/ID'
+      status:
+        type: string
+        description: |
+          The code identifying the payment status.
+        enum:
+          - planified
+          - rejected
+          - finalized
+          - canceled
+          - refused
+          - blocked
+          - waitingconfirmation
+      createdDate:
+        description: |
+          The creation date of the payment.
+        $ref: '#/definitions/Datetime'
+      desiredExecutionDate:
+        description: |
+          The initial date of execution when the payment is created.
+        $ref: '#/definitions/Date'
+      executionDate:
+        description: |
+          The effective date of execution of the payment.
+        $ref: '#/definitions/Date'
+      amount:
+        description: |
+          The nominal amount to be transfered.
+        $ref: '#/definitions/Amount'
+      counterValue:
+        description: |
+          The amount of the counter value when there is a trade.
+        $ref: '#/definitions/Amount'
+      rate:
+        description: |
+          A Rate describing FX market information asoociated to the trade.
+        $ref: '#/definitions/Rate'
+      tag:
+        type: string
+        maxLength: 50
+        description: |
+          The custom reference related to the payment. (For internal use only, not communicated to the beneficiary).
+      externalBankAccountId:
+        description: |
+          The code identifying the beneficiary account.
+        $ref: '#/definitions/ID'
+      sourceWalletId:
+        description: |
+          The code identifying the wallet the payment will be processed.
+        $ref: '#/definitions/ID'
+      communication:
+        type: string
+        maxLength: 50
+        description: |
+          The wording of the payment.
+      priorityPaymentOption:
+        type: string
+        description: |
+          The code representing whether this payment as a normal priority or if it as to be treated with a priority status by all the routing banks.
+        enum:
+          - normal
+          - urgent
+      feePaymentOption:
+        type: string
+        description: |
+          The code identifying the charges option for this payment.
+        enum:
+          - BEN
+          - OUR
+          - SHARE
 
-## Question [/questions/{question_id}]
-
-A Question object has the following attributes:
-
-+ question
-+ published_at - An ISO8601 date when the question was published.
-+ url
-+ choices - An array of Choice objects.
-
-+ Parameters
-    + question_id: 1 (required, number) - ID of the Question in form of an integer
-
-### View a Questions Detail [GET]
-
-+ Response 200 (application/json)
-
-        {
-            "question": "Favourite programming language?",
-            "published_at": "2014-11-11T08:40:51.620Z",
-            "url": "/questions/1",
-            "choices": [
-                {
-                    "choice": "Swift",
-                    "url": "/questions/1/choices/1",
-                    "votes": 2048
-                }, {
-                    "choice": "Python",
-                    "url": "/questions/1/choices/2",
-                    "votes": 1024
-                }, {
-                    "choice": "Objective-C",
-                    "url": "/questions/1/choices/3",
-                    "votes": 512
-                }, {
-                    "choice": "Ruby",
-                    "url": "/questions/1/choices/4",
-                    "votes": 256
-                }
-            ]
-        }
-
-## Choice [/questions/{question_id}/choices/{choice_id}]
-
-+ Parameters
-    + question_id: 1 (required, number) - ID of the Question in form of an integer
-    + choice_id: 1 (required, number) - ID of the Choice in form of an integer
-
-### Vote on a Choice [POST]
-
-This action allows you to vote on a question's choice.
-
-+ Response 201
-
-    + Headers
-
-            Location: /questions/1
-
-## Questions Collection [/questions{?page}]
-
-+ Parameters
-    + page: 1 (optional, number) - The page of questions to return
-
-### List All Questions [GET]
-
-+ Response 200 (application/json)
-
-    + Headers
-
-            Link: </questions?page=2>; rel="next"
-
-    + Body
-
-            [
-                {
-                    "question": "Favourite programming language?",
-                    "published_at": "2014-11-11T08:40:51.620Z",
-                    "url": "/questions/1",
-                    "choices": [
-                        {
-                            "choice": "Swift",
-                            "url": "/questions/1/choices/1",
-                            "votes": 2048
-                        }, {
-                            "choice": "Python",
-                            "url": "/questions/1/choices/2",
-                            "votes": 1024
-                        }, {
-                            "choice": "Objective-C",
-                            "url": "/questions/1/choices/3",
-                            "votes": 512
-                        }, {
-                            "choice": "Ruby",
-                            "url": "/questions/1/choices/4",
-                            "votes": 256
-                        }
-                    ]
-                }
-            ]
-
-### Create a New Question [POST]
-
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
-
-+ question (string) - The question
-+ choices (array[string]) - A collection of choices.
-
-+ Request (application/json)
-
-        {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
-
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /questions/2
-
-    + Body
-
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2014-11-11T08:40:51.620Z",
-                "url": "/questions/2",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "url": "/questions/2/choices/1",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "url": "/questions/2/choices/2",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "url": "/questions/2/choices/3",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "url": "/questions/2/choices/4",
-                        "votes": 0
-                    }
-                ]
-            }
+  Trade:
+    type: object
+    description: |
+      Representation of a Trade.
+    properties:
+      id:
+        description: |
+          The code identifying the trade.
+        $ref: '#/definitions/ID'
+      status:
+        type: string
+        description: |
+          The status of the trade.
+        enum:
+          - planified
+          - canceled
+          - finalized
+      side:
+        type: string
+        description: |
+          The side of the trade.
+        enum:
+          - B
+          - S
+      sourceAmount:
+        description: |
+          The amount to be debited from the source Wallet.
+        $ref: '#/definitions/Amount'
+      deliveredAmount:
+        description: |
+          The amount to be credited to the delivery wallet.
+        $ref: '#/definitions/Amount'
+      sourceWalletId:
+        description: |
+          The code identifying the account to be debited of the amount of currency sold.
+        $ref: '#/definitions/ID'
+      deliveryWalletId:
+        description: |
+          The code identifying the destination account of the amount of currencies bought.
+        $ref: '#/definitions/ID'
+      rate:
+        description: |
+          The Rate describing FX market information asoociated to the trade.
+        $ref: '#/definitions/Rate'
+      createdDate:
+        description: |
+          The creation date of the trade.
+        $ref: '#/definitions/Datetime'
+      deliveryDate:
+        description: |
+          The delivery date of the trade.
+        $ref: '#/definitions/Date'
+      
+  FinancialMovement:
+    type: object
+    description: |
+      Representation of a financial movement
+    properties:
+      id:
+        description: |
+          The code identifying the transfer.
+        $ref: '#/definitions/ID'
+      bookingDate:
+        description: |
+           The booking date of the transfer.
+        $ref: '#/definitions/Date'
+      valueDate:
+        description: |
+          The value date of the transfer.
+        $ref: '#/definitions/Date'
+      orderingAccountNumber:
+        type: string
+        maxLength: 40
+        description: |
+          The number referring the ordering account of the transfer.
+      orderingCustomer:
+        type: string
+        description: |
+          A free formatted String representing the ordering customer with it's name and it's address.
+      orderingInstitution:
+        type: string
+        description: |
+          A free formatted String representing the ordering institution with it's name and it's address.
+      orderingAmount:
+        description: |
+          The amount instructed by the ordering customer of the transfer.
+        $ref: '#/definitions/Amount'
+      beneficiaryAccountNumber:
+        type: string
+        maxLength: 40
+        description: |
+          The number referring the beneficiary account.
+      beneficiaryCustomer:
+        type: string
+        description: |
+          A free formatted String representing the beneficiary customer with it's name and it's address.
+      beneficiaryInstitution:
+        type: string
+        description: |
+          A free formatted String representing the beneficiary institution with it's name and it's address.
+      beneficiaryAmount:
+        description: |
+          The amount delivered credited in the beneficiary account.
+        $ref: '#/definitions/Amount'
+      remittanceInformation:
+        type: string
+        description: |
+          The communication field.
+      chargesDetails:
+        type: string
+        description: |
+          The charges details related to the transfer.
+      exchangeRate:
+        type: number
+        format: float
+        description: |
+          The exchange rate applied on the transfer.
+      typeLabel:
+        type: string
+        description: |
+          The type label of the financial movement.
+      description:
+        type: string
+        description: |
+          The description of the financial movement.
+      
+  Rate:
+    type: object
+    description: |
+      Representation of a Rate.
+    properties:
+      currencyPair:
+        description: |
+          The three-digit code used for the rates provided.
+        $ref: '#/definitions/CurrencyPair'
+      midMarket:
+        description: |
+          The average rate of the market between the bid and the ask rate.
+        $ref: '#/definitions/QuotedDecimal'
+      date:
+        description: |
+          The date representing the last update on the update.
+        $ref: '#/definitions/Datetime'
+      coreAsk:
+        description: |
+          The interbank ASK rate provided by the FX partner of IBANFIRST.
+        $ref: '#/definitions/QuotedDecimal'
+      coreBid:
+        description: |
+          The interbank BID rate provided by the FX partner of IBANFIRST.
+        $ref: '#/definitions/QuotedDecimal'
+      appliedAsk:
+        description: |
+          The interbank ASK rate applied for the transaction.
+        $ref: '#/definitions/QuotedDecimal'
+      appliedBid:
+        description: |
+          The interbank BID rate applied for the transaction.
+        $ref: '#/definitions/QuotedDecimal'
+        
+  Quote:
+    type: object
+    description: |
+      Representation of a quote.
+    properties:
+      id:
+        description: |
+          The code identifying the quote.
+        $ref: '#/definitions/ID'
+      side:
+        type: string
+        description: |
+          The code identifying the side of the quote.
+        enum:
+          - B
+          - S
+      currencyPair:
+        description: |
+          The six-digit code representing the pair of currency of the Quote.
+        $ref: '#/definitions/CurrencyPair'
+      rate:
+        description: |
+          The Object describing the rate of the quote.
+        $ref: '#/definitions/Rate'
+      createdDate:
+        description: |
+          The creation date of the quote.
+        $ref: '#/definitions/Datetime'
+      deliveryDate:
+        description: |
+          The delivery date of the quote.
+        $ref: '#/definitions/Date'
+      sourceAmount:
+        description: |
+          The amount to be debited from the source Wallet.
+        $ref: '#/definitions/Amount'
+      deliveredAmount:
+        description: |
+          The amount to be credited to the delivery wallet.
+        $ref: '#/definitions/Amount'
+        
+  Log:
+    type: object
+    description: |
+      Representation of a log.
+    properties:
+      id:
+        description: |
+          The code identifying the Log.
+        $ref: '#/definitions/ID'
+      createdAt:
+        description: |
+          The Datetime when the log entry was created.
+        $ref: '#/definitions/Datetime'
+      closedAt:
+        description: |
+          The Datetime when the log entry was closed.
+        $ref: '#/definitions/Datetime'
+      tokenNonce:
+        type: string
+        description: |
+          The nonce used in the HTTP header to authenticate the request.
+      remoteAddress:
+        type: string
+        maxLength: 15
+        description: |
+          The IP address of the request's emiter.
+      requestMethod:
+        type: string
+        maxLength: 6
+        description: |
+          The HTTP method of the request
+      uriRequested:
+        type: string
+        description: |
+          The Universal Resource Identifier given for this request.
+      parametersGiven:
+        type: string
+        description: |
+          The optional parameters *(e.g. after the ?)* given for this request.
+      requestBody:
+        type: string
+        description: |
+          The HTTP request body.
+      httpResponseCode:
+        type: number
+        format: int
+        description: |
+          The HTTP response code.
+      responseBody:
+        type: string
+        description: |
+          The text sent by the server as a result for the request.
+      restErrorTypeId:
+        type: number
+        format: integer
+        description: |
+          If there is an error during the processing the request, this id could be used to find this error.
+      login:
+        type: string
+        description: |
+          The login used for the request.
+  
+  ProcessResult:
+    type: object
+    description: |
+      As some of our process just need to send you back the confirmation that this process is successful, the API will send you a ProcessResult.
+    properties:
+      result:
+        type: boolean
+        description: |
+          The result of the operation. `true` if the operation is successful, else `false`
+      
+  VirtualIBAN:
+    type: object
+    description: |
+      Representation of a virtual IBAN.
+    properties:
+      IBAN:
+        type: string
+        maxLength: 16
+        description: |
+          The virtual IBAN requested.
+        
+  Error:
+    type: object
+    description: |
+      Representation of an error.
+    properties: 
+      errorCode:
+        type: number
+        format: int
+        description: |
+          The code referring the error.
+      errorType:
+        type: string
+        description: |
+          A short description identifying a general category for the error that occurred.
+      link:
+        type: string
+        description: |
+          An hyperlink to access the page that describes more accurately the error.
+      
+  Document:
+    type: object
+    description: |
+      Representation of a document.
+    properties:
+      id:
+        description: |
+          The unique identifier of the document.
+        $ref: '#/definitions/ID'
+      name:
+        description: |
+          The name of the document.
+        type: string
+      type:
+        description: |
+          The type of the document.
+        type: string
+      createdDate:
+        description: |
+          The creation date of the ducument.
+        $ref: '#/definitions/Datetime'
+      lastOpennedDate:
+        description: |
+          The date when the document was last openned.
+        $ref: '#/definitions/Datetime'
+      mimeType:
+        description: |
+          The MIME type of the document.
+        type: string
+      link:
+        description: |
+          The one-time link to access or download the document.
+        type: string
+        
+  UserInformation:
+    type: object
+    description: |
+      Representation of a set of user informations got by the Authentication service.
+    properties:
+      username:
+        type: string
+        description: |
+          The username of the user.
+      pass:
+        type: string
+        description: |
+          The encrypted pass of the user.
+      civility:
+        type: string
+        description: |
+          The civility of the user.
+      firstname:
+        type: string
+        description: |
+          The first name of the user.
+      lastname:
+        type: string
+        description: |
+          The last name of the user.
+      entityname:
+        type: string
+        description: |
+          The the user's company's name.
+      roles:
+        type: array
+        description: |
+          An array describing the roles of the user.
+        items:
+          type: string
+          description: |
+            A string containing the name of the role of the user.
+  
+        
+          
+# IMPLICIT TYPES
+  ID:
+    type: string
+    pattern: ^[A-Za-z0-9]{*}$
+    format: ^[A-Za-z0-9]{*}$
+    example: Na5Dv6E
+    description: |
+      A String representing the id of an object. This string contains alpha-numeric characters, including the capital ones.
+      
+  QuotedDecimal:
+    type: string
+    pattern: ^((\-){?})[0-9]{12}((\.[0-9]{1-7}){?})$
+    format: ^((\-){?})[0-9]{12}((\.[0-9]{1-7}){?})$
+    example: "2.257"
+    description: |
+      A String representing a formatted floating number.
+      
+  Currency:
+    type: string
+    pattern: ^[A-Z]{3}$
+    format: ^[A-Z]{3}$
+    example: "USD"
+    description: |
+      A String representing the Three-digit ISO 4217 Currency Code of a currency. This String only contains capitalized letters.
+    
+  Date:
+    type: string
+    pattern: ^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$
+    format: ^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$
+    example: "2016-01-01"
+    description: |
+      A String representing a date by its year, month and day in month.
+          
+  Datetime:
+    type: string
+    pattern: ^((19[0,99]|2[0-9]{3})\-(0[1-9]|1[012])\-([012][0-9]|3[01])\ ([01][0-9]|2[0-3])\:([0-5][0-9])\:([0-5][0-9]))$
+    format: ^((19[0,99]|2[0-9]{3})\-(0[1-9]|1[012])\-([012][0-9]|3[01])\ ([01][0-9]|2[0-3])\:([0-5][0-9])\:([0-5][0-9]))$
+    example: "2016-01-01 00:00:00"
+    description: |
+      A String representing a date by its year, month, day in month, hour, minute and second.
+  
+  CurrencyPair:
+    type: string
+    pattern: ^[A-Z]{6}$
+    format: ^[A-Z]{6}$
+    example: "EURUSD"
+    description: |
+      A String representing two concatenated Three-digit ISO 4217 Currency Code of a currency. This String only contains capitalized letters.
